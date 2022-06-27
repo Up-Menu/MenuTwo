@@ -6,8 +6,10 @@ import SidebarLayout from 'src/layouts/SidebarLayout'
 import BaseLayout from 'src/layouts/BaseLayout'
 
 import SuspenseLoader from 'src/components/SuspenseLoader'
+import { useTypedSelector } from './store'
 
-const Loader = ( Component ) => ( props ) =>
+
+const Loader = ( Component ) => ( props: JSX.IntrinsicAttributes ) =>
 (
   <Suspense fallback={ <SuspenseLoader /> }>
     <Component { ...props } />
@@ -70,6 +72,8 @@ const Avatars = Loader(
 )
 const Cards = Loader( lazy( () => import( 'src/content/pages/Components/Cards' ) ) )
 const Forms = Loader( lazy( () => import( 'src/content/pages/Components/Forms' ) ) )
+const SignUp = Loader( lazy( () => import( './components/modules/auth/SignUp' ) ) )
+
 
 // Status
 
@@ -86,157 +90,172 @@ const StatusMaintenance = Loader(
   lazy( () => import( 'src/content/pages/Status/Maintenance' ) )
 )
 
-const routes: RouteObject[] = [
-  {
-    path: '',
-    element: <BaseLayout />,
-    children: [
+
+
+
+function routes ( props ): RouteObject[] {
+  const isLogged = props ? true : false
+
+
+
+  return (
+    [
       {
-        path: '/',
-        element: <Overview />
-      },
-      {
-        path: 'overview',
-        element: <Navigate to="/" replace />
-      },
-      {
-        path: 'status',
+        path: '',
+        element: <BaseLayout />,
         children: [
           {
-            path: '',
-            element: <Navigate to="404" replace />
+            path: '/',
+            element: <Overview />
           },
           {
-            path: '404',
+            path: 'overview',
+            element: <Navigate to="/" replace />
+          },
+          {
+            path: 'status',
+            children: [
+              {
+                path: '',
+                element: <Navigate to="404" replace />
+              },
+              {
+                path: '404',
+                element: <Status404 />
+              },
+              {
+                path: '500',
+                element: <Status500 />
+              },
+              {
+                path: 'maintenance',
+                element: <StatusMaintenance />
+              },
+              {
+                path: 'coming-soon',
+                element: <StatusComingSoon />
+              }
+            ]
+          },
+          {
+            path: '*',
             element: <Status404 />
-          },
-          {
-            path: '500',
-            element: <Status500 />
-          },
-          {
-            path: 'maintenance',
-            element: <StatusMaintenance />
-          },
-          {
-            path: 'coming-soon',
-            element: <StatusComingSoon />
           }
         ]
       },
       {
-        path: '*',
-        element: <Status404 />
-      }
-    ]
-  },
-  {
-    path: 'dashboards',
-    element: <SidebarLayout />,
-    children: [
-      {
-        path: '',
-        element: <Navigate to="tasks" replace />
+        path: 'signup',
+        element: <SignUp />,
       },
       {
-        path: 'tasks',
-        element: <Tasks />
-      },
-      {
-        path: 'createAccount',
-        element: <CreateAccount />
-      },
-      {
-        path: "createMenu",
-        element: <CreateMenu />
-      },
-      {
-        path: 'themes',
-        element: <ThemeSelection />
-      },
-      {
-        path: 'messenger',
-        element: <Messenger />
-      }
-    ]
-  },
-  {
-    path: 'management',
-    element: <SidebarLayout />,
-    children: [
-      {
-        path: '',
-        element: <Navigate to="transactions" replace />
-      },
-      {
-        path: 'transactions',
-        element: <Transactions />
-      },
-      {
-        path: 'profile',
+        path: 'dashboards',
+        element: isLogged ? <SidebarLayout /> : <SignUp />,
         children: [
           {
             path: '',
-            element: <Navigate to="details" replace />
+            element: <Navigate to="tasks" replace />
           },
           {
-            path: 'details',
-            element: <UserProfile />
+            path: 'tasks',
+            element: <Tasks />
           },
           {
-            path: 'settings',
-            element: <UserSettings />
+            path: 'createAccount',
+            element: <CreateAccount />
+          },
+          {
+            path: "createMenu",
+            element: <CreateMenu />
+          },
+          {
+            path: 'themes',
+            element: <ThemeSelection />
+          },
+          {
+            path: 'messenger',
+            element: <Messenger />
+          }
+        ]
+      },
+      {
+        path: 'management',
+        element: <SidebarLayout />,
+        children: [
+          {
+            path: '',
+            element: <Navigate to="transactions" replace />
+          },
+          {
+            path: 'transactions',
+            element: <Transactions />
+          },
+          {
+            path: 'profile',
+            children: [
+              {
+                path: '',
+                element: <Navigate to="details" replace />
+              },
+              {
+                path: 'details',
+                element: <UserProfile />
+              },
+              {
+                path: 'settings',
+                element: <UserSettings />
+              }
+            ]
+          }
+        ]
+      },
+      {
+        path: '/components',
+        element: <SidebarLayout />,
+        children: [
+          {
+            path: '',
+            element: <Navigate to="buttons" replace />
+          },
+          {
+            path: 'buttons',
+            element: <Buttons />
+          },
+          {
+            path: 'modals',
+            element: <Modals />
+          },
+          {
+            path: 'accordions',
+            element: <Accordions />
+          },
+          {
+            path: 'tabs',
+            element: <Tabs />
+          },
+          {
+            path: 'badges',
+            element: <Badges />
+          },
+          {
+            path: 'tooltips',
+            element: <Tooltips />
+          },
+          {
+            path: 'avatars',
+            element: <Avatars />
+          },
+          {
+            path: 'cards',
+            element: <Cards />
+          },
+          {
+            path: 'forms',
+            element: <Forms />
           }
         ]
       }
     ]
-  },
-  {
-    path: '/components',
-    element: <SidebarLayout />,
-    children: [
-      {
-        path: '',
-        element: <Navigate to="buttons" replace />
-      },
-      {
-        path: 'buttons',
-        element: <Buttons />
-      },
-      {
-        path: 'modals',
-        element: <Modals />
-      },
-      {
-        path: 'accordions',
-        element: <Accordions />
-      },
-      {
-        path: 'tabs',
-        element: <Tabs />
-      },
-      {
-        path: 'badges',
-        element: <Badges />
-      },
-      {
-        path: 'tooltips',
-        element: <Tooltips />
-      },
-      {
-        path: 'avatars',
-        element: <Avatars />
-      },
-      {
-        path: 'cards',
-        element: <Cards />
-      },
-      {
-        path: 'forms',
-        element: <Forms />
-      }
-    ]
-  }
-]
+  )
+}
 
 export default routes

@@ -1,5 +1,5 @@
 import { useRoutes } from 'react-router-dom'
-import router from 'src/router'
+import routes from 'src/router'
 
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
@@ -7,9 +7,16 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import { CssBaseline } from '@mui/material'
 import ThemeProvider from './theme/ThemeProvider'
 import './assets/styles/css/costume.css'
+import { useTypedSelector } from './store'
+
 
 function App () {
+  const logData = useTypedSelector( state => state )
+  const router: any = routes( logData.user )
   const content = useRoutes( router )
+
+
+
 
   return (
     <ThemeProvider>

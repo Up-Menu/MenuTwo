@@ -140,7 +140,6 @@ const CreateMenu: React.FC = () => {
                       sx={ { margin: 1 } }>
                       <DeleteIcon fontSize="small" />
                     </IconButton>
-                    {/* <MinusCircleOutlined onClick={ () => remove( name ) } /> */ }
                   </Space>
                 ) ) }
                 <Form.Item>

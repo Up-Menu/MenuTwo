@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
 import {
     Container,
@@ -18,6 +18,8 @@ import { Button, Form } from 'antd'
 import { userSignIn } from 'src/store/actions'
 import { useTypedDispatch } from 'src/store'
 import { Link } from 'react-router-dom'
+import { promiseNotify, simpleNotify } from '../Notification/Notifire'
+import { Toaster } from 'react-hot-toast'
 
 const MyButton = styled( Button )`
     display: -webkit-inline-box;
@@ -85,10 +87,19 @@ const SignUp = () => {
 
     const dispatch = useTypedDispatch()
     const onFinish = ( values: any ) => {
-        dispatch( userSignIn( { ...values } ) )
-            .then( () => {
-                window.location.replace( '/login' )
-            } )
+        const myPromise = dispatch( userSignIn(
+            { ...values }
+        ) )
+        promiseNotify( myPromise, {
+            loading: 'در حال ارسال...',
+            success: 'کاربر با موفقیت دریافت شد',
+            error: 'خطا در ارسال دیتای کاربر',
+        } )
+
+        myPromise.then( () => {
+            const timer = setTimeout( () => window.location.replace( '/login' ), 2000 )
+            return () => clearTimeout( timer )
+        } )
     }
 
     const onFinishFailed = ( errorInfo: any ) => {
@@ -96,8 +107,13 @@ const SignUp = () => {
     }
 
 
+
+
+
+
     return (
         <>
+            <Toaster />
             <Helmet>
                 <title>SignUp page</title>
             </Helmet>

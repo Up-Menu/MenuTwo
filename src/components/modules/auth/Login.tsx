@@ -22,6 +22,8 @@ import { useTypedDispatch } from 'src/store'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
+import { promiseNotify, simpleNotify } from '../Notification/Notifire'
+import { Toaster } from 'react-hot-toast'
 
 
 const faPropIcon = faGoogle as IconProp
@@ -89,11 +91,22 @@ const MyButton = styled( Button )`
 const label = { inputProps: { 'aria-label': 'Switch demo' } }
 const Login = () => {
     const dispatch = useTypedDispatch()
+
     const onFinish = ( values: any ) => {
-        dispatch( userLogin( { ...values } ) )
-            .then( () => {
-                window.location.replace( '/dashboards' )
-            } )
+        const myPromise = dispatch( userLogin(
+            { ...values }
+        ) )
+        promiseNotify( myPromise, {
+            loading: 'در حال دریافت اطلاعات',
+            success: '!خوش آمدید',
+            error: 'خطا در دریافت اطلاعات',
+        } )
+        myPromise.then( () => {
+            const timer = setTimeout( () => window.location.replace( '/dashboards' )
+                , 2000 )
+            return () => clearTimeout( timer )
+        } )
+
     }
 
     const onFinishFailed = ( errorInfo: any ) => {
@@ -101,6 +114,7 @@ const Login = () => {
     }
     return (
         <>
+            <Toaster />
             <Helmet>
                 <title>LogIn page</title>
             </Helmet>

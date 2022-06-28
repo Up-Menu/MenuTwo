@@ -22,7 +22,7 @@ import { useTypedDispatch } from 'src/store'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
-import { promiseNotify, simpleNotify } from '../Notification/Notifire'
+import { promiseNotify } from '../Notification/Notifire'
 import { Toaster } from 'react-hot-toast'
 
 
@@ -93,20 +93,22 @@ const Login = () => {
     const dispatch = useTypedDispatch()
 
     const onFinish = ( values: any ) => {
-        const myPromise = dispatch( userLogin(
-            { ...values }
-        ) )
+        const myPromise = dispatch( userLogin( { ...values } ) )
         promiseNotify( myPromise, {
             loading: 'در حال دریافت اطلاعات',
             success: '!خوش آمدید',
             error: 'خطا در دریافت اطلاعات',
         } )
-        myPromise.then( () => {
-            const timer = setTimeout( () => window.location.replace( '/dashboards' )
-                , 2000 )
-            return () => clearTimeout( timer )
-        } )
-
+        // myPromise.then( () => {
+        //     const timer = setTimeout( () => window.location.replace( '/dashboards' )
+        //         , 2000 )
+        //     return () => clearTimeout( timer )
+        // } )
+        myPromise.catch(
+            ( err ) => {
+                console.log( err )
+            }
+        )
     }
 
     const onFinishFailed = ( errorInfo: any ) => {
@@ -196,7 +198,6 @@ const Login = () => {
                                                 />
                                             </Form.Item>
                                             <span>Remember me:</span>
-
                                         </Box>
                                         <Typography
                                             variant="h6"

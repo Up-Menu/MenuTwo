@@ -1,31 +1,63 @@
-import Api from '../api/Api'
 
-const APIKEY: string = 'd83249ec98df4883b35114524222606'
-
+import Api from "src/api/Api"
 
 
-export const GetWeather = ( fn: Function, city: string | number ): void => {
+
+export const SignUpReq = ( value: any ) => {
     Api
-        .get( `current.json?key=${ APIKEY }&q=${ city }&aqi=yes`, '', '' )
+        .post( 'Account/Register', value, '' )
+        .then( ( response ) => {
+            const SERVER_ANSWER = response.data.status
+            const SERVER_MESSAGE = response.data.data
+            if ( SERVER_ANSWER === 'Success' ) {
+                alert( SERVER_MESSAGE )
+            }
+            else alert( SERVER_MESSAGE )
+        } )
+        .catch( ( err ) => console.log( err ) )
+}
+
+export const LoginReq = ( value: any ) => {
+    Api
+        .post( 'Account/Login', value, '' )
+        .then( ( response ) => {
+            const SERVER_ANSWER = response.data.status
+            const SERVER_MESSAGE = response.data.data.message
+            if ( SERVER_ANSWER === 'NotFound' ) alert( SERVER_MESSAGE )
+            else if ( SERVER_ANSWER === 'Error' ) alert( SERVER_MESSAGE )
+            else if ( SERVER_ANSWER === 'InActive' ) alert( SERVER_MESSAGE )
+            else {
+                localStorage.setItem( 'isLoggedIn', '1' )
+                setTimeout( () => window.location.replace( '/dashboard' ), 1500 )
+            }
+            console.log( response )
+        } )
+        .catch( ( err ) => console.log( err ) )
+}
+
+export const AddMenuReq = ( value: any ) => {
+    Api
+        .post( 'Menu/AddMenu', value, '' )
+        .then( ( response ) => {
+            console.log( response )
+        } )
+        .catch( ( err ) => console.log( err ) )
+}
+
+export const GUIDsReq = ( count: any ) => {
+    Api
+        .get( `Menu/GetGUIDs?count=${ count }`, '', '' )
+        .then( ( response ) => {
+            console.log( response )
+        } )
+        .catch( ( err ) => console.log( err ) )
+}
+
+export const GetAllUsers = ( fn: ( arg0: any ) => void ) => {
+    Api
+        .get( 'Account/GetAllUsers', '', '' )
         .then( ( response ) => {
             fn( response.data )
         } )
         .catch( ( err ) => console.log( err ) )
-}
-
-export const GetDaysWeather = ( fn: Function, city: string ): void => {
-    Api
-        .get( `forecast.json?key=${ APIKEY }&q=${ city }&days=3&aqi=yes&alerts=no`, '', '' )
-        .then( ( response ) => {
-            fn( response.data.forecast.forecastday )
-        } )
-        .catch( ( err ) => console.log( err ) )
-}
-
-export const GetUserLocation = ( fn: Function ): void => {
-    if ( navigator.geolocation ) {
-        navigator.geolocation.watchPosition( function ( position ) {
-            fn( position.coords.latitude )
-        } )
-    }
 }

@@ -1,9 +1,14 @@
+import { SignUpReq, LoginReq } from './../../connections/Req'
 import { nanoid } from '@reduxjs/toolkit'
 import timeoutPromise from '../helper/TimeOut'
 
 // Actions
 export const userLogin = ( payload: any ) => async ( dispatch: ( arg0: { type: string; payload: any } ) => any ) => {
-    await timeoutPromise( 1000 )
+    const payloadWithOutRememberKey = {
+        email: payload.email,
+        password: payload.password,
+    }
+    LoginReq( payloadWithOutRememberKey )
     const data = (
         dispatch( {
             type: "USER_LOGIN",
@@ -32,15 +37,23 @@ export const userLogout = () => ( dispatch: ( arg0: { type: string } ) => any ) 
 
 // Actions
 export const userSignIn = ( payload: any ) => async ( dispatch: ( arg0: { type: string; payload: any } ) => any ) => {
-    await timeoutPromise( 1000 )
+    const payloadWithOutRememberKey = {
+        email: payload.email,
+        password: payload.password,
+        confirmPassword: payload.confirmPassword,
+        firstName: payload.firstName,
+        lastName: payload.lastName,
+        address: payload.address,
+        cellPhone: payload.cellPhone
+    }
+    SignUpReq( payloadWithOutRememberKey )
     const data = (
         dispatch( {
             type: "USER_SIGNIN",
             payload: {
-                userId: nanoid(),
                 ...payload
             }
         } ) )
     console.log( "THEN: ", data )
-    // localStorage.setItem( "user", JSON.stringify( data ) )
 }
+

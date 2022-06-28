@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
 import {
     Container,
@@ -18,7 +17,7 @@ import { Button, Form } from 'antd'
 import { userSignIn } from 'src/store/actions'
 import { useTypedDispatch } from 'src/store'
 import { Link } from 'react-router-dom'
-import { promiseNotify, simpleNotify } from '../Notification/Notifire'
+import { promiseNotify } from '../Notification/Notifire'
 import { Toaster } from 'react-hot-toast'
 
 const MyButton = styled( Button )`
@@ -87,25 +86,28 @@ const SignUp = () => {
 
     const dispatch = useTypedDispatch()
     const onFinish = ( values: any ) => {
-        const myPromise = dispatch( userSignIn(
-            { ...values }
-        ) )
+        const myPromise = dispatch( userSignIn( { ...values } ) )
         promiseNotify( myPromise, {
             loading: 'در حال ارسال...',
             success: 'کاربر با موفقیت دریافت شد',
             error: 'خطا در ارسال دیتای کاربر',
         } )
-
-        myPromise.then( () => {
-            const timer = setTimeout( () => window.location.replace( '/login' ), 2000 )
-            return () => clearTimeout( timer )
-        } )
+        // myPromise.then( () => {
+        //     const timer = setTimeout( () => window.location.replace( '/login' ), 2000 )
+        //     return () => clearTimeout( timer )
+        // } )
+        myPromise.catch(
+            ( err ) => {
+                console.log( err )
+            }
+        )
     }
+
+
 
     const onFinishFailed = ( errorInfo: any ) => {
         console.log( 'Failed:', errorInfo )
     }
-
 
 
 

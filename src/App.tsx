@@ -14,10 +14,6 @@ function App () {
   const logData = useTypedSelector( state => state )
   const router: any = routes( logData.user )
   const content = useRoutes( router )
-
-
-
-
   return (
     <ThemeProvider>
       <LocalizationProvider dateAdapter={ AdapterDateFns }>

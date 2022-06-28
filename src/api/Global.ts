@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 
 
 const config = {
-  baseUrl: 'https://api.weatherapi.com/v1/',
+  baseUrl: 'https://upmenu.sepandpay.ir/',
   udata: Cookies.get( 'token' ),
   axiosHandle: () => {
     return axios.create( {

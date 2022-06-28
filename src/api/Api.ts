@@ -2,7 +2,6 @@ import config from "./Global"
 
 const Api = {
     post: ( route: any, data: any, conf: any ) => {
-        console.log( "data", data )
         return config.axiosHandle().post( `${ route }`, data, conf )
     },
     delete: ( route: any, conf: any ) => {

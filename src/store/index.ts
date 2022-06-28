@@ -7,12 +7,14 @@ import { useSelector } from "react-redux"
 
 
 const initialState = {
-    user: readUserFromLocalStorage(),
-    blog: readBlogFromLocalStorage()
+    user: readUser(),
+
 }
 
+
+
 // Read user from the localStorage
-function readUserFromLocalStorage () {
+function readUser () {
     try {
         const serialized = localStorage.getItem( 'user' )
         if ( serialized === null )
@@ -24,17 +26,7 @@ function readUserFromLocalStorage () {
     }
 }
 
-function readBlogFromLocalStorage () {
-    try {
-        const serialized = localStorage.getItem( 'blog' )
-        if ( serialized === null )
-            return undefined
-        return JSON.parse( serialized )
-    }
-    catch ( err ) {
-        return undefined
-    }
-}
+
 
 /* Types */
 export type AppDispatch = typeof store.dispatch

@@ -6,7 +6,7 @@ import SidebarLayout from 'src/layouts/SidebarLayout'
 import BaseLayout from 'src/layouts/BaseLayout'
 
 import SuspenseLoader from 'src/components/SuspenseLoader'
-import { useTypedSelector } from './store'
+import Login from './components/modules/auth/Login'
 
 
 const Loader = ( Component ) => ( props: JSX.IntrinsicAttributes ) =>
@@ -93,7 +93,7 @@ const StatusMaintenance = Loader(
 
 
 
-function routes ( props ): RouteObject[] {
+function routes ( props: boolean | { user: any } ): RouteObject[] {
   const isLogged = props ? true : false
 
 
@@ -148,8 +148,12 @@ function routes ( props ): RouteObject[] {
         element: <SignUp />,
       },
       {
+        path: 'login',
+        element: <Login />,
+      },
+      {
         path: 'dashboards',
-        element: isLogged ? <SidebarLayout /> : <SignUp />,
+        element: isLogged ? <SidebarLayout /> : ( <Login /> || <SignUp /> ),
         children: [
           {
             path: '',

@@ -15,8 +15,9 @@ import TextField from '@mui/material/TextField'
 import { pink } from '@mui/material/colors'
 import styled from 'styled-components'
 import { Button, Form } from 'antd'
-import { userLogin } from 'src/store/actions'
+import { userSignIn } from 'src/store/actions'
 import { useTypedDispatch } from 'src/store'
+import { Link } from 'react-router-dom'
 
 const MyButton = styled( Button )`
     display: -webkit-inline-box;
@@ -84,9 +85,9 @@ const SignUp = () => {
 
     const dispatch = useTypedDispatch()
     const onFinish = ( values: any ) => {
-        dispatch( userLogin( { ...values } ) )
+        dispatch( userSignIn( { ...values } ) )
             .then( () => {
-                window.location.replace( '/dashboards' )
+                window.location.replace( '/login' )
             } )
     }
 
@@ -111,7 +112,12 @@ const SignUp = () => {
                 >
                     <Grid item xs={ 12 } display="flex" flexDirection="column" textAlign="center">
                         <Card>
-                            <CardHeader title="Sign Up Page" />
+                            <Box justifyContent="space-between" flexDirection="row" display="flex" textAlign="center">
+                                <Link to="/login">
+                                    <CardHeader title="Are you ready have account?" />
+                                </Link>
+                                <CardHeader title="Log-In Page" />
+                            </Box>
                             <Divider />
                             <Typography variant="h3" pt={ 2 } pb={ 2 } />
 

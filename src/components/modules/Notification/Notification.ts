@@ -13,9 +13,9 @@ export const promiseNotify = ( callBackFn: any, message: { loading: any; success
     } )
 }
 
-export const simpleNotify = ( setting: { message: Renderable | ValueFunction<Renderable, Toast>; duration: any; position: any; style: any; className: any; icon: any; iconTheme: any; ariaProps: any } ) => {
+export const simpleNotify = ( setting: { message: Renderable | ValueFunction<Renderable, Toast>; position: any; style: any; className: any; icon: any; iconTheme: any; ariaProps: any } ) => {
     toast( setting.message, {
-        duration: setting.duration,
+        duration: 1000000,
         position: setting.position,
         // Styling
         style: setting.style,

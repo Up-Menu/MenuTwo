@@ -22,7 +22,7 @@ import { useTypedDispatch } from 'src/store'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
-import { promiseNotify } from '../Notification/Notifire'
+import { promiseNotify } from '../Notification/Notification'
 import { Toaster } from 'react-hot-toast'
 
 
@@ -99,11 +99,11 @@ const Login = () => {
             success: '!خوش آمدید',
             error: 'خطا در دریافت اطلاعات',
         } )
-        // myPromise.then( () => {
-        //     const timer = setTimeout( () => window.location.replace( '/dashboards' )
-        //         , 2000 )
-        //     return () => clearTimeout( timer )
-        // } )
+        myPromise.then( () => {
+            const timer = setTimeout( () => window.location.replace( '/dashboards' )
+                , 2000 )
+            return () => clearTimeout( timer )
+        } )
         myPromise.catch(
             ( err ) => {
                 console.log( err )

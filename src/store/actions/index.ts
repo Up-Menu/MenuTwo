@@ -18,7 +18,8 @@ export const userLogin = ( payload: any ) => async ( dispatch: ( arg0: { type: s
             }
         } ) )
     console.log( "THEN: ", data )
-    localStorage.setItem( "user", JSON.stringify( data ) )
+    if ( payload.remember ) localStorage.setItem( "user", JSON.stringify( data ) )
+    else return
 }
 
 export const userLogout = () => ( dispatch: ( arg0: { type: string } ) => any ) => {

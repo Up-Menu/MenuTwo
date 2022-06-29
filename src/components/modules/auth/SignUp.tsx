@@ -17,7 +17,7 @@ import { Button, Form } from 'antd'
 import { userSignIn } from 'src/store/actions'
 import { useTypedDispatch } from 'src/store'
 import { Link } from 'react-router-dom'
-import { promiseNotify } from '../Notification/Notifire'
+import { promiseNotify } from '../Notification/Notification'
 import { Toaster } from 'react-hot-toast'
 
 const MyButton = styled( Button )`
@@ -92,10 +92,10 @@ const SignUp = () => {
             success: 'کاربر با موفقیت دریافت شد',
             error: 'خطا در ارسال دیتای کاربر',
         } )
-        // myPromise.then( () => {
-        //     const timer = setTimeout( () => window.location.replace( '/login' ), 2000 )
-        //     return () => clearTimeout( timer )
-        // } )
+        myPromise.then( () => {
+            const timer = setTimeout( () => window.location.replace( '/login' ), 2000 )
+            return () => clearTimeout( timer )
+        } )
         myPromise.catch(
             ( err ) => {
                 console.log( err )

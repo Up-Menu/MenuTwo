@@ -17,8 +17,9 @@ import { Button, Form } from 'antd'
 import { userSignIn } from 'src/store/actions'
 import { useTypedDispatch } from 'src/store'
 import { Link } from 'react-router-dom'
-import { promiseNotify } from '../Notification/Notification'
 import { Toaster } from 'react-hot-toast'
+import { useNavigate } from 'react-router'
+
 
 const MyButton = styled( Button )`
     display: -webkit-inline-box;
@@ -82,42 +83,21 @@ const MyButton = styled( Button )`
 
 const label = { inputProps: { 'aria-label': 'Switch demo' } }
 
-const SignUp = () => {
-
+const SignIn = () => {
     const dispatch = useTypedDispatch()
+    const nav = useNavigate()
+
     const onFinish = ( values: any ) => {
-        const myPromise = dispatch( userSignIn( { ...values } ) )
-        promiseNotify( myPromise, {
-            loading: 'در حال ارسال...',
-            success: 'کاربر با موفقیت دریافت شد',
-            error: 'خطا در ارسال دیتای کاربر',
-        } )
-        myPromise.then( () => {
-            const timer = setTimeout( () => window.location.replace( '/login' ), 2000 )
-            return () => clearTimeout( timer )
-        } )
-        myPromise.catch(
-            ( err ) => {
-                console.log( err )
-            }
-        )
+        dispatch( userSignIn( { ...values }, notification => notification, nav ) )
     }
-
-
-
     const onFinishFailed = ( errorInfo: any ) => {
         console.log( 'Failed:', errorInfo )
     }
-
-
-
-
-
     return (
         <>
             <Toaster />
             <Helmet>
-                <title>SignUp page</title>
+                <title>SignIn page</title>
             </Helmet>
             <Container maxWidth="lg">
                 <Grid
@@ -270,4 +250,4 @@ const SignUp = () => {
     )
 }
 
-export default SignUp
+export default SignIn

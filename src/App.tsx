@@ -1,5 +1,6 @@
+import { useEffect } from "react"
 import { useRoutes } from 'react-router-dom'
-import routes from 'src/router'
+import routes from 'src/router/router'
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import { CssBaseline } from '@mui/material'
@@ -7,9 +8,9 @@ import ThemeProvider from './theme/ThemeProvider'
 import './assets/styles/css/costume.css'
 import { useTypedSelector } from './store'
 import NetworkChecker from './components/modules/NetworkChecker'
-import { useEffect } from 'react'
 import toast from 'react-hot-toast'
 import { Toaster } from 'react-hot-toast'
+import AutoLogout from "./components/modules/auth/AutoLogout"
 
 
 
@@ -25,7 +26,6 @@ function App () {
 
   useEffect( () => {
     if ( isOnline ) {
-
       const favicon = getFaviconEl() // Accessing favicon element
       favicon.href = "./favicon.ico"
       toast.success( '!به اینترنت متصل هستید' )
@@ -42,7 +42,9 @@ function App () {
       <LocalizationProvider dateAdapter={ AdapterDateFns }>
         <Toaster />
         <CssBaseline />
-        { content }
+        <AutoLogout>
+          { content }
+        </AutoLogout>
       </LocalizationProvider>
     </ThemeProvider>
   )

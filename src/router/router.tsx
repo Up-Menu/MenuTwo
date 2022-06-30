@@ -6,7 +6,7 @@ import SidebarLayout from 'src/layouts/SidebarLayout'
 import BaseLayout from 'src/layouts/BaseLayout'
 
 import SuspenseLoader from 'src/components/SuspenseLoader'
-import Login from './components/modules/auth/Login'
+import Login from '../components/modules/auth/Login'
 
 
 const Loader = ( Component ) => ( props: JSX.IntrinsicAttributes ) =>
@@ -72,7 +72,7 @@ const Avatars = Loader(
 )
 const Cards = Loader( lazy( () => import( 'src/content/pages/Components/Cards' ) ) )
 const Forms = Loader( lazy( () => import( 'src/content/pages/Components/Forms' ) ) )
-const SignUp = Loader( lazy( () => import( './components/modules/auth/SignUp' ) ) )
+const SignIn = Loader( lazy( () => import( '../components/modules/auth/SignIn' ) ) )
 
 
 // Status
@@ -144,8 +144,8 @@ function routes ( props: boolean | { user: any } ): RouteObject[] {
         ]
       },
       {
-        path: 'signup',
-        element: <SignUp />,
+        path: 'signin',
+        element: <SignIn />,
       },
       {
         path: 'login',
@@ -153,7 +153,7 @@ function routes ( props: boolean | { user: any } ): RouteObject[] {
       },
       {
         path: 'dashboards',
-        element: isLogged ? <SidebarLayout /> : ( <Login /> || <SignUp /> ),
+        element: isLogged ? <SidebarLayout /> : ( <Login /> || <SignIn /> ),
         children: [
           {
             path: '',

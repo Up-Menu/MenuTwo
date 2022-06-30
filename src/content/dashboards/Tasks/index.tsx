@@ -106,13 +106,7 @@ const TabsContainerWrapper = styled( Box )(
 )
 
 function DashboardTasks () {
-  Object.keys( window ).forEach( key => {
-    if ( /^on/.test( key ) ) {
-      window.addEventListener( key.slice( 2 ), e => {
-        console.log( e )
-      } )
-    }
-  } )
+
   const theme = useTheme()
 
   const [ currentTab, setCurrentTab ] = useState<string>( 'analytics' )

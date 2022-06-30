@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom'
 import { HelmetProvider } from 'react-helmet-async'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 
 import 'nprogress/nprogress.css'
 import App from 'src/App'
@@ -13,9 +13,9 @@ ReactDOM.render(
   <Provider store={ store }>
     <HelmetProvider>
       <SidebarProvider>
-        <BrowserRouter>
+        <HashRouter>
           <App />
-        </BrowserRouter>
+        </HashRouter>
       </SidebarProvider>
     </HelmetProvider>
   </Provider>,

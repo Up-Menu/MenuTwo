@@ -83,7 +83,7 @@ function HeaderUserbox () {
     e.preventDefault()
     dispatch( userLogout() )
       .then( () => {
-        window.location.replace( '/login' )
+        window.location.reload()
       } )
   }
 

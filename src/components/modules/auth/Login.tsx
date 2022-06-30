@@ -150,9 +150,6 @@ const Login = () => {
                                         autoComplete="on"
                                     >
 
-
-
-
                                         <Box display="flex" flexDirection="row" textAlign="center" justifyContent="center" pt={ 1 } pb={ 1 }>
                                             <Form.Item
                                                 name="email"
@@ -177,13 +174,7 @@ const Login = () => {
                                                     type="password"
                                                 />
                                             </Form.Item>
-
                                         </Box>
-
-
-
-
-
                                         <Box display="flex" flexDirection="row-reverse" justifyContent="center" alignItems="baseline" textAlign="center">
                                             <Form.Item name="remember" valuePropName="checked" wrapperCol={ { offset: 8, span: 16 } }>
                                                 <Checkbox
@@ -216,7 +207,6 @@ const Login = () => {
                                             </Divider>
                                             <Box pl={ 1 }>
                                                 <MaterialButton
-
                                                     component={ RouterLink }
                                                     to="/signup"
                                                     startIcon={ <FontAwesomeIcon icon={ faPropIcon } /> }
@@ -224,9 +214,7 @@ const Login = () => {
                                             </Box>
                                         </Box>
                                     </Form>
-
                                 </Box>
-
                             </Card>
                         </Grid>
                     </Grid>

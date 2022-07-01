@@ -1,9 +1,9 @@
 import { Box, Card, Container } from '@mui/material'
 import { Helmet } from 'react-helmet-async'
 import { styled } from '@mui/material/styles'
-import Store from 'src/components/modules/themes/Layout/pages/store/Store'
 import Logo from 'src/components/LogoSign'
 import Hero from './Hero'
+
 
 
 
@@ -29,10 +29,8 @@ function Overview () {
         <Card sx={ { p: 10, mb: 10, borderRadius: 12 } }>
           <Hero />
         </Card>
-        {/* <Store /> */ }
       </Container>
     </OverviewWrapper>
-
   )
 }
 

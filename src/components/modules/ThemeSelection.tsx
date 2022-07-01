@@ -1,15 +1,25 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Container, Grid, Typography } from '@mui/material'
 import { Helmet } from 'react-helmet-async'
+import toast, { Toaster } from 'react-hot-toast'
+import { Link } from 'react-router-dom'
 import Footer from '../Footer'
 import BottomNav from './BottomNav'
 import { ThemesList } from './Themes'
 
 const ThemeSelection = () => {
+    const choseHandler = ( e: { preventDefault: () => void } ) => {
+        e.preventDefault()
+        console.log( "theme chosen!" )
+        toast.success( '!تم با موفقیت انتخاب شد' )
+    }
     return (
         <>
+            <Toaster />
             <Container maxWidth="lg">
                 <Helmet>
-                    <title>Tasks Dashboard</title>
+                    <title>
+                        انتخاب تم منو
+                    </title>
                 </Helmet>
                 <main>
                     <Typography variant="h3" pt={ 2 } pb={ 2 } display="flex" flexDirection="column" textAlign="center">
@@ -34,10 +44,10 @@ const ThemeSelection = () => {
                                             </Typography>
                                         </CardContent>
                                         <CardActions>
-                                            <Button size="small">
+                                            <Button size="small" onClick={ choseHandler }>
                                                 Active
                                             </Button>
-                                            <Button size="small">
+                                            <Button component={ Link } to={ '/theme/store' } sx={ { margin: 1 } } color="primary">
                                                 Preview
                                             </Button>
                                         </CardActions>
@@ -49,12 +59,12 @@ const ThemeSelection = () => {
                 </main>
                 <BottomNav
                     className="pt-5"
-                    nextStep={ true }
+                    nextStep={ false }
                     preStep={ true }
-                    forLink="/order-type"
-                    backLink="/theme-select"
-                    forText="انتخاب نوع سفارش"
-                    backText="انتخاب تم"
+                    forLink="order-type"
+                    backLink="createMenu"
+                    forText="ساخت حساب"
+                    backText="ساخت منو"
                 />
             </Container>
             <Footer />

@@ -39,7 +39,7 @@ const BottomNav = ( props: any ) => {
             data-aos-easing="ease-in"
         >
 
-            <Link to={ props.backLink }>
+            <Link to={ `/dashboards/${ props.backLink }` }>
                 <Button disabled={ !props.preStep } size="small">
                     { props.backText }
                 </Button>
@@ -48,7 +48,7 @@ const BottomNav = ( props: any ) => {
 
 
             { props.nextStep && (
-                <Link to={ props.forLink }>
+                <Link to={ `/dashboards/${ props.forLink }` }>
                     <Button size="small">
                         { props.forText }
                     </Button>

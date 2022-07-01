@@ -11,12 +11,14 @@ import { store } from './store'
 import CartContextProvider from "./contexts/Shop/CartContext"
 import ProductsContextProvider from "./contexts/Shop/ProductsContext"
 
+// eslint-disable-next-line
+import "swiper/css/bundle"
+
 
 const root = ReactDOM.createRoot(
   document.getElementById( 'root' ) as HTMLElement
 )
 root.render(
-
   <Provider store={ store }>
     <HelmetProvider>
       <SidebarProvider>
@@ -30,7 +32,6 @@ root.render(
       </SidebarProvider>
     </HelmetProvider>
   </Provider>
-
 )
 
 

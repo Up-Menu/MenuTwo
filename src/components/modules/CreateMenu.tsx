@@ -12,7 +12,7 @@ import {
   Typography,
   Checkbox,
   Box,
-  Button as MaterialButton
+  Button as MaterialButton,
 } from '@mui/material'
 import Footer from 'src/components/Footer'
 import TextField from '@mui/material/TextField'
@@ -29,14 +29,26 @@ import { useTypedDispatch } from 'src/store'
 import { promiseNotify } from './Notification/Notification'
 import MyButton from '../UI/Button/MyButton'
 import { Link, NavLink as RouterLink } from 'react-router-dom'
-import Switch from '@mui/material/Switch'
+import Switch, { SwitchProps } from '@mui/material/Switch'
 
 import { InboxOutlined } from '@ant-design/icons'
 import type { UploadProps } from 'antd'
 import { message, Upload } from 'antd'
 
 
-const { Dragger } = Upload
+
+
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react"
+
+// Import Swiper styles
+import "swiper/css"
+import "swiper/css/pagination"
+
+
+// import required modules
+import { Pagination } from "swiper"
+import { MuiSwitch } from '../UI/CustomizedSwitches'
 
 
 
@@ -77,6 +89,7 @@ const props: UploadProps = {
 
 const faPropIcon = faGoogle as IconProp
 const label = { inputProps: { 'aria-label': 'Switch demo' } }
+const { Dragger } = Upload
 
 
 
@@ -178,7 +191,9 @@ const CreateMenu: React.FC = () => {
                 spacing={ 0 }
               >
                 <Box pt={ 2 } pb={ 2 } pl={ 2 }>
-                  Add Product Form
+                  <Typography variant='h3'>
+                    Add Product Form
+                  </Typography>
                 </Box>
                 <Divider />
                 <Box pt={ 3 } pb={ 2 } pl={ 2 } pr={ 2 }>
@@ -346,13 +361,72 @@ const CreateMenu: React.FC = () => {
                 spacing={ 0 }
               >
                 <Box pt={ 2 } pb={ 2 } pl={ 2 }>
-                  Product
+                  <Typography variant='h3'>
+                    Products
+                  </Typography>
                 </Box>
                 <Divider />
-                <Box pt={ 3 } pb={ 2 } pl={ 2 }>
-                  slider
-                </Box>
               </Grid>
+              <Box>
+                <Swiper
+                  pagination={ {
+                    dynamicBullets: true,
+                  } }
+                  modules={ [ Pagination ] }
+                  className="mySwiper"
+                >
+                  <SwiperSlide>
+                    <img src="/static/images/placeholders/covers/1.jpg" alt="" />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <img src="/static/images/placeholders/covers/1.jpg" alt="" />
+                  </SwiperSlide><SwiperSlide>
+                    <img src="/static/images/placeholders/covers/1.jpg" alt="" />
+                  </SwiperSlide><SwiperSlide>
+                    <img src="/static/images/placeholders/covers/1.jpg" alt="" />
+                  </SwiperSlide><SwiperSlide>
+                    <img src="/static/images/placeholders/covers/1.jpg" alt="" />
+                  </SwiperSlide><SwiperSlide>
+                    <img src="/static/images/placeholders/covers/1.jpg" alt="" />
+                  </SwiperSlide>
+                </Swiper>
+
+                <Grid
+                  container
+                  direction="column"
+                  justifyContent="left"
+                  alignItems="stretch"
+                  spacing={ 0 }
+                >
+                  <Box pt={ 2 } pb={ 2 } pl={ 2 } pr={ 2 } display="flex" flexDirection="row" justifyContent="space-between">
+                    <Typography variant='h6'>
+                      Status Available
+                    </Typography>
+                    <MuiSwitch />
+                  </Box>
+                  <Divider />
+                  <Box pt={ 2 } pb={ 2 } pl={ 2 } pr={ 2 } display="flex" flexDirection="row" justifyContent="space-between">
+                    <Typography variant='h6'>
+                      Discount Active
+                    </Typography>
+                    <MuiSwitch />
+                  </Box>
+
+
+
+
+
+                  <Divider />
+                  <Box pt={ 2 } pb={ 2 } pl={ 2 } pr={ 2 } display="flex" flexDirection="row" justifyContent="space-between">
+                    <MaterialButton color="primary" >
+                      Save
+                    </MaterialButton>
+                    <MaterialButton color="primary" variant="outlined">
+                      Save & Add
+                    </MaterialButton>
+                  </Box>
+                </Grid>
+              </Box>
             </Card>
           </Grid>
         </Grid>

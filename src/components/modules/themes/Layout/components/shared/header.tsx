@@ -10,14 +10,14 @@ const Header = () => {
 
   return (
     <header className={ styles.header }>
-      <Button component={ Link } to={ '/theme/cart' } sx={ { margin: 1 } } href="#text-buttons" color="primary">
+      <Button component={ Link } to={ '/theme/cart' } sx={ { margin: 1 } } color="primary">
         <Box display="flex" justifyContent="center">
           <CartIcon width={ '' } />
 
           Cart ({ itemCount })
         </Box>
       </Button>
-      <Button variant="outlined" component={ Link } to={ '/theme/store' } sx={ { margin: 1 } } href="#text-buttons" color="primary">
+      <Button variant="outlined" component={ Link } to={ '/theme/store' } sx={ { margin: 1 } } color="primary">
         Store
       </Button>
     </header>

@@ -49,6 +49,14 @@ const ThemeSelection = Loader(
   lazy( () => import( 'src/components/modules/ThemeSelection' ) )
 )
 
+const ThemeStore = Loader(
+  lazy( () => import( 'src/components/modules/themes/Layout/pages/store/Store' ) )
+)
+
+const ThemeCart = Loader(
+  lazy( () => import( 'src/components/modules/themes/Layout/pages/cart' ) )
+)
+
 // Components
 
 const Buttons = Loader(
@@ -148,8 +156,25 @@ function routes ( props: boolean | { user: any } ): RouteObject[] {
         element: <SignIn />,
       },
       {
+        path: 'theme',
+        children: [
+          {
+            path: '',
+            element: <Navigate to="tasks" replace />
+          },
+          {
+            path: 'store',
+            element: <ThemeStore />
+          },
+          {
+            path: 'cart',
+            element: <ThemeCart />
+          }
+        ]
+      },
+      {
         path: 'login',
-        element: <Login />,
+        element: <Login />
       },
       {
         path: 'dashboards',

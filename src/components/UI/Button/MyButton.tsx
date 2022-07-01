@@ -65,7 +65,7 @@ const MyBtn = styled( Button )`
 const MyButton = ( props: any ) => {
     return (
         <Fragment>
-            <MyBtn type="primary" htmlType="submit">
+            <MyBtn id={ props.id } type="primary" htmlType="submit">
                 { props.children }
             </MyBtn>
         </Fragment>

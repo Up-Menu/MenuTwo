@@ -1,7 +1,7 @@
-import { Box, Container, Card } from '@mui/material'
+import { Box, Card, Container } from '@mui/material'
 import { Helmet } from 'react-helmet-async'
-
 import { styled } from '@mui/material/styles'
+import Store from 'src/components/modules/themes/Layout/pages/store/Store'
 import Logo from 'src/components/LogoSign'
 import Hero from './Hero'
 
@@ -17,9 +17,7 @@ const OverviewWrapper = styled( Box )(
 )
 
 function Overview () {
-
   return (
-
     <OverviewWrapper>
       <Helmet>
         <title>Tokyo Free Black React Typescript Admin Dashboard</title>

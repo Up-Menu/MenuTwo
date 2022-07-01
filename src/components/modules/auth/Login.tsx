@@ -7,8 +7,7 @@ import {
     Divider,
     Typography,
     Checkbox,
-    Box,
-    Button as MaterialButton
+    Box
 } from '@mui/material'
 import { Link, NavLink as RouterLink } from 'react-router-dom'
 import Footer from 'src/components/Footer'
@@ -17,14 +16,15 @@ import { pink } from '@mui/material/colors'
 import { Form } from 'antd'
 import { userLogin } from 'src/store/actions'
 import { useTypedDispatch } from 'src/store'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { IconProp } from '@fortawesome/fontawesome-svg-core'
-import { faGoogle } from '@fortawesome/free-brands-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { IconProp } from '@fortawesome/fontawesome-svg-core'
+// import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { Toaster } from 'react-hot-toast'
 import MyButton from 'src/components/UI/Button/MyButton'
+import { Google } from './GoogleSSO'
 
 
-const faPropIcon = faGoogle as IconProp
+// const faPropIcon = faGoogle as IconProp
 
 
 
@@ -120,7 +120,7 @@ const Login = () => {
                                             to="/signin">
                                             Oops I do not have an account!
                                         </Typography>
-                                        <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center" textAlign="center">
+                                        <Box pb={ 2 } pt={ 1 } display="flex" flexDirection="row" justifyContent="center" alignItems="center" textAlign="center">
                                             <Form.Item wrapperCol={ { offset: 8, span: 16 } }>
                                                 <MyButton type="primary" htmlType="submit">
                                                     LogIn
@@ -129,15 +129,17 @@ const Login = () => {
                                             <Divider orientation="vertical" flexItem>
 
                                             </Divider>
-                                            <Box pl={ 1 }>
-                                                <MaterialButton
+
+                                        </Box>
+                                    </Form>
+                                    <Box pl={ 1 }>
+                                        {/* <MaterialButton
                                                     component={ RouterLink }
                                                     to="/signin"
                                                     startIcon={ <FontAwesomeIcon icon={ faPropIcon } /> }
-                                                />
-                                            </Box>
-                                        </Box>
-                                    </Form>
+                                                /> */}
+                                        <Google />
+                                    </Box>
                                 </Box>
                             </Card>
                         </Grid>

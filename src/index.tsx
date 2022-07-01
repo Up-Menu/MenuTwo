@@ -8,7 +8,8 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
 import { store } from './store'
-import React from "react"
+import CartContextProvider from "./contexts/Shop/CartContext"
+import ProductsContextProvider from "./contexts/Shop/ProductsContext"
 
 
 const root = ReactDOM.createRoot(
@@ -19,9 +20,13 @@ root.render(
   <Provider store={ store }>
     <HelmetProvider>
       <SidebarProvider>
-        <HashRouter>
-          <App />
-        </HashRouter>
+        <ProductsContextProvider>
+          <CartContextProvider>
+            <HashRouter>
+              <App />
+            </HashRouter>
+          </CartContextProvider>
+        </ProductsContextProvider>
       </SidebarProvider>
     </HelmetProvider>
   </Provider>

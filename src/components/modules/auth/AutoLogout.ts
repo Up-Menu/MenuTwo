@@ -26,7 +26,7 @@ const AutoLogout = ( { children } ) => {
             } )
             // logs out user
             logoutAction()
-        }, 10000000 ) // 10000ms = 10secs. You can change the time.
+        }, 60000 ) // 60000ms = 60secs = 1min. You can change the time.
     }
 
     // this resets the timer if it exists.

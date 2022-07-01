@@ -6,26 +6,79 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <meta name="theme-color" content="#111633" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400&display=swap"
-      rel="stylesheet"
-    />
-    <title>سامانه یکپارچه ساخت منو رستوران</title>
-    <meta
-      name="description"
-      content="Tokyo Free Black React Typescript Admin Dashboard is built using the latest industry standards and features a clean and premium design style, making use of colors and accents to improve the user experience for all included flows and pages."
-    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="description" content="SepandPay Menu" />
     <meta
       name="keywords"
       content="material-ui, admin dashboard, admin template, react, react template, react admin template, react dashboard, react admin panel"
     />
+    <meta name="theme-color" content="#111633" />
+    <title>سامانه یکپارچه ساخت منو رستوران</title>
+    <link
+      rel="manifest"
+      href="%PUBLIC_URL%/manifest.webmanifest"
+      crossorigin="use-credentials"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/icon-192x192.png" />
+    <link
+      rel="shortcut icon"
+      href="%PUBLIC_URL%/icon-192x192.png"
+      type="image/x-icon"
+    />
+    <link rel="icon" href="%PUBLIC_URL%/icon-192x192.png" type="image/x-icon" />
+    <!-- ios support -->
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/icon-192x192.png" />
+    <link
+      rel="shortcut icon"
+      href="%PUBLIC_URL%/icon-192x192.png"
+      type="image/x-icon"
+    />
+    <link rel="icon" href="%PUBLIC_URL%/icon-192x192.png" type="image/x-icon" />
     <link rel="shortcut icon" id="favicon" href="%PUBLIC_URL%/favicon.ico" />
   </head>
 
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+          'gtm.start': new Date().getTime(),
+          event: 'gtm.js'
+        });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-THQTXJ7');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-226917312-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      gtag('js', new Date());
+      gtag('config', 'UA-226917312-1');
+    </script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
   </body>
 </html>

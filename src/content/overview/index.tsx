@@ -29,6 +29,7 @@ function Overview () {
         <Card sx={ { p: 10, mb: 10, borderRadius: 12 } }>
           <Hero />
         </Card>
+        {/* <Store /> */ }
       </Container>
     </OverviewWrapper>
 

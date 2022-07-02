@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react'
-import { dummyProducts } from 'src/components/modules/themes/Layout/services/dummy'
+import { dummyProducts } from 'src/theme/Layout/services/dummy'
 export const ProductsContext = createContext( null )
 
 const ProductsContextProvider = ( { children } ) => {

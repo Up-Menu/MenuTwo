@@ -18,7 +18,6 @@ import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone'
 import HeaderButtons from './Buttons'
 import HeaderUserbox from './Userbox'
 import HeaderMenu from './Menu'
-import { ThemeSwitch } from 'src/components/UI/CustomizedSwitches'
 
 const HeaderWrapper = styled( Box )(
   ( { theme } ) => `
@@ -72,7 +71,8 @@ function Header () {
         <HeaderMenu />
       </Stack>
       <Box display="flex" alignItems="center">
-        <ThemeSwitch />
+        {/* put theme switch there */ }
+
         <HeaderButtons />
         <HeaderUserbox />
 

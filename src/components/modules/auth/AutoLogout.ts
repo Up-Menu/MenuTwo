@@ -13,7 +13,7 @@ const events = [
 
 const AutoLogout = ( { children } ) => {
     const dispatch = useTypedDispatch()
-    let timer
+    let timer: NodeJS.Timeout
 
     // this function sets the timer that logs out the user after 10 secs
     const handleLogoutTimer = () => {
@@ -26,7 +26,7 @@ const AutoLogout = ( { children } ) => {
             } )
             // logs out user
             logoutAction()
-        }, 60000 ) // 60000ms = 60secs = 1min. You can change the time.
+        }, 3600000 ) // 60000ms = 60secs = 1min. You can change the time.
     }
 
     // this resets the timer if it exists.

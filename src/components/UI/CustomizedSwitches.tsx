@@ -179,16 +179,7 @@ const AntSwitch = styled( Switch )( ( { theme } ) => ( {
     },
 } ) )
 
-export function ThemeSwitch () {
-    return (
-        <FormGroup>
-            <FormControlLabel
-                control={ <MaterialUISwitch sx={ { m: 1 } } defaultChecked /> }
-                label=""
-            />
-        </FormGroup>
-    )
-}
+
 export function DefaultSwitch () {
     return (
         <FormGroup>

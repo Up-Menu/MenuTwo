@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { ThemeProvider } from '@mui/material'
 import { themeCreator } from './base'
 import { StylesProvider } from '@mui/styles'
+import ToggleColorMode from './ToggleColorMode'
 
 type BoxProps = {
   children: React.ReactNode // 👈️ type children
@@ -22,6 +23,7 @@ const ThemeProviderWrapper = ( props: BoxProps ) => {
 
   return (
     <StylesProvider injectFirst>
+      {/* <ToggleColorMode /> */ }
       <ThemeContext.Provider value={ setThemeName }>
         <ThemeProvider theme={ theme }>{ props.children }</ThemeProvider>
       </ThemeContext.Provider>

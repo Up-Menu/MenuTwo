@@ -127,19 +127,19 @@ const Login = () => {
                                                 </MyButton>
                                             </Form.Item>
                                             <Divider orientation="vertical" flexItem>
-
                                             </Divider>
-
+                                            <Box pt={ 0.5 } pl={ 1 }>
+                                                <Google />
+                                            </Box>
                                         </Box>
                                     </Form>
-                                    <Box pl={ 1 }>
-                                        {/* <MaterialButton
-                                                    component={ RouterLink }
-                                                    to="/signin"
-                                                    startIcon={ <FontAwesomeIcon icon={ faPropIcon } /> }
-                                                /> */}
-                                        <Google />
-                                    </Box>
+                                    {/* <Box pl={ 1 }>
+                                        <MaterialButton
+                                            component={ RouterLink }
+                                            to="/signin"
+                                            startIcon={ <FontAwesomeIcon icon={ faPropIcon } /> }
+                                        />
+                                    </Box> */}
                                 </Box>
                             </Card>
                         </Grid>

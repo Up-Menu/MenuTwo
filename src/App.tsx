@@ -28,7 +28,6 @@ function App () {
     if ( isOnline ) {
       const favicon = getFaviconEl() // Accessing favicon element
       favicon.href = "./favicon.ico"
-      toast.success( '!به اینترنت متصل هستید' )
     }
     else {
       const favicon = getFaviconEl() // Accessing favicon element

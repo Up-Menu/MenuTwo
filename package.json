@@ -1,15 +1,15 @@
 {
-  "name": "tokyo-free-black-react-admin-dashboard",
+  "name": "sepand-react-admin-dashboard",
   "version": "2.0.0",
-  "title": "Tokyo Free Black React Typescript Admin Dashboard",
-  "description": "Tokyo Free Black React Typescript Admin Dashboard is built using the latest industry standards and features a clean and premium design style, making use of colors and accents to improve the user experience for all included flows and pages.",
+  "title": "Sepand Restaurants Menu React Typescript Admin Dashboard",
+  "description": "Sepand Restaurants Menu React Typescript Admin Dashboard is built using the latest industry standards and features a clean and premium design style, making use of colors and accents to improve the user experience for all included flows and pages.",
   "homepage": ".",
   "author": {
     "email": "88213502+Mohammad-HGH@users.noreply.github.com",
     "name": "Mohammad-HGH",
     "url": "https://github.com/Mohammad-HGH"
   },
-  "repository": "https://github.com/Mohammad-HGH",
+  "repository": "https://github.com/Mohammad-HGH/MenuTwo",
   "private": true,
   "dependencies": {
     "@emotion/react": "11.9.0",

@@ -50,11 +50,11 @@ const ThemeSelection = Loader(
 )
 
 const ThemeStore = Loader(
-  lazy( () => import( 'src/components/modules/themes/Layout/pages/store/Store' ) )
+  lazy( () => import( 'src/theme/Layout/pages/store/Store' ) )
 )
 
 const ThemeCart = Loader(
-  lazy( () => import( 'src/components/modules/themes/Layout/pages/cart' ) )
+  lazy( () => import( 'src/theme/Layout/pages/cart' ) )
 )
 
 // Components

@@ -2,23 +2,30 @@
 import { useEffect } from "react"
 import jwt_decode from "jwt-decode"
 import { useTypedDispatch } from 'src/store'
-import { userLogin } from "src/store/actions"
+import { userGoogleLogIn } from "src/store/actions"
 import { Button } from "antd"
+import { useNavigate } from "react-router"
 
 
 declare let google: { accounts: { id: { initialize: ( arg0: { client_id: string; callback: ( response: any ) => void } ) => void; renderButton: ( arg0: HTMLElement, arg1: { theme: string; size: string } ) => void } } }
 
 export const Google = () => {
     const dispatch = useTypedDispatch()
-
+    const nav = useNavigate()
     function handleCallbackResponse ( response: any ) {
         let userObj: any = jwt_decode( response.credential )
         const userData: object = {
-            role: userObj.email,
-            password: '',
-            remember: true
+            email: userObj.email,
+            password: '000000',
+            confirmPassword: '000000',
+            firstName: userObj.given_name,
+            lastName: userObj.family_name,
+            address: 'googleSSO',
+            cellPhone: 'googleSSO',
+            profile: userObj.picture
         }
-        dispatch( userLogin( userData, notification => notification ) )
+        dispatch( userGoogleLogIn( userData, notification => notification, nav ) )
+        console.log( userData )
     }
 
     useEffect( () => {

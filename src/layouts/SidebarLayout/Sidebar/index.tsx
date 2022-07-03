@@ -81,11 +81,10 @@ function Sidebar() {
         />
         <Box p={2}>
           <Button
-            href="https://bloomui.com"
+            href="https://nilldevelopers.com/"
             target="_blank"
             rel="noopener noreferrer"
-            variant="contained"
-            color="success"
+            variant="outlined"
             size="small"
             fullWidth
           >

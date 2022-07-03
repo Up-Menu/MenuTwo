@@ -8,7 +8,7 @@ import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
 import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
 import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
 import InboxTwoToneIcon from '@mui/icons-material/InboxTwoTone';
-import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+// import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import LoginIcon from '@mui/icons-material/Login';
 import { NavLink } from 'react-router-dom';
 import { userLogout } from 'src/store/actions';
@@ -34,6 +34,12 @@ import {
 
 import { SidebarContext } from 'src/contexts/SidebarContext';
 import { useTypedSelector, useTypedDispatch } from 'src/store';
+
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+
+const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
@@ -113,11 +119,12 @@ const Overview_nav = () => {
 
   const signOutHandler = (e: any): void => {
     e.preventDefault();
-
     dispatch(userLogout()).then(() => {
       window.location.reload();
     });
   };
+
+  const colorMode = React.useContext(ColorModeContext);
 
   return (
     <Fragment>
@@ -149,6 +156,19 @@ const Overview_nav = () => {
           <HeaderMenu />
         </Stack>
         <Box display="flex" alignItems="center">
+          <Box sx={{ mr: 1 }}>
+            <IconButton
+              sx={{ ml: 1 }}
+              onClick={colorMode.toggleColorMode}
+              color="inherit"
+            >
+              {theme.palette.mode === 'dark' ? (
+                <Brightness7Icon />
+              ) : (
+                <Brightness4Icon />
+              )}
+            </IconButton>
+          </Box>
           <Box sx={{ mr: 1 }}>
             <HeaderSearch />
           </Box>

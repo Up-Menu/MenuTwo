@@ -12,7 +12,7 @@ import {
 import { NavLink as RouterLink } from 'react-router-dom';
 import { SidebarContext } from 'src/contexts/SidebarContext';
 
-import DesignServicesTwoToneIcon from '@mui/icons-material/DesignServicesTwoTone';
+// import DesignServicesTwoToneIcon from '@mui/icons-material/DesignServicesTwoTone';
 import BrightnessLowTwoToneIcon from '@mui/icons-material/BrightnessLowTwoTone';
 import MmsTwoToneIcon from '@mui/icons-material/MmsTwoTone';
 import TableChartTwoToneIcon from '@mui/icons-material/TableChartTwoTone';
@@ -30,6 +30,17 @@ import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 // import ChromeReaderModeTwoToneIcon from '@mui/icons-material/ChromeReaderModeTwoTone';
 // import WorkspacePremiumTwoToneIcon from '@mui/icons-material/WorkspacePremiumTwoTone';
 // import CameraFrontTwoToneIcon from '@mui/icons-material/CameraFrontTwoTone';
+import LogoutIcon from '@mui/icons-material/Logout';
+import ArticleIcon from '@mui/icons-material/Article';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
+import BeenhereIcon from '@mui/icons-material/Beenhere';
+import MapIcon from '@mui/icons-material/Map';
+import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
+import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
+import ContactlessIcon from '@mui/icons-material/Contactless';
+import AddBoxIcon from '@mui/icons-material/AddBox';
+
 import DisplaySettingsTwoToneIcon from '@mui/icons-material/DisplaySettingsTwoTone';
 
 const MenuWrapper = styled(Box)(
@@ -189,9 +200,9 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/overview"
-                  startIcon={<DesignServicesTwoToneIcon />}
+                  startIcon={<LogoutIcon />}
                 >
-                  Exit
+                  Logout
                 </Button>
               </ListItem>
             </List>
@@ -213,7 +224,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/dashboards/tasks"
-                  startIcon={<BrightnessLowTwoToneIcon />}
+                  startIcon={<AddBoxIcon />}
                 >
                   Create Menu
                 </Button>
@@ -224,7 +235,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/dashboards/messenger"
-                  startIcon={<MmsTwoToneIcon />}
+                  startIcon={<ContactlessIcon />}
                 >
                   Contact Us
                 </Button>
@@ -249,7 +260,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/dashboards/createAccount"
-                  startIcon={<MmsTwoToneIcon />}
+                  startIcon={<AccountCircleIcon />}
                 >
                   Account Create
                 </Button>
@@ -260,7 +271,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/dashboards/themes"
-                  startIcon={<MmsTwoToneIcon />}
+                  startIcon={<AutoFixHighIcon />}
                 >
                   Theme Selection
                 </Button>
@@ -272,7 +283,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/dashboards/createMenu"
-                  startIcon={<MmsTwoToneIcon />}
+                  startIcon={<ArticleIcon />}
                 >
                   Add Menu Items
                 </Button>
@@ -283,7 +294,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/dashboards/orders"
-                  startIcon={<MmsTwoToneIcon />}
+                  startIcon={<BeenhereIcon />}
                 >
                   Select Order
                 </Button>
@@ -294,7 +305,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/dashboards/delivery"
-                  startIcon={<MmsTwoToneIcon />}
+                  startIcon={<MapIcon />}
                 >
                   Add Delivery Zone
                 </Button>
@@ -317,7 +328,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/dashboards/mobileApp"
-                  startIcon={<MmsTwoToneIcon />}
+                  startIcon={<PhoneIphoneIcon />}
                 >
                   Config Mobile App
                 </Button>
@@ -328,7 +339,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/dashboards/finish"
-                  startIcon={<MmsTwoToneIcon />}
+                  startIcon={<DownloadDoneIcon />}
                 >
                   Finish Installation
                 </Button>

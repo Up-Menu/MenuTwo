@@ -7,6 +7,7 @@ import BaseLayout from 'src/layouts/BaseLayout';
 
 import SuspenseLoader from 'src/components/SuspenseLoader';
 import Login from '../components/modules/auth/Login';
+import OpenIconSpeedDial from 'src/components/modules/OpenIconSpeedDial';
 
 const Loader = (Component) => (props: JSX.IntrinsicAttributes) =>
   (
@@ -95,9 +96,9 @@ const StatusMaintenance = Loader(
 );
 
 function routes(props: boolean | { user: any }): RouteObject[] {
-  const isLogged = props ? true : false;
+  // const isLogged = props ? true : false;
 
-  // const isLogged = true;
+  const isLogged = true;
 
   return [
     {
@@ -106,7 +107,12 @@ function routes(props: boolean | { user: any }): RouteObject[] {
       children: [
         {
           path: '/',
-          element: <Overview />
+          element: (
+            <>
+              <Overview />
+              <OpenIconSpeedDial />
+            </>
+          )
         },
         {
           path: 'overview',
@@ -170,7 +176,13 @@ function routes(props: boolean | { user: any }): RouteObject[] {
     },
     {
       path: 'dashboards',
-      element: isLogged ? <SidebarLayout /> : <Login /> || <SignIn />,
+      element: isLogged ? (
+        <>
+          <SidebarLayout />
+        </>
+      ) : (
+        <Login /> || <SignIn />
+      ),
       children: [
         {
           path: '',

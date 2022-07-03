@@ -31,10 +31,10 @@ function BottomBarContent() {
   const user = {
     name: logData.googleData.payload
       ? `${logData.googleData.payload.firstName} ${logData.googleData.payload.lastName}`
-      : 'Catherine Pike',
+      : 'Sepand User',
     avatar: logData.googleData.payload
       ? logData.googleData.payload.profile
-      : '/static/images/avatars/1.jpg'
+      : '/static/images/avatars/profile_default.png'
   };
 
   return (

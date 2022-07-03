@@ -57,7 +57,7 @@ export const userLogout = () => ( dispatch: ( arg0: { type: string } ) => any ) 
             } ) )
         )
         .then( () => {
-            localStorage.removeItem( "user" )
+            localStorage.clear()
         } )
 }
 

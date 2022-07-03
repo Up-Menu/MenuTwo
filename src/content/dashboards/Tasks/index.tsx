@@ -1,7 +1,7 @@
-import { ChangeEvent, useState } from 'react'
-import { Helmet } from 'react-helmet-async'
-import PageHeader from './PageHeader'
-import Footer from 'src/components/Footer'
+import { ChangeEvent, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
+import PageHeader from './PageHeader';
+import Footer from 'src/components/Footer';
 import {
   Grid,
   Tab,
@@ -11,8 +11,8 @@ import {
   Box,
   useTheme,
   styled
-} from '@mui/material'
-import PageTitleWrapper from 'src/components/PageTitleWrapper'
+} from '@mui/material';
+import PageTitleWrapper from 'src/components/PageTitleWrapper';
 
 // import TeamOverview from './TeamOverview';
 // import TasksAnalytics from './TasksAnalytics';
@@ -20,12 +20,12 @@ import PageTitleWrapper from 'src/components/PageTitleWrapper'
 // import Projects from './Projects';
 // import Checklist from './Checklist';
 // import Profile from './Profile';
-import TaskSearch from './TaskSearch'
-import ProgressBar from 'src/components/modules/ProgressBar'
+import TaskSearch from './TaskSearch';
+import ProgressBar from 'src/components/modules/ProgressBar';
 
-const TabsContainerWrapper = styled( Box )(
-  ( { theme } ) => `
-      padding: 0 ${ theme.spacing( 2 ) };
+const TabsContainerWrapper = styled(Box)(
+  ({ theme }) => `
+      padding: 0 ${theme.spacing(2)};
       position: relative;
       bottom: -1px;
 
@@ -52,7 +52,7 @@ const TabsContainerWrapper = styled( Box )(
             width: 28px;
             content: ' ';
             margin-left: -14px;
-            background: ${ theme.colors.primary.main };
+            background: ${theme.colors.primary.main};
             border-radius: inherit;
             height: 100%;
           }
@@ -62,13 +62,13 @@ const TabsContainerWrapper = styled( Box )(
           &.MuiButtonBase-root {
               height: 44px;
               min-height: 44px;
-              background: ${ theme.colors.alpha.white[ 50 ] };
-              border: 1px solid ${ theme.colors.alpha.black[ 10 ] };
+              background: ${theme.colors.alpha.white[50]};
+              border: 1px solid ${theme.colors.alpha.black[10]};
               border-bottom: 0;
               position: relative;
-              margin-right: ${ theme.spacing( 1 ) };
-              font-size: ${ theme.typography.pxToRem( 14 ) };
-              color: ${ theme.colors.alpha.black[ 80 ] };
+              margin-right: ${theme.spacing(1)};
+              font-size: ${theme.typography.pxToRem(14)};
+              color: ${theme.colors.alpha.black[80]};
               border-bottom-left-radius: 0;
               border-bottom-right-radius: 0;
 
@@ -84,18 +84,18 @@ const TabsContainerWrapper = styled( Box )(
                 bottom: 0;
                 height: 1px;
                 content: '';
-                background: ${ theme.colors.alpha.black[ 10 ] };
+                background: ${theme.colors.alpha.black[10]};
               }
 
               &:hover {
-                color: ${ theme.colors.alpha.black[ 100 ] };
+                color: ${theme.colors.alpha.black[100]};
               }
           }
 
           &.Mui-selected {
-              color: ${ theme.colors.alpha.black[ 100 ] };
-              background: ${ theme.colors.alpha.white[ 100 ] };
-              border-bottom-color: ${ theme.colors.alpha.white[ 100 ] };
+              color: ${theme.colors.alpha.black[100]};
+              background: ${theme.colors.alpha.white[100]};
+              border-bottom-color: ${theme.colors.alpha.white[100]};
 
               &:after {
                 height: 0;
@@ -103,19 +103,18 @@ const TabsContainerWrapper = styled( Box )(
           }
       }
   `
-)
+);
 
-function DashboardTasks () {
+function DashboardTasks() {
+  const theme = useTheme();
 
-  const theme = useTheme()
+  const [currentTab, setCurrentTab] = useState<string>('analytics');
 
-  const [ currentTab, setCurrentTab ] = useState<string>( 'analytics' )
+  const tabs = [{ value: 'analytics', label: 'Analytics Overview' }];
 
-  const tabs = [ { value: 'analytics', label: 'Analytics Overview' } ]
-
-  const handleTabsChange = ( _event: ChangeEvent<{}>, value: string ): void => {
-    setCurrentTab( value )
-  }
+  const handleTabsChange = (_event: ChangeEvent<{}>, value: string): void => {
+    setCurrentTab(value);
+  };
 
   return (
     <>
@@ -128,16 +127,16 @@ function DashboardTasks () {
       <Container maxWidth="lg">
         <TabsContainerWrapper>
           <Tabs
-            onChange={ handleTabsChange }
-            value={ currentTab }
+            onChange={handleTabsChange}
+            value={currentTab}
             variant="scrollable"
             scrollButtons="auto"
             textColor="primary"
             indicatorColor="primary"
           >
-            { tabs.map( ( tab ) => (
-              <Tab key={ tab.value } label={ tab.label } value={ tab.value } />
-            ) ) }
+            {tabs.map((tab) => (
+              <Tab key={tab.value} label={tab.label} value={tab.value} />
+            ))}
           </Tabs>
         </TabsContainerWrapper>
         <Card variant="outlined">
@@ -146,30 +145,30 @@ function DashboardTasks () {
             direction="row"
             justifyContent="center"
             alignItems="stretch"
-            spacing={ 0 }
+            spacing={0}
           >
-            { currentTab === 'analytics' && (
+            {currentTab === 'analytics' && (
               <>
-                <Grid item xs={ 12 }>
-                  <Box p={ 4 }>
+                <Grid item xs={12}>
+                  <Box p={4}>
                     <ProgressBar />
                   </Box>
                 </Grid>
               </>
-            ) }
-            { currentTab === 'taskSearch' && (
-              <Grid item xs={ 12 }>
-                <Box p={ 4 }>
+            )}
+            {currentTab === 'taskSearch' && (
+              <Grid item xs={12}>
+                <Box p={4}>
                   <TaskSearch />
                 </Box>
               </Grid>
-            ) }
+            )}
           </Grid>
         </Card>
       </Container>
       <Footer />
     </>
-  )
+  );
 }
 
-export default DashboardTasks
+export default DashboardTasks;

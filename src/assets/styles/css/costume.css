@@ -78,3 +78,9 @@ a:active {
 div.ant-space.ant-space-horizontal.ant-space-align-baseline {
   align-items: center !important;
 }
+img {
+  max-width: 100%;
+  height: auto;
+  padding: 0;
+  margin: 0;
+}

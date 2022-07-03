@@ -95,9 +95,9 @@ const StatusMaintenance = Loader(
 );
 
 function routes(props: boolean | { user: any }): RouteObject[] {
-  // const isLogged = props ? true : false;
+  const isLogged = props ? true : false;
 
-  const isLogged = true;
+  // const isLogged = true;
 
   return [
     {

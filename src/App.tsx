@@ -21,7 +21,7 @@ function App() {
   const router: any = routes(logData.user);
   const content = useRoutes(router);
   const isOnline = NetworkChecker();
-  console.log(logData.googleData.payload);
+  console.log(logData.googleData);
 
   useEffect(() => {
     if (isOnline) {

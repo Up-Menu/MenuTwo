@@ -1,37 +1,32 @@
-import { Box, Card, Container } from '@mui/material'
-import { Helmet } from 'react-helmet-async'
-import { styled } from '@mui/material/styles'
-import Logo from 'src/components/LogoSign'
-import Hero from './Hero'
+import { Container, Box, styled } from '@mui/material';
+import { Helmet } from 'react-helmet-async';
+import Overview_main from 'src/components/modules/Overview_main';
+import Overview_slider from 'src/components/modules/Overview_slider';
+import Overview_blog from 'src/components/modules/blog/Overview_blog';
+import Overview_nav from 'src/components/modules/shared/Overview_nav';
 
-
-
-
-const OverviewWrapper = styled( Box )(
+const OverviewWrapper = styled(Box)(
   () => `
     overflow: auto;
     flex: 1;
     overflow-x: hidden;
     align-items: center;
 `
-)
+);
 
-function Overview () {
+function Overview() {
   return (
     <OverviewWrapper>
       <Helmet>
-        <title>Tokyo Free Black React Typescript Admin Dashboard</title>
+        <title>منو رستوران سپند</title>
       </Helmet>
-      <Container maxWidth="lg">
-        <Box display="flex" justifyContent="center" py={ 5 } alignItems="center">
-          <Logo />
-        </Box>
-        <Card sx={ { p: 10, mb: 10, borderRadius: 12 } }>
-          <Hero />
-        </Card>
-      </Container>
+      <Overview_nav />
+      <Overview_slider />
+      <Overview_main />
+      <Overview_blog />
+      <Container maxWidth="lg"></Container>
     </OverviewWrapper>
-  )
+  );
 }
 
-export default Overview
+export default Overview;

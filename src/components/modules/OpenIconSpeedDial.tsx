@@ -20,7 +20,7 @@ const actions = [
   { icon: <LinkedInIcon />, name: 'sepandpay' },
   { icon: <TelegramIcon />, name: '@sepandpay' },
   { icon: <InstagramIcon />, name: '@sepand_pay' },
-  { icon: <DialpadIcon />, name: '021-88324060' },
+  { icon: <DialpadIcon />, name: '88324060' },
   { icon: <AlternateEmailIcon />, name: 'info@sepandpay.com' }
 ];
 

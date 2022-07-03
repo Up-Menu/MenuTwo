@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import BottomNav from './BottomNav';
 import { Helmet } from 'react-helmet-async';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
-import { Container, Grid, Card, Divider, Typography, Box } from '@mui/material';
+import {
+  Container,
+  Grid,
+  Card,
+  Divider,
+  Typography,
+  Box,
+  Button
+} from '@mui/material';
 import Footer from 'src/components/Footer';
 import TextField from '@mui/material/TextField';
 import { Form } from 'antd';
@@ -83,15 +91,25 @@ const CreateMenu: React.FC = () => {
 
   // price type
   const [value, setValue] = useState('Controlled');
-  const [list, setList] = useState([]);
+
+  const initialState = [];
+
+  const [foodList, setFoodList] = useState(initialState);
 
   // const dispatch = useTypedDispatch();
   const [form] = Form.useForm();
+  let copyValues: any;
 
   //! call on form submit
-  const onFinish = (values: object) => {
+  const onFinish = (values: any) => {
     // delete every input before send data to server
+    copyValues = values;
+    setFoodList((foodList) => [...foodList, copyValues]);
     form.resetFields();
+  };
+
+  const sendMenu = () => {
+    console.log(foodList);
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -152,7 +170,12 @@ const CreateMenu: React.FC = () => {
                         rules={[{ message: 'Please input your product name!' }]}
                         style={{ paddingTop: '10px' }}
                       >
-                        <TextField label="Product name" type="text" fullWidth />
+                        <TextField
+                          value={''}
+                          label="Product name"
+                          type="text"
+                          fullWidth
+                        />
                       </Form.Item>
                     </Box>
 
@@ -241,6 +264,7 @@ const CreateMenu: React.FC = () => {
                               label="Quantity"
                               type="number"
                               fullWidth
+                              value={''}
                             />
                           </Form.Item>
                         </Grid>
@@ -250,7 +274,12 @@ const CreateMenu: React.FC = () => {
                             rules={[{ message: 'Please input your Price!' }]}
                             style={{ paddingTop: '10px' }}
                           >
-                            <TextField label="Price" type="number" fullWidth />
+                            <TextField
+                              value={''}
+                              label="Price"
+                              type="number"
+                              fullWidth
+                            />
                           </Form.Item>
                         </Grid>
                       </Grid>
@@ -272,6 +301,7 @@ const CreateMenu: React.FC = () => {
                           label="Food Description"
                           multiline
                           fullWidth
+                          value={''}
                           rows={5}
                         />
                       </Form.Item>
@@ -326,6 +356,15 @@ const CreateMenu: React.FC = () => {
                           >
                             Save & Add
                           </MyButton>
+
+                          <Button
+                            sx={{ margin: 1 }}
+                            size="medium"
+                            color="primary"
+                            onClick={sendMenu}
+                          >
+                            Submit
+                          </Button>
                         </Box>
                       </Form.Item>
                     </Box>

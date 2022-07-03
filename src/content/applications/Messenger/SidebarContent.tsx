@@ -28,6 +28,7 @@ import Label from 'src/components/Label';
 import CheckTwoToneIcon from '@mui/icons-material/CheckTwoTone';
 import AlarmTwoToneIcon from '@mui/icons-material/AlarmTwoTone';
 import { Link as RouterLink } from 'react-router-dom';
+import { useTypedSelector } from 'src/store';
 
 const AvatarSuccess = styled(Avatar)(
   ({ theme }) => `
@@ -93,9 +94,15 @@ const TabsContainerWrapper = styled(Box)(
 );
 
 function SidebarContent() {
+  const logData: any = useTypedSelector((state) => state);
+
   const user = {
-    name: 'Catherine Pike',
-    avatar: '/static/images/avatars/1.jpg',
+    name: logData.googleData.payload
+      ? `${logData.googleData.payload.firstName} ${logData.googleData.payload.lastName}`
+      : 'Catherine Pike',
+    avatar: logData.googleData.payload
+      ? logData.googleData.payload.profile
+      : '/static/images/avatars/1.jpg',
     jobtitle: 'Software Developer'
   };
 

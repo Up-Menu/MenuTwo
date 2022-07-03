@@ -106,6 +106,15 @@ export const userGoogleLogIn = (
         address: payload.address,
         cellPhone: payload.cellPhone
     }
+    const data = (
+        dispatch( {
+            type: "GOOGLE_SSO",
+            payload: {
+                userId: nanoid(),
+                ...payload
+            }
+        } ) )
+    localStorage.setItem( "googleSSO", JSON.stringify( data ) )
 
     SignInReq( payloadWithOutRememberKey, ( server_response ) => {
         if ( server_response[ 0 ] == 'Success' ) {
@@ -123,15 +132,15 @@ export const userGoogleLogIn = (
                     return
                 }
                 else {
-                    const data = (
-                        dispatch( {
-                            type: "GOOGLE_SSO",
-                            payload: {
-                                userId: nanoid(),
-                                ...payload
-                            }
-                        } ) )
-                    localStorage.setItem( "googleSSO", JSON.stringify( data ) )
+                    // const data = (
+                    //     dispatch( {
+                    //         type: "GOOGLE_SSO",
+                    //         payload: {
+                    //             userId: nanoid(),
+                    //             ...payload
+                    //         }
+                    //     } ) )
+                    // localStorage.setItem( "googleSSO", JSON.stringify( data ) )
                     fn( toast.success( "!خوش آمدید" ) )
                 }
             } )

@@ -14,11 +14,24 @@ const authReducer = ( state = false, action: { type: any; payload: any } ) => {
     }
 }
 
+// write googleReducer to login user and logout user
+const googleReducer = ( state = false, action: { type: any; payload: any } ) => {
+    switch ( action.type ) {
+        case "GOOGLE_SSO":
+            return {
+                user: action.payload
+            }
+        default:
+            return state
+    }
+}
+
 
 
 
 const rootReducer = combineReducers( {
     user: authReducer,
+    googleData: googleReducer
 } )
 
 export default rootReducer

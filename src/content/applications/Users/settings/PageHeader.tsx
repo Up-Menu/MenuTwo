@@ -1,9 +1,15 @@
 import { Typography } from '@mui/material';
+import { useTypedSelector } from 'src/store';
 
 function PageHeader() {
+  const logData: any = useTypedSelector((state) => state);
   const user = {
-    name: 'Catherine Pike',
-    avatar: '/static/images/avatars/1.jpg'
+    name: logData.googleData.payload
+      ? `${logData.googleData.payload.firstName} ${logData.googleData.payload.lastName}`
+      : 'Catherine Pike',
+    avatar: logData.googleData.payload
+      ? logData.googleData.payload.profile
+      : '/static/images/avatars/1.jpg'
   };
 
   return (

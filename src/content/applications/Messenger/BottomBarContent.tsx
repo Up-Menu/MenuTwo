@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import AttachFileTwoToneIcon from '@mui/icons-material/AttachFileTwoTone';
 import SendTwoToneIcon from '@mui/icons-material/SendTwoTone';
+import { useTypedSelector } from 'src/store';
 
 const MessageInputWrapper = styled(InputBase)(
   ({ theme }) => `
@@ -24,11 +25,16 @@ const Input = styled('input')({
 });
 
 function BottomBarContent() {
+  const logData: any = useTypedSelector((state) => state);
   const theme = useTheme();
 
   const user = {
-    name: 'Catherine Pike',
-    avatar: '/static/images/avatars/1.jpg'
+    name: logData.googleData.payload
+      ? `${logData.googleData.payload.firstName} ${logData.googleData.payload.lastName}`
+      : 'Catherine Pike',
+    avatar: logData.googleData.payload
+      ? logData.googleData.payload.profile
+      : '/static/images/avatars/1.jpg'
   };
 
   return (

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState } from 'react'
 import {
   Button,
   Box,
@@ -8,35 +8,35 @@ import {
   Typography,
   styled,
   useTheme
-} from '@mui/material';
-import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
-import Chart from 'react-apexcharts';
-import type { ApexOptions } from 'apexcharts';
+} from '@mui/material'
+import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone'
+import Chart from 'react-apexcharts'
+import type { ApexOptions } from 'apexcharts'
 
-const DotPrimaryLight = styled('span')(
-  ({ theme }) => `
+const DotPrimaryLight = styled( 'span' )(
+  ( { theme } ) => `
     border-radius: 22px;
-    background: ${theme.colors.primary.lighter};
-    width: ${theme.spacing(1.5)};
-    height: ${theme.spacing(1.5)};
+    background: ${ theme.colors.primary.lighter };
+    width: ${ theme.spacing( 1.5 ) };
+    height: ${ theme.spacing( 1.5 ) };
     display: inline-block;
-    margin-right: ${theme.spacing(0.5)};
+    margin-right: ${ theme.spacing( 0.5 ) };
 `
-);
+)
 
-const DotPrimary = styled('span')(
-  ({ theme }) => `
+const DotPrimary = styled( 'span' )(
+  ( { theme } ) => `
     border-radius: 22px;
-    background: ${theme.colors.primary.main};
-    width: ${theme.spacing(1.5)};
-    height: ${theme.spacing(1.5)};
+    background: ${ theme.colors.primary.main };
+    width: ${ theme.spacing( 1.5 ) };
+    height: ${ theme.spacing( 1.5 ) };
     display: inline-block;
-    margin-right: ${theme.spacing(0.5)};
+    margin-right: ${ theme.spacing( 0.5 ) };
 `
-);
+)
 
-function TasksAnalytics() {
-  const theme = useTheme();
+function TasksAnalytics () {
+  const theme = useTheme()
 
   const chartOptions: ApexOptions = {
     chart: {
@@ -56,7 +56,7 @@ function TasksAnalytics() {
         columnWidth: '35%'
       }
     },
-    colors: [theme.colors.primary.main, alpha(theme.colors.primary.main, 0.5)],
+    colors: [ theme.colors.primary.main, alpha( theme.colors.primary.main, 0.5 ) ],
     dataLabels: {
       enabled: false
     },
@@ -69,7 +69,7 @@ function TasksAnalytics() {
     stroke: {
       show: true,
       width: 3,
-      colors: ['transparent']
+      colors: [ 'transparent' ]
     },
     legend: {
       show: false
@@ -127,24 +127,24 @@ function TasksAnalytics() {
         show: false
       },
       y: {
-        formatter: function (val) {
-          return '$ ' + val + 'k';
+        formatter: function ( val ) {
+          return '$ ' + val + 'k'
         }
       },
-      theme: 'dark'
+      theme: 'light'
     }
-  };
+  }
 
   const chartData = [
     {
       name: 'Income',
-      data: [28, 47, 41, 34, 69, 91, 49, 82, 52, 72, 32, 99]
+      data: [ 28, 47, 41, 34, 69, 91, 49, 82, 52, 72, 32, 99 ]
     },
     {
       name: 'Expenses',
-      data: [38, 85, 64, 40, 97, 82, 58, 42, 55, 46, 57, 70]
+      data: [ 38, 85, 64, 40, 97, 82, 58, 42, 55, 46, 57, 70 ]
     }
-  ];
+  ]
 
   const periods = [
     {
@@ -163,16 +163,16 @@ function TasksAnalytics() {
       value: 'last_year',
       text: 'Last year'
     }
-  ];
+  ]
 
-  const actionRef1 = useRef<any>(null);
-  const [openPeriod, setOpenMenuPeriod] = useState<boolean>(false);
-  const [period, setPeriod] = useState<string>(periods[3].text);
+  const actionRef1 = useRef<any>( null )
+  const [ openPeriod, setOpenMenuPeriod ] = useState<boolean>( false )
+  const [ period, setPeriod ] = useState<string>( periods[ 3 ].text )
 
   return (
     <Box>
       <Box
-        mb={2}
+        mb={ 2 }
         display="flex"
         alignItems="center"
         justifyContent="space-between"
@@ -182,48 +182,48 @@ function TasksAnalytics() {
           size="small"
           variant="contained"
           color="secondary"
-          ref={actionRef1}
-          onClick={() => setOpenMenuPeriod(true)}
-          endIcon={<ExpandMoreTwoToneIcon fontSize="small" />}
+          ref={ actionRef1 }
+          onClick={ () => setOpenMenuPeriod( true ) }
+          endIcon={ <ExpandMoreTwoToneIcon fontSize="small" /> }
         >
-          {period}
+          { period }
         </Button>
         <Menu
           disableScrollLock
-          anchorEl={actionRef1.current}
-          onClose={() => setOpenMenuPeriod(false)}
-          open={openPeriod}
-          anchorOrigin={{
+          anchorEl={ actionRef1.current }
+          onClose={ () => setOpenMenuPeriod( false ) }
+          open={ openPeriod }
+          anchorOrigin={ {
             vertical: 'bottom',
             horizontal: 'right'
-          }}
-          transformOrigin={{
+          } }
+          transformOrigin={ {
             vertical: 'top',
             horizontal: 'right'
-          }}
+          } }
         >
-          {periods.map((_period) => (
+          { periods.map( ( _period ) => (
             <MenuItem
-              key={_period.value}
-              onClick={() => {
-                setPeriod(_period.text);
-                setOpenMenuPeriod(false);
-              }}
+              key={ _period.value }
+              onClick={ () => {
+                setPeriod( _period.text )
+                setOpenMenuPeriod( false )
+              } }
             >
-              {_period.text}
+              { _period.text }
             </MenuItem>
-          ))}
+          ) ) }
         </Menu>
       </Box>
-      <Box display="flex" alignItems="center" pb={2}>
+      <Box display="flex" alignItems="center" pb={ 2 }>
         <Typography
           variant="body2"
           color="text.secondary"
-          sx={{
+          sx={ {
             display: 'flex',
             alignItems: 'center',
             mr: 2
-          }}
+          } }
         >
           <DotPrimary />
           tasks created
@@ -231,23 +231,23 @@ function TasksAnalytics() {
         <Typography
           variant="body2"
           color="text.secondary"
-          sx={{
+          sx={ {
             display: 'flex',
             alignItems: 'center'
-          }}
+          } }
         >
           <DotPrimaryLight />
           tasks completed
         </Typography>
       </Box>
       <Chart
-        options={chartOptions}
-        series={chartData}
+        options={ chartOptions }
+        series={ chartData }
         type="bar"
-        height={270}
+        height={ 270 }
       />
     </Box>
-  );
+  )
 }
 
-export default TasksAnalytics;
+export default TasksAnalytics

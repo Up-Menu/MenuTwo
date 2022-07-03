@@ -1,23 +1,16 @@
 import * as React from 'react'
-import { ThemeProvider, createTheme } from '@mui/material/styles'
-import Header from 'src/layouts/SidebarLayout/Header'
-export const ColorModeContext = React.createContext( { toggleColorMode: () => { } } )
-export default function ToggleColorMode () {
-    const [ mode, setMode ] = React.useState<'light' | 'dark'>( 'light' )
-    const colorMode = React.useMemo(
-        () => ( {
-            toggleColorMode: () => {
-                setMode( ( prevMode ) => ( prevMode === 'light' ? 'dark' : 'light' ) )
-            },
-        } ),
-        [],
-    )
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import CssBaseline from '@mui/material/CssBaseline'
+
+export default function AutoToggle () {
+    const prefersDarkMode = useMediaQuery( '(prefers-color-scheme: dark)' )
 
     const theme = React.useMemo(
         () =>
             createTheme( {
                 palette: {
-                    mode,
+                    mode: prefersDarkMode ? 'dark' : 'light',
                 },
                 colors: {
                     gradients: {
@@ -136,14 +129,13 @@ export default function ToggleColorMode () {
                     textColor: undefined
                 }
             } ),
-        [ mode ],
+        [ prefersDarkMode ],
     )
 
     return (
-        <ColorModeContext.Provider value={ colorMode }>
-            <ThemeProvider theme={ theme }>
-                {/* <Header /> */ }
-            </ThemeProvider>
-        </ColorModeContext.Provider>
+        <ThemeProvider theme={ theme }>
+            <CssBaseline />
+            {/* <Routes /> */ }
+        </ThemeProvider>
     )
 }

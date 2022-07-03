@@ -8,6 +8,7 @@ import {
   subMinutes
 } from 'date-fns';
 import ScheduleTwoToneIcon from '@mui/icons-material/ScheduleTwoTone';
+import { useTypedSelector } from 'src/store';
 
 const DividerWrapper = styled(Divider)(
   ({ theme }) => `
@@ -46,9 +47,15 @@ const CardWrapperSecondary = styled(Card)(
 );
 
 function ChatContent() {
+  const logData: any = useTypedSelector((state) => state);
+
   const user = {
-    name: 'Catherine Pike',
-    avatar: '/static/images/avatars/1.jpg'
+    name: logData.googleData.payload
+      ? `${logData.googleData.payload.firstName} ${logData.googleData.payload.lastName}`
+      : 'Catherine Pike',
+    avatar: logData.googleData.payload
+      ? logData.googleData.payload.profile
+      : '/static/images/avatars/1.jpg'
   };
 
   return (

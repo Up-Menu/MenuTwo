@@ -9,13 +9,19 @@ import Feed from './Feed';
 import PopularTags from './PopularTags';
 import MyCards from './MyCards';
 import Addresses from './Addresses';
+import { useTypedSelector } from 'src/store';
 
 function ManagementUserProfile() {
+  const logData: any = useTypedSelector((state) => state);
   const user = {
     savedCards: 7,
-    name: 'Catherine Pike',
     coverImg: '/static/images/placeholders/covers/5.jpg',
-    avatar: '/static/images/avatars/4.jpg',
+    name: logData.googleData.payload
+      ? `${logData.googleData.payload.firstName} ${logData.googleData.payload.lastName}`
+      : 'Catherine Pike',
+    avatar: logData.googleData.payload
+      ? logData.googleData.payload.profile
+      : '/static/images/avatars/1.jpg',
     description:
       "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage",
     jobtitle: 'Web Developer',

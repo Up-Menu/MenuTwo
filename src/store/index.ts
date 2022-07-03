@@ -8,7 +8,7 @@ import { useSelector } from "react-redux"
 
 const initialState = {
     user: readUser(),
-
+    googleData: googleUser()
 }
 
 
@@ -17,6 +17,19 @@ const initialState = {
 function readUser () {
     try {
         const serialized = localStorage.getItem( 'user' )
+        if ( serialized === null )
+            return undefined
+        return JSON.parse( serialized )
+    }
+    catch ( err ) {
+        return undefined
+    }
+}
+
+// Read google user sso from the localStorage
+function googleUser () {
+    try {
+        const serialized = localStorage.getItem( 'googleSSO' )
         if ( serialized === null )
             return undefined
         return JSON.parse( serialized )

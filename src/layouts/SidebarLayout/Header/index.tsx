@@ -71,8 +71,7 @@ function Header () {
         <HeaderMenu />
       </Stack>
       <Box display="flex" alignItems="center">
-        {/* put theme switch there */ }
-
+        {/* put toggle there */ }
         <HeaderButtons />
         <HeaderUserbox />
 

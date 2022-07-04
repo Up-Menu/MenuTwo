@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { createTheme, ThemeProvider } from '@mui/material';
+import { alpha, createTheme, darken, ThemeProvider } from '@mui/material';
 import { themeCreator } from './base';
 import { StylesProvider } from '@mui/styles';
+import { colors, themeColors } from './schemes/NebulaFighterTheme';
 
 type BoxProps = {
   children: React.ReactNode; // 👈️ type children
@@ -36,8 +37,19 @@ const ThemeProviderWrapper = (props: BoxProps) => {
   const _theme = React.useMemo(
     () =>
       createTheme({
+        // direction: i18n.dir(),
+
         palette: {
-          mode
+          mode,
+
+          // text: {
+          //   primary: colors.alpha.black[100]
+          // },
+
+          background: {
+            paper: mode === 'dark' ? colors.alpha.white[100] : '#fff',
+            default: mode === 'dark' ? colors.layout.general.bodyBg : '#fff'
+          }
         }
       }),
     [mode]

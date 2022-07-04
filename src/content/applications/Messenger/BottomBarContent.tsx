@@ -11,6 +11,7 @@ import {
 import AttachFileTwoToneIcon from '@mui/icons-material/AttachFileTwoTone';
 import SendTwoToneIcon from '@mui/icons-material/SendTwoTone';
 import { useTypedSelector } from 'src/store';
+import images from 'src/importer';
 
 const MessageInputWrapper = styled(InputBase)(
   ({ theme }) => `
@@ -34,7 +35,7 @@ function BottomBarContent() {
       : 'Sepand User',
     avatar: logData.googleData.payload
       ? logData.googleData.payload.profile
-      : '/static/images/avatars/profile_default.png'
+      : images['avatars/profile_default.png']
   };
 
   return (

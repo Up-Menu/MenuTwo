@@ -29,6 +29,7 @@ import CheckTwoToneIcon from '@mui/icons-material/CheckTwoTone';
 import AlarmTwoToneIcon from '@mui/icons-material/AlarmTwoTone';
 import { Link as RouterLink } from 'react-router-dom';
 import { useTypedSelector } from 'src/store';
+import images from 'src/importer';
 
 const AvatarSuccess = styled(Avatar)(
   ({ theme }) => `
@@ -102,8 +103,8 @@ function SidebarContent() {
       : 'Sepand User',
     avatar: logData.googleData.payload
       ? logData.googleData.payload.profile
-      : '/static/images/avatars/profile_default.png',
-    jobtitle: 'Software Developer'
+      : images['avatars/profile_default.png'],
+    jobtitle: 'Sepand user'
   };
 
   const [state, setState] = useState({

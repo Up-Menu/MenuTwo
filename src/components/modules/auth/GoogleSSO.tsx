@@ -5,20 +5,7 @@ import { userGoogleLogIn } from 'src/store/actions';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router';
 
-declare let google: {
-  accounts: {
-    id: {
-      initialize: (arg0: {
-        client_id: string;
-        callback: (response: any) => void;
-      }) => void;
-      renderButton: (
-        arg0: HTMLElement,
-        arg1: { theme: string; size: string }
-      ) => void;
-    };
-  };
-};
+declare let google: any;
 
 export const Google = () => {
   const dispatch = useTypedDispatch();

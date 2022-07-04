@@ -1,4 +1,5 @@
 import { Typography } from '@mui/material';
+import images from 'src/importer';
 import { useTypedSelector } from 'src/store';
 
 function PageHeader() {
@@ -9,7 +10,7 @@ function PageHeader() {
       : 'Sepand User',
     avatar: logData.googleData.payload
       ? logData.googleData.payload.profile
-      : '/static/images/avatars/profile_default.png'
+      : images['avatars/profile_default.png']
   };
 
   return (

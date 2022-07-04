@@ -95,10 +95,10 @@ const StatusMaintenance = Loader(
   lazy(() => import('src/content/pages/Status/Maintenance'))
 );
 
-function routes(props: boolean | { user: any }): RouteObject[] {
-  // const isLogged = props ? true : false;
+function routes(props: string[]): RouteObject[] {
+  const isLogged = props[0] || props[1] ? true : false;
 
-  const isLogged = true;
+  // const isLogged = true;
 
   return [
     {

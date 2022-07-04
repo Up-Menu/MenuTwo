@@ -38,6 +38,7 @@ import { useTypedSelector, useTypedDispatch } from 'src/store';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
+import images from 'src/importer';
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
@@ -102,8 +103,8 @@ const Overview_nav = () => {
       : 'Not Registered',
     avatar: logData.googleData.payload
       ? logData.googleData.payload.profile
-      : '/static/images/avatars/profile_default.png',
-    jobtitle: 'Project Manager'
+      : images['avatars/profile_default.png'],
+    jobtitle: 'Sepand user'
   };
 
   const ref = useRef<any>(null);

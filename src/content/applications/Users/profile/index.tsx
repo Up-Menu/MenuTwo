@@ -10,6 +10,7 @@ import PopularTags from './PopularTags';
 import MyCards from './MyCards';
 import Addresses from './Addresses';
 import { useTypedSelector } from 'src/store';
+import images from 'src/importer';
 
 function ManagementUserProfile() {
   const logData: any = useTypedSelector((state) => state);
@@ -21,10 +22,10 @@ function ManagementUserProfile() {
       : 'Sepand User',
     avatar: logData.googleData.payload
       ? logData.googleData.payload.profile
-      : '/static/images/avatars/profile_default.png',
+      : images['avatars/profile_default.png'],
     description:
       "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage",
-    jobtitle: 'Web Developer',
+    jobtitle: 'Sepand user',
     location: 'Barcelona, Spain',
     followers: '465'
   };

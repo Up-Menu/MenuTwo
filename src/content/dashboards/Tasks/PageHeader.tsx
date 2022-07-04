@@ -10,6 +10,7 @@ import {
 import DocumentScannerTwoToneIcon from '@mui/icons-material/DocumentScannerTwoTone';
 import AddAlertTwoToneIcon from '@mui/icons-material/AddAlertTwoTone';
 import { useTypedSelector } from 'src/store';
+import images from 'src/importer';
 
 const AvatarPageTitle = styled(Avatar)(
   ({ theme }) => `
@@ -43,7 +44,7 @@ function PageHeader() {
       : 'Sepand User',
     avatar: logData.googleData.payload
       ? logData.googleData.payload.profile
-      : '/static/images/avatars/profile_default.png'
+      : images['avatars/profile_default.png']
   };
 
   return (

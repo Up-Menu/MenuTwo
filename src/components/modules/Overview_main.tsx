@@ -20,6 +20,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Footer from '../Footer';
+import images from 'src/importer';
 const MyButton = styled(Button)`
   &:hover svg {
     margin-left: 5px;
@@ -110,9 +111,9 @@ function PricingContent() {
       <CssBaseline />
 
       <Box sx={{ pt: 15, pb: 6 }}>
-        <Container disableGutters maxWidth="lg" component="main">
+        <Container maxWidth="lg" component="main">
           <Grid container spacing={7} alignItems="center">
-            <Grid item xs={4}>
+            <Grid item xs={12} md={4}>
               <Typography variant="h2">
                 Online food ordering system on your own
               </Typography>
@@ -144,7 +145,11 @@ function PricingContent() {
                           return (
                             <span
                               key={key}
-                              style={i % 2 === 0 ? { color: 'whitesmoke' } : {}}
+                              style={
+                                i % 2 === 0
+                                  ? { color: '#8C7CF0' }
+                                  : { color: '#8C7CF0' }
+                              }
                             >
                               {char}
                             </span>
@@ -182,8 +187,8 @@ function PricingContent() {
               </Typography>
             </Grid>
 
-            <Grid item xs={8}>
-              <img src="/static/images/burger.png" alt="" />
+            <Grid item xs={12} md={8}>
+              <img src={images['burger.png']} alt="" />
             </Grid>
           </Grid>
 
@@ -243,28 +248,28 @@ function PricingContent() {
           >
             <Grid container spacing={2}>
               <Grid item xs={2}>
-                <img src="/static/images/logo-subway.png" alt="" />
+                <img src={images['logo-subway.png']} alt="" />
               </Grid>
               <Grid item xs={2}>
-                <img src="/static/images/logo-77sushi.png" alt="" />
+                <img src={images['logo-77sushi.png']} alt="" />
               </Grid>
               <Grid item xs={2}>
-                <img src="/static/images/logo-elburro.png" alt="" />
+                <img src={images['logo-elburro.png']} alt="" />
               </Grid>
               <Grid item xs={2}>
-                <img src="/static/images/logo-tasteburger.png" alt="" />
+                <img src={images['logo-tasteburger.png']} alt="" />
               </Grid>
               <Grid item xs={2}>
-                <img src="/static/images/logo-fiero.png" alt="" />
+                <img src={images['logo-fiero.png']} alt="" />
               </Grid>
               <Grid item xs={2}>
-                <img src="/static/images/logo-otosushi.png" alt="" />
+                <img src={images['logo-otosushi.png']} alt="" />
               </Grid>
             </Grid>
           </Box>
 
           <Grid pb={5} container spacing={7} alignItems="center">
-            <Grid item xs={4}>
+            <Grid item xs={12} md={4}>
               <Typography variant="h2">
                 Food online ordering for restaurants
               </Typography>
@@ -285,16 +290,16 @@ function PricingContent() {
               </Link>
             </Grid>
 
-            <Grid item xs={8}>
-              <img src="/static/images/burger.png" alt="" />
+            <Grid item xs={12} md={8}>
+              <img src={images['burger.png']} alt="" />
             </Grid>
           </Grid>
 
           <Grid pt={5} container spacing={7} alignItems="center">
-            <Grid item xs={6}>
-              <img src="/static/images/new-home-2.png" alt="" />
+            <Grid item xs={12} md={6} order={{ xs: 1, md: -1 }}>
+              <img src={images['new-home-2.png']} alt="" />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <Typography variant="h2">Branded mobile app</Typography>
               <p>
                 Increase sales and get up to 20% more online orders
@@ -317,7 +322,7 @@ function PricingContent() {
           </Grid>
 
           <Grid pt={5} pb={5} container spacing={7} alignItems="center">
-            <Grid item xs={5}>
+            <Grid item xs={12} md={5}>
               <Typography variant="h2">Free restaurant</Typography>
 
               <Typography variant="h2" color="#8C7CF0">
@@ -344,16 +349,16 @@ function PricingContent() {
               </Link>
             </Grid>
 
-            <Grid item xs={7}>
-              <img src="/static/images/new-home-3.png" alt="" />
+            <Grid item xs={12} md={7}>
+              <img src={images['new-home-3.png']} alt="" />
             </Grid>
           </Grid>
 
           <Grid pt={5} container spacing={7} alignItems="center">
-            <Grid item xs={6}>
-              <img src="/static/images/new-home-4.png" alt="" />
+            <Grid item xs={12} md={6} order={{ xs: 2, md: -1 }}>
+              <img src={images['new-home-4.png']} alt="" />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <Typography variant="h2">Table booking system</Typography>
               <p>
                 60% of customers would like to book a table online – let
@@ -376,7 +381,7 @@ function PricingContent() {
           </Grid>
 
           <Grid pt={5} pb={5} container spacing={7} alignItems="center">
-            <Grid item xs={5}>
+            <Grid item xs={12} md={5}>
               <Typography variant="h2">Loyalty program &</Typography>
               <Typography variant="h2">reward system</Typography>
 
@@ -403,8 +408,8 @@ function PricingContent() {
               </Link>
             </Grid>
 
-            <Grid item xs={7}>
-              <img src="/static/images/new-home-5.png" alt="" />
+            <Grid item xs={12} md={7}>
+              <img src={images['new-home-5.png']} alt="" />
             </Grid>
           </Grid>
         </Container>

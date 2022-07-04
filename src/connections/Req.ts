@@ -19,6 +19,15 @@ export const LoginReq = ( value: any, fn: ( arg0: any ) => void ) => {
         .catch( err => console.log( err ) )
 }
 
+export const GoogleReq = ( value: any, fn: ( arg0: any ) => void ) => {
+    Api
+        .post( 'Account/SSO', value, '' )
+        .then( response => {
+            fn( [ response.data.status, response.data.data.message ] )
+        } )
+        .catch( err => console.log( err ) )
+}
+
 export const AddMenuReq = ( value: any ) => {
     Api
         .post( 'Menu/AddMenu', value, '' )

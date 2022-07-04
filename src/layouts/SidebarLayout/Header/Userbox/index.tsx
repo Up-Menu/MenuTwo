@@ -25,6 +25,7 @@ import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
 import { useTypedDispatch } from 'src/store';
 import { userLogout } from 'src/store/actions';
 import { useTypedSelector } from 'src/store';
+import images from 'src/importer';
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
@@ -69,7 +70,7 @@ function HeaderUserbox() {
       : 'Sepand User',
     avatar: logData.googleData.payload
       ? logData.googleData.payload.profile
-      : '/static/images/avatars/profile_default.png',
+      : images['avatars/profile_default.png'],
     jobtitle: 'Project Manager'
   };
   const dispatch = useTypedDispatch();

@@ -1,4 +1,4 @@
-import { SignInReq, LoginReq } from './../../connections/Req'
+import { SignInReq, LoginReq, GoogleReq } from './../../connections/Req'
 import { nanoid } from '@reduxjs/toolkit'
 import timeoutPromise from '../helper/TimeOut'
 import toast from 'react-hot-toast'
@@ -106,45 +106,35 @@ export const userGoogleLogIn = (
         address: payload.address,
         cellPhone: payload.cellPhone
     }
-    const data = (
-        dispatch( {
-            type: "GOOGLE_SSO",
-            payload: {
-                userId: nanoid(),
-                ...payload
-            }
-        } ) )
-    localStorage.setItem( "googleSSO", JSON.stringify( data ) )
 
-    SignInReq( payloadWithOutRememberKey, ( server_response ) => {
-        if ( server_response[ 0 ] == 'Success' ) {
-            LoginReq( { email: payload.email, password: payload.password, }, ( server_response_log ) => {
-                if ( server_response_log[ 0 ] == "NotFound" ) {
-                    fn( toast.error( server_response_log[ 1 ] ) )
-                    return
-                }
-                else if ( server_response_log[ 0 ] == "Error" ) {
-                    fn( toast.error( server_response_log[ 1 ] ) )
-                    return
-                }
-                else if ( server_response_log[ 0 ] == "InActive" ) {
-                    fn( toast.error( server_response_log[ 1 ] ) )
-                    return
-                }
-                else {
-                    // const data = (
-                    //     dispatch( {
-                    //         type: "GOOGLE_SSO",
-                    //         payload: {
-                    //             userId: nanoid(),
-                    //             ...payload
-                    //         }
-                    //     } ) )
-                    // localStorage.setItem( "googleSSO", JSON.stringify( data ) )
-                    fn( toast.success( "!خوش آمدید" ) )
-                }
-            } )
+    GoogleReq( payloadWithOutRememberKey, ( server_response_log ) => {
+        if ( server_response_log[ 0 ] == "NotFound" ) {
+            fn( toast.error( server_response_log[ 1 ] ) )
+            return
+        }
+        else if ( server_response_log[ 0 ] == "Error" ) {
+            fn( toast.error( server_response_log[ 1 ] ) )
+            return
+        }
+        else if ( server_response_log[ 0 ] == "InActive" ) {
+            fn( toast.error( server_response_log[ 1 ] ) )
+            return
+        }
+        else {
+            const data = (
+                dispatch( {
+                    type: "GOOGLE_SSO",
+                    payload: {
+                        userId: nanoid(),
+                        ...payload
+                    }
+                } ) )
+            fn( toast.success( "!خوش آمدید" ) )
+            localStorage.setItem( "googleSSO", JSON.stringify( data ) )
             nav( "/dashboards/tasks" )
-        } else fn( toast.error( server_response[ 1 ] ) )
+        }
     } )
+
+
+
 }

@@ -19,10 +19,11 @@ function getFaviconEl() {
 
 function App() {
   const logData: any = useTypedSelector((state) => state);
-  const router: any = routes(logData.user);
+  console.log(logData);
+
+  const router: any = routes([logData.user || logData.googleData]);
   const content = useRoutes(router);
   const isOnline = NetworkChecker();
-  console.log(logData.googleData);
 
   useEffect(() => {
     if (isOnline) {

@@ -29,6 +29,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper';
 import { MuiSwitch } from '../UI/CustomizedSwitches';
 import MyButton from '../UI/Button/MyButton';
+import images from 'src/importer';
 
 const props: UploadProps = {
   name: 'file',
@@ -396,40 +397,22 @@ const CreateMenu: React.FC = () => {
                   className="mySwiper"
                 >
                   <SwiperSlide>
-                    <img
-                      src="/static/images/placeholders/covers/1.jpg"
-                      alt=""
-                    />
+                    <img src={images['new-home-1.png']} alt="" />
                   </SwiperSlide>
                   <SwiperSlide>
-                    <img
-                      src="/static/images/placeholders/covers/1.jpg"
-                      alt=""
-                    />
+                    <img src={images['new-home-2.png']} alt="" />
                   </SwiperSlide>
                   <SwiperSlide>
-                    <img
-                      src="/static/images/placeholders/covers/1.jpg"
-                      alt=""
-                    />
+                    <img src={images['new-home-3.png']} alt="" />
                   </SwiperSlide>
                   <SwiperSlide>
-                    <img
-                      src="/static/images/placeholders/covers/1.jpg"
-                      alt=""
-                    />
+                    <img src={images['new-home-4.png']} alt="" />
                   </SwiperSlide>
                   <SwiperSlide>
-                    <img
-                      src="/static/images/placeholders/covers/1.jpg"
-                      alt=""
-                    />
+                    <img src={images['new-home-5.png']} alt="" />
                   </SwiperSlide>
                   <SwiperSlide>
-                    <img
-                      src="/static/images/placeholders/covers/1.jpg"
-                      alt=""
-                    />
+                    <img src={images['new-home-5.png']} alt="" />
                   </SwiperSlide>
                 </Swiper>
 

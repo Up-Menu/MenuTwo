@@ -1,57 +1,115 @@
-import React from 'react'
+import { Fragment } from 'react';
 
-import { useCart } from 'src/components/modules/hooks/useCart'
-import { formatNumber } from 'src/components/modules/helpers/utils'
-import { PlusCircleIcon, MinusCircleIcon, TrashIcon } from '../../components/icons'
+import { useCart } from 'src/components/modules/hooks/useCart';
+import { formatNumber } from 'src/components/modules/helpers/utils';
 
-const CartItem = ( { product } ) => {
+import {
+  Box,
+  CssBaseline,
+  GlobalStyles,
+  IconButton,
+  Typography
+} from '@mui/material';
 
-    const { increase, decrease, removeProduct } = useCart()
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { makeStyles } from '@material-ui/core/styles';
 
-    return (
-        <div className="row no-gutters py-2">
-            <div className="col-sm-2 p-2">
-                <img
-                    alt={ product.name }
-                    style={ { margin: "0 auto", maxHeight: "50px" } }
-                    src={ product.photo } className="img-fluid d-block" />
-            </div>
-            <div className="col-sm-4 p-2">
-                <h5 className="mb-1">{ product.name }</h5>
-                <p className="mb-1">Price: { formatNumber( product.price ) } </p>
+const minusStyles = makeStyles((theme) => ({
+  customHoverFocus: {
+    '&:hover, &.Mui-focusVisible': { color: '#ad1457' }
+  }
+}));
 
-            </div>
-            <div className="col-sm-2 p-2 text-center ">
-                <p className="mb-0">Qty: { product.quantity }</p>
-            </div>
-            <div className="col-sm-4 p-2 text-right">
-                <button
-                    onClick={ () => increase( product ) }
-                    className="btn btn-primary btn-sm mr-2 mb-1">
-                    <PlusCircleIcon width={ "20px" } />
-                </button>
+const plusStyles = makeStyles((theme) => ({
+  customHoverFocus: {
+    '&:hover, &.Mui-focusVisible': { color: '#57CA22' }
+  }
+}));
 
-                {
-                    product.quantity > 1 &&
-                    <button
-                        onClick={ () => decrease( product ) }
-                        className="btn btn-danger btn-sm mb-1">
-                        <MinusCircleIcon width={ "20px" } />
-                    </button>
-                }
+const trashStyles = makeStyles((theme) => ({
+  customHoverFocus: {
+    '&:hover, &.Mui-focusVisible': { color: '#FF1943' }
+  }
+}));
 
-                {
-                    product.quantity === 1 &&
-                    <button
-                        onClick={ () => removeProduct( product ) }
-                        className="btn btn-danger btn-sm mb-1">
-                        <TrashIcon width={ "20px" } />
-                    </button>
-                }
+const CartItem = ({ product }) => {
+  const { increase, decrease, removeProduct } = useCart();
+  const plusClasses = plusStyles();
+  const minusClasses = minusStyles();
+  const trashClasses = trashStyles();
+  return (
+    <Fragment>
+      <GlobalStyles
+        styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }}
+      />
+      <CssBaseline />
 
-            </div>
-        </div>
-    )
-}
+      <Box
+        display="flex"
+        flexDirection="row"
+        justifyContent="space-between"
+        justifyItems="center"
+        justifySelf="center"
+        alignItems="center"
+        alignContent="center"
+        alignSelf="center"
+        textAlign="start"
+        flexWrap="wrap"
+      >
+        <Box>
+          <img
+            alt={product.name}
+            style={{ margin: '0 auto', maxWidth: '150px' }}
+            src={product.photo}
+          />
+        </Box>
 
-export default CartItem
+        <Box>
+          <Box>
+            <Typography mb={1} variant="h5">
+              {product.name}
+            </Typography>
+            <Box mb={1}>Price: {formatNumber(product.price)} </Box>
+          </Box>
+          <Box mb={0}>
+            <p>Qty: {product.quantity}</p>
+          </Box>
+        </Box>
+
+        <Box display="flex" flexDirection="column">
+          <IconButton
+            className={plusClasses.customHoverFocus}
+            aria-label="Delete"
+            onClick={() => increase(product)}
+          >
+            <AddCircleIcon />
+          </IconButton>
+
+          {product.quantity > 1 && (
+            <IconButton
+              className={minusClasses.customHoverFocus}
+              aria-label="Delete"
+              onClick={() => decrease(product)}
+            >
+              <RemoveCircleIcon />
+            </IconButton>
+          )}
+
+          {product.quantity === 1 && (
+            <IconButton
+              className={trashClasses.customHoverFocus}
+              aria-label="Delete"
+              onClick={() => removeProduct(product)}
+            >
+              <DeleteForeverIcon />
+            </IconButton>
+          )}
+        </Box>
+      </Box>
+    </Fragment>
+  );
+};
+
+export default CartItem;

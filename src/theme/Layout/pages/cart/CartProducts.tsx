@@ -1,20 +1,25 @@
-import React from 'react'
-import CartItem from './CartItem'
-import { useCart } from 'src/components/modules/hooks/useCart'
-import styles from 'src/assets/styles/scss/CartProducts.module.scss'
+import React from 'react';
+import CartItem from './CartItem';
+import { useCart } from 'src/components/modules/hooks/useCart';
+import { Container, Divider, Grid, Box } from '@mui/material';
 
 const CartProducts = () => {
-  const { cartItems } = useCart()
+  const { cartItems } = useCart();
 
   return (
-    <div className={ styles.p__container }>
-      <div className="card card-body border-0">
-        { cartItems.map( ( product: { id: React.Key } ) => (
-          <CartItem key={ product.id } product={ product } />
-        ) ) }
-      </div>
-    </div>
-  )
-}
+    <Container maxWidth="lg" component="main">
+      <Grid spacing={7} alignItems="center">
+        {cartItems.map((product: { id: React.Key }) => (
+          <Grid item xs={12} key={product.id}>
+            <CartItem product={product} />
+            <Box pb={2}>
+              {+product.id - 1 !== cartItems.length ? <Divider /> : null}
+            </Box>
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
+  );
+};
 
-export default CartProducts
+export default CartProducts;

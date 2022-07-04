@@ -19,8 +19,6 @@ function getFaviconEl() {
 
 function App() {
   const logData: any = useTypedSelector((state) => state);
-  console.log(logData);
-
   const router: any = routes([logData.user || logData.googleData]);
   const content = useRoutes(router);
   const isOnline = NetworkChecker();
@@ -43,7 +41,6 @@ function App() {
         <CssBaseline />
         <AutoLogout>{content}</AutoLogout>
       </LocalizationProvider>
-
       <CookieConsent
         location="bottom"
         buttonText="Accept Cookies!"

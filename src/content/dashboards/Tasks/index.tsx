@@ -119,7 +119,7 @@ function DashboardTasks() {
   return (
     <>
       <Helmet>
-        <title>Tasks Dashboard</title>
+        <title>پنل ادمین رستوران | خوش آمدید</title>
       </Helmet>
       <PageTitleWrapper>
         <PageHeader />

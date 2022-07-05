@@ -973,7 +973,11 @@ const DarkLight = ({ children }) => {
                   borderRadius: 100
                 },
                 '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                  opacity: 0.3
+                  opacity: 0.3,
+                  backgroundColor:
+                    mode === 'dark'
+                      ? `${themeColors.primary} !important`
+                      : `${themeColors.white} !important`
                 }
               },
               thumb: {
@@ -996,7 +1000,8 @@ const DarkLight = ({ children }) => {
                 },
 
                 '&.Mui-checked .MuiSwitch-thumb': {
-                  backgroundColor: colors.primary.main
+                  backgroundColor:
+                    mode === 'dark' ? '#fff' : colors.primary.main
                 }
               }
             }

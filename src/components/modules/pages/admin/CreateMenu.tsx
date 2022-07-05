@@ -27,7 +27,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 // import required modules
 import { Pagination } from 'swiper';
-import { MuiSwitch } from '../../../UI/CustomizedSwitches';
+import { IOSwitch } from '../../../UI/CustomizedSwitches';
 import MyButton from '../../../UI/Button/MyButton';
 import images from 'src/importer';
 
@@ -431,9 +431,10 @@ const CreateMenu: React.FC = () => {
                     display="flex"
                     flexDirection="row"
                     justifyContent="space-between"
+                    alignItems="center"
                   >
                     <Typography variant="h6">Status Available</Typography>
-                    <MuiSwitch />
+                    <IOSwitch />
                   </Box>
                   <Divider />
                   <Box
@@ -444,9 +445,10 @@ const CreateMenu: React.FC = () => {
                     display="flex"
                     flexDirection="row"
                     justifyContent="space-between"
+                    alignItems="center"
                   >
                     <Typography variant="h6">Discount Active</Typography>
-                    <MuiSwitch />
+                    <IOSwitch />
                   </Box>
                 </Grid>
               </Box>

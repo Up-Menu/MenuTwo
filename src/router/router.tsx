@@ -53,6 +53,14 @@ const ThemeStore = Loader(lazy(() => import('src/theme/classic/Store')));
 
 const ThemeCart = Loader(lazy(() => import('src/theme/classic')));
 
+const Order = Loader(
+  lazy(() => import('src/components/modules/pages/admin/OrdersMng'))
+);
+
+const Delivery = Loader(
+  lazy(() => import('src/components/modules/pages/admin/Delivery'))
+);
+
 // Components
 
 const Buttons = Loader(
@@ -201,6 +209,14 @@ function routes(props: string[]): RouteObject[] {
         {
           path: 'createMenu',
           element: isLogged ? <CreateMenu /> : <Login /> || <SignIn />
+        },
+        {
+          path: 'orders',
+          element: isLogged ? <Order /> : <Login /> || <SignIn />
+        },
+        {
+          path: 'delivery',
+          element: isLogged ? <Delivery /> : <Login /> || <SignIn />
         },
         {
           path: 'themes',

@@ -12,16 +12,16 @@ import Typography from '@mui/material/Typography';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
 import ReactTypingEffect from 'react-typing-effect';
-import Alert, { AlertProps } from '@mui/material/Alert';
+import Alert from '@mui/material/Alert';
 import SlowMotionVideoIcon from '@mui/icons-material/SlowMotionVideo';
 import Stack from '@mui/material/Stack';
-import styled, { StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 
 import { Link } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import Footer from '../Footer';
+import Footer from '../../shared/Footer';
 import images from 'src/importer';
-import { ColorModeContext } from 'src/theme/ThemeProvider';
+import { ColorModeContext } from 'src/theme/DarkLight';
 import { useTheme } from '@mui/material';
 
 const MyButton = styled(Button)`
@@ -216,7 +216,7 @@ function PricingContent() {
             alignContent="center"
             justifyContent="center"
           >
-            <Stack sx={{ width: '60%' }}>
+            <Stack>
               <Link to="/component">
                 <MyAlert severity="error">
                   How UpMenu help selling online during COVID-19

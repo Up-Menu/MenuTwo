@@ -6,11 +6,12 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { CssBaseline } from '@mui/material';
 import ThemeProvider from './theme/ThemeProvider';
 import './assets/styles/css/costume.css';
+
 import { useTypedSelector } from './store';
-import NetworkChecker from './components/modules/NetworkChecker';
+import NetworkChecker from './components/modules/widgets/NetworkChecker';
 import toast from 'react-hot-toast';
 import { Toaster } from 'react-hot-toast';
-import AutoLogout from './components/modules/auth/AutoLogout';
+import AutoLogout from './components/modules/widgets/AutoLogout';
 import CookieConsent from 'react-cookie-consent';
 
 function getFaviconEl() {

@@ -7,9 +7,10 @@ import {
   Divider,
   Typography,
   Checkbox,
-  Box
+  Box,
+  OutlinedInput
 } from '@mui/material';
-import Footer from 'src/components/Footer';
+import Footer from 'src/components/modules/shared/Footer';
 import TextField from '@mui/material/TextField';
 import { pink } from '@mui/material/colors';
 import styled from 'styled-components';
@@ -19,6 +20,14 @@ import { useTypedDispatch } from 'src/store';
 import { Link } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router';
+
+import * as React from 'react';
+import IconButton from '@mui/material/IconButton';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormControl from '@mui/material/FormControl';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const MyButton = styled(Button)`
   display: -webkit-inline-box;
@@ -91,10 +100,55 @@ const MyButton = styled(Button)`
  */
 
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
+interface State {
+  password: string;
+  confPassword: string;
 
+  showPassword: boolean;
+  showConfPassword: boolean;
+}
 const SignIn = () => {
   const dispatch = useTypedDispatch();
   const nav = useNavigate();
+
+  const [values, setValues] = React.useState<State>({
+    password: '',
+    confPassword: '',
+    showPassword: false,
+    showConfPassword: false
+  });
+  const handleChange =
+    (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      setValues({ ...values, [prop]: event.target.value });
+    };
+  const handleConfChange =
+    (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      setValues({ ...values, [prop]: event.target.value });
+    };
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword
+    });
+  };
+
+  const handleClickShowConfPassword = () => {
+    setValues({
+      ...values,
+      showConfPassword: !values.showConfPassword
+    });
+  };
+
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
+  const handleMouseDownConfPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
 
   const onFinish = (values: any) => {
     dispatch(userSignIn({ ...values }, (notification) => notification, nav));
@@ -195,12 +249,34 @@ const SignIn = () => {
                     ]}
                     style={{ paddingRight: '10px' }}
                   >
-                    <TextField
-                      required
-                      id="outlined-password-input"
-                      label="Password"
-                      type="password"
-                    />
+                    <FormControl required variant="outlined">
+                      <InputLabel htmlFor="outlined-adornment-password">
+                        Password
+                      </InputLabel>
+                      <OutlinedInput
+                        id="outlined-adornment-password"
+                        type={values.showPassword ? 'text' : 'password'}
+                        value={values.password}
+                        onChange={handleChange('password')}
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={handleClickShowPassword}
+                              onMouseDown={handleMouseDownPassword}
+                              edge="end"
+                            >
+                              {values.showPassword ? (
+                                <VisibilityOff />
+                              ) : (
+                                <Visibility />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                        label="Password"
+                      />
+                    </FormControl>
                   </Form.Item>
                   <Form.Item
                     name="confirmPassword"
@@ -211,12 +287,34 @@ const SignIn = () => {
                       }
                     ]}
                   >
-                    <TextField
-                      required
-                      id="outlined-password-input"
-                      label="Confirm Password"
-                      type="password"
-                    />
+                    <FormControl required variant="outlined">
+                      <InputLabel htmlFor="outlined-adornment-password">
+                        Confirm
+                      </InputLabel>
+                      <OutlinedInput
+                        id="outlined-adornment-password"
+                        type={values.showConfPassword ? 'text' : 'password'}
+                        value={values.confPassword}
+                        onChange={handleConfChange('confPassword')}
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={handleClickShowConfPassword}
+                              onMouseDown={handleMouseDownConfPassword}
+                              edge="end"
+                            >
+                              {values.showConfPassword ? (
+                                <VisibilityOff />
+                              ) : (
+                                <Visibility />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                        label="Password"
+                      />
+                    </FormControl>
                   </Form.Item>
                 </Box>
 

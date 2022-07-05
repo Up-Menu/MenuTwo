@@ -1,7 +1,7 @@
-import { Box } from '@mui/material'
-import Layout from '../../components/Layout'
+import { Box } from '@mui/material';
+import Layout from './Layout';
 
-import ProductsGrid from './ProductsGrid'
+import ProductsGrid from './ProductsGrid';
 
 const Store = () => {
   return (
@@ -16,7 +16,7 @@ const Store = () => {
         </div>
       </Layout>
     </Box>
-  )
-}
+  );
+};
 
-export default Store
+export default Store;

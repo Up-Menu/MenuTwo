@@ -1,7 +1,7 @@
 import { Box, styled } from '@mui/material';
 import { Helmet } from 'react-helmet-async';
-import Overview_main from 'src/components/modules/Overview_main';
-import Overview_nav from 'src/components/modules/Overview_nav';
+import Overview_main from 'src/components/modules/pages/client/Overview_main';
+import Overview_nav from 'src/components/modules/shared/Overview_nav';
 
 const OverviewWrapper = styled(Box)(
   () => `

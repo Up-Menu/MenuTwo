@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import CartProducts from './CartProducts';
-import Layout from '../../components/Layout';
+import Layout from './Layout';
 import { useCart } from 'src/components/modules/hooks/useCart';
 import { formatNumber } from 'src/components/modules/helpers/utils';
 import {
@@ -26,8 +26,7 @@ const MyAlert = styled(Alert)`
 `;
 
 const Cart = () => {
-  const { total, cartItems, itemCount, clearCart, checkout, handleCheckout } =
-    useCart();
+  const { total, cartItems, clearCart, checkout, handleCheckout } = useCart();
 
   return (
     <Layout title="Cart" description="This is the Cart page">

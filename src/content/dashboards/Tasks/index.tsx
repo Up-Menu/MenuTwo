@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import PageHeader from './PageHeader';
-import Footer from 'src/components/Footer';
+import Footer from 'src/components/modules/shared/Footer';
 import {
   Grid,
   Tab,
@@ -21,7 +21,7 @@ import PageTitleWrapper from 'src/components/PageTitleWrapper';
 // import Checklist from './Checklist';
 // import Profile from './Profile';
 import TaskSearch from './TaskSearch';
-import ProgressBar from 'src/components/modules/ProgressBar';
+import ProgressBar from 'src/components/modules/pages/admin/ProgressBar';
 
 const TabsContainerWrapper = styled(Box)(
   ({ theme }) => `

@@ -18,7 +18,7 @@ import HeaderButtons from './Buttons';
 import HeaderUserbox from './Userbox';
 import HeaderMenu from './Menu';
 import React from 'react';
-import { ColorModeContext } from 'src/theme/ThemeProvider';
+import { ColorModeContext } from 'src/theme/DarkLight';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 

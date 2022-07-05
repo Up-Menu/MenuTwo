@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import BottomNav from './BottomNav';
+import BottomNav from '../../shared/BottomNav';
 import { Helmet } from 'react-helmet-async';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
@@ -13,7 +13,7 @@ import {
   Box,
   Button
 } from '@mui/material';
-import Footer from 'src/components/Footer';
+import Footer from 'src/components/modules/shared/Footer';
 import TextField from '@mui/material/TextField';
 import { Form } from 'antd';
 import MenuItem from '@mui/material/MenuItem';
@@ -27,8 +27,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 // import required modules
 import { Pagination } from 'swiper';
-import { MuiSwitch } from '../UI/CustomizedSwitches';
-import MyButton from '../UI/Button/MyButton';
+import { MuiSwitch } from '../../../UI/CustomizedSwitches';
+import MyButton from '../../../UI/Button/MyButton';
 import images from 'src/importer';
 
 const props: UploadProps = {

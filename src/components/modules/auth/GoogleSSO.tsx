@@ -2,12 +2,15 @@ import { useEffect } from 'react';
 import jwt_decode from 'jwt-decode';
 import { useTypedDispatch } from 'src/store';
 import { userGoogleLogIn } from 'src/store/actions';
-import { Button } from 'antd';
+import { Button, IconButton, styled } from '@mui/material';
 import { useNavigate } from 'react-router';
+import GoogleIcon from '@mui/icons-material/Google';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import FacebookIcon from '@mui/icons-material/Facebook';
 
 declare let google: any;
 
-export const Google = () => {
+export const SSO = () => {
   const dispatch = useTypedDispatch();
   const nav = useNavigate();
   function handleCallbackResponse(response: any) {
@@ -26,20 +29,40 @@ export const Google = () => {
     // console.log( userData )
   }
 
+  const googleSSO = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    console.log(google);
+    return;
+  };
+
   useEffect(() => {
     google.accounts.id.initialize({
       client_id:
         '901720212338-h3afddsalov3ujsieft24k7148jes3dd.apps.googleusercontent.com',
       callback: handleCallbackResponse
     });
+
     google.accounts.id.renderButton(document.getElementById('singInDiv'), {
       theme: 'outline',
-      size: 'large'
+      size: 'large',
+      type: 'icon',
+      shape: 'circle'
     });
   }, []);
+
   return (
     <>
-      <Button id="singInDiv" />
+      {/* <IconButton id="singInDiv" /> */}
+      <IconButton sx={{ ml: 1, mb: 0.5 }} onClick={googleSSO} color="primary">
+        <GoogleIcon />
+      </IconButton>
+
+      {/* <IconButton sx={{ ml: 1, mb: 0.5 }} onClick={googleSSO} color="primary">
+        <GitHubIcon />
+      </IconButton>
+      <IconButton sx={{ ml: 1, mb: 0.5 }} onClick={googleSSO} color="primary">
+        <FacebookIcon />
+      </IconButton> */}
     </>
   );
 };

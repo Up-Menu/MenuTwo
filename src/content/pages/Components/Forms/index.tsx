@@ -11,7 +11,7 @@ import {
   CardContent,
   Divider
 } from '@mui/material';
-import Footer from 'src/components/Footer';
+import Footer from 'src/components/modules/shared/Footer';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';

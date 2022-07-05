@@ -28,12 +28,11 @@ import {
   Typography
 } from '@mui/material';
 
-import { SidebarContext } from 'src/contexts/SidebarContext';
 import { useTypedSelector, useTypedDispatch } from 'src/store';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import images from 'src/importer';
-import { ColorModeContext } from 'src/theme/ThemeProvider';
+import { ColorModeContext } from 'src/theme/DarkLight';
 
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `

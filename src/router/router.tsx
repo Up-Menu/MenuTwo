@@ -7,7 +7,7 @@ import BaseLayout from 'src/layouts/BaseLayout';
 
 import SuspenseLoader from 'src/components/SuspenseLoader';
 import Login from '../components/modules/auth/Login';
-import OpenIconSpeedDial from 'src/components/modules/OpenIconSpeedDial';
+import OpenIconSpeedDial from 'src/components/modules/widgets/OpenIconSpeedDial';
 
 const Loader = (Component) => (props: JSX.IntrinsicAttributes) =>
   (
@@ -40,20 +40,18 @@ const UserSettings = Loader(
 );
 
 const CreateAccount = Loader(
-  lazy(() => import('src/components/modules/CreateAccount'))
+  lazy(() => import('src/components/modules/pages/admin/CreateAccount'))
 );
 const CreateMenu = Loader(
-  lazy(() => import('src/components/modules/CreateMenu'))
+  lazy(() => import('src/components/modules/pages/admin/CreateMenu'))
 );
 const ThemeSelection = Loader(
-  lazy(() => import('src/components/modules/ThemeSelection'))
+  lazy(() => import('src/components/modules/pages/admin/ThemeSelection'))
 );
 
-const ThemeStore = Loader(
-  lazy(() => import('src/theme/Layout/pages/store/Store'))
-);
+const ThemeStore = Loader(lazy(() => import('src/theme/classic/Store')));
 
-const ThemeCart = Loader(lazy(() => import('src/theme/Layout/pages/cart')));
+const ThemeCart = Loader(lazy(() => import('src/theme/classic')));
 
 // Components
 
@@ -186,33 +184,37 @@ function routes(props: string[]): RouteObject[] {
       children: [
         {
           path: '',
-          element: <Navigate to="tasks" replace />
+          element: isLogged ? (
+            <Navigate to="tasks" replace />
+          ) : (
+            <Login /> || <SignIn />
+          )
         },
         {
           path: 'tasks',
-          element: <Tasks />
+          element: isLogged ? <Tasks /> : <Login /> || <SignIn />
         },
         {
           path: 'createAccount',
-          element: <CreateAccount />
+          element: isLogged ? <CreateAccount /> : <Login /> || <SignIn />
         },
         {
           path: 'createMenu',
-          element: <CreateMenu />
+          element: isLogged ? <CreateMenu /> : <Login /> || <SignIn />
         },
         {
           path: 'themes',
-          element: <ThemeSelection />
+          element: isLogged ? <ThemeSelection /> : <Login /> || <SignIn />
         },
         {
           path: 'messenger',
-          element: <Messenger />
+          element: isLogged ? <Messenger /> : <Login /> || <SignIn />
         }
       ]
     },
     {
       path: 'management',
-      element: <SidebarLayout />,
+      element: isLogged ? <SidebarLayout /> : <Login /> || <SignIn />,
       children: [
         {
           path: '',

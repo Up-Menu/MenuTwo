@@ -1,6 +1,4 @@
-import React, { Fragment, useContext, useRef, useState } from 'react';
-import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
-import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
+import React, { Fragment, useRef, useState } from 'react';
 import HeaderMenu from 'src/layouts/SidebarLayout/Header/Menu';
 import HeaderSearch from 'src/layouts/SidebarLayout/Header/Buttons/Search';
 import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
@@ -8,7 +6,6 @@ import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
 import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
 import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
 import InboxTwoToneIcon from '@mui/icons-material/InboxTwoTone';
-// import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import LoginIcon from '@mui/icons-material/Login';
 import { NavLink } from 'react-router-dom';
 import { userLogout } from 'src/store/actions';
@@ -19,7 +16,6 @@ import {
   lighten,
   Divider,
   IconButton,
-  Tooltip,
   styled,
   useTheme,
   Avatar,
@@ -89,7 +85,6 @@ const UserBoxDescription = styled(Typography)(
 );
 
 const Overview_nav = () => {
-  const { sidebarToggle, toggleSidebar } = useContext(SidebarContext);
   const ref = useRef<any>(null);
   const [isOpen, setOpen] = useState<boolean>(false);
   const theme = useTheme();
@@ -127,21 +122,6 @@ const Overview_nav = () => {
       <HeaderWrapper
         display="flex"
         alignItems="center"
-        // sx={{
-        //   boxShadow:
-        //     theme.palette.mode === 'dark'
-        //       ? `0 1px 0 ${alpha(
-        //           lighten(theme.colors.primary.main, 0.7),
-        //           0.15
-        //         )}, 0px 2px 8px -3px rgba(0, 0, 0, 0.2), 0px 5px 22px -4px rgba(0, 0, 0, .1)`
-        //       : `0px 2px 8px -3px ${alpha(
-        //           theme.colors.alpha.black[100],
-        //           0.2
-        //         )}, 0px 5px 22px -4px ${alpha(
-        //           theme.colors.alpha.black[100],
-        //           0.1
-        //         )}`
-        // }}
         sx={{
           bgcolor: 'background.default',
           color: 'text.primary'
@@ -254,24 +234,6 @@ const Overview_nav = () => {
               )}
             </Box>
           </Popover>
-
-          <Box
-            component="span"
-            sx={{
-              ml: 2,
-              display: { lg: 'none', xs: 'inline-block' }
-            }}
-          >
-            <Tooltip arrow title="Toggle Menu">
-              <IconButton color="primary" onClick={toggleSidebar}>
-                {!sidebarToggle ? (
-                  <MenuTwoToneIcon fontSize="small" />
-                ) : (
-                  <CloseTwoToneIcon fontSize="small" />
-                )}
-              </IconButton>
-            </Tooltip>
-          </Box>
         </Box>
       </HeaderWrapper>
     </Fragment>

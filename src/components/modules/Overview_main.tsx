@@ -12,15 +12,18 @@ import Typography from '@mui/material/Typography';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
 import ReactTypingEffect from 'react-typing-effect';
-import Alert from '@mui/material/Alert';
+import Alert, { AlertProps } from '@mui/material/Alert';
 import SlowMotionVideoIcon from '@mui/icons-material/SlowMotionVideo';
 import Stack from '@mui/material/Stack';
-import styled from 'styled-components';
+import styled, { StyledComponent } from 'styled-components';
 
 import { Link } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Footer from '../Footer';
 import images from 'src/importer';
+import { ColorModeContext } from 'src/theme/ThemeProvider';
+import { useTheme } from '@mui/material';
+
 const MyButton = styled(Button)`
   &:hover svg {
     margin-left: 5px;
@@ -96,13 +99,25 @@ const tiers = [
   }
 ];
 
-const MyAlert = styled(Alert)`
-  border: 1px solid red;
-  color: rgb(233, 166, 166);
-  background-color: rgba(57, 0, 0, 0.3);
-`;
-
 function PricingContent() {
+  const theme = useTheme();
+
+  const MyAlert = styled(Alert)`
+    border: 1px solid red;
+    color: ${theme.palette.mode === 'dark' ? '#FF1943' : 'red'};
+    background-color: ${theme.palette.mode === 'dark'
+      ? 'rgba(122, 2, 2, 0.3)'
+      : '#fbaaaa'};
+    justify-content: center;
+
+    svg {
+      color: ${theme.palette.mode === 'dark' ? '#FF1943' : 'red'};
+      padding-top: 1px;
+    }
+  `;
+  const MyLink = styled(Link)`
+    color: ${theme.palette.mode === 'dark' ? '#9EA4C1' : '#000000d4'};
+  `;
   return (
     <React.Fragment>
       <GlobalStyles
@@ -527,9 +542,9 @@ function PricingContent() {
                 <ul>
                   {footer.description.map((item) => (
                     <li key={item}>
-                      <Link to="/someLink" color="text.secondary">
+                      <MyLink to="/someLink" color="text.secondary">
                         {item}
-                      </Link>
+                      </MyLink>
                     </li>
                   ))}
                 </ul>

@@ -61,6 +61,10 @@ const Delivery = Loader(
   lazy(() => import('src/components/modules/pages/admin/Delivery'))
 );
 
+const MobileApp = Loader(
+  lazy(() => import('src/components/modules/pages/admin/MobileApp'))
+);
+
 // Components
 
 const Buttons = Loader(
@@ -197,6 +201,10 @@ function routes(props: string[]): RouteObject[] {
           ) : (
             <Login /> || <SignIn />
           )
+        },
+        {
+          path: 'mobileApp',
+          element: isLogged ? <MobileApp /> : <Login /> || <SignIn />
         },
         {
           path: 'tasks',

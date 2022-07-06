@@ -89,10 +89,10 @@ const OrdersMng = () => {
           className="pt-5"
           nextStep={true}
           preStep={true}
-          forLink="delivery"
-          backLink="createMenu"
-          forText="انتخاب بورد ارسال"
-          backText="ساخت منو"
+          forLink="createMenu"
+          backLink="delivery"
+          forText="Create Menu"
+          backText="Add delivery zone"
         />
       </Container>
       <Footer />

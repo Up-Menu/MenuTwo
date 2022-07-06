@@ -460,10 +460,10 @@ const CreateMenu: React.FC = () => {
           className="pt-5"
           nextStep={true}
           preStep={true}
-          forLink="/order-type"
-          backLink="/theme-select"
-          forText="انتخاب نوع سفارش"
-          backText="انتخاب تم"
+          backLink="orders"
+          forLink="themes"
+          forText="Select theme"
+          backText="Select order"
         />
       </Container>
       <Footer />

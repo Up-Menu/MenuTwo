@@ -85,7 +85,7 @@ const ThemeSelection = () => {
           forLink="order-type"
           backLink="createMenu"
           forText="ساخت حساب"
-          backText="ساخت منو"
+          backText="Create Menu"
         />
       </Container>
       <Footer />

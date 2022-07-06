@@ -1,150 +1,113 @@
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  Flex,
-  HStack,
-  IconButton,
-  Input,
-  SkeletonText,
-  Text
-} from '@chakra-ui/react';
-import { FaLocationArrow, FaTimes } from 'react-icons/fa';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
+import { LoadScript, GoogleMap, Polygon } from '@react-google-maps/api';
+import BottomNav from '../../shared/BottomNav';
+import Footer from '../../shared/Footer';
+import { Container } from '@mui/material';
 
-import {
-  useJsApiLoader,
-  GoogleMap,
-  Marker,
-  Autocomplete,
-  DirectionsRenderer
-} from '@react-google-maps/api';
-import { useRef, useState } from 'react';
+// This example presents a way to handle editing a Polygon
+// The objective is to get the new path on every editing event :
+// - on dragging the whole Polygon
+// - on moving one of the existing points (vertex)
+// - on adding a new point by dragging an edge point (midway between two vertices)
 
-const center = { lat: 35.689198, lng: 51.388973 };
+// We achieve it by defining refs for the google maps API Polygon instances and listeners with `useRef`
+// Then we bind those refs to the currents instances with the help of `onLoad`
+// Then we get the new path value with the `onEdit` `useCallback` and pass it to `setPath`
+// Finally we clean up the refs with `onUnmount`
 
 function Delivery() {
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: 'AIzaSyDNRaAu9F2yyT74B9RttgmfgnyChPYP5pQ',
-    libraries: ['places']
-  });
+  // Store Polygon path in state
+  const [path, setPath] = useState([
+    { lat: 35.689198, lng: 51.388973 },
+    { lat: 35.7792, lng: 51.389973 },
+    { lat: 35.79921, lng: 51.499973 }
+  ]);
 
-  const [map, setMap] = useState(/** @type google.maps.Map */ null);
-  const [directionsResponse, setDirectionsResponse] = useState(null);
-  const [distance, setDistance] = useState('');
-  const [duration, setDuration] = useState('');
+  // Define refs for Polygon instance and listeners
+  const polygonRef = useRef(null);
+  const listenersRef = useRef([]);
 
-  /** @type React.MutableRefObject<HTMLInputElement> */
-  const originRef: any = useRef();
-  /** @type React.MutableRefObject<HTMLInputElement> */
-  const destinationRef: any = useRef();
-
-  if (!isLoaded) {
-    return <SkeletonText />;
-  }
-
-  async function calculateRoute() {
-    if (originRef.current.value === '' || destinationRef.current.value === '') {
-      return;
+  // Call setPath with new edited path
+  const onEdit = useCallback(() => {
+    if (polygonRef.current) {
+      const nextPath = polygonRef.current
+        .getPath()
+        .getArray()
+        .map((latLng: { lat: () => any; lng: () => any }) => {
+          return { lat: latLng.lat(), lng: latLng.lng() };
+        });
+      setPath(nextPath);
     }
-    // eslint-disable-next-line no-undef
-    const directionsService = new google.maps.DirectionsService();
-    const results = await directionsService.route({
-      origin: originRef.current.value,
-      destination: destinationRef.current.value,
-      // eslint-disable-next-line no-undef
-      travelMode: google.maps.TravelMode.DRIVING
-    });
-    setDirectionsResponse(results);
-    setDistance(results.routes[0].legs[0].distance.text);
-    setDuration(results.routes[0].legs[0].duration.text);
-  }
+  }, [setPath]);
 
-  function clearRoute() {
-    setDirectionsResponse(null);
-    setDistance('');
-    setDuration('');
-    originRef.current.value = '';
-    destinationRef.current.value = '';
-  }
+  // Bind refs to current Polygon and listeners
+  const onLoad = useCallback(
+    (polygon: { getPath: () => any }) => {
+      polygonRef.current = polygon;
+      const path = polygon.getPath();
+      listenersRef.current.push(
+        path.addListener('set_at', onEdit),
+        path.addListener('insert_at', onEdit),
+        path.addListener('remove_at', onEdit)
+      );
+    },
+    [onEdit]
+  );
+
+  // Clean up refs
+  const onUnmount = useCallback(() => {
+    listenersRef.current.forEach((lis) => lis.remove());
+    polygonRef.current = null;
+  }, []);
+
+  useEffect(() => {
+    console.log(path);
+
+    /**
+     * send path to mostafa
+     */
+  }, [path]);
 
   return (
-    <Flex
-      position="relative"
-      flexDirection="column"
-      alignItems="center"
-      h="100vh"
-    >
-      <Box position="absolute" left={0} top={0} h="100%" w="100%">
-        {/* Google Map Box */}
-        <GoogleMap
-          center={center}
-          zoom={15}
-          mapContainerStyle={{ width: '100%', height: '100%' }}
-          options={{
-            zoomControl: true,
-            streetViewControl: true,
-            mapTypeControl: true,
-            fullscreenControl: true
-          }}
-          onLoad={(map) => setMap(map)}
-        >
-          <Marker position={center} />
-          {directionsResponse && (
-            <DirectionsRenderer directions={directionsResponse} />
-          )}
-        </GoogleMap>
-      </Box>
-      <Box
-        p={4}
-        borderRadius="lg"
-        m={4}
-        bgColor="white"
-        shadow="base"
-        minW="container.md"
-        zIndex="1"
+    <div id="Map">
+      <LoadScript
+        id="script-loader"
+        googleMapsApiKey=""
+        language="en"
+        region="us"
       >
-        <HStack spacing={2} justifyContent="space-between">
-          <Box flexGrow={1}>
-            <Autocomplete>
-              <Input type="text" placeholder="Origin" ref={originRef} />
-            </Autocomplete>
-          </Box>
-          <Box flexGrow={1}>
-            <Autocomplete>
-              <Input
-                type="text"
-                placeholder="Destination"
-                ref={destinationRef}
-              />
-            </Autocomplete>
-          </Box>
-
-          <ButtonGroup>
-            <Button colorScheme="pink" type="submit" onClick={calculateRoute}>
-              Calculate Route
-            </Button>
-            <IconButton
-              aria-label="center back"
-              icon={<FaTimes />}
-              onClick={clearRoute}
-            />
-          </ButtonGroup>
-        </HStack>
-        <HStack spacing={4} mt={4} justifyContent="space-between">
-          <Text>Distance: {distance} </Text>
-          <Text>Duration: {duration} </Text>
-          <IconButton
-            aria-label="center back"
-            icon={<FaLocationArrow />}
-            isRound
-            onClick={() => {
-              map.panTo(center);
-              map.setZoom(15);
-            }}
+        <GoogleMap
+          mapContainerClassName="App-map"
+          center={{ lat: 35.7502, lng: 51.450973 }}
+          zoom={12}
+        >
+          <Polygon
+            // Make the Polygon editable / draggable
+            editable
+            draggable
+            path={path}
+            // Event used when manipulating and adding points
+            onMouseUp={onEdit}
+            // Event used when dragging the whole Polygon
+            onDragEnd={onEdit}
+            onLoad={onLoad}
+            onUnmount={onUnmount}
           />
-        </HStack>
-      </Box>
-    </Flex>
+        </GoogleMap>
+      </LoadScript>
+      <Container maxWidth="lg">
+        <BottomNav
+          className="pt-5"
+          nextStep={true}
+          preStep={true}
+          forLink="orders"
+          backLink="mobileApp"
+          forText="Select order"
+          backText="Configure Mobile App"
+        />
+      </Container>
+      <Footer />
+    </div>
   );
 }
 

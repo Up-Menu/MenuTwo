@@ -16,7 +16,11 @@ import {
   Modal,
   Backdrop,
   Fade,
-  useTheme
+  useTheme,
+  InputLabel,
+  InputAdornment,
+  FormControl,
+  OutlinedInput
 } from '@mui/material';
 import Footer from 'src/components/modules/shared/Footer';
 import TextField from '@mui/material/TextField';
@@ -30,50 +34,19 @@ import { Pagination } from 'swiper';
 import { IOSwitch } from '../../../UI/CustomizedSwitches';
 import MyButton from '../../../UI/Button/MyButton';
 
-import { DataGrid, GridApi, GridCellValue, GridColDef } from '@mui/x-data-grid';
+import { DataGrid, GridApi, GridColDef } from '@mui/x-data-grid';
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import EditIcon from '@mui/icons-material/Edit';
 import DoneIcon from '@mui/icons-material/Done';
 import CloseIcon from '@mui/icons-material/Close';
 
-const MyAlert = styled(Alert)`
-  border: 1px solid green;
-  color: rgb(187, 233, 166);
-  background-color: rgba(17, 57, 0, 0.3);
-`;
-
-const MyDataGrid = styled(DataGrid)`
-  .MuiDataGrid-row:hover {
-    background-color: rgb(140 124 240 / 8%);
-  }
-  .MuiDataGrid-columnHeader:focus,
-  .MuiDataGrid-cell:focus,
-  .MuiDataGrid-columnHeader:focus-within,
-  .MuiDataGrid-cell:focus-within {
-    outline: solid transparent 1px !important;
-  }
-`;
-
-const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4
-};
-
-const CreateMenu: React.FC = () => {
+const CreateMenu: React.FunctionComponent = () => {
   const [foodList, setFoodList] = useState([]);
+
   const [form] = Form.useForm();
   const theme = useTheme();
 
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   const ErrAlert = styled(Alert)`
     border: 1px solid red;
@@ -88,6 +61,35 @@ const CreateMenu: React.FC = () => {
       padding-top: 1px;
     }
   `;
+  const MyAlert = styled(Alert)`
+    border: 1px solid green;
+    color: rgb(187, 233, 166);
+    background-color: rgba(17, 57, 0, 0.3);
+  `;
+
+  const MyDataGrid = styled(DataGrid)`
+    .MuiDataGrid-row:hover {
+      background-color: rgb(140 124 240 / 8%);
+    }
+    .MuiDataGrid-columnHeader:focus,
+    .MuiDataGrid-cell:focus,
+    .MuiDataGrid-columnHeader:focus-within,
+    .MuiDataGrid-cell:focus-within {
+      outline: solid transparent 1px !important;
+    }
+  `;
+
+  const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4
+  };
 
   //! call on form submit
   const onFinish = (values: any) => {
@@ -104,11 +106,6 @@ const CreateMenu: React.FC = () => {
     console.log(foodList);
   };
 
-  const removeHandler = () => {
-    console.log(foodList);
-    setOpen(false);
-  };
-
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
@@ -122,18 +119,24 @@ const CreateMenu: React.FC = () => {
       renderCell: (params) => {
         const deleteHandler = (e: { stopPropagation: () => void }) => {
           e.stopPropagation(); // don't select this row after clicking
-          setOpen(true); // open modal immediately
-        };
 
-        const editHandler = (e: { stopPropagation: () => void }) => {
-          e.stopPropagation(); // don't select this row after clicking
+          let newUserSet1 = [...foodList];
+          const api: GridApi = params.api;
+
+          api
+            .getAllColumns()
+            .filter((c) => c.field !== '__check__' && !!c)
+            .forEach(() => {
+              newUserSet1 = newUserSet1.filter(
+                (user) => user.id !== params.row.id
+              );
+            });
+
+          setFoodList(newUserSet1);
         };
 
         return (
           <Box display="flex" flexDirection="row">
-            <IconButton onClick={editHandler} sx={{ ml: 1 }} color="inherit">
-              <EditIcon />
-            </IconButton>
             <IconButton onClick={deleteHandler} sx={{ ml: 1 }} color="inherit">
               <DeleteSweepIcon />
             </IconButton>
@@ -142,19 +145,72 @@ const CreateMenu: React.FC = () => {
       }
     },
     { field: 'id', headerName: 'ID', width: 50 },
-    { field: 'productName', headerName: 'Product Name', width: 180 },
-    { field: 'category', headerName: 'Category', width: 130 },
-    { field: 'price', headerName: 'Price', width: 100 },
-    { field: 'description', headerName: 'Description', width: 330 }
+    {
+      field: 'productName',
+      editable: true,
+      headerName: 'Product Name',
+      width: 180
+    },
+    { field: 'category', editable: true, headerName: 'Category', width: 130 },
+    { field: 'price', editable: true, headerName: 'Price', width: 100 },
+    {
+      field: 'description',
+      editable: true,
+      headerName: 'Description',
+      width: 330
+    }
   ];
-
+  const handleCellEditCommit = React.useCallback(
+    ({ id, field, value }) => {
+      if (field === 'productName') {
+        const productName = value.toString();
+        const updatedRows = foodList.map((row) => {
+          if (row.id === id) {
+            return { ...row, productName };
+          }
+          return row;
+        });
+        setFoodList(updatedRows);
+      } else if (field === 'category') {
+        const category = value.toString();
+        const updatedRows = foodList.map((row) => {
+          if (row.id === id) {
+            return { ...row, category };
+          }
+          return row;
+        });
+        setFoodList(updatedRows);
+      } else if (field === 'price') {
+        const price = value.toString();
+        const updatedRows = foodList.map((row) => {
+          if (row.id === id) {
+            return { ...row, price };
+          }
+          return row;
+        });
+        setFoodList(updatedRows);
+      } else if (field === 'description') {
+        const description = value.toString();
+        const updatedRows = foodList.map((row) => {
+          if (row.id === id) {
+            return { ...row, description };
+          }
+          return row;
+        });
+        setFoodList(updatedRows);
+      }
+    },
+    [foodList]
+  );
   return (
     <>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={open}
-        onClose={handleClose}
+        onClose={() => {
+          setOpen(false);
+        }}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
@@ -173,13 +229,21 @@ const CreateMenu: React.FC = () => {
 
             <Stack direction="row" spacing={2} pt={4}>
               <IconButton
-                onClick={removeHandler}
+                onClick={() => {
+                  setOpen(false);
+                }}
                 sx={{ ml: 1 }}
                 color="inherit"
               >
                 <DoneIcon />
               </IconButton>
-              <IconButton onClick={handleClose} sx={{ ml: 1 }} color="inherit">
+              <IconButton
+                onClick={() => {
+                  setOpen(false);
+                }}
+                sx={{ ml: 1 }}
+                color="inherit"
+              >
                 <CloseIcon />
               </IconButton>
             </Stack>
@@ -270,12 +334,24 @@ const CreateMenu: React.FC = () => {
                             rules={[{ message: 'Please input your Price!' }]}
                             style={{ paddingTop: '10px' }}
                           >
-                            <TextField
-                              value={''}
-                              label="Price"
-                              type="number"
-                              fullWidth
-                            />
+                            {/* <InputMask
+                              mask="999, 999"
+                              value={' '}
+                              disabled={false}
+                            > */}
+                            <FormControl variant="outlined">
+                              <InputLabel>Price</InputLabel>
+                              <OutlinedInput
+                                type="text"
+                                endAdornment={
+                                  <InputAdornment position="end">
+                                    تومان
+                                  </InputAdornment>
+                                }
+                                label="Price"
+                              />
+                            </FormControl>
+                            {/* </InputMask> */}
                           </Form.Item>
                         </Grid>
                       </Grid>
@@ -435,6 +511,7 @@ const CreateMenu: React.FC = () => {
                 pageSize={5}
                 rowsPerPageOptions={[5]}
                 checkboxSelection
+                onCellEditCommit={handleCellEditCommit}
               />
             </div>
           </Card>

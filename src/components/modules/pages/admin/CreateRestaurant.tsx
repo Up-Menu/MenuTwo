@@ -1,5 +1,16 @@
 import React, { useState } from 'react';
-import { Container, Card, Box, Button } from '@mui/material';
+import {
+  Container,
+  Card,
+  Box,
+  Button,
+  IconButton,
+  InputLabel,
+  InputAdornment,
+  FormControl,
+  OutlinedInput,
+  TextField
+} from '@mui/material';
 import { Fragment } from 'react';
 import { Helmet } from 'react-helmet-async';
 import BottomNav from '../../shared/BottomNav';
@@ -7,21 +18,12 @@ import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
 import Footer from '../../shared/Footer';
 
 import { LoadingOutlined } from '@ant-design/icons';
-import { message, Upload } from 'antd';
+import { message, Typography, Upload } from 'antd';
 import type { UploadChangeParam } from 'antd/es/upload';
 import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
 
-import { OutlinedInput } from '@mui/material';
-
-import TextField from '@mui/material/TextField';
-
 import styled from 'styled-components';
 import { Form } from 'antd';
-
-import IconButton from '@mui/material/IconButton';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormControl from '@mui/material/FormControl';
 
 import images from 'src/importer';
 import LanguageIcon from '@mui/icons-material/Language';
@@ -29,6 +31,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
+import InputMask from 'react-input-mask';
 
 const MyOutlinedInput = styled(OutlinedInput)`
   width: 347px;
@@ -105,7 +108,14 @@ const CreateAccount = () => {
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
-
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <Fragment>
       <Helmet>
@@ -205,29 +215,31 @@ const CreateAccount = () => {
                   ]}
                   style={{ paddingRight: '10px' }}
                 >
-                  <FormControl variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-password">
-                      Phone
-                    </InputLabel>
-                    <MyOutlinedInput
-                      id="outlined-adornment-password"
-                      type="tel"
-                      startAdornment={
-                        <InputAdornment position="start">021</InputAdornment>
-                      }
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            edge="end"
-                          >
-                            <PhoneAndroidIcon />
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="Phone"
-                    />
-                  </FormControl>
+                  <InputMask mask="999 999 99" value={' '} disabled={false}>
+                    <FormControl variant="outlined">
+                      <InputLabel htmlFor="outlined-adornment-password">
+                        Phone
+                      </InputLabel>
+                      <MyOutlinedInput
+                        id="outlined-adornment-password"
+                        type="text"
+                        startAdornment={
+                          <InputAdornment position="start">021</InputAdornment>
+                        }
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              edge="end"
+                            >
+                              <PhoneAndroidIcon />
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                        label="Phone"
+                      />
+                    </FormControl>
+                  </InputMask>
                 </Form.Item>
                 <Form.Item
                   name="email"
@@ -245,9 +257,22 @@ const CreateAccount = () => {
                           <IconButton
                             aria-label="toggle password visibility"
                             edge="end"
+                            onClick={handleClick}
                           >
                             <EmailIcon />
                           </IconButton>
+                          {/* <Menu
+                            id="basic-menu"
+                            anchorEl={anchorEl}
+                            open={open}
+                            onClose={handleClose}
+                            MenuListProps={{
+                              'aria-labelledby': 'basic-button'
+                            }}
+                          >
+                            <MenuItem onClick={handleClose}>.com</MenuItem>
+                            <MenuItem onClick={handleClose}>.ir</MenuItem>
+                          </Menu> */}
                         </InputAdornment>
                       }
                       label="Email"

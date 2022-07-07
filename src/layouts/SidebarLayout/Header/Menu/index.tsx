@@ -11,7 +11,9 @@
 // import { styled } from '@mui/material/styles';
 // import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
 
-import { Alert, Box, Stack, styled } from '@mui/material';
+import { Alert, Box, Stack, styled, Typography } from '@mui/material';
+import { useState } from 'react';
+import { useTypedSelector } from 'src/store';
 
 // const ListWrapper = styled(Box)(
 //   ({ theme }) => `
@@ -63,12 +65,9 @@ import { Alert, Box, Stack, styled } from '@mui/material';
 //         }
 // `
 // );
-const MyAlert = styled(Alert)`
-  border: 1px solid green;
-  color: rgb(187, 233, 166);
-  background-color: rgba(17, 57, 0, 0.3);
-`;
+
 function HeaderMenu() {
+  const [flag, setFlag] = useState(true);
   // const ref = useRef<any>(null);
   // const [isOpen, setOpen] = useState<boolean>(false);
 
@@ -79,14 +78,35 @@ function HeaderMenu() {
   // const handleClose = (): void => {
   //   setOpen(false);
   // };
+  const logData: any = useTypedSelector((state) => state);
+  setTimeout(() => {
+    setFlag(false);
+  }, 604800000);
 
+  const MyAlert = styled(Alert)`
+    border: ${flag ? '1px solid green' : '1px solid #ff00009d'};
+  `;
   return (
     <>
-      <Stack sx={{ width: '100%' }} spacing={2}>
-        <MyAlert severity="success">
-          Well done! You successfully read this important alert message.
-        </MyAlert>
-      </Stack>
+      {flag ? (
+        <Stack sx={{ width: '100%' }} spacing={2}>
+          <MyAlert severity="success">
+            <Typography color="rgb(187,233,166)">
+              {' '}
+              Free trial, enjoy it!
+            </Typography>
+          </MyAlert>
+        </Stack>
+      ) : (
+        <Stack sx={{ width: '100%' }} spacing={2}>
+          <MyAlert severity="error">
+            <Typography color="red">
+              {' '}
+              Your 7 days free package has ended, please update your account!
+            </Typography>
+          </MyAlert>
+        </Stack>
+      )}
 
       {/* <ListWrapper
         sx={{

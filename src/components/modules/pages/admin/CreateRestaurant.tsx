@@ -18,7 +18,7 @@ import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
 import Footer from '../../shared/Footer';
 
 import { LoadingOutlined } from '@ant-design/icons';
-import { message, Typography, Upload } from 'antd';
+import { message, Upload } from 'antd';
 import type { UploadChangeParam } from 'antd/es/upload';
 import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
 
@@ -31,7 +31,6 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
-import InputMask from 'react-input-mask';
 
 const MyOutlinedInput = styled(OutlinedInput)`
   width: 347px;
@@ -98,7 +97,6 @@ const CreateAccount = () => {
       ) : (
         <img width={80} src={images['avatars/profile_default.png']} />
       )}
-      {/* <div style={{ marginTop: 8 }}>Upload</div> */}
     </div>
   );
 
@@ -109,13 +107,7 @@ const CreateAccount = () => {
     console.log('Failed:', errorInfo);
   };
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+
   return (
     <Fragment>
       <Helmet>
@@ -215,31 +207,29 @@ const CreateAccount = () => {
                   ]}
                   style={{ paddingRight: '10px' }}
                 >
-                  <InputMask mask="999 999 99" value={' '} disabled={false}>
-                    <FormControl variant="outlined">
-                      <InputLabel htmlFor="outlined-adornment-password">
-                        Phone
-                      </InputLabel>
-                      <MyOutlinedInput
-                        id="outlined-adornment-password"
-                        type="text"
-                        startAdornment={
-                          <InputAdornment position="start">021</InputAdornment>
-                        }
-                        endAdornment={
-                          <InputAdornment position="end">
-                            <IconButton
-                              aria-label="toggle password visibility"
-                              edge="end"
-                            >
-                              <PhoneAndroidIcon />
-                            </IconButton>
-                          </InputAdornment>
-                        }
-                        label="Phone"
-                      />
-                    </FormControl>
-                  </InputMask>
+                  <FormControl variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-password">
+                      Phone
+                    </InputLabel>
+                    <MyOutlinedInput
+                      id="outlined-adornment-password"
+                      type="text"
+                      startAdornment={
+                        <InputAdornment position="start">021</InputAdornment>
+                      }
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            edge="end"
+                          >
+                            <PhoneAndroidIcon />
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                      label="Phone"
+                    />
+                  </FormControl>
                 </Form.Item>
                 <Form.Item
                   name="email"
@@ -257,22 +247,9 @@ const CreateAccount = () => {
                           <IconButton
                             aria-label="toggle password visibility"
                             edge="end"
-                            onClick={handleClick}
                           >
                             <EmailIcon />
                           </IconButton>
-                          {/* <Menu
-                            id="basic-menu"
-                            anchorEl={anchorEl}
-                            open={open}
-                            onClose={handleClose}
-                            MenuListProps={{
-                              'aria-labelledby': 'basic-button'
-                            }}
-                          >
-                            <MenuItem onClick={handleClose}>.com</MenuItem>
-                            <MenuItem onClick={handleClose}>.ir</MenuItem>
-                          </Menu> */}
                         </InputAdornment>
                       }
                       label="Email"
@@ -286,7 +263,6 @@ const CreateAccount = () => {
                   name="website"
                   rules={[
                     {
-                      required: true,
                       message: 'Please input your website!'
                     }
                   ]}

@@ -119,7 +119,7 @@ const CreateTable = () => {
         <Card variant="outlined">
           <Box p={2}>
             <Grid container spacing={2}>
-              <Grid item xs={5}>
+              <Grid item xs={12} md={5}>
                 <Grid
                   container
                   direction="column"
@@ -178,6 +178,7 @@ const CreateTable = () => {
                             pr={2}
                             display="flex"
                             flexDirection="row"
+                            flexWrap="wrap"
                             justifyContent="space-between"
                           >
                             <MyButton
@@ -216,7 +217,7 @@ const CreateTable = () => {
                   </Box>
                 </Grid>
               </Grid>
-              <Grid item xs={7}>
+              <Grid item xs={12} md={7}>
                 <Box pt={3} pb={3}>
                   <Card>
                     <div style={{ height: 400, width: '100%' }}>

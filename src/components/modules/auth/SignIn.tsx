@@ -185,7 +185,7 @@ const SignIn = () => {
                 display="flex"
                 textAlign="center"
               >
-                <Link to="/login">
+                <Link to="/dashboards/tasks">
                   <CardHeader title="Are you ready have account?" />
                 </Link>
                 <CardHeader title="Log-In Page" />

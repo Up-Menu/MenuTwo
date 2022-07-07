@@ -8,7 +8,9 @@ import {
   Button
 } from '@mui/material';
 import React from 'react';
-import { IOSwitch } from 'src/components/modules/interfaces/CustomizedSwitches';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 import { Link } from 'react-router-dom';
 import Footer from '../../shared/Footer';
 import BottomNav from '../../shared/BottomNav';
@@ -49,7 +51,18 @@ const OrdersMng = () => {
                     alignItems="center"
                     flexWrap="wrap"
                   >
-                    <IOSwitch />
+                    <FormGroup>
+                      <FormControlLabel
+                        control={
+                          <Switch
+                            sx={{ m: 1 }}
+                            defaultChecked
+                            color="success"
+                          />
+                        }
+                        label=""
+                      />
+                    </FormGroup>
                     <Typography variant="h4">Delivery</Typography>
                   </Box>
 
@@ -60,7 +73,18 @@ const OrdersMng = () => {
                     alignItems="center"
                     flexWrap="wrap"
                   >
-                    <IOSwitch />
+                    <FormGroup>
+                      <FormControlLabel
+                        control={
+                          <Switch
+                            sx={{ m: 1 }}
+                            defaultChecked
+                            color="success"
+                          />
+                        }
+                        label=""
+                      />
+                    </FormGroup>
                     <Typography variant="h4">Pickup</Typography>
                   </Box>
 
@@ -71,7 +95,18 @@ const OrdersMng = () => {
                     alignItems="center"
                     flexWrap="wrap"
                   >
-                    <IOSwitch />
+                    <FormGroup>
+                      <FormControlLabel
+                        control={
+                          <Switch
+                            sx={{ m: 1 }}
+                            defaultChecked
+                            color="success"
+                          />
+                        }
+                        label=""
+                      />
+                    </FormGroup>
                     <Typography variant="h4">Dine-in</Typography>
                   </Box>
 
@@ -82,7 +117,18 @@ const OrdersMng = () => {
                     alignItems="center"
                     flexWrap="wrap"
                   >
-                    <IOSwitch />
+                    <FormGroup>
+                      <FormControlLabel
+                        control={
+                          <Switch
+                            sx={{ m: 1 }}
+                            defaultChecked
+                            color="success"
+                          />
+                        }
+                        label=""
+                      />
+                    </FormGroup>
                     <Typography variant="h4">
                       Table ordering (QR Code)
                     </Typography>

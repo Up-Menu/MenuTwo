@@ -55,7 +55,7 @@ function HeaderNotifications() {
   return (
     <>
       <Tooltip arrow title="Notifications">
-        <IconButton color="primary" ref={ref} onClick={handleOpen}>
+        <IconButton color="warning" ref={ref} onClick={handleOpen}>
           <NotificationsBadge
             badgeContent={1}
             anchorOrigin={{

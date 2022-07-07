@@ -31,7 +31,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 // import required modules
 import { Pagination } from 'swiper';
-import { IOSwitch } from '../../interfaces/CustomizedSwitches';
+// import { IOSwitch } from '../../interfaces/CustomizedSwitches';
 // import MyButton from '../../interfaces/Button/MyButton';
 
 import { DataGrid, GridApi, GridColDef } from '@mui/x-data-grid';
@@ -40,6 +40,9 @@ import DoneIcon from '@mui/icons-material/Done';
 import CloseIcon from '@mui/icons-material/Close';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import AddTaskIcon from '@mui/icons-material/AddTask';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 
 const CreateMenu: React.FunctionComponent = () => {
   const [foodList, setFoodList] = useState([]);
@@ -483,7 +486,18 @@ const CreateMenu: React.FunctionComponent = () => {
                     alignItems="center"
                   >
                     <Typography variant="h6">Status Available</Typography>
-                    <IOSwitch />
+                    <FormGroup>
+                      <FormControlLabel
+                        control={
+                          <Switch
+                            sx={{ m: 1 }}
+                            defaultChecked
+                            color="success"
+                          />
+                        }
+                        label=""
+                      />
+                    </FormGroup>
                   </Box>
                   <Divider />
                   <Box
@@ -497,7 +511,19 @@ const CreateMenu: React.FunctionComponent = () => {
                     alignItems="center"
                   >
                     <Typography variant="h6">Discount Active</Typography>
-                    <IOSwitch />
+
+                    <FormGroup>
+                      <FormControlLabel
+                        control={
+                          <Switch
+                            sx={{ m: 1 }}
+                            defaultChecked
+                            color="success"
+                          />
+                        }
+                        label=""
+                      />
+                    </FormGroup>
                   </Box>
                 </Grid>
               </Box>

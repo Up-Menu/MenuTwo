@@ -32,12 +32,14 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // import required modules
 import { Pagination } from 'swiper';
 import { IOSwitch } from '../../interfaces/CustomizedSwitches';
-import MyButton from '../../interfaces/Button/MyButton';
+// import MyButton from '../../interfaces/Button/MyButton';
 
 import { DataGrid, GridApi, GridColDef } from '@mui/x-data-grid';
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import DoneIcon from '@mui/icons-material/Done';
 import CloseIcon from '@mui/icons-material/Close';
+import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
+import AddTaskIcon from '@mui/icons-material/AddTask';
 
 const CreateMenu: React.FunctionComponent = () => {
   const [foodList, setFoodList] = useState([]);
@@ -136,7 +138,7 @@ const CreateMenu: React.FunctionComponent = () => {
 
         return (
           <Box display="flex" flexDirection="row">
-            <IconButton onClick={deleteHandler} sx={{ ml: 1 }} color="inherit">
+            <IconButton onClick={deleteHandler} sx={{ ml: 1 }} color="error">
               <DeleteSweepIcon />
             </IconButton>
           </Box>
@@ -405,22 +407,24 @@ const CreateMenu: React.FunctionComponent = () => {
                           flexDirection="row"
                           justifyContent="space-between"
                         >
-                          <MyButton
-                            size="medium"
-                            sx={{ margin: 1 }}
-                            type="primary"
-                            htmlType="submit"
-                          >
-                            Save & Add
-                          </MyButton>
-
                           <Button
                             sx={{ margin: 1 }}
                             size="medium"
-                            color="primary"
+                            color="success"
+                            variant="outlined"
+                            startIcon={<DoneOutlineIcon />}
                             onClick={sendMenu}
                           >
                             Submit
+                          </Button>
+                          <Button
+                            size="medium"
+                            sx={{ margin: 1 }}
+                            type="submit"
+                            color="warning"
+                            startIcon={<AddTaskIcon />}
+                          >
+                            Save & Add
                           </Button>
                         </Box>
                       </Form.Item>

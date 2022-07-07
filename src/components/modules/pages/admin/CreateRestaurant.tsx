@@ -39,7 +39,7 @@ const My_OutlinedInput = styled(OutlinedInput)`
   width: 310px;
 `;
 const MyBox = styled(Box)`
-  border: 1px solid #fff;
+  border: 1px solid #cbccd247;
   border-radius: 15px;
   width: fit-content;
   padding: 10px;
@@ -343,6 +343,7 @@ const CreateAccount = () => {
                     variant="outlined"
                     sx={{ padding: 1 }}
                     startIcon={<DownloadDoneIcon />}
+                    color="success"
                   >
                     Submit data
                   </Button>

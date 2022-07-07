@@ -12,6 +12,7 @@ import { IOSwitch } from 'src/components/modules/interfaces/CustomizedSwitches';
 import { Link } from 'react-router-dom';
 import Footer from '../../shared/Footer';
 import BottomNav from '../../shared/BottomNav';
+import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 
 const OrdersMng = () => {
   const MyCard = styled(Card)`
@@ -25,6 +26,17 @@ const OrdersMng = () => {
             <Grid item xs={5}>
               <Box p={5}>
                 <Typography variant="h2">Order types</Typography>
+              </Box>
+              <Box p={5}>
+                <Button
+                  variant="outlined"
+                  size="large"
+                  sx={{ padding: 1 }}
+                  startIcon={<DoneOutlineIcon />}
+                  color="success"
+                >
+                  Submit
+                </Button>
               </Box>
             </Grid>
             <Grid item xs={7}>

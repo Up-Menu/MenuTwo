@@ -61,14 +61,18 @@ const ThemeSelection = () => {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" onClick={choseHandler}>
+                    <Button
+                      variant="outlined"
+                      color="success"
+                      onClick={choseHandler}
+                    >
                       Active
                     </Button>
                     <Button
                       component={Link}
                       to={'/theme/store'}
                       sx={{ margin: 1 }}
-                      color="primary"
+                      color="warning"
                     >
                       Preview
                     </Button>

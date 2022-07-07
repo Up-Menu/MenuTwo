@@ -14,10 +14,12 @@ import BottomNav from '../../shared/BottomNav';
 import Footer from '../../shared/Footer';
 import TextField from '@mui/material/TextField';
 import { Form } from 'antd';
-import MyButton from '../../interfaces/Button/MyButton';
+
 import { DataGrid, GridApi, GridColDef } from '@mui/x-data-grid';
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import { QRCodeSVG } from 'qrcode.react';
+import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
+import AddTaskIcon from '@mui/icons-material/AddTask';
 
 const CreateTable = () => {
   const [tableList, setTableList] = React.useState([]);
@@ -181,22 +183,24 @@ const CreateTable = () => {
                             flexWrap="wrap"
                             justifyContent="space-between"
                           >
-                            <MyButton
-                              size="medium"
-                              sx={{ margin: 1 }}
-                              type="primary"
-                              htmlType="submit"
-                            >
-                              Add new table
-                            </MyButton>
-
                             <Button
                               sx={{ margin: 1 }}
                               size="medium"
-                              color="primary"
+                              color="success"
+                              variant="outlined"
+                              startIcon={<DoneOutlineIcon />}
                               onClick={sendTable}
                             >
                               Submit
+                            </Button>
+                            <Button
+                              size="medium"
+                              sx={{ margin: 1 }}
+                              type="submit"
+                              color="warning"
+                              startIcon={<AddTaskIcon />}
+                            >
+                              Add new table
                             </Button>
                           </Box>
                         </Form.Item>

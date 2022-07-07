@@ -50,6 +50,7 @@ const BottomNav = (props: any) => {
     >
       <Link to={`/dashboards/${props.backLink}`}>
         <Button
+          color="success"
           startIcon={<LeftArrow />}
           variant="outlined"
           disabled={!props.preStep}
@@ -61,7 +62,7 @@ const BottomNav = (props: any) => {
 
       {props.nextStep && (
         <Link to={`/dashboards/${props.forLink}`}>
-          <Button endIcon={<DoubleArrowIcon />} size="small">
+          <Button color="error" endIcon={<DoubleArrowIcon />} size="small">
             {props.forText}
           </Button>
         </Link>

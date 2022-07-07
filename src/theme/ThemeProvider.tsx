@@ -3,7 +3,6 @@ import { ThemeProvider } from '@mui/material';
 import { themeCreator } from './base';
 import { StylesProvider } from '@mui/styles';
 import DarkLight from './DarkLight';
-import Chakra from './Chakra';
 
 type BoxProps = {
   children: React.ReactNode; // 👈️ type children
@@ -27,9 +26,7 @@ const ThemeProviderWrapper = (props: BoxProps) => {
     <StylesProvider injectFirst>
       <ThemeContext.Provider value={setThemeName}>
         <ThemeProvider theme={theme}>
-          <Chakra>
-            <DarkLight>{props.children}</DarkLight>
-          </Chakra>
+          <DarkLight>{props.children}</DarkLight>
         </ThemeProvider>
       </ThemeContext.Provider>
     </StylesProvider>

@@ -2,7 +2,7 @@ import { Suspense, lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 import { RouteObject } from 'react-router';
 
-import SidebarLayout from 'src/layouts/SidebarLayout';
+import SidebarLayout from 'src/components/modules/shared/SidebarLayout';
 import BaseLayout from 'src/layouts/BaseLayout';
 
 import SuspenseLoader from 'src/components/SuspenseLoader';
@@ -63,6 +63,9 @@ const Delivery = Loader(
 
 const MobileApp = Loader(
   lazy(() => import('src/components/modules/pages/admin/MobileApp'))
+);
+const Tables = Loader(
+  lazy(() => import('src/components/modules/pages/admin/TableMng'))
 );
 
 // Components
@@ -205,6 +208,10 @@ function routes(props: string[]): RouteObject[] {
         {
           path: 'mobileApp',
           element: isLogged ? <MobileApp /> : <Login /> || <SignIn />
+        },
+        {
+          path: 'tables',
+          element: isLogged ? <Tables /> : <Login /> || <SignIn />
         },
         {
           path: 'tasks',

@@ -30,6 +30,8 @@ import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 // import WorkspacePremiumTwoToneIcon from '@mui/icons-material/WorkspacePremiumTwoTone';
 // import CameraFrontTwoToneIcon from '@mui/icons-material/CameraFrontTwoTone';
 // import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
+
 import LogoutIcon from '@mui/icons-material/Logout';
 import ArticleIcon from '@mui/icons-material/Article';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
@@ -228,7 +230,7 @@ function SidebarMenu() {
                   Progress
                 </Button>
               </ListItem>
-              <ListItem component="div">
+              {/* <ListItem component="div">
                 <Button
                   disableRipple
                   component={RouterLink}
@@ -238,7 +240,7 @@ function SidebarMenu() {
                 >
                   Contact Us
                 </Button>
-              </ListItem>
+              </ListItem> */}
             </List>
           </SubMenuWrapper>
         </List>
@@ -296,6 +298,17 @@ function SidebarMenu() {
                   startIcon={<BeenhereIcon />}
                 >
                   Select Order
+                </Button>
+              </ListItem>
+              <ListItem component="div">
+                <Button
+                  disableRipple
+                  component={RouterLink}
+                  onClick={closeSidebar}
+                  to="/dashboards/tables"
+                  startIcon={<TableRestaurantIcon />}
+                >
+                  Table management
                 </Button>
               </ListItem>
               <ListItem component="div">

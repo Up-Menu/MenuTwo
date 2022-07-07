@@ -100,9 +100,9 @@ function Delivery() {
           className="pt-5"
           nextStep={true}
           preStep={true}
-          forLink="orders"
+          forLink="tables"
           backLink="mobileApp"
-          forText="Select order"
+          forText="Table manager"
           backText="Configure Mobile App"
         />
       </Container>

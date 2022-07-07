@@ -31,12 +31,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 // import required modules
 import { Pagination } from 'swiper';
-import { IOSwitch } from '../../../UI/CustomizedSwitches';
-import MyButton from '../../../UI/Button/MyButton';
+import { IOSwitch } from '../../interfaces/CustomizedSwitches';
+import MyButton from '../../interfaces/Button/MyButton';
 
 import { DataGrid, GridApi, GridColDef } from '@mui/x-data-grid';
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
-import EditIcon from '@mui/icons-material/Edit';
 import DoneIcon from '@mui/icons-material/Done';
 import CloseIcon from '@mui/icons-material/Close';
 

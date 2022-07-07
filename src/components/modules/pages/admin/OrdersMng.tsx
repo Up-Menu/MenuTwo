@@ -8,7 +8,7 @@ import {
   Button
 } from '@mui/material';
 import React from 'react';
-import { IOSwitch } from 'src/components/UI/CustomizedSwitches';
+import { IOSwitch } from 'src/components/modules/interfaces/CustomizedSwitches';
 import { Link } from 'react-router-dom';
 import Footer from '../../shared/Footer';
 import BottomNav from '../../shared/BottomNav';
@@ -90,9 +90,9 @@ const OrdersMng = () => {
           nextStep={true}
           preStep={true}
           forLink="createMenu"
-          backLink="delivery"
+          backLink="tables"
           forText="Create Menu"
-          backText="Add delivery zone"
+          backText="Table manager"
         />
       </Container>
       <Footer />

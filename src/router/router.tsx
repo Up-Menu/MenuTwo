@@ -39,8 +39,8 @@ const UserSettings = Loader(
   lazy(() => import('src/content/applications/Users/settings'))
 );
 
-const CreateAccount = Loader(
-  lazy(() => import('src/components/modules/pages/admin/CreateAccount'))
+const CreateRestaurant = Loader(
+  lazy(() => import('src/components/modules/pages/admin/CreateRestaurant'))
 );
 const CreateMenu = Loader(
   lazy(() => import('src/components/modules/pages/admin/CreateMenu'))
@@ -211,8 +211,8 @@ function routes(props: string[]): RouteObject[] {
           element: isLogged ? <Tasks /> : <Login /> || <SignIn />
         },
         {
-          path: 'createAccount',
-          element: isLogged ? <CreateAccount /> : <Login /> || <SignIn />
+          path: 'createRestaurant',
+          element: isLogged ? <CreateRestaurant /> : <Login /> || <SignIn />
         },
         {
           path: 'createMenu',

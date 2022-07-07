@@ -1,82 +1,94 @@
-import {
-  Box,
-  List,
-  ListItem,
-  ListItemText,
-  Menu,
-  MenuItem
-} from '@mui/material';
-import { useRef, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { styled } from '@mui/material/styles';
-import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
+// import {
+//   Box,
+//   List,
+//   ListItem,
+//   ListItemText,
+//   Menu,
+//   MenuItem
+// } from '@mui/material';
+// import { useRef, useState } from 'react';
+// import { NavLink } from 'react-router-dom';
+// import { styled } from '@mui/material/styles';
+// import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
 
-const ListWrapper = styled(Box)(
-  ({ theme }) => `
-        .MuiTouchRipple-root {
-            display: none;
-        }
-        
-        .MuiListItem-root {
-            transition: ${theme.transitions.create(['color', 'fill'])};
-            
-            &.MuiListItem-indicators {
-                padding: ${theme.spacing(1, 2)};
-            
-                .MuiListItemText-root {
-                    .MuiTypography-root {
-                        &:before {
-                            height: 4px;
-                            width: 22px;
-                            opacity: 0;
-                            visibility: hidden;
-                            display: block;
-                            position: absolute;
-                            bottom: -10px;
-                            transition: all .2s;
-                            border-radius: ${theme.general.borderRadiusLg};
-                            content: "";
-                            background: ${theme.colors.primary.main};
-                        }
-                    }
-                }
+import { Alert, Box, Stack, styled } from '@mui/material';
 
-                &.active,
-                &:active,
-                &:hover {
-                
-                    background: transparent;
-                
-                    .MuiListItemText-root {
-                        .MuiTypography-root {
-                            &:before {
-                                opacity: 1;
-                                visibility: visible;
-                                bottom: 0px;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-`
-);
+// const ListWrapper = styled(Box)(
+//   ({ theme }) => `
+//         .MuiTouchRipple-root {
+//             display: none;
+//         }
 
+//         .MuiListItem-root {
+//             transition: ${theme.transitions.create(['color', 'fill'])};
+
+//             &.MuiListItem-indicators {
+//                 padding: ${theme.spacing(1, 2)};
+
+//                 .MuiListItemText-root {
+//                     .MuiTypography-root {
+//                         &:before {
+//                             height: 4px;
+//                             width: 22px;
+//                             opacity: 0;
+//                             visibility: hidden;
+//                             display: block;
+//                             position: absolute;
+//                             bottom: -10px;
+//                             transition: all .2s;
+//                             border-radius: ${theme.general.borderRadiusLg};
+//                             content: "";
+//                             background: ${theme.colors.primary.main};
+//                         }
+//                     }
+//                 }
+
+//                 &.active,
+//                 &:active,
+//                 &:hover {
+
+//                     background: transparent;
+
+//                     .MuiListItemText-root {
+//                         .MuiTypography-root {
+//                             &:before {
+//                                 opacity: 1;
+//                                 visibility: visible;
+//                                 bottom: 0px;
+//                             }
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+// `
+// );
+const MyAlert = styled(Alert)`
+  border: 1px solid green;
+  color: rgb(187, 233, 166);
+  background-color: rgba(17, 57, 0, 0.3);
+`;
 function HeaderMenu() {
-  const ref = useRef<any>(null);
-  const [isOpen, setOpen] = useState<boolean>(false);
+  // const ref = useRef<any>(null);
+  // const [isOpen, setOpen] = useState<boolean>(false);
 
-  const handleOpen = (): void => {
-    setOpen(true);
-  };
+  // const handleOpen = (): void => {
+  //   setOpen(true);
+  // };
 
-  const handleClose = (): void => {
-    setOpen(false);
-  };
+  // const handleClose = (): void => {
+  //   setOpen(false);
+  // };
 
   return (
     <>
-      <ListWrapper
+      <Stack sx={{ width: '100%' }} spacing={2}>
+        <MyAlert severity="success">
+          Well done! You successfully read this important alert message.
+        </MyAlert>
+      </Stack>
+
+      {/* <ListWrapper
         sx={{
           display: {
             xs: 'none',
@@ -140,7 +152,7 @@ function HeaderMenu() {
         <MenuItem sx={{ px: 3 }} component={NavLink} to="/components/modals">
           Modals
         </MenuItem>
-      </Menu>
+      </Menu> */}
     </>
   );
 }

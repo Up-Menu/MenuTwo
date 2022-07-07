@@ -11,16 +11,16 @@ import {
   Divider,
   Typography,
   Box,
-  Button
+  Button,
+  IconButton,
+  Modal,
+  Backdrop,
+  Fade,
+  useTheme
 } from '@mui/material';
 import Footer from 'src/components/modules/shared/Footer';
 import TextField from '@mui/material/TextField';
 import { Form } from 'antd';
-import MenuItem from '@mui/material/MenuItem';
-import toast, { Toaster } from 'react-hot-toast';
-import { InboxOutlined } from '@ant-design/icons';
-import type { UploadProps } from 'antd';
-import { Upload } from 'antd';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -29,57 +29,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper';
 import { IOSwitch } from '../../../UI/CustomizedSwitches';
 import MyButton from '../../../UI/Button/MyButton';
-import images from 'src/importer';
 
-const props: UploadProps = {
-  name: 'file',
-  multiple: true,
-  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-  onChange(info) {
-    const { status } = info.file;
-    if (status !== 'uploading') {
-      console.log(info.file, info.fileList);
-    }
-    if (status === 'done') {
-      toast.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === 'error') {
-      toast.error(`${info.file.name} file upload failed.`);
-    }
-  },
-  onDrop(e) {
-    console.log('Dropped files', e.dataTransfer.files);
-  }
-};
-
-// const faPropIcon = faGoogle as IconProp;
-// const label = { inputProps: { 'aria-label': 'Switch demo' } };
-const { Dragger } = Upload;
-
-const currencies = [
-  {
-    value: 'IRR',
-    label: 'IRR'
-  }
-];
-
-const category = [
-  {
-    value: 'Salad',
-    label: 'Salad'
-  },
-  {
-    value: 'Main course',
-    label: 'Main Course'
-  },
-  {
-    value: 'Sandwich',
-    label: 'Sandwich'
-  },
-  {
-    value: 'Beverages',
-    label: 'Beverages'
-  }
-];
+import { DataGrid, GridApi, GridCellValue, GridColDef } from '@mui/x-data-grid';
+import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
+import EditIcon from '@mui/icons-material/Edit';
+import DoneIcon from '@mui/icons-material/Done';
+import CloseIcon from '@mui/icons-material/Close';
 
 const MyAlert = styled(Alert)`
   border: 1px solid green;
@@ -87,25 +42,61 @@ const MyAlert = styled(Alert)`
   background-color: rgba(17, 57, 0, 0.3);
 `;
 
+const MyDataGrid = styled(DataGrid)`
+  .MuiDataGrid-row:hover {
+    background-color: rgb(140 124 240 / 8%);
+  }
+  .MuiDataGrid-columnHeader:focus,
+  .MuiDataGrid-cell:focus,
+  .MuiDataGrid-columnHeader:focus-within,
+  .MuiDataGrid-cell:focus-within {
+    outline: solid transparent 1px !important;
+  }
+`;
+
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4
+};
+
 const CreateMenu: React.FC = () => {
-  const [currency, setCurrency] = useState('EUR');
-
-  // price type
-  const [value, setValue] = useState('Controlled');
-
-  const initialState = [];
-
-  const [foodList, setFoodList] = useState(initialState);
-
-  // const dispatch = useTypedDispatch();
+  const [foodList, setFoodList] = useState([]);
   const [form] = Form.useForm();
-  let copyValues: any;
+  const theme = useTheme();
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const ErrAlert = styled(Alert)`
+    border: 1px solid red;
+    color: ${theme.palette.mode === 'dark' ? '#FF1943' : 'red'};
+    background-color: ${theme.palette.mode === 'dark'
+      ? 'rgba(122, 2, 2, 0.3)'
+      : '#fbaaaa'};
+    justify-content: center;
+
+    svg {
+      color: ${theme.palette.mode === 'dark' ? '#FF1943' : 'red'};
+      padding-top: 1px;
+    }
+  `;
 
   //! call on form submit
   const onFinish = (values: any) => {
-    // delete every input before send data to server
-    copyValues = values;
-    setFoodList((foodList) => [...foodList, copyValues]);
+    let valuesWithIdGenerator = {
+      id: foodList.length,
+      ...values
+    };
+
+    setFoodList((foodList) => [...foodList, valuesWithIdGenerator]);
     form.resetFields();
   };
 
@@ -113,16 +104,88 @@ const CreateMenu: React.FC = () => {
     console.log(foodList);
   };
 
+  const removeHandler = () => {
+    console.log(foodList);
+    setOpen(false);
+  };
+
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
-  };
+  const columns: GridColDef[] = [
+    {
+      field: 'action',
+      headerName: 'Action',
+      sortable: false,
+      width: 150,
+      renderCell: (params) => {
+        const deleteHandler = (e: { stopPropagation: () => void }) => {
+          e.stopPropagation(); // don't select this row after clicking
+          setOpen(true); // open modal immediately
+        };
+
+        const editHandler = (e: { stopPropagation: () => void }) => {
+          e.stopPropagation(); // don't select this row after clicking
+        };
+
+        return (
+          <Box display="flex" flexDirection="row">
+            <IconButton onClick={editHandler} sx={{ ml: 1 }} color="inherit">
+              <EditIcon />
+            </IconButton>
+            <IconButton onClick={deleteHandler} sx={{ ml: 1 }} color="inherit">
+              <DeleteSweepIcon />
+            </IconButton>
+          </Box>
+        );
+      }
+    },
+    { field: 'id', headerName: 'ID', width: 50 },
+    { field: 'productName', headerName: 'Product Name', width: 180 },
+    { field: 'category', headerName: 'Category', width: 130 },
+    { field: 'price', headerName: 'Price', width: 100 },
+    { field: 'description', headerName: 'Description', width: 330 }
+  ];
+
   return (
     <>
-      <Toaster />
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500
+        }}
+      >
+        <Fade in={open}>
+          <Box sx={style}>
+            <Stack>
+              <ErrAlert severity="error">Pay attention</ErrAlert>
+            </Stack>
+
+            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+              Are you sure you want to delete this item?
+            </Typography>
+
+            <Stack direction="row" spacing={2} pt={4}>
+              <IconButton
+                onClick={removeHandler}
+                sx={{ ml: 1 }}
+                color="inherit"
+              >
+                <DoneIcon />
+              </IconButton>
+              <IconButton onClick={handleClose} sx={{ ml: 1 }} color="inherit">
+                <CloseIcon />
+              </IconButton>
+            </Stack>
+          </Box>
+        </Fade>
+      </Modal>
       <Container maxWidth="lg">
         <Helmet>
           <title>صفحه ساخت منو</title>
@@ -183,87 +246,19 @@ const CreateMenu: React.FC = () => {
                     <Box
                       display="flex"
                       flexDirection="row"
-                      textAlign="center"
-                      justifyContent="space-between"
-                      pt={1}
-                      pb={1}
-                    >
-                      <Grid
-                        container
-                        rowSpacing={1}
-                        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-                      >
-                        <Grid item xs={6}>
-                          <Form.Item
-                            name="text"
-                            rules={[{ message: 'Please input your category!' }]}
-                            style={{}}
-                          >
-                            <TextField
-                              id="outlined-select-currency"
-                              select
-                              label="Select Category"
-                              value={currency}
-                              onChange={handleChange}
-                              fullWidth
-                            >
-                              {category.map((option) => (
-                                <MenuItem
-                                  key={option.value}
-                                  value={option.value}
-                                >
-                                  {option.label}
-                                </MenuItem>
-                              ))}
-                            </TextField>
-                          </Form.Item>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Form.Item
-                            name="text_2"
-                            rules={[
-                              { message: 'Please input your phone currency!' }
-                            ]}
-                            style={{}}
-                          >
-                            <TextField
-                              id="outlined-select-currency"
-                              select
-                              label="Currency"
-                              value={currency}
-                              onChange={handleChange}
-                              fullWidth
-                            >
-                              {currencies.map((option) => (
-                                <MenuItem
-                                  key={option.value}
-                                  value={option.value}
-                                >
-                                  {option.label}
-                                </MenuItem>
-                              ))}
-                            </TextField>
-                          </Form.Item>
-                        </Grid>
-                      </Grid>
-                    </Box>
-
-                    <Box
-                      display="flex"
-                      flexDirection="row"
                       textAlign="justify"
                       pb={1}
                     >
                       <Grid container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                         <Grid item xs={6}>
                           <Form.Item
-                            name="Quantity"
-                            rules={[{ message: 'Please input your Quantity!' }]}
+                            name="category"
+                            rules={[{ message: 'Please input your Category!' }]}
                             style={{ paddingTop: '10px' }}
                           >
                             <TextField
-                              label="Quantity"
-                              type="number"
+                              label="Category"
+                              type="text"
                               fullWidth
                               value={''}
                             />
@@ -271,7 +266,7 @@ const CreateMenu: React.FC = () => {
                         </Grid>
                         <Grid item xs={6}>
                           <Form.Item
-                            name="Price"
+                            name="price"
                             rules={[{ message: 'Please input your Price!' }]}
                             style={{ paddingTop: '10px' }}
                           >
@@ -308,28 +303,14 @@ const CreateMenu: React.FC = () => {
                       </Form.Item>
                     </Box>
 
-                    <Box
-                      sx={{
-                        border: '1px solid rgba(255, 255, 255, 0.12)',
-                        borderRadius: '10px'
-                      }}
-                      textAlign="center"
-                      mt={1}
-                      pt={1}
-                      pb={1}
-                    >
-                      <Dragger {...props}>
-                        <p className="ant-upload-drag-icon">
-                          <InboxOutlined />
-                        </p>
-                        <p className="ant-upload-text">
-                          Click or drag file to this area to upload
-                        </p>
-                        <p className="ant-upload-hint">
-                          Support for a single or bulk upload. Strictly prohibit
-                          from uploading company data or other band files
-                        </p>
-                      </Dragger>
+                    <Box>
+                      <Form.Item
+                        name="foodImage"
+                        rules={[{ message: 'Please input your food image!' }]}
+                        style={{ paddingTop: '10px' }}
+                      >
+                        <TextField value={''} type="file" fullWidth />
+                      </Form.Item>
                     </Box>
 
                     <Box
@@ -396,24 +377,13 @@ const CreateMenu: React.FC = () => {
                   modules={[Pagination]}
                   className="mySwiper"
                 >
-                  <SwiperSlide>
-                    <img src={images['new-home-1.png']} alt="" />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img src={images['new-home-2.png']} alt="" />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img src={images['new-home-3.png']} alt="" />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img src={images['new-home-4.png']} alt="" />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img src={images['new-home-5.png']} alt="" />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img src={images['new-home-5.png']} alt="" />
-                  </SwiperSlide>
+                  {foodList.map((foodItems) => {
+                    return (
+                      <SwiperSlide key={foodItems.id}>
+                        <img src={foodItems.foodImage} alt="" />
+                      </SwiperSlide>
+                    );
+                  })}
                 </Swiper>
 
                 <Grid
@@ -455,6 +425,20 @@ const CreateMenu: React.FC = () => {
             </Card>
           </Grid>
         </Grid>
+
+        <Box pt={3} pb={3}>
+          <Card>
+            <div style={{ height: 400, width: '100%' }}>
+              <MyDataGrid
+                rows={foodList}
+                columns={columns}
+                pageSize={5}
+                rowsPerPageOptions={[5]}
+                checkboxSelection
+              />
+            </div>
+          </Card>
+        </Box>
 
         <BottomNav
           className="pt-5"

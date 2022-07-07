@@ -64,28 +64,15 @@ const UserBoxDescription = styled(Typography)(
 
 function HeaderUserbox() {
   const logData: any = useTypedSelector((state) => state);
-  let user: { name: any; avatar: any; jobtitle: any };
-
-  if (logData.googleData) {
-    user = {
-      name: `${logData.googleData.payload.firstName} ${logData.googleData.payload.lastName}`,
-      avatar: logData.googleData.payload.profile,
-      jobtitle: 'Project Manager'
-    };
-  } else if (logData.user) {
-    user = {
-      name: logData.user.payload.email,
-      avatar: images['avatars/profile_default.png'],
-      jobtitle: 'Project Manager'
-    };
-  } else {
-    user = {
-      name: 'Sepand User',
-      avatar: images['avatars/profile_default.png'],
-      jobtitle: 'Project Manager'
-    };
-  }
-
+  const user = {
+    name: logData.googleData.payload
+      ? `${logData.googleData.payload.firstName} ${logData.googleData.payload.lastName}`
+      : 'Sepand User',
+    avatar: logData.googleData.payload
+      ? logData.googleData.payload.profile
+      : images['avatars/profile_default.png'],
+    jobtitle: 'Project Manager'
+  };
   const dispatch = useTypedDispatch();
 
   const ref = useRef<any>(null);

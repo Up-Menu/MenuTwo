@@ -17,7 +17,6 @@ import { Form } from 'antd';
 import MyButton from '../../interfaces/Button/MyButton';
 import { DataGrid, GridApi, GridColDef } from '@mui/x-data-grid';
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
-
 import { QRCodeSVG } from 'qrcode.react';
 
 const CreateTable = () => {

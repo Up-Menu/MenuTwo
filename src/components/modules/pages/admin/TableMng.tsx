@@ -9,7 +9,7 @@ import {
   styled,
   IconButton
 } from '@mui/material';
-import React from 'react';
+import React, { useContext } from 'react';
 import BottomNav from '../../shared/BottomNav';
 import Footer from '../../shared/Footer';
 import TextField from '@mui/material/TextField';
@@ -20,12 +20,13 @@ import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import { QRCodeSVG } from 'qrcode.react';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import AddTaskIcon from '@mui/icons-material/AddTask';
+import ProgressContext from 'src/contexts/ProgressContext';
 
 const CreateTable = () => {
   const [tableList, setTableList] = React.useState([]);
   const [qrText, setQRText] = React.useState('');
   const [form] = Form.useForm();
-
+  const progressContext = useContext(ProgressContext);
   //! call on form submit
   const onFinish = (values: any) => {
     let valuesWithIdGenerator = {
@@ -39,6 +40,7 @@ const CreateTable = () => {
 
   const sendTable = () => {
     console.log(tableList);
+    progressContext.onTable(true);
   };
 
   const onFinishFailed = (errorInfo: any) => {

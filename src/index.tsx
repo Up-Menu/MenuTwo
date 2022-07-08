@@ -16,23 +16,26 @@ import 'swiper/css/bundle';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { ProgressContextProvider } from './contexts/ProgressContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <Provider store={store}>
-    <HelmetProvider>
-      <SidebarProvider>
-        <ProductsContextProvider>
-          <CartContextProvider>
-            <HashRouter>
-              <App />
-            </HashRouter>
-          </CartContextProvider>
-        </ProductsContextProvider>
-      </SidebarProvider>
-    </HelmetProvider>
+    <ProgressContextProvider>
+      <HelmetProvider>
+        <SidebarProvider>
+          <ProductsContextProvider>
+            <CartContextProvider>
+              <HashRouter>
+                <App />
+              </HashRouter>
+            </CartContextProvider>
+          </ProductsContextProvider>
+        </SidebarProvider>
+      </HelmetProvider>
+    </ProgressContextProvider>
   </Provider>
 );
 

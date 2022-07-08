@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+
 import {
   Button,
   Card,
@@ -14,12 +16,15 @@ import { Link } from 'react-router-dom';
 import Footer from '../../shared/Footer';
 import BottomNav from '../../shared/BottomNav';
 import { ThemesList } from '../../../../theme/Themes';
+import ProgressContext from 'src/contexts/ProgressContext';
 
 const ThemeSelection = () => {
+  const progressContext = useContext(ProgressContext);
   const choseHandler = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     console.log('theme chosen!');
     toast.success('!تم با موفقیت انتخاب شد');
+    progressContext.onTheme(true);
   };
   return (
     <>

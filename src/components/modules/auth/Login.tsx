@@ -29,12 +29,15 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 // const faPropIcon = faGoogle as IconProp
 interface State {
   password: string;
   showPassword: boolean;
 }
+
+const recaptchaRef: any = React.createRef();
 
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const Login = () => {
@@ -62,6 +65,7 @@ const Login = () => {
   };
 
   const onFinish = (values: any) => {
+    // const captcha = recaptchaRef.current.execute();
     dispatch(userLogin({ ...values }, (notification) => notification));
   };
 
@@ -200,6 +204,23 @@ const Login = () => {
                     >
                       Oops I do not have an account!
                     </Typography>
+
+                    {/* <Box
+                      pb={2}
+                      pt={1}
+                      display="flex"
+                      flexDirection="row"
+                      justifyContent="center"
+                      alignItems="center"
+                      textAlign="center"
+                    >
+                      <ReCAPTCHA
+                        // size="invisible"
+                        ref={recaptchaRef}
+                        sitekey="6Leh7NMgAAAAAPZfD_ISYsYYTgyrXLEbOVMCjz8S"
+                        // onChange={onChange}
+                      />
+                    </Box> */}
                     <Box
                       pb={2}
                       pt={1}

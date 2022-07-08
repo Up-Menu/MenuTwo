@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Container,
   Card,
@@ -31,6 +31,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
+import ProgressContext from 'src/contexts/ProgressContext';
 
 const MyOutlinedInput = styled(OutlinedInput)`
   width: 347px;
@@ -73,6 +74,7 @@ const beforeUpload = (file: RcFile) => {
 const CreateAccount = () => {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
+  const progressContext = useContext(ProgressContext);
 
   const handleChange: UploadProps['onChange'] = (
     info: UploadChangeParam<UploadFile>
@@ -102,11 +104,11 @@ const CreateAccount = () => {
 
   const onFinish = (values: any) => {
     console.log(values);
+    progressContext.onRestaurant(true);
   };
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   return (
     <Fragment>

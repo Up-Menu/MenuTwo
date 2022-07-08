@@ -20,7 +20,8 @@ import {
   InputLabel,
   InputAdornment,
   FormControl,
-  OutlinedInput
+  OutlinedInput,
+  MenuItem
 } from '@mui/material';
 import Footer from 'src/components/modules/shared/Footer';
 import TextField from '@mui/material/TextField';
@@ -34,8 +35,6 @@ import { Pagination } from 'swiper';
 // import { IOSwitch } from '../../interfaces/CustomizedSwitches';
 // import MyButton from '../../interfaces/Button/MyButton';
 
-import { DataGrid, GridApi, GridColDef } from '@mui/x-data-grid';
-import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import DoneIcon from '@mui/icons-material/Done';
 import CloseIcon from '@mui/icons-material/Close';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
@@ -43,9 +42,12 @@ import AddTaskIcon from '@mui/icons-material/AddTask';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
+import RecentOrdersTable from 'src/content/applications/Transactions/RecentOrdersTable';
+import { CryptoOrder } from 'src/models/crypto_order';
 
 const CreateMenu: React.FunctionComponent = () => {
-  const [foodList, setFoodList] = useState([]);
+  const initialState: CryptoOrder[] = [];
+  const [foodList, setFoodList] = useState(initialState);
 
   const [form] = Form.useForm();
   const theme = useTheme();
@@ -71,17 +73,20 @@ const CreateMenu: React.FunctionComponent = () => {
     background-color: rgba(17, 57, 0, 0.3);
   `;
 
-  const MyDataGrid = styled(DataGrid)`
-    .MuiDataGrid-row:hover {
-      background-color: rgb(140 124 240 / 8%);
+  const statuses = [
+    {
+      value: 'failed',
+      label: 'Failed'
+    },
+    {
+      value: 'completed',
+      label: 'Completed'
+    },
+    {
+      value: 'pending',
+      label: 'Pending'
     }
-    .MuiDataGrid-columnHeader:focus,
-    .MuiDataGrid-cell:focus,
-    .MuiDataGrid-columnHeader:focus-within,
-    .MuiDataGrid-cell:focus-within {
-      outline: solid transparent 1px !important;
-    }
-  `;
+  ];
 
   const style = {
     position: 'absolute' as 'absolute',
@@ -99,6 +104,7 @@ const CreateMenu: React.FunctionComponent = () => {
   const onFinish = (values: any) => {
     let valuesWithIdGenerator = {
       id: foodList.length,
+      orderDate: new Date().getTime(),
       ...values
     };
 
@@ -114,100 +120,11 @@ const CreateMenu: React.FunctionComponent = () => {
     console.log('Failed:', errorInfo);
   };
 
-  const columns: GridColDef[] = [
-    {
-      field: 'action',
-      headerName: 'Action',
-      sortable: false,
-      width: 150,
-      renderCell: (params) => {
-        const deleteHandler = (e: { stopPropagation: () => void }) => {
-          e.stopPropagation(); // don't select this row after clicking
-
-          let newUserSet1 = [...foodList];
-          const api: GridApi = params.api;
-
-          api
-            .getAllColumns()
-            .filter((c) => c.field !== '__check__' && !!c)
-            .forEach(() => {
-              newUserSet1 = newUserSet1.filter(
-                (user) => user.id !== params.row.id
-              );
-            });
-
-          setFoodList(newUserSet1);
-        };
-
-        return (
-          <Box display="flex" flexDirection="row">
-            <IconButton onClick={deleteHandler} sx={{ ml: 1 }} color="error">
-              <DeleteSweepIcon />
-            </IconButton>
-          </Box>
-        );
-      }
-    },
-    { field: 'id', headerName: 'ID', width: 50 },
-    {
-      field: 'productName',
-      editable: true,
-      headerName: 'Product Name',
-      width: 180
-    },
-    { field: 'category', editable: true, headerName: 'Category', width: 130 },
-    { field: 'price', editable: true, headerName: 'Price', width: 100 },
-    {
-      field: 'description',
-      editable: true,
-      headerName: 'Description',
-      width: 330
-    }
-  ];
-  const handleCellEditCommit = React.useCallback(
-    ({ id, field, value }) => {
-      if (field === 'productName') {
-        const productName = value.toString();
-        const updatedRows = foodList.map((row) => {
-          if (row.id === id) {
-            return { ...row, productName };
-          }
-          return row;
-        });
-        setFoodList(updatedRows);
-      } else if (field === 'category') {
-        const category = value.toString();
-        const updatedRows = foodList.map((row) => {
-          if (row.id === id) {
-            return { ...row, category };
-          }
-          return row;
-        });
-        setFoodList(updatedRows);
-      } else if (field === 'price') {
-        const price = value.toString();
-        const updatedRows = foodList.map((row) => {
-          if (row.id === id) {
-            return { ...row, price };
-          }
-          return row;
-        });
-        setFoodList(updatedRows);
-      } else if (field === 'description') {
-        const description = value.toString();
-        const updatedRows = foodList.map((row) => {
-          if (row.id === id) {
-            return { ...row, description };
-          }
-          return row;
-        });
-        setFoodList(updatedRows);
-      }
-    },
-    [foodList]
-  );
   return (
     <>
+      <Helmet>
+        <title>صفحه ساخت منو</title>
+      </Helmet>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -255,9 +172,6 @@ const CreateMenu: React.FunctionComponent = () => {
         </Fade>
       </Modal>
       <Container maxWidth="lg">
-        <Helmet>
-          <title>صفحه ساخت منو</title>
-        </Helmet>
         <Box pt={3} pb={5}>
           <Stack sx={{ width: '100%' }} spacing={2}>
             <MyAlert severity="success">
@@ -292,23 +206,55 @@ const CreateMenu: React.FunctionComponent = () => {
                   >
                     <Box
                       display="flex"
-                      flexDirection="column"
+                      flexDirection="row"
                       textAlign="justify"
-                      pt={1}
                       pb={1}
                     >
-                      <Form.Item
-                        name="productName"
-                        rules={[{ message: 'Please input your product name!' }]}
-                        style={{ paddingTop: '10px' }}
-                      >
-                        <TextField
-                          value={''}
-                          label="Product name"
-                          type="text"
-                          fullWidth
-                        />
-                      </Form.Item>
+                      <Grid container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                        <Grid item xs={8}>
+                          <Form.Item
+                            name="productName"
+                            rules={[
+                              { message: 'Please input your food name!' }
+                            ]}
+                          >
+                            <TextField
+                              label="Product"
+                              type="text"
+                              fullWidth
+                              value={''}
+                            />
+                          </Form.Item>
+                        </Grid>
+                        <Grid item xs={4}>
+                          <Form.Item
+                            name="status"
+                            rules={[
+                              {
+                                required: true,
+                                message: 'Please input status!'
+                              }
+                            ]}
+                          >
+                            <TextField
+                              id="outlined-select-currency"
+                              select
+                              label="Status"
+                              fullWidth
+                              required
+                            >
+                              {statuses.map((option) => (
+                                <MenuItem
+                                  key={option.value}
+                                  value={option.value}
+                                >
+                                  {option.label}
+                                </MenuItem>
+                              ))}
+                            </TextField>
+                          </Form.Item>
+                        </Grid>
+                      </Grid>
                     </Box>
 
                     <Box
@@ -338,11 +284,6 @@ const CreateMenu: React.FunctionComponent = () => {
                             rules={[{ message: 'Please input your Price!' }]}
                             style={{ paddingTop: '10px' }}
                           >
-                            {/* <InputMask
-                              mask="999, 999"
-                              value={' '}
-                              disabled={false}
-                            > */}
                             <FormControl variant="outlined">
                               <InputLabel>Price</InputLabel>
                               <OutlinedInput
@@ -355,7 +296,6 @@ const CreateMenu: React.FunctionComponent = () => {
                                 label="Price"
                               />
                             </FormControl>
-                            {/* </InputMask> */}
                           </Form.Item>
                         </Grid>
                       </Grid>
@@ -533,16 +473,7 @@ const CreateMenu: React.FunctionComponent = () => {
 
         <Box pt={3} pb={3}>
           <Card>
-            <div style={{ height: 400, width: '100%' }}>
-              <MyDataGrid
-                rows={foodList}
-                columns={columns}
-                pageSize={5}
-                rowsPerPageOptions={[5]}
-                checkboxSelection
-                onCellEditCommit={handleCellEditCommit}
-              />
-            </div>
+            <RecentOrdersTable cryptoOrders={foodList} />
           </Card>
         </Box>
 

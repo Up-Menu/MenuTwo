@@ -218,10 +218,10 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                   onChange={handleSelectAllCryptoOrders}
                 />
               </TableCell>
-              <TableCell>Order Details</TableCell>
-              <TableCell>Order ID</TableCell>
-              <TableCell>Source</TableCell>
-              <TableCell align="right">Amount</TableCell>
+              <TableCell>Detail</TableCell>
+              <TableCell>Product Name</TableCell>
+              <TableCell>Category</TableCell>
+              <TableCell align="right">Price</TableCell>
               <TableCell align="right">Status</TableCell>
               <TableCell align="right">Actions</TableCell>
             </TableRow>
@@ -255,7 +255,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.orderDetails}
+                      {cryptoOrder.id}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" noWrap>
                       {format(cryptoOrder.orderDate, 'MMMM dd yyyy')}
@@ -269,7 +269,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.orderID}
+                      {cryptoOrder.productName}
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -280,14 +280,14 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.sourceName}
+                      {cryptoOrder.category}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" noWrap>
-                      {cryptoOrder.sourceDesc}
-                    </Typography>
+                    {/* <Typography variant="body2" color="text.secondary" noWrap>
+                      {cryptoOrder.category}
+                    </Typography> */}
                   </TableCell>
                   <TableCell align="right">
-                    <Typography
+                    {/* <Typography
                       variant="body1"
                       fontWeight="bold"
                       color="text.primary"
@@ -296,10 +296,10 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                     >
                       {cryptoOrder.amountCrypto}
                       {cryptoOrder.cryptoCurrency}
-                    </Typography>
+                    </Typography> */}
                     <Typography variant="body2" color="text.secondary" noWrap>
-                      {numeral(cryptoOrder.amount).format(
-                        `${cryptoOrder.currency}0,0.00`
+                      {numeral(cryptoOrder.price).format(
+                        `${cryptoOrder.price}0,0.00`
                       )}
                     </Typography>
                   </TableCell>

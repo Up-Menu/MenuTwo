@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import BottomNav from '../../shared/BottomNav';
 import { Helmet } from 'react-helmet-async';
@@ -43,11 +43,10 @@ import AddTaskIcon from '@mui/icons-material/AddTask';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import ProgressContext from 'src/contexts/ProgressContext';
 
 const CreateMenu: React.FunctionComponent = () => {
   const [foodList, setFoodList] = useState([]);
-  const progressContext = useContext(ProgressContext);
+
   const [form] = Form.useForm();
   const theme = useTheme();
 
@@ -108,7 +107,7 @@ const CreateMenu: React.FunctionComponent = () => {
   };
 
   const sendMenu = () => {
-    progressContext.onMenu(true);
+    console.log(foodList);
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -339,6 +338,11 @@ const CreateMenu: React.FunctionComponent = () => {
                             rules={[{ message: 'Please input your Price!' }]}
                             style={{ paddingTop: '10px' }}
                           >
+                            {/* <InputMask
+                              mask="999, 999"
+                              value={' '}
+                              disabled={false}
+                            > */}
                             <FormControl variant="outlined">
                               <InputLabel>Price</InputLabel>
                               <OutlinedInput
@@ -351,6 +355,7 @@ const CreateMenu: React.FunctionComponent = () => {
                                 label="Price"
                               />
                             </FormControl>
+                            {/* </InputMask> */}
                           </Form.Item>
                         </Grid>
                       </Grid>

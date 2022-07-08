@@ -10,8 +10,15 @@ import {
 import BottomNav from '../../shared/BottomNav';
 import Footer from '../../shared/Footer';
 import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
+import { useContext } from 'react';
+import ProgressContext from 'src/contexts/ProgressContext';
 
 const MobileApp = () => {
+  const progressContext = useContext(ProgressContext);
+
+  const onSubmit = () => {
+    progressContext.onMobileApp(true);
+  };
   return (
     <div>
       <Container maxWidth="lg">
@@ -39,6 +46,8 @@ const MobileApp = () => {
                   variant="outlined"
                   sx={{ padding: 1 }}
                   startIcon={<DownloadDoneIcon />}
+                  onClick={onSubmit}
+                  color="success"
                 >
                   Finish Installation
                 </Button>

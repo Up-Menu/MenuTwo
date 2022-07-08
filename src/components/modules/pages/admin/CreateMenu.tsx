@@ -42,11 +42,13 @@ import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
+import Switch, { SwitchProps } from '@mui/material/Switch';
+import { useContext } from 'react';
+import ProgressContext from 'src/contexts/ProgressContext';
 
 const CreateMenu: React.FunctionComponent = () => {
   const [foodList, setFoodList] = useState([]);
-
+  const progressContext = useContext(ProgressContext);
   const [form] = Form.useForm();
   const theme = useTheme();
 
@@ -107,6 +109,7 @@ const CreateMenu: React.FunctionComponent = () => {
   };
 
   const sendMenu = () => {
+    progressContext.onMenu(true);
     console.log(foodList);
   };
 
@@ -206,6 +209,53 @@ const CreateMenu: React.FunctionComponent = () => {
     },
     [foodList]
   );
+
+  const IOSSwitch = styled((props: SwitchProps) => (
+    <Switch
+      focusVisibleClassName=".Mui-focusVisible"
+      disableRipple
+      {...props}
+    />
+  ))(({ theme }) => ({
+    width: 42,
+    height: 26,
+    padding: 0,
+    '& .MuiSwitch-switchBase': {
+      padding: 0,
+      margin: 2,
+      transitionDuration: '300ms',
+      '&.Mui-checked': {
+        transform: 'translateX(16px)',
+        color: '#fff',
+        '& + .MuiSwitch-track': {
+          backgroundColor: '#57CA22 !important',
+          opacity: 1,
+          border: 0
+        },
+        '&.Mui-disabled + .MuiSwitch-track': {
+          opacity: 0.5
+        }
+      },
+      '&.Mui-focusVisible .MuiSwitch-thumb': {
+        color: '#57CA22',
+        border: '6px solid #fff'
+      },
+
+      '&.Mui-disabled + .MuiSwitch-track': {
+        opacity: 0.3
+      }
+    },
+    '& .MuiSwitch-thumb': {
+      boxSizing: 'border-box',
+      width: 22,
+      height: 22
+    },
+    '& .MuiSwitch-track': {
+      borderRadius: 26 / 2,
+      backgroundColor: '#FF1943',
+      opacity: 1
+    }
+  }));
   return (
     <>
       <Modal
@@ -486,7 +536,7 @@ const CreateMenu: React.FunctionComponent = () => {
                     alignItems="center"
                   >
                     <Typography variant="h6">Status Available</Typography>
-                    <FormGroup>
+                    {/* <FormGroup>
                       <FormControlLabel
                         control={
                           <Switch
@@ -495,6 +545,12 @@ const CreateMenu: React.FunctionComponent = () => {
                             color="success"
                           />
                         }
+                        label=""
+                      />
+                    </FormGroup> */}
+                    <FormGroup>
+                      <FormControlLabel
+                        control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
                         label=""
                       />
                     </FormGroup>
@@ -512,7 +568,7 @@ const CreateMenu: React.FunctionComponent = () => {
                   >
                     <Typography variant="h6">Discount Active</Typography>
 
-                    <FormGroup>
+                    {/* <FormGroup>
                       <FormControlLabel
                         control={
                           <Switch
@@ -521,6 +577,13 @@ const CreateMenu: React.FunctionComponent = () => {
                             color="success"
                           />
                         }
+                        label=""
+                      />
+                    </FormGroup> */}
+
+                    <FormGroup>
+                      <FormControlLabel
+                        control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
                         label=""
                       />
                     </FormGroup>

@@ -7,9 +7,16 @@ import {
   Box,
   Button,
   styled,
-  IconButton
+  IconButton,
+  Modal,
+  Fade,
+  Stack,
+  Alert,
+  useTheme,
+  Backdrop,
+  Tooltip
 } from '@mui/material';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import BottomNav from '../../shared/BottomNav';
 import Footer from '../../shared/Footer';
 import TextField from '@mui/material/TextField';
@@ -21,12 +28,34 @@ import { QRCodeSVG } from 'qrcode.react';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import ProgressContext from 'src/contexts/ProgressContext';
+import { Toaster } from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
+import DoneIcon from '@mui/icons-material/Done';
+import CloseIcon from '@mui/icons-material/Close';
 
 const CreateTable = () => {
-  const [tableList, setTableList] = React.useState([]);
-  const [qrText, setQRText] = React.useState('');
-  const [form] = Form.useForm();
   const progressContext = useContext(ProgressContext);
+  const [tableList, setTableList] = useState([]);
+  const [qrText, setQRText] = useState('');
+  const [open, setOpen] = useState(false);
+  const [ID, setID] = useState(0);
+  const [form] = Form.useForm();
+  const theme = useTheme();
+
+  const ErrAlert = styled(Alert)`
+    border: 1px solid red;
+    color: ${theme.palette.mode === 'dark' ? '#FF1943' : 'red'};
+    background-color: ${theme.palette.mode === 'dark'
+      ? 'rgba(122, 2, 2, 0.3)'
+      : '#fbaaaa'};
+    justify-content: center;
+
+    svg {
+      color: ${theme.palette.mode === 'dark' ? '#FF1943' : 'red'};
+      padding-top: 1px;
+    }
+  `;
+
   //! call on form submit
   const onFinish = (values: any) => {
     let valuesWithIdGenerator = {
@@ -66,27 +95,33 @@ const CreateTable = () => {
       renderCell: (params) => {
         const deleteHandler = (e: { stopPropagation: () => void }) => {
           e.stopPropagation(); // don't select this row after clicking
-
-          let newUserSet1 = [...tableList];
+          setOpen(true);
           const api: GridApi = params.api;
-
           api
             .getAllColumns()
             .filter((c) => c.field !== '__check__' && !!c)
             .forEach(() => {
-              newUserSet1 = newUserSet1.filter(
-                (user) => user.id !== params.row.id
-              );
+              setID(params.row.id);
             });
-
-          setTableList(newUserSet1);
         };
 
         return (
           <Box display="flex" flexDirection="row">
-            <IconButton onClick={deleteHandler} sx={{ ml: 1 }} color="inherit">
-              <DeleteSweepIcon />
-            </IconButton>
+            <Tooltip title="Delete Order" arrow>
+              <IconButton
+                sx={{
+                  '&:hover': {
+                    background: 'rgba(255, 25, 67, 0.25)'
+                  },
+                  color: '#FF1943'
+                }}
+                onClick={deleteHandler}
+                color="error"
+                size="small"
+              >
+                <DeleteSweepIcon fontSize="small" />
+              </IconButton>
+            </Tooltip>
           </Box>
         );
       }
@@ -113,12 +148,83 @@ const CreateTable = () => {
     },
     [tableList]
   );
-
-  const qrSend = (e) => {
+  const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4
+  };
+  const removeConfirmation = () => {
+    let newTableList = [...tableList];
+    newTableList = newTableList.filter((table) => table.id !== ID);
+    setTableList(newTableList);
+    setOpen(false);
+  };
+  const qrSend = (e: { target: { value: React.SetStateAction<string> } }) => {
     setQRText(e.target.value);
   };
   return (
-    <div>
+    <>
+      <Toaster />
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={open}
+        onClose={() => {
+          setOpen(false);
+        }}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500
+        }}
+      >
+        <Fade in={open}>
+          <Box sx={style}>
+            <Stack>
+              <ErrAlert severity="error">Pay attention</ErrAlert>
+            </Stack>
+
+            <Typography
+              id="transition-modal-description"
+              sx={{ mt: 2, textAlign: 'center' }}
+            >
+              Are you sure you want to delete this item?
+            </Typography>
+
+            <Stack direction="row" justifyContent="center" spacing={2} pt={4}>
+              <Tooltip title="Confirm deletion" arrow>
+                <IconButton
+                  onClick={removeConfirmation}
+                  sx={{ ml: 1 }}
+                  color="success"
+                >
+                  <DoneIcon />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Deny removal" arrow>
+                <IconButton
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                  sx={{ ml: 1 }}
+                  color="error"
+                >
+                  <CloseIcon />
+                </IconButton>
+              </Tooltip>
+            </Stack>
+          </Box>
+        </Fade>
+      </Modal>
+      <Helmet>
+        <title>مدیریت میز</title>
+      </Helmet>
       <Container>
         <Card variant="outlined">
           <Box p={2}>
@@ -253,7 +359,7 @@ const CreateTable = () => {
         />
       </Container>
       <Footer />
-    </div>
+    </>
   );
 };
 

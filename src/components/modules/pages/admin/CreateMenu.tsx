@@ -20,7 +20,8 @@ import {
   InputLabel,
   InputAdornment,
   FormControl,
-  OutlinedInput
+  OutlinedInput,
+  Tooltip
 } from '@mui/material';
 import Footer from 'src/components/modules/shared/Footer';
 import TextField from '@mui/material/TextField';
@@ -45,6 +46,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch, { SwitchProps } from '@mui/material/Switch';
 import { useContext } from 'react';
 import ProgressContext from 'src/contexts/ProgressContext';
+import images from 'src/importer';
+import toast, { Toaster } from 'react-hot-toast';
 
 const CreateMenu: React.FunctionComponent = () => {
   const [foodList, setFoodList] = useState([]);
@@ -53,6 +56,7 @@ const CreateMenu: React.FunctionComponent = () => {
   const theme = useTheme();
 
   const [open, setOpen] = useState(false);
+  const [ID, setID] = useState(0);
 
   const ErrAlert = styled(Alert)`
     border: 1px solid red;
@@ -97,7 +101,7 @@ const CreateMenu: React.FunctionComponent = () => {
     p: 4
   };
 
-  //! call on form submit
+  //* call on form submit
   const onFinish = (values: any) => {
     let valuesWithIdGenerator = {
       id: foodList.length,
@@ -110,11 +114,12 @@ const CreateMenu: React.FunctionComponent = () => {
 
   const sendMenu = () => {
     progressContext.onMenu(true);
+    toast.success('form submitted successfully!');
     console.log(foodList);
   };
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
+    toast.error('Failed:', errorInfo);
   };
 
   const columns: GridColDef[] = [
@@ -122,31 +127,37 @@ const CreateMenu: React.FunctionComponent = () => {
       field: 'action',
       headerName: 'Action',
       sortable: false,
-      width: 150,
+      width: 100,
       renderCell: (params) => {
         const deleteHandler = (e: { stopPropagation: () => void }) => {
           e.stopPropagation(); // don't select this row after clicking
-
-          let newUserSet1 = [...foodList];
+          setOpen(true);
           const api: GridApi = params.api;
-
           api
             .getAllColumns()
             .filter((c) => c.field !== '__check__' && !!c)
             .forEach(() => {
-              newUserSet1 = newUserSet1.filter(
-                (user) => user.id !== params.row.id
-              );
+              setID(params.row.id);
             });
-
-          setFoodList(newUserSet1);
         };
 
         return (
           <Box display="flex" flexDirection="row">
-            <IconButton onClick={deleteHandler} sx={{ ml: 1 }} color="error">
-              <DeleteSweepIcon />
-            </IconButton>
+            <Tooltip title="Delete Order" arrow>
+              <IconButton
+                sx={{
+                  '&:hover': {
+                    background: 'rgba(255, 25, 67, 0.25)'
+                  },
+                  color: '#FF1943'
+                }}
+                onClick={deleteHandler}
+                color="error"
+                size="small"
+              >
+                <DeleteSweepIcon fontSize="small" />
+              </IconButton>
+            </Tooltip>
           </Box>
         );
       }
@@ -256,8 +267,17 @@ const CreateMenu: React.FunctionComponent = () => {
       opacity: 1
     }
   }));
+
+  const removeConfirmation = () => {
+    let newFoodList = [...foodList];
+    newFoodList = newFoodList.filter((food) => food.id !== ID);
+    setFoodList(newFoodList);
+    setOpen(false);
+  };
+
   return (
     <>
+      <Toaster />
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -277,37 +297,42 @@ const CreateMenu: React.FunctionComponent = () => {
               <ErrAlert severity="error">Pay attention</ErrAlert>
             </Stack>
 
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+            <Typography
+              id="transition-modal-description"
+              sx={{ mt: 2, textAlign: 'center' }}
+            >
               Are you sure you want to delete this item?
             </Typography>
 
-            <Stack direction="row" spacing={2} pt={4}>
-              <IconButton
-                onClick={() => {
-                  setOpen(false);
-                }}
-                sx={{ ml: 1 }}
-                color="inherit"
-              >
-                <DoneIcon />
-              </IconButton>
-              <IconButton
-                onClick={() => {
-                  setOpen(false);
-                }}
-                sx={{ ml: 1 }}
-                color="inherit"
-              >
-                <CloseIcon />
-              </IconButton>
+            <Stack direction="row" justifyContent="center" spacing={2} pt={4}>
+              <Tooltip title="Confirm deletion" arrow>
+                <IconButton
+                  onClick={removeConfirmation}
+                  sx={{ ml: 1 }}
+                  color="success"
+                >
+                  <DoneIcon />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Deny removal" arrow>
+                <IconButton
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                  sx={{ ml: 1 }}
+                  color="error"
+                >
+                  <CloseIcon />
+                </IconButton>
+              </Tooltip>
             </Stack>
           </Box>
         </Fade>
       </Modal>
+      <Helmet>
+        <title>صفحه ساخت منو</title>
+      </Helmet>
       <Container maxWidth="lg">
-        <Helmet>
-          <title>صفحه ساخت منو</title>
-        </Helmet>
         <Box pt={3} pb={5}>
           <Stack sx={{ width: '100%' }} spacing={2}>
             <MyAlert severity="success">
@@ -388,11 +413,6 @@ const CreateMenu: React.FunctionComponent = () => {
                             rules={[{ message: 'Please input your Price!' }]}
                             style={{ paddingTop: '10px' }}
                           >
-                            {/* <InputMask
-                              mask="999, 999"
-                              value={' '}
-                              disabled={false}
-                            > */}
                             <FormControl variant="outlined">
                               <InputLabel>Price</InputLabel>
                               <OutlinedInput
@@ -405,7 +425,6 @@ const CreateMenu: React.FunctionComponent = () => {
                                 label="Price"
                               />
                             </FormControl>
-                            {/* </InputMask> */}
                           </Form.Item>
                         </Grid>
                       </Grid>
@@ -509,13 +528,18 @@ const CreateMenu: React.FunctionComponent = () => {
                   modules={[Pagination]}
                   className="mySwiper"
                 >
-                  {foodList.map((foodItems) => {
-                    return (
-                      <SwiperSlide key={foodItems.id}>
-                        <img src={foodItems.foodImage} alt="" />
-                      </SwiperSlide>
-                    );
-                  })}
+                  <SwiperSlide>
+                    <img src={images['new-home-1.png']} alt="" />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <img src={images['new-home-1.png']} alt="" />
+                  </SwiperSlide>{' '}
+                  <SwiperSlide>
+                    <img src={images['new-home-1.png']} alt="" />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <img src={images['new-home-1.png']} alt="" />
+                  </SwiperSlide>
                 </Swiper>
 
                 <Grid

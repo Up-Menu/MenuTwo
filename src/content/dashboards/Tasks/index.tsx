@@ -21,7 +21,7 @@ import PageTitleWrapper from 'src/components/PageTitleWrapper';
 // import Checklist from './Checklist';
 // import Profile from './Profile';
 import TaskSearch from './TaskSearch';
-import ProgressBar from 'src/components/modules/pages/admin/ProgressBar';
+import ProgressBar from 'src/components/modules/pages/admin/progress/ProgressBar';
 
 const TabsContainerWrapper = styled(Box)(
   ({ theme }) => `

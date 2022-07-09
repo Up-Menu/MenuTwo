@@ -42,7 +42,7 @@ import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
 import ContactlessIcon from '@mui/icons-material/Contactless';
 
 import DisplaySettingsTwoToneIcon from '@mui/icons-material/DisplaySettingsTwoTone';
-import CircularStatic from 'src/components/modules/pages/admin/ProgressShow';
+import CircularStatic from 'src/components/modules/pages/admin/progress/ProgressShow';
 
 const MenuWrapper = styled(Box)(
   ({ theme }) => `

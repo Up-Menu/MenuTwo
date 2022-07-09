@@ -48,10 +48,13 @@ import { useContext } from 'react';
 import ProgressContext from 'src/contexts/ProgressContext';
 import images from 'src/importer';
 import toast, { Toaster } from 'react-hot-toast';
+import { userCreateMenu } from 'src/store/actions';
+import { useTypedDispatch } from 'src/store';
 
 const CreateMenu: React.FunctionComponent = () => {
   const [foodList, setFoodList] = useState([]);
   const progressContext = useContext(ProgressContext);
+  const dispatch = useTypedDispatch();
   const [form] = Form.useForm();
   const theme = useTheme();
 
@@ -114,7 +117,7 @@ const CreateMenu: React.FunctionComponent = () => {
 
   const sendMenu = () => {
     progressContext.onMenu(true);
-    toast.success('form submitted successfully!');
+    // dispatch(userCreateMenu(foodList, (notification) => notification));
     console.log(foodList);
   };
 

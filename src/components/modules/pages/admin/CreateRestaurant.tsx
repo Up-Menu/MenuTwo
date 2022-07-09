@@ -32,6 +32,9 @@ import EmailIcon from '@mui/icons-material/Email';
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import ProgressContext from 'src/contexts/ProgressContext';
+import { userCreateRestaurant } from 'src/store/actions';
+import { useTypedDispatch } from 'src/store';
+import { Toaster } from 'react-hot-toast';
 
 const MyOutlinedInput = styled(OutlinedInput)`
   width: 347px;
@@ -75,6 +78,7 @@ const CreateAccount = () => {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
   const progressContext = useContext(ProgressContext);
+  const dispatch = useTypedDispatch();
 
   const handleChange: UploadProps['onChange'] = (
     info: UploadChangeParam<UploadFile>
@@ -103,8 +107,8 @@ const CreateAccount = () => {
   );
 
   const onFinish = (values: any) => {
-    console.log(values);
     progressContext.onRestaurant(true);
+    dispatch(userCreateRestaurant(values, (notification) => notification));
   };
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
@@ -112,6 +116,7 @@ const CreateAccount = () => {
 
   return (
     <Fragment>
+      <Toaster />
       <Helmet>
         <title>Create restaurant</title>
       </Helmet>

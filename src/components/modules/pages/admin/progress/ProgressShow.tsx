@@ -51,12 +51,10 @@ export default function CircularStatic() {
   ];
 
   const count1 = progressArr.filter((value) => value === true).length;
-  console.log(count1);
 
   React.useEffect(() => {
     const timer = setInterval(() => {
       setProgress(() => count1 * 11.1111111111);
-      console.log(progress);
     }, 800);
     return () => {
       clearInterval(timer);

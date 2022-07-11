@@ -51,7 +51,7 @@ const BottomNav = (props: any) => {
       <Link to={`/dashboards/${props.backLink}`}>
         <Button
           color="success"
-          startIcon={<LeftArrow />}
+          endIcon={<LeftArrow />}
           variant="outlined"
           disabled={!props.preStep}
           size="small"

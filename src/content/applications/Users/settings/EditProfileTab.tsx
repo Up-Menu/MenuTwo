@@ -32,7 +32,7 @@ function EditProfileTab() {
                 Manage informations related to your personal details
               </Typography>
             </Box>
-            <Button variant="text" startIcon={<EditTwoToneIcon />}>
+            <Button variant="text" endIcon={<EditTwoToneIcon />}>
               Edit
             </Button>
           </Box>
@@ -94,7 +94,7 @@ function EditProfileTab() {
                 Manage details related to your account
               </Typography>
             </Box>
-            <Button variant="text" startIcon={<EditTwoToneIcon />}>
+            <Button variant="text" endIcon={<EditTwoToneIcon />}>
               Edit
             </Button>
           </Box>
@@ -154,7 +154,7 @@ function EditProfileTab() {
                 Manage details related to your associated email addresses
               </Typography>
             </Box>
-            <Button variant="text" startIcon={<EditTwoToneIcon />}>
+            <Button variant="text" endIcon={<EditTwoToneIcon />}>
               Edit
             </Button>
           </Box>

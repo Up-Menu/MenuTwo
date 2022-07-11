@@ -10,6 +10,8 @@ import {
 } from '@mui/material';
 import { NavLink as RouterLink } from 'react-router-dom';
 import { SidebarContext } from 'src/contexts/SidebarContext';
+
+// import requirements icons
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import MmsTwoToneIcon from '@mui/icons-material/MmsTwoTone';
 import TableChartTwoToneIcon from '@mui/icons-material/TableChartTwoTone';

@@ -14,7 +14,8 @@ import Footer from '../../shared/Footer';
 import BottomNav from '../../shared/BottomNav';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import ProgressContext from 'src/contexts/ProgressContext';
-import IosSwitch from '../../interfaces/IosSwitch';
+import IosSwitch from '../../UI/IosSwitch';
+import RtlVersion from '../../UI/RtlVersion';
 
 const OrdersMng = () => {
   const progressContext = useContext(ProgressContext);
@@ -28,81 +29,81 @@ const OrdersMng = () => {
   return (
     <>
       <Container maxWidth="lg" component="main">
-        <Box textAlign="left">
+        <Box sx={{ direction: 'rtl' }}>
           <Grid container spacing={2}>
-            <Grid item xs={5}>
-              <Box p={5}>
-                <Typography variant="h2">Order types</Typography>
-              </Box>
-              <Box p={5}>
-                <Button
-                  variant="outlined"
-                  size="large"
-                  sx={{ padding: 1 }}
-                  startIcon={<DoneOutlineIcon />}
-                  color="success"
-                  onClick={submitOrder}
-                >
-                  Submit
-                </Button>
-              </Box>
-            </Grid>
-            <Grid item xs={7}>
-              <MyCard variant="outlined">
-                <Box p={3}>
-                  <Box
-                    display="flex"
-                    flexDirection="row"
-                    justifyContent="flex-start"
-                    alignItems="center"
-                    flexWrap="wrap"
-                  >
-                    <IosSwitch />
-                    <Typography variant="h4">Delivery</Typography>
-                  </Box>
-
-                  <Box
-                    display="flex"
-                    flexDirection="row"
-                    justifyContent="flex-start"
-                    alignItems="center"
-                    flexWrap="wrap"
-                  >
-                    <IosSwitch />
-                    <Typography variant="h4">Pickup</Typography>
-                  </Box>
-
-                  <Box
-                    display="flex"
-                    flexDirection="row"
-                    justifyContent="flex-start"
-                    alignItems="center"
-                    flexWrap="wrap"
-                  >
-                    <IosSwitch />
-                    <Typography variant="h4">Pickup</Typography>
-                  </Box>
-
-                  <Box
-                    display="flex"
-                    flexDirection="row"
-                    justifyContent="flex-start"
-                    alignItems="center"
-                    flexWrap="wrap"
-                  >
-                    <IosSwitch />
-                    <Typography variant="h4">
-                      Table ordering (QR Code)
-                    </Typography>
-                    <Typography variant="h4" fontSize={12}>
-                      <Link to="/someLink">
-                        &nbsp; Generate QR code for dine-in
-                      </Link>
-                    </Typography>
-                  </Box>
+            <RtlVersion>
+              <Grid item xs={12} md={5}>
+                <Box p={5}>
+                  <Typography variant="h2">انواع تحویل</Typography>
                 </Box>
-              </MyCard>
-            </Grid>
+                <Box p={5}>
+                  <Button
+                    variant="outlined"
+                    size="large"
+                    sx={{ padding: 1 }}
+                    endIcon={<DoneOutlineIcon />}
+                    color="success"
+                    onClick={submitOrder}
+                  >
+                    ثبت
+                  </Button>
+                </Box>
+              </Grid>
+              <Grid item xs={12} md={7}>
+                <MyCard variant="outlined">
+                  <Box p={3}>
+                    <Box
+                      display="flex"
+                      flexDirection="row"
+                      justifyContent="flex-start"
+                      alignItems="center"
+                      flexWrap="wrap"
+                    >
+                      <IosSwitch />
+                      <Typography variant="h4">تحویل</Typography>
+                    </Box>
+
+                    <Box
+                      display="flex"
+                      flexDirection="row"
+                      justifyContent="flex-start"
+                      alignItems="center"
+                      flexWrap="wrap"
+                    >
+                      <IosSwitch />
+                      <Typography variant="h4">ماشین بر</Typography>
+                    </Box>
+
+                    <Box
+                      display="flex"
+                      flexDirection="row"
+                      justifyContent="flex-start"
+                      alignItems="center"
+                      flexWrap="wrap"
+                    >
+                      <IosSwitch />
+                      <Typography variant="h4">اعلان میز</Typography>
+                    </Box>
+
+                    <Box
+                      display="flex"
+                      flexDirection="row"
+                      justifyContent="flex-start"
+                      alignItems="center"
+                      flexWrap="wrap"
+                    >
+                      <IosSwitch />
+                      <Typography variant="h4">سفارش میز (QR Code)</Typography>
+                      <Typography variant="h4" fontSize={12}>
+                        <Link to="/someLink">
+                          &nbsp; کد QR برای صرف غذا ایجاد کن
+                        </Link>
+                      </Typography>
+                    </Box>
+                  </Box>
+                </MyCard>
+              </Grid>
+            </RtlVersion>
           </Grid>
         </Box>
         <BottomNav

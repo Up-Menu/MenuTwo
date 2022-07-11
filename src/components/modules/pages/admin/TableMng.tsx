@@ -26,10 +26,10 @@ import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 
 // costume components
-import Tables from '../../interfaces/Table';
-import PopUp from '../../interfaces/PopUp';
-import TitleText from '../../interfaces/TitleText';
-import RtlVersion from '../../interfaces/RtlVersion';
+import Tables from '../../UI/Table';
+import PopUp from '../../UI/PopUp';
+import TitleText from '../../UI/TitleText';
+import RtlVersion from '../../UI/RtlVersion';
 
 const CreateTable = () => {
   const progressContext = useContext(ProgressContext);
@@ -212,7 +212,7 @@ const CreateTable = () => {
                                 size="medium"
                                 color="success"
                                 variant="outlined"
-                                startIcon={<DoneOutlineIcon />}
+                                endIcon={<DoneOutlineIcon />}
                                 onClick={sendTable}
                               >
                                 ثبت
@@ -222,7 +222,7 @@ const CreateTable = () => {
                                 sx={{ margin: 1 }}
                                 type="submit"
                                 color="warning"
-                                startIcon={<AddTaskIcon />}
+                                endIcon={<AddTaskIcon />}
                               >
                                 اضافه کردن مجدد
                               </Button>

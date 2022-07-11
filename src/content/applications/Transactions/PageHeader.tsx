@@ -28,7 +28,7 @@ function PageHeader() {
         <Button
           sx={{ mt: { xs: 2, md: 0 } }}
           variant="contained"
-          startIcon={<AddTwoToneIcon fontSize="small" />}
+          endIcon={<AddTwoToneIcon fontSize="small" />}
         >
           Create transaction
         </Button>

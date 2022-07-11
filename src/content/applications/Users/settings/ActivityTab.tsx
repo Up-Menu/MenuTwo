@@ -83,17 +83,17 @@ function ActivityTab() {
         }}
       >
         <Box>
-          <Button startIcon={<ThumbUpAltTwoToneIcon />} variant="contained">
+          <Button endIcon={<ThumbUpAltTwoToneIcon />} variant="contained">
             Like
           </Button>
           <Button
-            startIcon={<CommentTwoToneIcon />}
+            endIcon={<CommentTwoToneIcon />}
             variant="outlined"
             sx={{ mx: 2 }}
           >
             Comment
           </Button>
-          <Button startIcon={<ShareTwoToneIcon />} variant="outlined">
+          <Button endIcon={<ShareTwoToneIcon />} variant="outlined">
             Share
           </Button>
         </Box>

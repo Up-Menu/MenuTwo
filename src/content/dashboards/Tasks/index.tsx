@@ -2,16 +2,7 @@ import { ChangeEvent, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import PageHeader from './PageHeader';
 import Footer from 'src/components/modules/shared/Footer';
-import {
-  Grid,
-  Tab,
-  Tabs,
-  Container,
-  Card,
-  Box,
-  useTheme,
-  styled
-} from '@mui/material';
+import { Grid, Tab, Tabs, Container, Card, Box, styled } from '@mui/material';
 import PageTitleWrapper from 'src/components/PageTitleWrapper';
 
 // import TeamOverview from './TeamOverview';
@@ -121,9 +112,9 @@ function DashboardTasks() {
       <Helmet>
         <title>پنل ادمین رستوران | خوش آمدید</title>
       </Helmet>
-      <PageTitleWrapper>
+      {/* <PageTitleWrapper>
         <PageHeader />
-      </PageTitleWrapper>
+      </PageTitleWrapper> */}
       <Container maxWidth="lg">
         <TabsContainerWrapper>
           <Tabs
@@ -139,32 +130,71 @@ function DashboardTasks() {
             ))}
           </Tabs>
         </TabsContainerWrapper>
-        <Card variant="outlined">
-          <Grid
-            container
-            direction="row"
-            justifyContent="center"
-            alignItems="stretch"
-            spacing={0}
-          >
-            {currentTab === 'analytics' && (
-              <>
-                <Grid item xs={12}>
-                  <Box p={4}>
-                    <ProgressBar />
-                  </Box>
-                </Grid>
-              </>
-            )}
-            {currentTab === 'taskSearch' && (
-              <Grid item xs={12}>
-                <Box p={4}>
-                  <TaskSearch />
-                </Box>
+
+        <Grid container spacing={2}>
+          <Grid item xs={12} /* md={6} */>
+            <Card variant="outlined">
+              <Grid
+                container
+                direction="row"
+                justifyContent="center"
+                alignItems="stretch"
+                spacing={0}
+              >
+                {currentTab === 'analytics' && (
+                  <>
+                    <Grid item xs={12}>
+                      <Box p={4}>
+                        <ProgressBar />
+                      </Box>
+                    </Grid>
+                  </>
+                )}
+                {currentTab === 'taskSearch' && (
+                  <Grid item xs={12}>
+                    <Box p={4}>
+                      <TaskSearch />
+                    </Box>
+                  </Grid>
+                )}
               </Grid>
-            )}
+            </Card>
           </Grid>
-        </Card>
+          {/* <Grid item xs={12} md={6}>
+            <Card variant="outlined">
+              <Box sx={{ p: 5 }}>
+                <video
+                  className="img-fluid"
+                  id="video"
+                  controls={true}
+                  preload="none"
+                  width="600"
+                  poster="https://assets.codepen.io/32795/poster.png"
+                >
+                  <source
+                    id="mp4"
+                    src="http://media.w3.org/2010/05/sintel/trailer.mp4"
+                    type="video/mp4"
+                  />
+                  <source
+                    id="webm"
+                    src="http://media.w3.org/2010/05/sintel/trailer.webm"
+                    type="video/webm"
+                  />
+                  <source
+                    id="ogv"
+                    src="http://media.w3.org/2010/05/sintel/trailer.ogv"
+                    type="video/ogg"
+                  />
+
+                  <p>
+                    Your user agent does not support the HTML5 Video element.
+                  </p>
+                </video>
+              </Box>
+            </Card>
+          </Grid> */}
+        </Grid>
       </Container>
       <Footer />
     </Box>

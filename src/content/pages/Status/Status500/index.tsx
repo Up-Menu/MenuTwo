@@ -92,7 +92,7 @@ function Status500() {
                   loading={pending}
                   variant="outlined"
                   color="primary"
-                  startIcon={<RefreshTwoToneIcon />}
+                  endIcon={<RefreshTwoToneIcon />}
                 >
                   Refresh view
                 </LoadingButton>

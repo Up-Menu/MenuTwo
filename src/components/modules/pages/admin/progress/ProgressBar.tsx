@@ -1,25 +1,37 @@
 import { useContext } from 'react';
 
-import { Box, Typography, Divider, Avatar, styled } from '@mui/material';
+import { Box, Divider, Avatar, styled, Button } from '@mui/material';
 
 import { CheckBox, CheckBoxOutlineBlankTwoTone } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import ProgressContext from 'src/contexts/ProgressContext';
 
-const AvatarPrimary = styled(Avatar)(
-  ({ theme }) => `
-        background: ${theme.colors.primary.lighter};
-        color: ${theme.colors.primary.main};
-        width: ${theme.spacing(7)};
-        height: ${theme.spacing(7)};
-  `
-);
+// import requirement icons
+import RestaurantIcon from '@mui/icons-material/Restaurant';
+import MmsTwoToneIcon from '@mui/icons-material/MmsTwoTone';
+import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
+import ArticleIcon from '@mui/icons-material/Article';
+import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
+import BeenhereIcon from '@mui/icons-material/Beenhere';
+import MapIcon from '@mui/icons-material/Map';
+import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
+import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
+
+// import rtl module
+import RtlVersion from 'src/components/modules/UI/RtlVersion';
 
 const checkedPart = <CheckBox />;
 const noneCheckPart = <CheckBoxOutlineBlankTwoTone />;
 const ProgressBar = () => {
   const progressContext = useContext(ProgressContext);
-
+  const AvatarPrimary = styled(Avatar)(
+    ({ theme }) => `
+          background: ${theme.colors.primary.lighter};
+          color: ${theme.colors.primary.main};
+          width: ${theme.spacing(7)};
+          height: ${theme.spacing(7)};
+    `
+  );
   return (
     <div>
       <Link to="/dashboards/createRestaurant">
@@ -30,13 +42,24 @@ const ProgressBar = () => {
             </AvatarPrimary>
           }
           <Box
-            pl={2}
+            pr={2}
             display="flex"
             flexDirection="column"
             justifyContent="center"
             alignItems="flex-center"
+            sx={{ direction: 'rtl' }}
           >
-            <Typography variant="h4">Restaurant Create</Typography>
+            <RtlVersion>
+              <Button
+                disableRipple
+                size="large"
+                sx={{ padding: 1 }}
+                endIcon={<RestaurantIcon />}
+                color="primary"
+              >
+                ساخت رستوران
+              </Button>
+            </RtlVersion>
           </Box>
         </Box>
       </Link>
@@ -48,13 +71,24 @@ const ProgressBar = () => {
             {progressContext.themeSelection ? checkedPart : noneCheckPart}
           </AvatarPrimary>
           <Box
-            pl={2}
+            pr={2}
             display="flex"
             flexDirection="column"
             justifyContent="center"
             alignItems="flex-center"
+            sx={{ direction: 'rtl' }}
           >
-            <Typography variant="h4">Theme Selection</Typography>
+            <RtlVersion>
+              <Button
+                disableRipple
+                size="large"
+                sx={{ padding: 1 }}
+                endIcon={<AutoFixHighIcon />}
+                color="primary"
+              >
+                انتخاب مضمون
+              </Button>
+            </RtlVersion>
           </Box>
         </Box>
       </Link>
@@ -66,13 +100,24 @@ const ProgressBar = () => {
             {progressContext.addMenu ? checkedPart : noneCheckPart}
           </AvatarPrimary>
           <Box
-            pl={2}
+            pr={2}
             display="flex"
             flexDirection="column"
             justifyContent="center"
             alignItems="flex-center"
+            sx={{ direction: 'rtl' }}
           >
-            <Typography variant="h4">Add Your First Menu Items</Typography>
+            <RtlVersion>
+              <Button
+                disableRipple
+                size="large"
+                sx={{ padding: 1 }}
+                endIcon={<ArticleIcon />}
+                color="primary"
+              >
+                ساخت منو
+              </Button>
+            </RtlVersion>
           </Box>
         </Box>
       </Link>
@@ -83,13 +128,52 @@ const ProgressBar = () => {
             {progressContext.selectOrder ? checkedPart : noneCheckPart}
           </AvatarPrimary>
           <Box
-            pl={2}
+            pr={2}
             display="flex"
             flexDirection="column"
             justifyContent="center"
             alignItems="flex-center"
+            sx={{ direction: 'rtl' }}
           >
-            <Typography variant="h4">Select Order Types</Typography>
+            <RtlVersion>
+              <Button
+                disableRipple
+                size="large"
+                sx={{ padding: 1 }}
+                endIcon={<BeenhereIcon />}
+                color="primary"
+              >
+                نوع تحویل
+              </Button>
+            </RtlVersion>
+          </Box>
+        </Box>
+      </Link>
+      <Divider />
+      <Link to="/dashboards/orders">
+        <Box px={2} py={4} display="flex" alignItems="flex-center">
+          <AvatarPrimary>
+            {progressContext.tableManager ? checkedPart : noneCheckPart}
+          </AvatarPrimary>
+          <Box
+            pr={2}
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="flex-center"
+            sx={{ direction: 'rtl' }}
+          >
+            <RtlVersion>
+              <Button
+                disableRipple
+                size="large"
+                sx={{ padding: 1 }}
+                endIcon={<TableRestaurantIcon />}
+                color="primary"
+              >
+                ساخت میز
+              </Button>
+            </RtlVersion>
           </Box>
         </Box>
       </Link>
@@ -100,13 +184,24 @@ const ProgressBar = () => {
             {progressContext.deliveryZone ? checkedPart : noneCheckPart}
           </AvatarPrimary>
           <Box
-            pl={2}
+            pr={2}
             display="flex"
             flexDirection="column"
             justifyContent="center"
             alignItems="flex-center"
+            sx={{ direction: 'rtl' }}
           >
-            <Typography variant="h4">Add Your First Delivery Zone</Typography>
+            <RtlVersion>
+              <Button
+                disableRipple
+                size="large"
+                sx={{ padding: 1 }}
+                endIcon={<MapIcon />}
+                color="primary"
+              >
+                منطقه ارسال غذا
+              </Button>
+            </RtlVersion>
           </Box>
         </Box>
       </Link>
@@ -117,13 +212,24 @@ const ProgressBar = () => {
             {progressContext.testOrders ? checkedPart : noneCheckPart}
           </AvatarPrimary>
           <Box
-            pl={2}
+            pr={2}
             display="flex"
             flexDirection="column"
             justifyContent="center"
             alignItems="flex-center"
+            sx={{ direction: 'rtl' }}
           >
-            <Typography variant="h4">Test Your Orders</Typography>
+            <RtlVersion>
+              <Button
+                disableRipple
+                size="large"
+                sx={{ padding: 1 }}
+                endIcon={<MmsTwoToneIcon />}
+                color="primary"
+              >
+                تست سامانه
+              </Button>
+            </RtlVersion>
           </Box>
         </Box>
       </Link>
@@ -134,30 +240,54 @@ const ProgressBar = () => {
             {progressContext.mobileApp ? checkedPart : noneCheckPart}
           </AvatarPrimary>
           <Box
-            pl={2}
+            pr={2}
             display="flex"
             flexDirection="column"
             justifyContent="center"
             alignItems="flex-center"
+            sx={{ direction: 'rtl' }}
           >
-            <Typography variant="h4">Configuration Your Mobile App</Typography>
+            <RtlVersion>
+              <Button
+                disableRipple
+                size="large"
+                sx={{ padding: 1 }}
+                endIcon={<PhoneIphoneIcon />}
+                color="primary"
+              >
+                تنظیمات تلفن همراه
+              </Button>
+            </RtlVersion>
           </Box>
         </Box>
       </Link>
       <Divider />
       <Link to="/dashboards/finish">
         <Box px={2} py={4} display="flex" alignItems="flex-center">
-          <AvatarPrimary>
+          <AvatarPrimary color="success">
             {progressContext.finishInstallation ? checkedPart : noneCheckPart}
           </AvatarPrimary>
           <Box
-            pl={2}
+            pr={2}
             display="flex"
             flexDirection="column"
             justifyContent="center"
             alignItems="flex-center"
+            sx={{ direction: 'rtl' }}
           >
-            <Typography variant="h4">Finish UpMenu Installation</Typography>
+            <RtlVersion>
+              <Button
+                disableRipple
+                type="submit"
+                size="large"
+                variant="outlined"
+                sx={{ padding: 1 }}
+                endIcon={<DownloadDoneIcon />}
+                color="success"
+              >
+                اتمام نصب
+              </Button>
+            </RtlVersion>
           </Box>
         </Box>
       </Link>

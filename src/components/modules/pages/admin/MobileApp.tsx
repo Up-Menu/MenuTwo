@@ -45,7 +45,7 @@ const MobileApp = () => {
                   size="large"
                   variant="outlined"
                   sx={{ padding: 1 }}
-                  startIcon={<DownloadDoneIcon />}
+                  endIcon={<DownloadDoneIcon />}
                   onClick={onSubmit}
                   color="success"
                 >

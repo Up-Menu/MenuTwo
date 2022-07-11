@@ -41,6 +41,39 @@
     <link rel="icon" href="%PUBLIC_URL%/icon-192x192.png" type="image/x-icon" />
     <link rel="shortcut icon" id="favicon" href="%PUBLIC_URL%/favicon.ico" />
     <script src="https://accounts.google.com/gsi/client"></script>
+
+    <script src="%PUBLIC_URL%/offline/offline.min.js"></script>
+
+    <!--
+      Themes:
+      <link rel="stylesheet" href="./themes/offline-theme-default.css" />
+      <link rel="stylesheet" href="./themes/offline-theme-default-indicator.css" />
+      <link rel="stylesheet" href="./themes/offline-theme-slide.css" />
+      <link rel="stylesheet" href="./themes/offline-theme-slide-indicator.css" />
+      <link rel="stylesheet" href="./themes/offline-theme-chrome.css" />
+      <link rel="stylesheet" href="./themes/offline-theme-chrome-indicator.css" />
+      <link rel="stylesheet" href="./themes/offline-theme-hubspot.css" />
+    -->
+
+    <link
+      rel="stylesheet"
+      href="%PUBLIC_URL%/offline/themes/offline-theme-slide.css"
+    />
+    <link
+      rel="stylesheet"
+      href="%PUBLIC_URL%/offline/themes/offline-language-english.css"
+    />
+
+    <script>
+      var run = function () {
+        var req = new XMLHttpRequest();
+        req.timeout = 5000;
+        req.open('GET', 'https://mohammad-hgh.github.io/', true);
+        req.send();
+      };
+
+      setInterval(run, 3000);
+    </script>
   </head>
 
   <body>

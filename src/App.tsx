@@ -14,31 +14,31 @@ import { Toaster } from 'react-hot-toast';
 import AutoLogout from './components/modules/widgets/AutoLogout';
 import CookieConsent from 'react-cookie-consent';
 
-function getFaviconEl() {
-  return document.getElementById('favicon')! as HTMLLinkElement;
-}
+// function getFaviconEl() {
+//   return document.getElementById('favicon')! as HTMLLinkElement;
+// }
 
 function App() {
   const logData: any = useTypedSelector((state) => state);
   const router: any = routes([logData.user, logData.googleData]);
   const content = useRoutes(router);
-  const isOnline = NetworkChecker();
+  // const isOnline = NetworkChecker();
 
-  useEffect(() => {
-    if (isOnline) {
-      const favicon = getFaviconEl(); // Accessing favicon element
-      favicon.href = './favicon.ico';
-    } else {
-      const favicon = getFaviconEl(); // Accessing favicon element
-      favicon.href = 'Error.svg';
-      toast.error('!دسترسی اینترنت شما قطع شده است');
-    }
-  }, [isOnline]);
+  // useEffect(() => {
+  //   if (isOnline) {
+  //     const favicon = getFaviconEl(); // Accessing favicon element
+  //     favicon.href = './favicon.ico';
+  //   } else {
+  //     const favicon = getFaviconEl(); // Accessing favicon element
+  //     favicon.href = 'Error.svg';
+  //     toast.error('!دسترسی اینترنت شما قطع شده است');
+  //   }
+  // }, [isOnline]);
 
   return (
     <ThemeProvider>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <Toaster />
+        {/* <Toaster /> */}
         <CssBaseline />
         <AutoLogout>{content}</AutoLogout>
       </LocalizationProvider>

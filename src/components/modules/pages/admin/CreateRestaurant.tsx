@@ -4,11 +4,6 @@ import {
   Card,
   Box,
   Button,
-  IconButton,
-  InputLabel,
-  InputAdornment,
-  FormControl,
-  OutlinedInput,
   TextField,
   styled,
   Grid
@@ -39,9 +34,9 @@ import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
 import images from 'src/importer';
 
 // import costume components
-import TitleText from '../../interfaces/TitleText';
+import TitleText from '../../UI/TitleText';
 import ProgressContext from 'src/contexts/ProgressContext';
-import RtlVersion from '../../interfaces/RtlVersion';
+import RtlVersion from '../../UI/RtlVersion';
 
 const MyBox = styled(Box)`
   border: 1px solid #cbccd247;
@@ -235,7 +230,7 @@ const CreateAccount = () => {
                         size="large"
                         variant="outlined"
                         sx={{ padding: 1 }}
-                        startIcon={<DownloadDoneIcon />}
+                        endIcon={<DownloadDoneIcon />}
                         color="success"
                       >
                         ذخیره

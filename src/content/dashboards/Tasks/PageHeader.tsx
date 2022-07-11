@@ -69,7 +69,7 @@ function PageHeader() {
         </Box>
       </Box>
       <Box mt={{ xs: 3, md: 0 }}>
-        <Button variant="contained" startIcon={<DocumentScannerTwoToneIcon />}>
+        <Button variant="contained" endIcon={<DocumentScannerTwoToneIcon />}>
           Export
         </Button>
       </Box>

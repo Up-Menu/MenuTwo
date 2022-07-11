@@ -39,13 +39,14 @@ const HeaderWrapper = styled(Box)(
           height: ${theme.header.height};
           color: ${theme.header.textColor};
           padding: ${theme.spacing(0, 2)};
-          left: 0;
+          right: 0;
           z-index: 6;
           background-color: ${alpha(theme.header.background, 0.95)};
           backdrop-filter: blur(3px);
           position: fixed;
           justify-content: space-between;
           width: 100%;
+          direction:rtl;
   `
 );
 const UserBoxButton = styled(Button)(
@@ -126,14 +127,14 @@ const Overview_nav = () => {
           color: 'text.primary'
         }}
       >
-        <Stack
+        {/* <Stack
           direction="row"
           divider={<Divider orientation="vertical" flexItem />}
           alignItems="center"
           spacing={2}
         >
           <HeaderMenu />
-        </Stack>
+        </Stack> */}
         <Box display="flex" alignItems="center">
           <Box sx={{ ml: 1 }}>{/* dark mode button */}</Box>
           <Box sx={{ ml: 1 }}>
@@ -160,7 +161,7 @@ const Overview_nav = () => {
               </UserBoxText>
             </Hidden>
             <Hidden smDown>
-              <ExpandMoreTwoToneIcon sx={{ mr: 1 }} />
+              <ExpandMoreTwoToneIcon sx={{ ml: 1 }} />
             </Hidden>
           </UserBoxButton>
           <Popover
@@ -178,7 +179,7 @@ const Overview_nav = () => {
           >
             <MenuUserBox sx={{ minWidth: 210 }} display="flex">
               <Avatar variant="rounded" alt={user.name} src={user.avatar} />
-              <UserBoxText>
+              <UserBoxText sx={{ ml: 1 }}>
                 <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
                 <UserBoxDescription variant="body2">
                   {user.jobtitle}
@@ -191,30 +192,33 @@ const Overview_nav = () => {
             <Box sx={{ m: 1 }}>
               {logData.user || logData.googleData ? (
                 <>
-                  <List sx={{ p: 1 }} component="nav">
+                  <List
+                    sx={{ p: 1, direction: 'rtl', textAlign: 'right' }}
+                    component="nav"
+                  >
                     <ListItem button to="/dashboards/tasks" component={NavLink}>
                       <AccountBoxTwoToneIcon fontSize="small" />
-                      <ListItemText primary="Dashboard" />
+                      <ListItemText primary="داشبورد" />
                     </ListItem>
 
-                    <ListItem
+                    {/* <ListItem
                       button
                       to="/dashboards/messenger"
                       component={NavLink}
                     >
                       <InboxTwoToneIcon fontSize="small" />
                       <ListItemText primary="Messenger" />
-                    </ListItem>
-                    <ListItem
+                    </ListItem> */}
+                    {/* <ListItem
                       button
                       to="/management/profile/settings"
                       component={NavLink}
                     >
                       <AccountTreeTwoToneIcon fontSize="small" />
                       <ListItemText primary="Account Settings" />
-                    </ListItem>
+                    </ListItem> */}
                   </List>
-                  <Button color="primary" fullWidth onClick={signOutHandler}>
+                  <Button color="error" fullWidth onClick={signOutHandler}>
                     <LockOpenTwoToneIcon sx={{ ml: 1 }} />
                     Sign out
                   </Button>

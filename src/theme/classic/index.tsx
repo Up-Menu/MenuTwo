@@ -56,7 +56,7 @@ const Cart = () => {
                   <Button
                     size="large"
                     sx={{ padding: 1 }}
-                    startIcon={<AddShoppingCartIcon />}
+                    endIcon={<AddShoppingCartIcon />}
                   >
                     BUY MORE
                   </Button>
@@ -93,7 +93,7 @@ const Cart = () => {
                     variant="outlined"
                     size="small"
                     sx={{ padding: 1 }}
-                    startIcon={<PriceCheckIcon />}
+                    endIcon={<PriceCheckIcon />}
                     onClick={handleCheckout}
                   >
                     CHECKOUT
@@ -104,7 +104,7 @@ const Cart = () => {
                   <Button
                     size="small"
                     sx={{ padding: 1 }}
-                    startIcon={<DeleteSweepIcon />}
+                    endIcon={<DeleteSweepIcon />}
                     onClick={clearCart}
                   >
                     CLEAR

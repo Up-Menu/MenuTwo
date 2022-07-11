@@ -9,7 +9,8 @@ import {
   Checkbox,
   Box,
   Button,
-  OutlinedInput
+  OutlinedInput,
+  CardContent
 } from '@mui/material';
 import { Link, NavLink as RouterLink } from 'react-router-dom';
 import Footer from 'src/components/modules/shared/Footer';
@@ -29,7 +30,11 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import ReCAPTCHA from 'react-google-recaptcha';
+import TitleText from '../UI/TitleText';
+import RtlVersion from '../UI/RtlVersion';
+// import ReCAPTCHA from 'react-google-recaptcha';
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
 
 // const faPropIcon = faGoogle as IconProp
 interface State {
@@ -74,7 +79,153 @@ const Login = () => {
   };
   return (
     <>
+      <TitleText header="صفحه ورود" />
       <Toaster />
+      <Container maxWidth="lg">
+        <Box pt={5} sx={{ direction: 'rtl' }}>
+          <Card>
+            <Box
+              display="flex"
+              flexDirection="row"
+              justifyContent="space-between"
+            >
+              <CardHeader title="فرم لاگین" />
+              <Link to="/">
+                <CardHeader title="برو به خانه" />
+              </Link>
+            </Box>
+            <Divider />
+            <CardContent>
+              <Box sx={{ p: 5, m: 2 }}>
+                <RtlVersion>
+                  <Form
+                    name="basic"
+                    wrapperCol={{ span: 6 }}
+                    initialValues={{ remember: true }}
+                    onFinish={onFinish}
+                    onFinishFailed={onFinishFailed}
+                    autoComplete="on"
+                  >
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} md={6}>
+                        <Form.Item name="email">
+                          <TextField
+                            label="نام کاربری"
+                            type="text"
+                            fullWidth
+                            value={''}
+                          />
+                        </Form.Item>
+                      </Grid>
+                      <Grid item xs={12} md={6}>
+                        <Form.Item
+                          name="password"
+                          rules={[
+                            {
+                              required: true,
+                              message: 'Please input your password!'
+                            }
+                          ]}
+                        >
+                          <FormControl fullWidth required variant="outlined">
+                            <InputLabel htmlFor="outlined-adornment-password">
+                              کلمه عبور
+                            </InputLabel>
+                            <OutlinedInput
+                              id="outlined-adornment-password"
+                              type={values.showPassword ? 'text' : 'password'}
+                              value={values.password}
+                              onChange={handleChange('password')}
+                              endAdornment={
+                                <InputAdornment position="end">
+                                  <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                  >
+                                    {values.showPassword ? (
+                                      <VisibilityOff />
+                                    ) : (
+                                      <Visibility />
+                                    )}
+                                  </IconButton>
+                                </InputAdornment>
+                              }
+                              label="کلمه عبور"
+                            />
+                          </FormControl>
+                        </Form.Item>
+                      </Grid>
+                      <Grid
+                        item
+                        xs={12}
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'row-reverse',
+                          justifyContent: 'center',
+                          alignItems: 'center'
+                        }}
+                      >
+                        <Form.Item
+                          name="remember"
+                          valuePropName="checked"
+                          wrapperCol={{ offset: 8, span: 16 }}
+                        >
+                          <Checkbox
+                            {...label}
+                            defaultChecked
+                            sx={{
+                              color: pink[800],
+                              '&.Mui-checked': {
+                                color: pink[600]
+                              }
+                            }}
+                          />
+                        </Form.Item>
+                        <span>مرا به خاطر بسپار</span>
+                      </Grid>
+                      <Grid
+                        item
+                        xs={12}
+                        sx={{ display: 'flex', justifyContent: 'center' }}
+                      >
+                        <Typography
+                          variant="h6"
+                          component={RouterLink}
+                          to="/signin"
+                        >
+                          چرا همین الآن ثبت نام نمیکنی؟
+                        </Typography>
+                      </Grid>
+                      <Grid
+                        item
+                        xs={12}
+                        sx={{ display: 'flex', justifyContent: 'center' }}
+                      >
+                        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                          <Button
+                            type="submit"
+                            size="large"
+                            variant="outlined"
+                            sx={{ padding: 1 }}
+                            endIcon={<LockOpenIcon />}
+                            color="success"
+                          >
+                            ورود به سامانه
+                          </Button>
+                        </Form.Item>
+                      </Grid>
+                    </Grid>
+                  </Form>
+                </RtlVersion>
+              </Box>
+            </CardContent>
+          </Card>
+        </Box>
+      </Container>
+      <Footer />
+      {/* <Toaster />
       <Helmet>
         <title>LogIn page</title>
       </Helmet>
@@ -221,7 +372,7 @@ const Login = () => {
                         // onChange={onChange}
                       />
                     </Box> */}
-                    <Box
+      {/* <Box
                       pb={2}
                       pt={1}
                       display="flex"
@@ -234,7 +385,7 @@ const Login = () => {
                         <Box pr={2}>
                           <Button
                             size="medium"
-                            startIcon={<LoginIcon />}
+                            endIcon={<LoginIcon />}
                             variant="outlined"
                             type="submit"
                           >
@@ -256,7 +407,7 @@ const Login = () => {
           </Grid>
         </Box>
       </Container>
-      <Footer />
+      <Footer /> */}
     </>
   );
 };

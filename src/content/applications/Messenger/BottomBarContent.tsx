@@ -76,7 +76,7 @@ function BottomBarContent() {
             </IconButton>
           </label>
         </Tooltip>
-        <Button startIcon={<SendTwoToneIcon />} variant="contained">
+        <Button endIcon={<SendTwoToneIcon />} variant="contained">
           Send
         </Button>
       </Box>

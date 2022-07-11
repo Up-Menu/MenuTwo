@@ -13,10 +13,6 @@ import {
   Box,
   Button,
   IconButton,
-  InputLabel,
-  InputAdornment,
-  FormControl,
-  OutlinedInput,
   Tooltip,
   TextField,
   styled
@@ -42,11 +38,11 @@ import images from 'src/importer';
 import toast, { Toaster } from 'react-hot-toast';
 
 // costume components
-import Tables from '../../interfaces/Table';
-import PopUp from '../../interfaces/PopUp';
-import TitleText from '../../interfaces/TitleText';
-import RtlVersion from '../../interfaces/RtlVersion';
-import IosSwitch from '../../interfaces/IosSwitch';
+import Tables from '../../UI/Table';
+import PopUp from '../../UI/PopUp';
+import TitleText from '../../UI/TitleText';
+import RtlVersion from '../../UI/RtlVersion';
+import IosSwitch from '../../UI/IosSwitch';
 
 // import icons
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
@@ -238,139 +234,61 @@ const CreateMenu: React.FunctionComponent = () => {
                         onFinishFailed={onFinishFailed}
                         autoComplete="on"
                       >
-                        <Box
-                          display="flex"
-                          flexDirection="column"
-                          textAlign="justify"
-                          pt={1}
-                          pb={1}
-                        >
-                          <Form.Item
-                            name="productName"
-                            rules={[
-                              { message: 'Please input your product name!' }
-                            ]}
-                            style={{ paddingTop: '10px' }}
-                          >
-                            <TextField
-                              value={''}
-                              label="نام غذا"
-                              type="text"
-                              fullWidth
-                            />
-                          </Form.Item>
-                        </Box>
-
-                        <Box
-                          display="flex"
-                          flexDirection="row"
-                          textAlign="justify"
-                          pb={1}
-                        >
-                          <Grid
-                            container
-                            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-                          >
-                            <Grid item xs={6}>
-                              <Form.Item
-                                name="category"
-                                rules={[
-                                  { message: 'Please input your Category!' }
-                                ]}
-                                style={{ paddingTop: '10px' }}
-                              >
-                                <TextField
-                                  label="دسته بندی"
-                                  type="text"
-                                  fullWidth
-                                  value={''}
-                                />
-                              </Form.Item>
-                            </Grid>
-                            <Grid item xs={6}>
-                              <Form.Item
-                                name="price"
-                                rules={[
-                                  { message: 'Please input your Price!' }
-                                ]}
-                                style={{ paddingTop: '10px' }}
-                              >
-                                <FormControl variant="outlined">
-                                  <InputLabel>قیمت</InputLabel>
-                                  <OutlinedInput
-                                    type="text"
-                                    endAdornment={
-                                      <InputAdornment position="end">
-                                        تومان
-                                      </InputAdornment>
-                                    }
-                                    label="قیمت"
-                                  />
-                                </FormControl>
-                              </Form.Item>
-                            </Grid>
+                        <Grid container spacing={2}>
+                          <Grid item xs={12}>
+                            <Form.Item name="productName">
+                              <TextField
+                                value={''}
+                                label="نام غذا"
+                                type="text"
+                                fullWidth
+                              />
+                            </Form.Item>
                           </Grid>
-                        </Box>
-
-                        <Box
-                          display="flex"
-                          flexDirection="column"
-                          textAlign="justify"
-                          pb={1}
-                        >
-                          <Form.Item
-                            name="description"
-                            rules={[
-                              { message: 'Please input your product name!' }
-                            ]}
-                            style={{ paddingTop: '10px' }}
-                          >
-                            <TextField
-                              id="outlined-multiline-static"
-                              label="توضیحات غذا"
-                              multiline
-                              fullWidth
-                              value={''}
-                              rows={5}
-                            />
-                          </Form.Item>
-                        </Box>
-
-                        <Box>
-                          <Form.Item
-                            name="foodImage"
-                            rules={[
-                              { message: 'Please input your food image!' }
-                            ]}
-                            style={{ paddingTop: '10px' }}
-                          >
-                            <TextField value={''} type="file" fullWidth />
-                          </Form.Item>
-                        </Box>
-
-                        <Box
-                          display="flex"
-                          flexDirection="row"
-                          justifyContent="center"
-                          alignItems="center"
-                          textAlign="center"
-                        >
-                          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                            <Box
-                              pt={2}
-                              pb={2}
-                              pl={2}
-                              pr={2}
-                              display="flex"
-                              flexDirection="row"
-                              justifyContent="space-between"
-                            >
+                          <Grid item xs={12} md={6}>
+                            <Form.Item name="category">
+                              <TextField
+                                label="دسته بندی"
+                                type="text"
+                                fullWidth
+                                value={''}
+                              />
+                            </Form.Item>
+                          </Grid>
+                          <Grid item xs={12} md={6}>
+                            <Form.Item name="price">
+                              <TextField
+                                label="قیمت"
+                                type="text"
+                                fullWidth
+                                value={''}
+                              />
+                            </Form.Item>
+                          </Grid>
+                          <Grid item xs={12}>
+                            <Form.Item name="description">
+                              <TextField
+                                label="توضیحات غذا"
+                                multiline
+                                fullWidth
+                                value={''}
+                                rows={5}
+                              />
+                            </Form.Item>
+                          </Grid>
+                          <Grid item xs={12}>
+                            <Form.Item name="foodImage">
+                              <TextField value={''} type="file" fullWidth />
+                            </Form.Item>
+                          </Grid>
+                          <Grid item xs={12}>
+                            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                               <Button
                                 sx={{ margin: 1 }}
                                 size="medium"
                                 color="success"
                                 variant="outlined"
-                                startIcon={<DoneOutlineIcon />}
+                                endIcon={<DoneOutlineIcon />}
                                 onClick={sendMenu}
                               >
                                 ثبت
@@ -380,13 +298,13 @@ const CreateMenu: React.FunctionComponent = () => {
                                 sx={{ margin: 1 }}
                                 type="submit"
                                 color="warning"
-                                startIcon={<AddTaskIcon />}
+                                endIcon={<AddTaskIcon />}
                               >
                                 اضافه کردن مجدد
                               </Button>
-                            </Box>
-                          </Form.Item>
-                        </Box>
+                            </Form.Item>
+                          </Grid>
+                        </Grid>
                       </Form>
                     </Box>
                   </Grid>
@@ -449,7 +367,7 @@ const CreateMenu: React.FunctionComponent = () => {
                       justifyContent="space-between"
                       alignItems="center"
                     >
-                      <Typography variant="h6">Status Available</Typography>
+                      <Typography variant="h6">وضعیت موجود</Typography>
 
                       <IosSwitch />
                     </Box>
@@ -464,7 +382,7 @@ const CreateMenu: React.FunctionComponent = () => {
                       justifyContent="space-between"
                       alignItems="center"
                     >
-                      <Typography variant="h6">Discount Active</Typography>
+                      <Typography variant="h6">تخفیف</Typography>
 
                       <IosSwitch />
                     </Box>

@@ -18,10 +18,7 @@ function HeaderMenu() {
       {flag ? (
         <Stack sx={{ width: '100%' }} spacing={2}>
           <MyAlert severity="success">
-            <Typography color="rgb(187,233,166)">
-              {' '}
-              Free trial, enjoy it!
-            </Typography>
+            <Typography color="rgb(187,233,166)"> خوش آمدید!</Typography>
           </MyAlert>
         </Stack>
       ) : (

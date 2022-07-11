@@ -47,7 +47,7 @@ function BulkActions() {
           </Typography>
           <ButtonError
             sx={{ mr: 1 }}
-            startIcon={<DeleteTwoToneIcon />}
+            endIcon={<DeleteTwoToneIcon />}
             variant="contained"
           >
             Delete

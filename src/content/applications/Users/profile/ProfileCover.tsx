@@ -102,7 +102,7 @@ const ProfileCover = ({ user }) => {
           <Input accept="image/*" id="change-cover" multiple type="file" />
           <label htmlFor="change-cover">
             <Button
-              startIcon={<UploadTwoToneIcon />}
+              endIcon={<UploadTwoToneIcon />}
               variant="contained"
               component="span"
             >

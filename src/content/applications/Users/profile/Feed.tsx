@@ -74,7 +74,7 @@ function Feed() {
                   <Button
                     variant="outlined"
                     size="small"
-                    startIcon={<AddTwoToneIcon />}
+                    endIcon={<AddTwoToneIcon />}
                   >
                     Follow
                   </Button>

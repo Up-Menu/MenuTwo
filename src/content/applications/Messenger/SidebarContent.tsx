@@ -136,7 +136,7 @@ function SidebarContent() {
         <Avatar alt={user.name} src={user.avatar} />
         <Box
           sx={{
-            ml: 1.5,
+            mr: 1.5,
             flex: 1
           }}
         >
@@ -229,7 +229,7 @@ function SidebarContent() {
               </ListItemAvatar>
               <ListItemText
                 sx={{
-                  mr: 1
+                  ml: 1
                 }}
                 primaryTypographyProps={{
                   color: 'textPrimary',
@@ -253,7 +253,7 @@ function SidebarContent() {
               </ListItemAvatar>
               <ListItemText
                 sx={{
-                  mr: 1
+                  ml: 1
                 }}
                 primaryTypographyProps={{
                   color: 'textPrimary',
@@ -274,7 +274,7 @@ function SidebarContent() {
               </ListItemAvatar>
               <ListItemText
                 sx={{
-                  mr: 1
+                  ml: 1
                 }}
                 primaryTypographyProps={{
                   color: 'textPrimary',
@@ -295,7 +295,7 @@ function SidebarContent() {
               </ListItemAvatar>
               <ListItemText
                 sx={{
-                  mr: 1
+                  ml: 1
                 }}
                 primaryTypographyProps={{
                   color: 'textPrimary',
@@ -323,7 +323,7 @@ function SidebarContent() {
               </ListItemAvatar>
               <ListItemText
                 sx={{
-                  mr: 1
+                  ml: 1
                 }}
                 primaryTypographyProps={{
                   color: 'textPrimary',
@@ -347,7 +347,7 @@ function SidebarContent() {
               </ListItemAvatar>
               <ListItemText
                 sx={{
-                  mr: 1
+                  ml: 1
                 }}
                 primaryTypographyProps={{
                   color: 'textPrimary',
@@ -397,7 +397,7 @@ function SidebarContent() {
       <Box display="flex" pb={1} mt={4} alignItems="center">
         <Typography
           sx={{
-            mr: 1
+            ml: 1
           }}
           variant="h3"
         >
@@ -412,7 +412,7 @@ function SidebarContent() {
 
         <Box py={3} display="flex" alignItems="flex-start">
           <AlarmTwoToneIcon />
-          <Box pl={1}>
+          <Box pr={1}>
             <Typography
               variant="subtitle2"
               sx={{
@@ -480,7 +480,7 @@ function SidebarContent() {
 
         <Box py={3} display="flex" alignItems="flex-start">
           <AlarmTwoToneIcon />
-          <Box pl={1}>
+          <Box pr={1}>
             <Typography
               variant="subtitle2"
               sx={{

@@ -6,7 +6,7 @@ import {
   Divider,
   Avatar,
   useTheme,
-  styled,
+  styled
 } from '@mui/material';
 
 import ShoppingBagTwoToneIcon from '@mui/icons-material/ShoppingBagTwoTone';
@@ -33,7 +33,7 @@ function RecentActivity() {
         <AvatarPrimary>
           <ShoppingBagTwoToneIcon />
         </AvatarPrimary>
-        <Box pl={2} flex={1}>
+        <Box pr={2} flex={1}>
           <Typography variant="h3">Orders</Typography>
 
           <Box pt={2} display="flex">
@@ -65,7 +65,7 @@ function RecentActivity() {
         <AvatarPrimary>
           <FavoriteTwoToneIcon />
         </AvatarPrimary>
-        <Box pl={2} flex={1}>
+        <Box pr={2} flex={1}>
           <Typography variant="h3">Favourites</Typography>
 
           <Box pt={2} display="flex">
@@ -97,7 +97,7 @@ function RecentActivity() {
         <AvatarPrimary>
           <StarTwoToneIcon />
         </AvatarPrimary>
-        <Box pl={2} flex={1}>
+        <Box pr={2} flex={1}>
           <Typography variant="h3">Reviews</Typography>
 
           <Box pt={2} display="flex">

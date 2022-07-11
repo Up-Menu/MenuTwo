@@ -22,20 +22,20 @@ import BusinessCenterTwoToneIcon from '@mui/icons-material/BusinessCenterTwoTone
 
 const TimelineWrapper = styled(Timeline)(
   ({ theme }) => `
-    margin-left: ${theme.spacing(2)};
+    margin-right: ${theme.spacing(2)};
 
     .MuiTimelineDot-root {
-      left: -${theme.spacing(2)};
+      right: -${theme.spacing(2)};
       margin-top: 0;
       top: ${theme.spacing(0.5)};
     }
     
     .MuiTimelineContent-root {
-      padding-left: ${theme.spacing(4)};
+      padding-right: ${theme.spacing(4)};
     }
     
     .MuiFormControlLabel-root {
-      margin-left: -${theme.spacing(0.7)};
+      margin-right: -${theme.spacing(0.7)};
     }
     
     .MuiFormControlLabel-label {

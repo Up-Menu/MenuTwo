@@ -23,7 +23,7 @@ import {
   TableRow,
   TableContainer,
   useTheme,
-  styled,
+  styled
 } from '@mui/material';
 
 import DoneTwoToneIcon from '@mui/icons-material/DoneTwoTone';
@@ -126,7 +126,7 @@ function SecurityTab() {
         <Card>
           <List>
             <ListItem sx={{ p: 3 }}>
-              <ListItemAvatar sx={{ pr: 2 }}>
+              <ListItemAvatar sx={{ pl: 2 }}>
                 <AvatarWrapper src="/static/images/logo/google.svg" />
               </ListItemAvatar>
               <ListItemText
@@ -149,7 +149,7 @@ function SecurityTab() {
         <Card>
           <List>
             <ListItem sx={{ p: 3 }}>
-              <ListItemAvatar sx={{ pr: 2 }}>
+              <ListItemAvatar sx={{ pl: 2 }}>
                 <AvatarSuccess>
                   <DoneTwoToneIcon />
                 </AvatarSuccess>
@@ -169,7 +169,7 @@ function SecurityTab() {
             </ListItem>
             <Divider component="li" />
             <ListItem sx={{ p: 3 }}>
-              <ListItemAvatar sx={{ pr: 2 }}>
+              <ListItemAvatar sx={{ pl: 2 }}>
                 <AvatarSuccess>
                   <DoneTwoToneIcon />
                 </AvatarSuccess>
@@ -246,7 +246,7 @@ function SecurityTab() {
                   <TableCell>IP Address</TableCell>
                   <TableCell>Location</TableCell>
                   <TableCell>Date/Time</TableCell>
-                  <TableCell align="right">Actions</TableCell>
+                  <TableCell align="left">Actions</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -258,7 +258,7 @@ function SecurityTab() {
                     <TableCell>
                       {format(log.date, 'dd MMMM, yyyy - h:mm:ss a')}
                     </TableCell>
-                    <TableCell align="right">
+                    <TableCell align="left">
                       <Tooltip placement="top" title="Delete" arrow>
                         <IconButton
                           sx={{

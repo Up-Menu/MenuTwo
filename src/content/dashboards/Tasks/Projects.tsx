@@ -34,7 +34,7 @@ const DotLegend = styled('span')(
     height: ${theme.spacing(1.8)};
     display: inline-block;
     border: 2px solid ${theme.colors.alpha.white[100]};
-    margin-right: ${theme.spacing(0.5)};
+    margin-left: ${theme.spacing(0.5)};
 `
 );
 
@@ -187,7 +187,7 @@ function Projects() {
                     size="small"
                     color="secondary"
                     sx={{
-                      ml: 0.5
+                      mr: 0.5
                     }}
                   >
                     <CalendarTodayTwoToneIcon fontSize="small" />
@@ -202,7 +202,7 @@ function Projects() {
                     size="small"
                     sx={{
                       color: `${theme.colors.warning.main}`,
-                      ml: 0.5
+                      mr: 0.5
                     }}
                   >
                     <StarTwoToneIcon fontSize="small" />
@@ -304,7 +304,7 @@ function Projects() {
                     size="small"
                     color="secondary"
                     sx={{
-                      ml: 0.5
+                      mr: 0.5
                     }}
                   >
                     <CalendarTodayTwoToneIcon fontSize="small" />
@@ -319,7 +319,7 @@ function Projects() {
                     size="small"
                     sx={{
                       color: `${theme.colors.warning.main}`,
-                      ml: 0.5
+                      mr: 0.5
                     }}
                   >
                     <StarTwoToneIcon fontSize="small" />
@@ -442,7 +442,7 @@ function Projects() {
                     size="small"
                     color="secondary"
                     sx={{
-                      ml: 0.5
+                      mr: 0.5
                     }}
                   >
                     <CalendarTodayTwoToneIcon fontSize="small" />
@@ -457,7 +457,7 @@ function Projects() {
                     size="small"
                     sx={{
                       color: `${theme.colors.warning.main}`,
-                      ml: 0.5
+                      mr: 0.5
                     }}
                   >
                     <StarTwoToneIcon fontSize="small" />

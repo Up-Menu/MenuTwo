@@ -32,7 +32,7 @@ import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
 const OutlinedInputWrapper = styled(OutlinedInput)(
   ({ theme }) => `
     background-color: ${theme.colors.alpha.white[100]};
-    padding-right: ${theme.spacing(0.7)}
+    padding-left: ${theme.spacing(0.7)}
 `
 );
 
@@ -104,7 +104,7 @@ function TaskSearch() {
           <Typography
             variant="subtitle2"
             sx={{
-              pr: 1
+              pl: 1
             }}
           >
             Sort by:
@@ -125,11 +125,11 @@ function TaskSearch() {
             open={openPeriod}
             anchorOrigin={{
               vertical: 'bottom',
-              horizontal: 'right'
+              horizontal: 'left'
             }}
             transformOrigin={{
               vertical: 'top',
-              horizontal: 'right'
+              horizontal: 'left'
             }}
           >
             {periods.map((_period) => (
@@ -168,7 +168,7 @@ function TaskSearch() {
             >
               <Chip
                 sx={{
-                  mr: 0.5
+                  ml: 0.5
                 }}
                 size="small"
                 label="Website"
@@ -178,7 +178,7 @@ function TaskSearch() {
               />
               <Chip
                 sx={{
-                  mr: 0.5
+                  ml: 0.5
                 }}
                 size="small"
                 label="Integrations"
@@ -219,7 +219,7 @@ function TaskSearch() {
               >
                 <TodayTwoToneIcon
                   sx={{
-                    mr: 1
+                    ml: 1
                   }}
                 />
                 {formatDistance(subDays(new Date(), 24), new Date(), {
@@ -276,7 +276,7 @@ function TaskSearch() {
             >
               <Chip
                 sx={{
-                  mr: 0.5
+                  ml: 0.5
                 }}
                 size="small"
                 label="Website"
@@ -286,7 +286,7 @@ function TaskSearch() {
               />
               <Chip
                 sx={{
-                  mr: 0.5
+                  ml: 0.5
                 }}
                 size="small"
                 label="Integrations"
@@ -327,7 +327,7 @@ function TaskSearch() {
               >
                 <TodayTwoToneIcon
                   sx={{
-                    mr: 1
+                    ml: 1
                   }}
                 />
                 {formatDistance(subMonths(new Date(), 2), new Date(), {
@@ -396,7 +396,7 @@ function TaskSearch() {
             >
               <Chip
                 sx={{
-                  mr: 0.5
+                  ml: 0.5
                 }}
                 size="small"
                 label="Website"
@@ -406,7 +406,7 @@ function TaskSearch() {
               />
               <Chip
                 sx={{
-                  mr: 0.5
+                  ml: 0.5
                 }}
                 size="small"
                 label="Integrations"
@@ -447,7 +447,7 @@ function TaskSearch() {
               >
                 <TodayTwoToneIcon
                   sx={{
-                    mr: 1
+                    ml: 1
                   }}
                 />
                 {formatDistance(subDays(new Date(), 31), new Date(), {

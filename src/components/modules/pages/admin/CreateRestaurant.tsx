@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState, Fragment } from 'react';
 import {
   Container,
   Card,
@@ -9,39 +9,40 @@ import {
   InputAdornment,
   FormControl,
   OutlinedInput,
-  TextField
+  TextField,
+  styled,
+  Grid
 } from '@mui/material';
-import { Fragment } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import BottomNav from '../../shared/BottomNav';
-import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
 import Footer from '../../shared/Footer';
+import { Form } from 'antd';
+
+// import Redux requirements
+import { userCreateRestaurant } from 'src/store/actions';
+import { useTypedDispatch } from 'src/store';
+
+// import notification requirements
+import { Toaster } from 'react-hot-toast';
+
+// import icons
+import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
 
 import { LoadingOutlined } from '@ant-design/icons';
+
+// upload requirements
 import { message, Upload } from 'antd';
 import type { UploadChangeParam } from 'antd/es/upload';
 import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
 
-import styled from 'styled-components';
-import { Form } from 'antd';
-
+// auto image importer
 import images from 'src/importer';
-import LanguageIcon from '@mui/icons-material/Language';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import EmailIcon from '@mui/icons-material/Email';
-import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
-import RestaurantIcon from '@mui/icons-material/Restaurant';
-import ProgressContext from 'src/contexts/ProgressContext';
-import { userCreateRestaurant } from 'src/store/actions';
-import { useTypedDispatch } from 'src/store';
-import { Toaster } from 'react-hot-toast';
 
-const MyOutlinedInput = styled(OutlinedInput)`
-  width: 347px;
-`;
-const My_OutlinedInput = styled(OutlinedInput)`
-  width: 310px;
-`;
+// import costume components
+import TitleText from '../../interfaces/TitleText';
+import ProgressContext from 'src/contexts/ProgressContext';
+import RtlVersion from '../../interfaces/RtlVersion';
+
 const MyBox = styled(Box)`
   border: 1px solid #cbccd247;
   border-radius: 15px;
@@ -53,9 +54,6 @@ const MyBox = styled(Box)`
   text-align: center;
 `;
 
-const MyResOutlinedInput = styled(OutlinedInput)`
-  width: 669px;
-`;
 const getBase64 = (img: RcFile, callback: (url: string) => void) => {
   const reader = new FileReader();
   reader.addEventListener('load', () => callback(reader.result as string));
@@ -116,248 +114,138 @@ const CreateAccount = () => {
 
   return (
     <Fragment>
+      <TitleText header="ساخت اکانت رستوران" />
       <Toaster />
-      <Helmet>
-        <title>Create restaurant</title>
-      </Helmet>
 
       <Container maxWidth="lg">
         <Card>
-          <Form
-            name="basic"
-            wrapperCol={{ span: 6 }}
-            initialValues={{ remember: true }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="on"
-          >
-            <Box
-              display="flex"
-              flexDirection="column"
-              alignContent="center"
-              flexWrap="wrap"
-              alignItems="stretch"
-            >
-              <Box pb={4} pt={3} display="flex" justifyContent="center">
-                <Form.Item
-                  name="profile"
-                  rules={[
-                    {
-                      message: 'Please input your profile!'
-                    }
-                  ]}
-                  style={{ paddingRight: '10px' }}
-                >
-                  <MyBox>
-                    <Upload
-                      name="avatar"
-                      listType="picture-card"
-                      className="avatar-uploader"
-                      showUploadList={false}
-                      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                      beforeUpload={beforeUpload}
-                      onChange={handleChange}
-                    >
-                      {imageUrl ? (
-                        <img
-                          src={imageUrl}
-                          alt="avatar"
-                          style={{ width: '100%' }}
-                        />
-                      ) : (
-                        uploadButton
-                      )}
-                    </Upload>
-                  </MyBox>
-                </Form.Item>
-              </Box>
-
-              <Box display="flex" flexDirection="row" pt={2}>
-                <Form.Item
-                  name="restaurantName"
-                  rules={[
-                    {
-                      message: 'Please input your restaurant name!'
-                    }
-                  ]}
-                >
-                  <FormControl variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-password">
-                      Restaurant name
-                    </InputLabel>
-                    <MyResOutlinedInput
-                      id="outlined-adornment-password"
-                      type="text"
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            edge="end"
-                          >
-                            <RestaurantIcon />
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="Restaurant name"
-                    />
-                  </FormControl>
-                </Form.Item>
-              </Box>
-
-              <Box display="flex" flexDirection="row" pt={2}>
-                <Form.Item
-                  name="cellPhone"
-                  rules={[
-                    {
-                      message: 'Please input your phone number!'
-                    }
-                  ]}
-                  style={{ paddingRight: '10px' }}
-                >
-                  <FormControl variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-password">
-                      Phone
-                    </InputLabel>
-                    <MyOutlinedInput
-                      id="outlined-adornment-password"
-                      type="text"
-                      startAdornment={
-                        <InputAdornment position="start">021</InputAdornment>
-                      }
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            edge="end"
-                          >
-                            <PhoneAndroidIcon />
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="Phone"
-                    />
-                  </FormControl>
-                </Form.Item>
-                <Form.Item
-                  name="email"
-                  rules={[{ message: 'Please input your email!' }]}
-                >
-                  <FormControl variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-password">
-                      Email
-                    </InputLabel>
-                    <My_OutlinedInput
-                      id="outlined-adornment-password"
-                      type="email"
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            edge="end"
-                          >
-                            <EmailIcon />
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="Email"
-                    />
-                  </FormControl>
-                </Form.Item>
-              </Box>
-
-              <Box display="flex" flexDirection="row" pt={2}>
-                <Form.Item
-                  name="website"
-                  rules={[
-                    {
-                      message: 'Please input your website!'
-                    }
-                  ]}
-                  style={{ paddingRight: '10px' }}
-                >
-                  <FormControl variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-password">
-                      Website
-                    </InputLabel>
-                    <OutlinedInput
-                      id="outlined-adornment-password"
-                      type="text"
-                      startAdornment={
-                        <InputAdornment position="start">
-                          https://
-                        </InputAdornment>
-                      }
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            edge="end"
-                          >
-                            <LanguageIcon />
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="Website"
-                    />
-                  </FormControl>
-                </Form.Item>
-
-                <Form.Item
-                  name="social"
-                  rules={[{ message: 'Please input your social!' }]}
-                >
-                  <FormControl variant="outlined">
-                    <InputLabel>Instagram ID</InputLabel>
-                    <OutlinedInput
-                      type="text"
-                      startAdornment={
-                        <InputAdornment position="start">@</InputAdornment>
-                      }
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton edge="end">
-                            <InstagramIcon />
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="Instagram ID"
-                    />
-                  </FormControl>
-                </Form.Item>
-              </Box>
-
-              <Box pt={2}>
-                <Form.Item
-                  name="address"
-                  rules={[{ message: 'Please input your address!' }]}
-                >
-                  <TextField
-                    id="outlined-multiline-static"
-                    label="Address"
-                    multiline
-                    value={''}
-                    fullWidth
-                    rows={7}
-                  />
-                </Form.Item>
-              </Box>
-
-              <Box pt={2} pb={2} display="flex" justifyContent="center">
-                <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                  <Button
-                    type="submit"
-                    size="large"
-                    variant="outlined"
-                    sx={{ padding: 1 }}
-                    startIcon={<DownloadDoneIcon />}
-                    color="success"
+          <Box sx={{ direction: 'rtl', p: 5, m: 2 }}>
+            <RtlVersion>
+              <Form
+                name="basic"
+                wrapperCol={{ span: 6 }}
+                initialValues={{ remember: true }}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                autoComplete="on"
+              >
+                <Grid container spacing={2}>
+                  <Grid
+                    item
+                    xs={12}
+                    sx={{ display: 'flex', justifyContent: 'center' }}
                   >
-                    Submit data
-                  </Button>
-                </Form.Item>
-              </Box>
-            </Box>
-          </Form>
+                    <Form.Item name="profile">
+                      <MyBox>
+                        <Upload
+                          name="avatar"
+                          listType="picture-card"
+                          className="avatar-uploader"
+                          showUploadList={false}
+                          action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                          beforeUpload={beforeUpload}
+                          onChange={handleChange}
+                        >
+                          {imageUrl ? (
+                            <img
+                              src={imageUrl}
+                              alt="avatar"
+                              style={{ width: '100%' }}
+                            />
+                          ) : (
+                            uploadButton
+                          )}
+                        </Upload>
+                      </MyBox>
+                    </Form.Item>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Form.Item name="restaurantName">
+                      <TextField
+                        label="نام رستوران"
+                        type="text"
+                        fullWidth
+                        value={''}
+                      />
+                    </Form.Item>
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <Form.Item name="cellPhone">
+                      <TextField
+                        label="شماره تلفن"
+                        type="text"
+                        fullWidth
+                        value={''}
+                      />
+                    </Form.Item>
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <Form.Item name="email">
+                      <TextField
+                        label="ایمیل"
+                        type="text"
+                        fullWidth
+                        value={''}
+                      />
+                    </Form.Item>
+                  </Grid>
+
+                  <Grid item xs={12} md={6}>
+                    <Form.Item name="website">
+                      <TextField
+                        label="لینک سایت رستوران"
+                        type="text"
+                        fullWidth
+                        value={''}
+                      />
+                    </Form.Item>
+                  </Grid>
+
+                  <Grid item xs={12} md={6}>
+                    <Form.Item name="social">
+                      <TextField
+                        label="آیدی اینستاگرام"
+                        type="text"
+                        fullWidth
+                        value={''}
+                      />
+                    </Form.Item>
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <Form.Item name="address">
+                      <TextField
+                        label="نشانی"
+                        multiline
+                        value={''}
+                        fullWidth
+                        rows={7}
+                      />
+                    </Form.Item>
+                  </Grid>
+
+                  <Grid
+                    item
+                    xs={12}
+                    sx={{ display: 'flex', justifyContent: 'center' }}
+                  >
+                    <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                      <Button
+                        type="submit"
+                        size="large"
+                        variant="outlined"
+                        sx={{ padding: 1 }}
+                        startIcon={<DownloadDoneIcon />}
+                        color="success"
+                      >
+                        ذخیره
+                      </Button>
+                    </Form.Item>
+                  </Grid>
+                </Grid>
+              </Form>
+            </RtlVersion>
+          </Box>
         </Card>
 
         <BottomNav

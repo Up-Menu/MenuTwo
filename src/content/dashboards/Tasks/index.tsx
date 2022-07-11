@@ -48,10 +48,10 @@ const TabsContainerWrapper = styled(Box)(
 
           &:after {
             position: absolute;
-            left: 50%;
+            right: 50%;
             width: 28px;
             content: ' ';
-            margin-left: -14px;
+            margin-right: -14px;
             background: ${theme.colors.primary.main};
             border-radius: inherit;
             height: 100%;
@@ -66,11 +66,11 @@ const TabsContainerWrapper = styled(Box)(
               border: 1px solid ${theme.colors.alpha.black[10]};
               border-bottom: 0;
               position: relative;
-              margin-right: ${theme.spacing(1)};
+              margin-left: ${theme.spacing(1)};
               font-size: ${theme.typography.pxToRem(14)};
               color: ${theme.colors.alpha.black[80]};
-              border-bottom-left-radius: 0;
               border-bottom-right-radius: 0;
+              border-bottom-left-radius: 0;
 
               .MuiTouchRipple-root {
                 opacity: .1;
@@ -78,8 +78,8 @@ const TabsContainerWrapper = styled(Box)(
 
               &:after {
                 position: absolute;
-                left: 0;
                 right: 0;
+                left: 0;
                 width: 100%;
                 bottom: 0;
                 height: 1px;
@@ -106,7 +106,7 @@ const TabsContainerWrapper = styled(Box)(
 );
 
 function DashboardTasks() {
-  const theme = useTheme();
+  // const theme = useTheme();
 
   const [currentTab, setCurrentTab] = useState<string>('analytics');
 
@@ -117,7 +117,7 @@ function DashboardTasks() {
   };
 
   return (
-    <>
+    <Box sx={{ direction: 'rtl' }}>
       <Helmet>
         <title>پنل ادمین رستوران | خوش آمدید</title>
       </Helmet>
@@ -167,7 +167,7 @@ function DashboardTasks() {
         </Card>
       </Container>
       <Footer />
-    </>
+    </Box>
   );
 }
 

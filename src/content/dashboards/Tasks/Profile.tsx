@@ -43,7 +43,7 @@ function Profile() {
         <Typography
           variant="h5"
           sx={{
-            pl: 0.5
+            pr: 0.5
           }}
         >
           4.1

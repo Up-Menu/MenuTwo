@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState, useCallback } from 'react';
+
 import BottomNav from '../../shared/BottomNav';
-import { Helmet } from 'react-helmet-async';
-import Alert from '@mui/material/Alert';
-import Stack from '@mui/material/Stack';
+
 import {
+  Alert,
+  Stack,
   Container,
   Grid,
   Card,
@@ -13,18 +13,16 @@ import {
   Box,
   Button,
   IconButton,
-  Modal,
-  Backdrop,
-  Fade,
-  useTheme,
   InputLabel,
   InputAdornment,
   FormControl,
   OutlinedInput,
-  Tooltip
+  Tooltip,
+  TextField,
+  styled
 } from '@mui/material';
 import Footer from 'src/components/modules/shared/Footer';
-import TextField from '@mui/material/TextField';
+
 import { Form } from 'antd';
 
 // Import Swiper React components
@@ -32,77 +30,45 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 // import required modules
 import { Pagination } from 'swiper';
-// import { IOSwitch } from '../../interfaces/CustomizedSwitches';
-// import MyButton from '../../interfaces/Button/MyButton';
 
-import { DataGrid, GridApi, GridColDef } from '@mui/x-data-grid';
+// import Table components
+import { GridApi, GridColDef } from '@mui/x-data-grid';
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
-import DoneIcon from '@mui/icons-material/Done';
-import CloseIcon from '@mui/icons-material/Close';
-import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
-import AddTaskIcon from '@mui/icons-material/AddTask';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch, { SwitchProps } from '@mui/material/Switch';
 import { useContext } from 'react';
 import ProgressContext from 'src/contexts/ProgressContext';
 import images from 'src/importer';
+
+// import Notification components
 import toast, { Toaster } from 'react-hot-toast';
-import { userCreateMenu } from 'src/store/actions';
-import { useTypedDispatch } from 'src/store';
+
+// costume components
+import Tables from '../../interfaces/Table';
+import PopUp from '../../interfaces/PopUp';
+import TitleText from '../../interfaces/TitleText';
+import RtlVersion from '../../interfaces/RtlVersion';
+import IosSwitch from '../../interfaces/IosSwitch';
+
+// import icons
+import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
+import AddTaskIcon from '@mui/icons-material/AddTask';
 
 const CreateMenu: React.FunctionComponent = () => {
   const [foodList, setFoodList] = useState([]);
-  const progressContext = useContext(ProgressContext);
-  const dispatch = useTypedDispatch();
-  const [form] = Form.useForm();
-  const theme = useTheme();
-
   const [open, setOpen] = useState(false);
   const [ID, setID] = useState(0);
+  const progressContext = useContext(ProgressContext);
+  // const dispatch = useTypedDispatch();
+  const [form] = Form.useForm();
 
-  const ErrAlert = styled(Alert)`
-    border: 1px solid red;
-    color: ${theme.palette.mode === 'dark' ? '#FF1943' : 'red'};
-    background-color: ${theme.palette.mode === 'dark'
-      ? 'rgba(122, 2, 2, 0.3)'
-      : '#fbaaaa'};
-    justify-content: center;
-
-    svg {
-      color: ${theme.palette.mode === 'dark' ? '#FF1943' : 'red'};
-      padding-top: 1px;
-    }
-  `;
   const MyAlert = styled(Alert)`
     border: 1px solid green;
     color: rgb(187, 233, 166);
     background-color: rgba(17, 57, 0, 0.3);
+    flex-direction: row-reverse;
+    direction: rtl;
+    text-align: right;
+    justify-content: flex-end;
   `;
-
-  const MyDataGrid = styled(DataGrid)`
-    .MuiDataGrid-row:hover {
-      background-color: rgb(140 124 240 / 8%);
-    }
-    .MuiDataGrid-columnHeader:focus,
-    .MuiDataGrid-cell:focus,
-    .MuiDataGrid-columnHeader:focus-within,
-    .MuiDataGrid-cell:focus-within {
-      outline: solid transparent 1px !important;
-    }
-  `;
-
-  const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4
-  };
 
   //* call on form submit
   const onFinish = (values: any) => {
@@ -128,7 +94,7 @@ const CreateMenu: React.FunctionComponent = () => {
   const columns: GridColDef[] = [
     {
       field: 'action',
-      headerName: 'Action',
+      headerName: 'اقدام',
       sortable: false,
       width: 100,
       renderCell: (params) => {
@@ -165,23 +131,23 @@ const CreateMenu: React.FunctionComponent = () => {
         );
       }
     },
-    { field: 'id', headerName: 'ID', width: 50 },
+
     {
       field: 'productName',
       editable: true,
-      headerName: 'Product Name',
+      headerName: 'نام غذا',
       width: 180
     },
-    { field: 'category', editable: true, headerName: 'Category', width: 130 },
-    { field: 'price', editable: true, headerName: 'Price', width: 100 },
+    { field: 'category', editable: true, headerName: 'دسته بندی', width: 130 },
+    { field: 'price', editable: true, headerName: 'قیمت', width: 100 },
     {
       field: 'description',
       editable: true,
-      headerName: 'Description',
+      headerName: 'توضیحات',
       width: 330
     }
   ];
-  const handleCellEditCommit = React.useCallback(
+  const handleCellEditCommit = useCallback(
     ({ id, field, value }) => {
       if (field === 'productName') {
         const productName = value.toString();
@@ -224,327 +190,211 @@ const CreateMenu: React.FunctionComponent = () => {
     [foodList]
   );
 
-  const IOSSwitch = styled((props: SwitchProps) => (
-    <Switch
-      focusVisibleClassName=".Mui-focusVisible"
-      disableRipple
-      {...props}
-    />
-  ))(({ theme }) => ({
-    width: 42,
-    height: 26,
-    padding: 0,
-    '& .MuiSwitch-switchBase': {
-      padding: 0,
-      margin: 2,
-      transitionDuration: '300ms',
-      '&.Mui-checked': {
-        transform: 'translateX(16px)',
-        color: '#fff',
-        '& + .MuiSwitch-track': {
-          backgroundColor: '#57CA22 !important',
-          opacity: 1,
-          border: 0
-        },
-        '&.Mui-disabled + .MuiSwitch-track': {
-          opacity: 0.5
-        }
-      },
-      '&.Mui-focusVisible .MuiSwitch-thumb': {
-        color: '#57CA22',
-        border: '6px solid #fff'
-      },
-
-      '&.Mui-disabled + .MuiSwitch-track': {
-        opacity: 0.3
-      }
-    },
-    '& .MuiSwitch-thumb': {
-      boxSizing: 'border-box',
-      width: 22,
-      height: 22
-    },
-    '& .MuiSwitch-track': {
-      borderRadius: 26 / 2,
-      backgroundColor: '#FF1943',
-      opacity: 1
-    }
-  }));
-
-  const removeConfirmation = () => {
-    let newFoodList = [...foodList];
-    newFoodList = newFoodList.filter((food) => food.id !== ID);
-    setFoodList(newFoodList);
-    setOpen(false);
-  };
-
   return (
     <>
+      <TitleText header="صفحه ساخت منو" />
       <Toaster />
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
+      <PopUp
+        setOpen={setOpen}
+        setID={setID}
+        setList={setFoodList}
         open={open}
-        onClose={() => {
-          setOpen(false);
-        }}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500
-        }}
-      >
-        <Fade in={open}>
-          <Box sx={style}>
-            <Stack>
-              <ErrAlert severity="error">Pay attention</ErrAlert>
-            </Stack>
+        ID={ID}
+        List={foodList}
+      />
 
-            <Typography
-              id="transition-modal-description"
-              sx={{ mt: 2, textAlign: 'center' }}
-            >
-              Are you sure you want to delete this item?
-            </Typography>
-
-            <Stack direction="row" justifyContent="center" spacing={2} pt={4}>
-              <Tooltip title="Confirm deletion" arrow>
-                <IconButton
-                  onClick={removeConfirmation}
-                  sx={{ ml: 1 }}
-                  color="success"
-                >
-                  <DoneIcon />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title="Deny removal" arrow>
-                <IconButton
-                  onClick={() => {
-                    setOpen(false);
-                  }}
-                  sx={{ ml: 1 }}
-                  color="error"
-                >
-                  <CloseIcon />
-                </IconButton>
-              </Tooltip>
+      <Container maxWidth="lg">
+        <Box sx={{ direction: 'rtl' }}>
+          <Box pt={3} pb={5}>
+            <Stack sx={{ width: '100%' }} spacing={2}>
+              <MyAlert severity="success">
+                انتخاب مضمون با موفقیت انجام شد، اکنون منو غذا را بسازید!
+              </MyAlert>
             </Stack>
           </Box>
-        </Fade>
-      </Modal>
-      <Helmet>
-        <title>صفحه ساخت منو</title>
-      </Helmet>
-      <Container maxWidth="lg">
-        <Box pt={3} pb={5}>
-          <Stack sx={{ width: '100%' }} spacing={2}>
-            <MyAlert severity="success">
-              Well done! You successfully read this important alert message.
-            </MyAlert>
-          </Stack>
-        </Box>
 
-        <Grid container spacing={5}>
-          <Grid item xs={12} md={6}>
-            <Card variant="outlined">
-              <Grid
-                container
-                direction="column"
-                justifyContent="left"
-                alignItems="stretch"
-                spacing={0}
-              >
-                <Box pt={2} pb={2} pl={2}>
-                  <Typography variant="h3">Add Product Form</Typography>
-                </Box>
-                <Divider />
-                <Box pt={3} pb={2} pl={2} pr={2}>
-                  <Form
-                    form={form}
-                    name="control-hooks"
-                    wrapperCol={{ span: 12 }}
-                    initialValues={{ remember: true }}
-                    onFinish={onFinish}
-                    onFinishFailed={onFinishFailed}
-                    autoComplete="on"
+          <Grid container spacing={5}>
+            <RtlVersion>
+              <Grid item xs={12} md={6}>
+                <Card variant="outlined">
+                  <Grid
+                    container
+                    direction="column"
+                    justifyContent="left"
+                    alignItems="stretch"
+                    spacing={0}
                   >
-                    <Box
-                      display="flex"
-                      flexDirection="column"
-                      textAlign="justify"
-                      pt={1}
-                      pb={1}
-                    >
-                      <Form.Item
-                        name="productName"
-                        rules={[{ message: 'Please input your product name!' }]}
-                        style={{ paddingTop: '10px' }}
-                      >
-                        <TextField
-                          value={''}
-                          label="Product name"
-                          type="text"
-                          fullWidth
-                        />
-                      </Form.Item>
+                    <Box pt={2} pb={2} pl={2}>
+                      <Typography variant="h4">فرم افزودن محصول</Typography>
                     </Box>
-
-                    <Box
-                      display="flex"
-                      flexDirection="row"
-                      textAlign="justify"
-                      pb={1}
-                    >
-                      <Grid container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                        <Grid item xs={6}>
+                    <Divider />
+                    <Box pt={3} pb={2} pl={2} pr={2}>
+                      <Form
+                        form={form}
+                        name="control-hooks"
+                        wrapperCol={{ span: 12 }}
+                        initialValues={{ remember: true }}
+                        onFinish={onFinish}
+                        onFinishFailed={onFinishFailed}
+                        autoComplete="on"
+                      >
+                        <Box
+                          display="flex"
+                          flexDirection="column"
+                          textAlign="justify"
+                          pt={1}
+                          pb={1}
+                        >
                           <Form.Item
-                            name="category"
-                            rules={[{ message: 'Please input your Category!' }]}
+                            name="productName"
+                            rules={[
+                              { message: 'Please input your product name!' }
+                            ]}
                             style={{ paddingTop: '10px' }}
                           >
                             <TextField
-                              label="Category"
+                              value={''}
+                              label="نام غذا"
                               type="text"
                               fullWidth
-                              value={''}
                             />
                           </Form.Item>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Form.Item
-                            name="price"
-                            rules={[{ message: 'Please input your Price!' }]}
-                            style={{ paddingTop: '10px' }}
-                          >
-                            <FormControl variant="outlined">
-                              <InputLabel>Price</InputLabel>
-                              <OutlinedInput
-                                type="text"
-                                endAdornment={
-                                  <InputAdornment position="end">
-                                    تومان
-                                  </InputAdornment>
-                                }
-                                label="Price"
-                              />
-                            </FormControl>
-                          </Form.Item>
-                        </Grid>
-                      </Grid>
-                    </Box>
+                        </Box>
 
-                    <Box
-                      display="flex"
-                      flexDirection="column"
-                      textAlign="justify"
-                      pb={1}
-                    >
-                      <Form.Item
-                        name="description"
-                        rules={[{ message: 'Please input your product name!' }]}
-                        style={{ paddingTop: '10px' }}
-                      >
-                        <TextField
-                          id="outlined-multiline-static"
-                          label="Food Description"
-                          multiline
-                          fullWidth
-                          value={''}
-                          rows={5}
-                        />
-                      </Form.Item>
-                    </Box>
-
-                    <Box>
-                      <Form.Item
-                        name="foodImage"
-                        rules={[{ message: 'Please input your food image!' }]}
-                        style={{ paddingTop: '10px' }}
-                      >
-                        <TextField value={''} type="file" fullWidth />
-                      </Form.Item>
-                    </Box>
-
-                    <Box
-                      display="flex"
-                      flexDirection="row"
-                      justifyContent="center"
-                      alignItems="center"
-                      textAlign="center"
-                    >
-                      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                         <Box
-                          pt={2}
-                          pb={2}
-                          pl={2}
-                          pr={2}
                           display="flex"
                           flexDirection="row"
-                          justifyContent="space-between"
+                          textAlign="justify"
+                          pb={1}
                         >
-                          <Button
-                            sx={{ margin: 1 }}
-                            size="medium"
-                            color="success"
-                            variant="outlined"
-                            startIcon={<DoneOutlineIcon />}
-                            onClick={sendMenu}
+                          <Grid
+                            container
+                            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                           >
-                            Submit
-                          </Button>
-                          <Button
-                            size="medium"
-                            sx={{ margin: 1 }}
-                            type="submit"
-                            color="warning"
-                            startIcon={<AddTaskIcon />}
-                          >
-                            Save & Add
-                          </Button>
+                            <Grid item xs={6}>
+                              <Form.Item
+                                name="category"
+                                rules={[
+                                  { message: 'Please input your Category!' }
+                                ]}
+                                style={{ paddingTop: '10px' }}
+                              >
+                                <TextField
+                                  label="دسته بندی"
+                                  type="text"
+                                  fullWidth
+                                  value={''}
+                                />
+                              </Form.Item>
+                            </Grid>
+                            <Grid item xs={6}>
+                              <Form.Item
+                                name="price"
+                                rules={[
+                                  { message: 'Please input your Price!' }
+                                ]}
+                                style={{ paddingTop: '10px' }}
+                              >
+                                <FormControl variant="outlined">
+                                  <InputLabel>قیمت</InputLabel>
+                                  <OutlinedInput
+                                    type="text"
+                                    endAdornment={
+                                      <InputAdornment position="end">
+                                        تومان
+                                      </InputAdornment>
+                                    }
+                                    label="قیمت"
+                                  />
+                                </FormControl>
+                              </Form.Item>
+                            </Grid>
+                          </Grid>
                         </Box>
-                      </Form.Item>
-                    </Box>
-                  </Form>
-                </Box>
-              </Grid>
-            </Card>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Card variant="outlined">
-              <Grid
-                container
-                direction="column"
-                justifyContent="left"
-                alignItems="stretch"
-                spacing={0}
-              >
-                <Box pt={2} pb={2} pl={2}>
-                  <Typography variant="h3">Products</Typography>
-                </Box>
-                <Divider />
-              </Grid>
-              <Box>
-                <Swiper
-                  pagination={{
-                    dynamicBullets: true
-                  }}
-                  modules={[Pagination]}
-                  className="mySwiper"
-                >
-                  <SwiperSlide>
-                    <img src={images['new-home-1.png']} alt="" />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img src={images['new-home-1.png']} alt="" />
-                  </SwiperSlide>{' '}
-                  <SwiperSlide>
-                    <img src={images['new-home-1.png']} alt="" />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img src={images['new-home-1.png']} alt="" />
-                  </SwiperSlide>
-                </Swiper>
 
+                        <Box
+                          display="flex"
+                          flexDirection="column"
+                          textAlign="justify"
+                          pb={1}
+                        >
+                          <Form.Item
+                            name="description"
+                            rules={[
+                              { message: 'Please input your product name!' }
+                            ]}
+                            style={{ paddingTop: '10px' }}
+                          >
+                            <TextField
+                              id="outlined-multiline-static"
+                              label="توضیحات غذا"
+                              multiline
+                              fullWidth
+                              value={''}
+                              rows={5}
+                            />
+                          </Form.Item>
+                        </Box>
+
+                        <Box>
+                          <Form.Item
+                            name="foodImage"
+                            rules={[
+                              { message: 'Please input your food image!' }
+                            ]}
+                            style={{ paddingTop: '10px' }}
+                          >
+                            <TextField value={''} type="file" fullWidth />
+                          </Form.Item>
+                        </Box>
+
+                        <Box
+                          display="flex"
+                          flexDirection="row"
+                          justifyContent="center"
+                          alignItems="center"
+                          textAlign="center"
+                        >
+                          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                            <Box
+                              pt={2}
+                              pb={2}
+                              pl={2}
+                              pr={2}
+                              display="flex"
+                              flexDirection="row"
+                              justifyContent="space-between"
+                            >
+                              <Button
+                                sx={{ margin: 1 }}
+                                size="medium"
+                                color="success"
+                                variant="outlined"
+                                startIcon={<DoneOutlineIcon />}
+                                onClick={sendMenu}
+                              >
+                                ثبت
+                              </Button>
+                              <Button
+                                size="medium"
+                                sx={{ margin: 1 }}
+                                type="submit"
+                                color="warning"
+                                startIcon={<AddTaskIcon />}
+                              >
+                                اضافه کردن مجدد
+                              </Button>
+                            </Box>
+                          </Form.Item>
+                        </Box>
+                      </Form>
+                    </Box>
+                  </Grid>
+                </Card>
+              </Grid>
+            </RtlVersion>
+            <Grid item xs={12} md={6}>
+              <Card variant="outlined">
                 <Grid
                   container
                   direction="column"
@@ -552,88 +402,89 @@ const CreateMenu: React.FunctionComponent = () => {
                   alignItems="stretch"
                   spacing={0}
                 >
-                  <Box
-                    pt={2}
-                    pb={2}
-                    pl={2}
-                    pr={2}
-                    display="flex"
-                    flexDirection="row"
-                    justifyContent="space-between"
-                    alignItems="center"
-                  >
-                    <Typography variant="h6">Status Available</Typography>
-                    {/* <FormGroup>
-                      <FormControlLabel
-                        control={
-                          <Switch
-                            sx={{ m: 1 }}
-                            defaultChecked
-                            color="success"
-                          />
-                        }
-                        label=""
-                      />
-                    </FormGroup> */}
-                    <FormGroup>
-                      <FormControlLabel
-                        control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                        label=""
-                      />
-                    </FormGroup>
+                  <Box pt={2} pb={2} pr={2}>
+                    <Typography variant="h4">محصولات</Typography>
                   </Box>
                   <Divider />
-                  <Box
-                    pt={2}
-                    pb={2}
-                    pl={2}
-                    pr={2}
-                    display="flex"
-                    flexDirection="row"
-                    justifyContent="space-between"
-                    alignItems="center"
-                  >
-                    <Typography variant="h6">Discount Active</Typography>
-
-                    {/* <FormGroup>
-                      <FormControlLabel
-                        control={
-                          <Switch
-                            sx={{ m: 1 }}
-                            defaultChecked
-                            color="success"
-                          />
-                        }
-                        label=""
-                      />
-                    </FormGroup> */}
-
-                    <FormGroup>
-                      <FormControlLabel
-                        control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                        label=""
-                      />
-                    </FormGroup>
-                  </Box>
                 </Grid>
-              </Box>
-            </Card>
-          </Grid>
-        </Grid>
+                <Box>
+                  <Swiper
+                    pagination={{
+                      dynamicBullets: true
+                    }}
+                    modules={[Pagination]}
+                    className="mySwiper"
+                  >
+                    <SwiperSlide>
+                      <img src={images['new-home-1.png']} alt="" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <img src={images['new-home-2.png']} alt="" />
+                    </SwiperSlide>{' '}
+                    <SwiperSlide>
+                      <img src={images['new-home-3.png']} alt="" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <img src={images['new-home-4.png']} alt="" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <img src={images['new-home-5.png']} alt="" />
+                    </SwiperSlide>
+                  </Swiper>
 
-        <Box pt={3} pb={3}>
-          <Card>
-            <div style={{ height: 400, width: '100%' }}>
-              <MyDataGrid
-                rows={foodList}
-                columns={columns}
-                pageSize={5}
-                rowsPerPageOptions={[5]}
-                checkboxSelection
-                onCellEditCommit={handleCellEditCommit}
-              />
-            </div>
-          </Card>
+                  <Grid
+                    container
+                    direction="column"
+                    justifyContent="left"
+                    alignItems="stretch"
+                    spacing={0}
+                  >
+                    <Box
+                      pt={2}
+                      pb={2}
+                      pl={2}
+                      pr={2}
+                      display="flex"
+                      flexDirection="row"
+                      justifyContent="space-between"
+                      alignItems="center"
+                    >
+                      <Typography variant="h6">Status Available</Typography>
+
+                      <IosSwitch />
+                    </Box>
+                    <Divider />
+                    <Box
+                      pt={2}
+                      pb={2}
+                      pl={2}
+                      pr={2}
+                      display="flex"
+                      flexDirection="row"
+                      justifyContent="space-between"
+                      alignItems="center"
+                    >
+                      <Typography variant="h6">Discount Active</Typography>
+
+                      <IosSwitch />
+                    </Box>
+                  </Grid>
+                </Box>
+              </Card>
+            </Grid>
+          </Grid>
+
+          <Box pt={3} pb={3}>
+            <Card>
+              <RtlVersion>
+                <Tables
+                  Rows={foodList}
+                  Columns={columns}
+                  onCellEditCommitFn={handleCellEditCommit}
+                />
+              </RtlVersion>
+            </Card>
+          </Box>
         </Box>
 
         <BottomNav

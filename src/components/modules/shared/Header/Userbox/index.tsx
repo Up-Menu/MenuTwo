@@ -43,8 +43,8 @@ const MenuUserBox = styled(Box)(
 
 const UserBoxText = styled(Box)(
   ({ theme }) => `
-        text-align: left;
-        padding-left: ${theme.spacing(1)};
+        text-align: right;
+        padding-right: ${theme.spacing(1)};
 `
 );
 
@@ -106,7 +106,7 @@ function HeaderUserbox() {
           </UserBoxText>
         </Hidden>
         <Hidden smDown>
-          <ExpandMoreTwoToneIcon sx={{ ml: 1 }} />
+          <ExpandMoreTwoToneIcon sx={{ mr: 1 }} />
         </Hidden>
       </UserBoxButton>
       <Popover
@@ -115,11 +115,11 @@ function HeaderUserbox() {
         open={isOpen}
         anchorOrigin={{
           vertical: 'top',
-          horizontal: 'right'
+          horizontal: 'left'
         }}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'right'
+          horizontal: 'left'
         }}
       >
         <MenuUserBox sx={{ minWidth: 210 }} display="flex">
@@ -153,7 +153,7 @@ function HeaderUserbox() {
         <Divider />
         <Box sx={{ m: 1 }}>
           <Button color="error" fullWidth onClick={signOutHandler}>
-            <LockOpenTwoToneIcon sx={{ mr: 1 }} />
+            <LockOpenTwoToneIcon sx={{ ml: 1 }} />
             Sign out
           </Button>
         </Box>

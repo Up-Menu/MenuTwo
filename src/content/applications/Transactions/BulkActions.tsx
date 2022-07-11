@@ -46,7 +46,7 @@ function BulkActions() {
             Bulk actions:
           </Typography>
           <ButtonError
-            sx={{ ml: 1 }}
+            sx={{ mr: 1 }}
             startIcon={<DeleteTwoToneIcon />}
             variant="contained"
           >
@@ -57,7 +57,7 @@ function BulkActions() {
           color="primary"
           onClick={openMenu}
           ref={moreRef}
-          sx={{ ml: 2, p: 1 }}
+          sx={{ mr: 2, p: 1 }}
         >
           <MoreVertTwoToneIcon />
         </IconButton>

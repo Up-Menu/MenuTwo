@@ -27,7 +27,7 @@ const AvatarWrapper = styled(Card)(
     overflow: visible;
     display: inline-block;
     margin-top: -${theme.spacing(9)};
-    margin-left: ${theme.spacing(2)};
+    margin-right: ${theme.spacing(2)};
 
     .MuiAvatar-root {
       width: ${theme.spacing(16)};
@@ -127,7 +127,7 @@ const ProfileCover = ({ user }) => {
           </label>
         </ButtonUploadWrapper>
       </AvatarWrapper>
-      <Box py={2} pl={2} mb={3}>
+      <Box py={2} pr={2} mb={3}>
         <Typography gutterBottom variant="h4">
           {user.name}
         </Typography>

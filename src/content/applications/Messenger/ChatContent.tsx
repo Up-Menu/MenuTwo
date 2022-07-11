@@ -29,7 +29,7 @@ const CardWrapperPrimary = styled(Card)(
       color: ${theme.palette.primary.contrastText};
       padding: ${theme.spacing(2)};
       border-radius: ${theme.general.borderRadiusXl};
-      border-top-right-radius: ${theme.general.borderRadius};
+      border-top-left-radius: ${theme.general.borderRadius};
       max-width: 380px;
       display: inline-flex;
 `
@@ -41,7 +41,7 @@ const CardWrapperSecondary = styled(Card)(
       color: ${theme.colors.alpha.black[100]};
       padding: ${theme.spacing(2)};
       border-radius: ${theme.general.borderRadiusXl};
-      border-top-left-radius: ${theme.general.borderRadius};
+      border-top-right-radius: ${theme.general.borderRadius};
       max-width: 380px;
       display: inline-flex;
 `
@@ -85,7 +85,7 @@ function ChatContent() {
           alignItems="flex-start"
           flexDirection="column"
           justifyContent="flex-start"
-          ml={2}
+          mr={2}
         >
           <CardWrapperSecondary>
             Hi. Can you send me the missing invoices asap?
@@ -100,7 +100,7 @@ function ChatContent() {
           >
             <ScheduleTwoToneIcon
               sx={{
-                mr: 0.5
+                ml: 0.5
               }}
               fontSize="small"
             />
@@ -122,7 +122,7 @@ function ChatContent() {
           alignItems="flex-end"
           flexDirection="column"
           justifyContent="flex-end"
-          mr={2}
+          ml={2}
         >
           <CardWrapperPrimary>
             Yes, I'll email them right now. I'll let you know once the remaining
@@ -138,7 +138,7 @@ function ChatContent() {
           >
             <ScheduleTwoToneIcon
               sx={{
-                mr: 0.5
+                ml: 0.5
               }}
               fontSize="small"
             />
@@ -172,7 +172,7 @@ function ChatContent() {
           alignItems="flex-end"
           flexDirection="column"
           justifyContent="flex-end"
-          mr={2}
+          ml={2}
         >
           <CardWrapperPrimary>Hey! Are you there?</CardWrapperPrimary>
           <CardWrapperPrimary
@@ -192,7 +192,7 @@ function ChatContent() {
           >
             <ScheduleTwoToneIcon
               sx={{
-                mr: 0.5
+                ml: 0.5
               }}
               fontSize="small"
             />
@@ -232,7 +232,7 @@ function ChatContent() {
           alignItems="flex-start"
           flexDirection="column"
           justifyContent="flex-start"
-          ml={2}
+          mr={2}
         >
           <CardWrapperSecondary>Hey there!</CardWrapperSecondary>
           <CardWrapperSecondary
@@ -252,7 +252,7 @@ function ChatContent() {
           >
             <ScheduleTwoToneIcon
               sx={{
-                mr: 0.5
+                ml: 0.5
               }}
               fontSize="small"
             />
@@ -273,7 +273,7 @@ function ChatContent() {
           alignItems="flex-end"
           flexDirection="column"
           justifyContent="flex-end"
-          mr={2}
+          ml={2}
         >
           <CardWrapperPrimary>
             Hello, I just got my Amazon order shipped and I’m very happy about
@@ -296,7 +296,7 @@ function ChatContent() {
           >
             <ScheduleTwoToneIcon
               sx={{
-                mr: 0.5
+                ml: 0.5
               }}
               fontSize="small"
             />

@@ -18,7 +18,7 @@ const DotLegend = styled('span')(
     width: ${theme.spacing(1.5)};
     height: ${theme.spacing(1.5)};
     display: inline-block;
-    margin-right: ${theme.spacing(0.5)};
+    margin-left: ${theme.spacing(0.5)};
     border: ${theme.colors.alpha.white[100]} solid 2px;
 `
 );
@@ -56,7 +56,7 @@ function TeamOverview() {
             <Badge
               anchorOrigin={{
                 vertical: 'bottom',
-                horizontal: 'right'
+                horizontal: 'left'
               }}
               overlap="circular"
               badgeContent={
@@ -83,7 +83,7 @@ function TeamOverview() {
             </Badge>
             <Box
               sx={{
-                ml: 1.5
+                mr: 1.5
               }}
             >
               <Typography variant="h4" noWrap gutterBottom>
@@ -112,7 +112,7 @@ function TeamOverview() {
             <Badge
               anchorOrigin={{
                 vertical: 'bottom',
-                horizontal: 'right'
+                horizontal: 'left'
               }}
               overlap="circular"
               badgeContent={
@@ -139,7 +139,7 @@ function TeamOverview() {
             </Badge>
             <Box
               sx={{
-                ml: 1.5
+                mr: 1.5
               }}
             >
               <Typography variant="h4" noWrap gutterBottom>
@@ -168,7 +168,7 @@ function TeamOverview() {
             <Badge
               anchorOrigin={{
                 vertical: 'bottom',
-                horizontal: 'right'
+                horizontal: 'left'
               }}
               overlap="circular"
               badgeContent={
@@ -195,7 +195,7 @@ function TeamOverview() {
             </Badge>
             <Box
               sx={{
-                ml: 1.5
+                mr: 1.5
               }}
             >
               <Typography variant="h4" noWrap gutterBottom>

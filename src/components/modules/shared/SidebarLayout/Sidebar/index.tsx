@@ -11,8 +11,7 @@ import {
   useTheme,
   Button,
   lighten,
-  darken,
-  Tooltip
+  darken
 } from '@mui/material';
 
 import SidebarMenu from './SidebarMenu';
@@ -43,8 +42,9 @@ function Sidebar() {
             xs: 'none',
             lg: 'inline-block'
           },
+
           position: 'fixed',
-          left: 0,
+          right: 0,
           top: 0,
           background:
             theme.palette.mode === 'dark'

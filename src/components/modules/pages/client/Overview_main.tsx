@@ -21,12 +21,15 @@ import { Link } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Footer from '../../shared/Footer';
 import images from 'src/importer';
-import { ColorModeContext } from 'src/theme/DarkLight';
 import { useTheme } from '@mui/material';
 
 const MyButton = styled(Button)`
+  svg {
+    margin-right: 8px;
+  }
+
   &:hover svg {
-    margin-left: 5px;
+    margin-right: 17px;
   }
 `;
 
@@ -118,6 +121,9 @@ function PricingContent() {
   const MyLink = styled(Link)`
     color: ${theme.palette.mode === 'dark' ? '#9EA4C1' : '#000000d4'};
   `;
+  const ArrowLeftIcon = styled(ArrowForwardIcon)`
+    transform: rotate(180deg);
+  `;
   return (
     <React.Fragment>
       <GlobalStyles
@@ -125,21 +131,18 @@ function PricingContent() {
       />
       <CssBaseline />
 
-      <Box sx={{ pt: 15, pb: 6 }}>
+      <Box sx={{ pt: 15, pb: 6, direction: 'rtl' }}>
         <Container maxWidth="lg" component="main">
           <Grid container spacing={7} alignItems="center">
             <Grid item xs={12} md={4}>
               <Typography variant="h2">
-                Online food ordering system on your own
+                سیستم سفارش آنلاین منو رستوران
               </Typography>
 
               <>
                 <ReactTypingEffect
-                  text={[
-                    'mobile application.',
-                    'Facebook page',
-                    'restaurant website'
-                  ]}
+                  text={['اپلیکیشن موبایل.', 'صفحه فیسبوک', 'وبسایت رستوران']}
+                  eraseSpeed={60}
                   cursorRenderer={(
                     cursor:
                       | string
@@ -151,7 +154,7 @@ function PricingContent() {
                         >
                       | React.ReactFragment
                       | React.ReactPortal
-                  ) => <h1>{cursor}</h1>}
+                  ) => <h1 dir="ltr">{cursor}</h1>}
                   displayTextRenderer={(text: string, i: any) => {
                     return (
                       <h1>
@@ -176,7 +179,7 @@ function PricingContent() {
                 />
               </>
               <Typography variant="h4">
-                No commission costs. Start in 5 minutes.
+                بدون هزینه کمیسیون 5 دقیقه دیگر شروع کنید.
               </Typography>
 
               <Stack direction="row" spacing={2} pt={4}>
@@ -186,19 +189,19 @@ function PricingContent() {
                   size="large"
                   color="primary"
                 >
-                  Start Free Trial
+                  آزمایش رایگان را شروع کنید
                 </Button>
                 <Button
                   size="large"
                   sx={{ padding: 1 }}
-                  startIcon={<SlowMotionVideoIcon />}
+                  endIcon={<SlowMotionVideoIcon />}
                 >
-                  Watch Video
+                  دیدن ویدئو آموزشی
                 </Button>
               </Stack>
 
               <Typography variant="h6" fontSize={10} pt={1}>
-                No credit card required・Free for 7 days・No commitment
+                بدون نیاز به کارت اعتباری・رایگان به مدت 7 روز・بدون تعهد
               </Typography>
             </Grid>
 
@@ -219,7 +222,7 @@ function PricingContent() {
             <Stack>
               <Link to="/component">
                 <MyAlert severity="error">
-                  How UpMenu help selling online during COVID-19
+                  چگونه UpMenu به فروش آنلاین در طول COVID-19 کمک می کند
                 </MyAlert>
               </Link>
             </Stack>
@@ -234,7 +237,7 @@ function PricingContent() {
             justifyContent="center"
           >
             <Typography variant="h2">
-              Used by 7600+ restaurant owners around the world
+              مورد استفاده بیش از 7600 صاحب رستوران در سراسر ایران
             </Typography>
           </Box>
 
@@ -247,8 +250,8 @@ function PricingContent() {
             justifyContent="center"
           >
             <Typography variant="h6" fontSize={14} pt={1}>
-              Take advantage of the restaurant ordering system and earn more
-              just like our customers
+              از سیستم سفارش رستوران بهره ببرید و درآمد بیشتری کسب کنید درست مثل
+              مشتریان ما!
             </Typography>
           </Box>
 
@@ -286,21 +289,21 @@ function PricingContent() {
           <Grid pb={5} container spacing={7} alignItems="center">
             <Grid item xs={12} md={4}>
               <Typography variant="h2">
-                Food online ordering for restaurants
+                سفارش آنلاین غذا برای رستوران ها
               </Typography>
               <p>
-                Launch a commission-free restaurant ordering system and reduce
-                delivery portal costs up to 70%. Decide on fixed costs per month
-                for your restaurant business
+                یک سیستم سفارش رستوران بدون کمیسیون راه اندازی کنید و کاهش دهید
+                پورتال تحویل تا 70 درصد هزینه دارد. در مورد هزینه های ثابت در
+                ماه تصمیم بگیرید برای کسب و کار رستوران شما
               </p>
 
               <Link to="/someLink">
                 <MyButton
                   size="large"
                   sx={{ padding: 1 }}
-                  endIcon={<ArrowForwardIcon />}
+                  endIcon={<ArrowLeftIcon />}
                 >
-                  Learn about online ordering system
+                  با سیستم سفارش آنلاین آشنا شوید
                 </MyButton>
               </Link>
             </Grid>
@@ -315,22 +318,20 @@ function PricingContent() {
               <img src={images['new-home-2.png']} alt="" />
             </Grid>
             <Grid item xs={12} md={6}>
-              <Typography variant="h2">Branded mobile app</Typography>
+              <Typography variant="h2">اپلیکیشن موبایل مارک دار</Typography>
               <p>
-                Increase sales and get up to 20% more online orders
-                <br />
-                thanks to the branded mobile app for restaurants. Make
-                <br />
-                your business available on every device.
+                فروش را افزایش دهید و تا 20٪ سفارشات آنلاین بیشتری دریافت کنید
+                با تشکر از برنامه تلفن همراه مارک برای رستوران ها. بسازید کسب و
+                کار شما در هر دستگاهی موجود است.
               </p>
 
               <Link to="/someLink">
                 <MyButton
                   size="large"
                   sx={{ padding: 1 }}
-                  endIcon={<ArrowForwardIcon />}
+                  endIcon={<ArrowLeftIcon />}
                 >
-                  Learn about mobile app for online ordering systems
+                  با اپلیکیشن موبایل برای سیستم های سفارش آنلاین آشنا شوید
                 </MyButton>
               </Link>
             </Grid>
@@ -338,28 +339,25 @@ function PricingContent() {
 
           <Grid pt={5} pb={5} container spacing={7} alignItems="center">
             <Grid item xs={12} md={5}>
-              <Typography variant="h2">Free restaurant</Typography>
+              <Typography variant="h2">رستوران رایگان</Typography>
 
               <Typography variant="h2" color="#8C7CF0">
-                website builder
+                سازنده وب سایت
               </Typography>
               <p>
-                Build a website for a restaurant ordering using free
-                <br />
-                UpMenu templates in 5 minutes and watch conversions
-                <br />
-                increase up to 40%. No coding skills required. Gather
-                <br />
-                more traffic to your restaurant business webpage.
+                وب سایتی برای سفارش رستوران با استفاده از رایگان بسازید قالب های
+                UpMenu در 5 دقیقه و تماشای تبدیل تا 40 درصد افزایش یابد. بدون
+                نیاز به مهارت کدنویسی جمع آوری ترافیک بیشتر به صفحه وب کسب و کار
+                رستوران شما.
               </p>
 
               <Link to="/someLink">
                 <MyButton
                   size="large"
                   sx={{ padding: 1 }}
-                  endIcon={<ArrowForwardIcon />}
+                  endIcon={<ArrowLeftIcon />}
                 >
-                  Learn about restaurant websites with ordering system
+                  با سایت های رستوران با سیستم سفارش آشنا شوید
                 </MyButton>
               </Link>
             </Grid>
@@ -374,22 +372,20 @@ function PricingContent() {
               <img src={images['new-home-4.png']} alt="" />
             </Grid>
             <Grid item xs={12} md={6}>
-              <Typography variant="h2">Table booking system</Typography>
+              <Typography variant="h2">سیستم رزرو میز</Typography>
               <p>
-                60% of customers would like to book a table online – let
-                <br />
-                them. Forget about abandoned reservations thanks to the
-                <br />
-                pre-ordering option in app. Try it for free.
+                60 درصد از مشتریان مایلند به صورت آنلاین میز رزرو کنند – اجازه
+                دهید آنها با تشکر از رزروهای رها شده را فراموش کنید گزینه
+                پیش‌سفارش در برنامه آن را به صورت رایگان امتحان کنید.
               </p>
 
               <Link to="/someLink">
                 <MyButton
                   size="large"
                   sx={{ padding: 1 }}
-                  endIcon={<ArrowForwardIcon />}
+                  endIcon={<ArrowLeftIcon />}
                 >
-                  Learn about table booking
+                  با رزرو میز آشنا شوید
                 </MyButton>
               </Link>
             </Grid>
@@ -397,28 +393,23 @@ function PricingContent() {
 
           <Grid pt={5} pb={5} container spacing={7} alignItems="center">
             <Grid item xs={12} md={5}>
-              <Typography variant="h2">Loyalty program &</Typography>
-              <Typography variant="h2">reward system</Typography>
+              <Typography variant="h2">برنامه وفاداری و</Typography>
+              <Typography variant="h2">سیستم پاداش</Typography>
 
               <p>
-                Loyal customers spend 67% more when online ordering
-                <br />
-                food than average. Reward them. Forget paper cards with
-                <br />
-                stamps. Go digital, both online with a dedicated app or
-                <br />
-                website, and at a restaurant and sell more food orders
-                <br />
-                online.
+                مشتریان وفادار 67 درصد بیشتر هنگام سفارش آنلاین خرج می کنند غذا
+                از حد متوسط به آنها پاداش دهید. کارت های کاغذی را با تمبرها
+                دیجیتالی شوید، هم آنلاین با یک برنامه اختصاصی یا وب سایت، و در
+                یک رستوران و فروش بیشتر سفارشات غذا برخط.
               </p>
 
               <Link to="/someLink">
                 <MyButton
                   size="large"
                   sx={{ padding: 1 }}
-                  endIcon={<ArrowForwardIcon />}
+                  endIcon={<ArrowLeftIcon />}
                 >
-                  Learn about loyalty programs
+                  با برنامه های وفاداری آشنا شوید
                 </MyButton>
               </Link>
             </Grid>

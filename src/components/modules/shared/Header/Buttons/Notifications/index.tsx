@@ -29,7 +29,7 @@ const NotificationsBadge = styled(Badge)(
         &::after {
             position: absolute;
             top: 0;
-            left: 0;
+            right: 0;
             width: 100%;
             height: 100%;
             border-radius: 50%;
@@ -60,7 +60,7 @@ function HeaderNotifications() {
             badgeContent={1}
             anchorOrigin={{
               vertical: 'top',
-              horizontal: 'right'
+              horizontal: 'left'
             }}
           >
             <NotificationsActiveTwoToneIcon />
@@ -73,11 +73,11 @@ function HeaderNotifications() {
         open={isOpen}
         anchorOrigin={{
           vertical: 'top',
-          horizontal: 'right'
+          horizontal: 'left'
         }}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'right'
+          horizontal: 'left'
         }}
       >
         <Box

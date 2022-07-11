@@ -39,7 +39,7 @@ const HeaderWrapper = styled(Box)(
           height: ${theme.header.height};
           color: ${theme.header.textColor};
           padding: ${theme.spacing(0, 2)};
-          right: 0;
+          left: 0;
           z-index: 6;
           background-color: ${alpha(theme.header.background, 0.95)};
           backdrop-filter: blur(3px);
@@ -64,8 +64,8 @@ const MenuUserBox = styled(Box)(
 
 const UserBoxText = styled(Box)(
   ({ theme }) => `
-          text-align: left;
-          padding-left: ${theme.spacing(1)};
+          text-align: right;
+          padding-right: ${theme.spacing(1)};
   `
 );
 
@@ -135,13 +135,13 @@ const Overview_nav = () => {
           <HeaderMenu />
         </Stack>
         <Box display="flex" alignItems="center">
-          <Box sx={{ mr: 1 }}>{/* dark mode button */}</Box>
-          <Box sx={{ mr: 1 }}>
+          <Box sx={{ ml: 1 }}>{/* dark mode button */}</Box>
+          <Box sx={{ ml: 1 }}>
             <HeaderSearch />
           </Box>
 
           <IconButton
-            sx={{ ml: 1 }}
+            sx={{ mr: 1 }}
             onClick={colorMode.toggleColorMode}
             color="inherit"
           >
@@ -160,7 +160,7 @@ const Overview_nav = () => {
               </UserBoxText>
             </Hidden>
             <Hidden smDown>
-              <ExpandMoreTwoToneIcon sx={{ ml: 1 }} />
+              <ExpandMoreTwoToneIcon sx={{ mr: 1 }} />
             </Hidden>
           </UserBoxButton>
           <Popover
@@ -169,11 +169,11 @@ const Overview_nav = () => {
             open={isOpen}
             anchorOrigin={{
               vertical: 'top',
-              horizontal: 'right'
+              horizontal: 'left'
             }}
             transformOrigin={{
               vertical: 'top',
-              horizontal: 'right'
+              horizontal: 'left'
             }}
           >
             <MenuUserBox sx={{ minWidth: 210 }} display="flex">
@@ -215,7 +215,7 @@ const Overview_nav = () => {
                     </ListItem>
                   </List>
                   <Button color="primary" fullWidth onClick={signOutHandler}>
-                    <LockOpenTwoToneIcon sx={{ mr: 1 }} />
+                    <LockOpenTwoToneIcon sx={{ ml: 1 }} />
                     Sign out
                   </Button>
                 </>

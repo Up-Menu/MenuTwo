@@ -23,7 +23,6 @@ const Scrollbar: FC<ScrollbarProps> = ({ className, children, ...rest }) => {
               background: `${theme.colors.alpha.black[10]}`,
               borderRadius: `${theme.general.borderRadiusLg}`,
               transition: `${theme.transitions.create(['background'])}`,
-
               '&:hover': {
                 background: `${theme.colors.alpha.black[30]}`
               }

@@ -40,8 +40,8 @@ function EditProfileTab() {
           <CardContent sx={{ p: 4 }}>
             <Typography variant="subtitle2">
               <Grid container spacing={0}>
-                <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'right' }}>
-                  <Box pr={3} pb={2}>
+                <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'left' }}>
+                  <Box pl={3} pb={2}>
                     Name:
                   </Box>
                 </Grid>
@@ -50,8 +50,8 @@ function EditProfileTab() {
                     <b>Craig Donin</b>
                   </Text>
                 </Grid>
-                <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'right' }}>
-                  <Box pr={3} pb={2}>
+                <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'left' }}>
+                  <Box pl={3} pb={2}>
                     Date of birth:
                   </Box>
                 </Grid>
@@ -60,8 +60,8 @@ function EditProfileTab() {
                     <b>15 March 1977</b>
                   </Text>
                 </Grid>
-                <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'right' }}>
-                  <Box pr={3} pb={2}>
+                <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'left' }}>
+                  <Box pl={3} pb={2}>
                     Address:
                   </Box>
                 </Grid>
@@ -102,8 +102,8 @@ function EditProfileTab() {
           <CardContent sx={{ p: 4 }}>
             <Typography variant="subtitle2">
               <Grid container spacing={0}>
-                <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'right' }}>
-                  <Box pr={3} pb={2}>
+                <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'left' }}>
+                  <Box pl={3} pb={2}>
                     Language:
                   </Box>
                 </Grid>
@@ -112,8 +112,8 @@ function EditProfileTab() {
                     <b>English (US)</b>
                   </Text>
                 </Grid>
-                <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'right' }}>
-                  <Box pr={3} pb={2}>
+                <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'left' }}>
+                  <Box pl={3} pb={2}>
                     Timezone:
                   </Box>
                 </Grid>
@@ -122,8 +122,8 @@ function EditProfileTab() {
                     <b>GMT +2</b>
                   </Text>
                 </Grid>
-                <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'right' }}>
-                  <Box pr={3} pb={2}>
+                <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'left' }}>
+                  <Box pl={3} pb={2}>
                     Account status:
                   </Box>
                 </Grid>
@@ -162,8 +162,8 @@ function EditProfileTab() {
           <CardContent sx={{ p: 4 }}>
             <Typography variant="subtitle2">
               <Grid container spacing={0}>
-                <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'right' }}>
-                  <Box pr={3} pb={2}>
+                <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'left' }}>
+                  <Box pl={3} pb={2}>
                     Email ID:
                   </Box>
                 </Grid>
@@ -171,12 +171,12 @@ function EditProfileTab() {
                   <Text color="black">
                     <b>example@demo.com</b>
                   </Text>
-                  <Box pl={1} component="span">
+                  <Box pr={1} component="span">
                     <Label color="success">Primary</Label>
                   </Box>
                 </Grid>
-                <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'right' }}>
-                  <Box pr={3} pb={2}>
+                <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'left' }}>
+                  <Box pl={3} pb={2}>
                     Email ID:
                   </Box>
                 </Grid>

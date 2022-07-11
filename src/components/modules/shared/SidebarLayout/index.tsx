@@ -18,7 +18,6 @@ const SidebarLayout: FC<SidebarLayoutProps> = () => {
         sx={{
           flex: 1,
           height: '100%',
-
           '.MuiPageTitle-wrapper': {
             background:
               theme.palette.mode === 'light'
@@ -51,7 +50,7 @@ const SidebarLayout: FC<SidebarLayoutProps> = () => {
             flex: 1,
             pt: `${theme.header.height}`,
             [theme.breakpoints.up('lg')]: {
-              ml: `${theme.sidebar.width}`
+              mr: `${theme.sidebar.width}`
             }
           }}
         >

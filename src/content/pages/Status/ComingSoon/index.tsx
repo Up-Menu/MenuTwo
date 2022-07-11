@@ -53,7 +53,7 @@ const OutlinedInputWrapper = styled(OutlinedInput)(
 
 const ButtonNotify = styled(Button)(
   ({ theme }) => `
-    margin-right: -${theme.spacing(1)};
+    margin-left: -${theme.spacing(1)};
 `
 );
 

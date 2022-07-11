@@ -30,7 +30,7 @@ const Sidebar = styled(Box)(
   ({ theme }) => `
         width: 300px;
         background: ${theme.colors.alpha.white[100]};
-        border-right: ${theme.colors.alpha.black[10]} solid 1px;
+        border-left: ${theme.colors.alpha.black[10]} solid 1px;
 `
 );
 
@@ -118,7 +118,7 @@ function ApplicationsMessenger() {
             <IconButtonToggle
               sx={{
                 display: { lg: 'none', xs: 'flex' },
-                mr: 2
+                ml: 2
               }}
               color="primary"
               onClick={handleDrawerToggle}

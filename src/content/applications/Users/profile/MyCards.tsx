@@ -33,7 +33,7 @@ const CardLogo = styled('img')(
       border: 1px solid ${theme.colors.alpha.black[30]};
       border-radius: ${theme.general.borderRadius};
       padding: ${theme.spacing(1)};
-      margin-right: ${theme.spacing(2)};
+      margin-left: ${theme.spacing(2)};
       background: ${theme.colors.alpha.white[100]};
 `
 );
@@ -93,7 +93,7 @@ function MyCards() {
     setSelectedValue(event.target.value);
   };
 
-  const handleDelete = () => { };
+  const handleDelete = () => {};
 
   return (
     <Card>

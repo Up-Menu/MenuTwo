@@ -61,7 +61,7 @@ function Feed() {
             <Grid key={_feed.name} item xs={12} sm={6} lg={4}>
               <Box p={3} display="flex" alignItems="flex-start">
                 <Avatar src={_feed.avatar} />
-                <Box pl={2}>
+                <Box pr={2}>
                   <Typography gutterBottom variant="subtitle2">
                     {_feed.company}
                   </Typography>

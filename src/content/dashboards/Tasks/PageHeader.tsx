@@ -17,7 +17,7 @@ const AvatarPageTitle = styled(Avatar)(
       width: ${theme.spacing(8)};
       height: ${theme.spacing(8)};
       color: ${theme.colors.primary.main};
-      margin-right: ${theme.spacing(2)};
+      margin-left: ${theme.spacing(2)};
       background: ${
         theme.palette.mode === 'dark'
           ? theme.colors.alpha.trueWhite[10]

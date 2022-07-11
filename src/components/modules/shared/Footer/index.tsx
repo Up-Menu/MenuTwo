@@ -14,7 +14,7 @@ function Footer() {
         pb={4}
         display={{ xs: 'block', md: 'flex' }}
         alignItems="center"
-        textAlign={{ xs: 'center', md: 'left' }}
+        textAlign={{ xs: 'center', md: 'right' }}
         justifyContent="space-between"
       >
         <Box>

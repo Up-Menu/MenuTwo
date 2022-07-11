@@ -47,14 +47,14 @@ const TypographySecondary = styled(Typography)(
 const LinearProgressWrapper = styled(LinearProgress)(
   ({ theme }) => `
         flex-grow: 1;
-        margin-right: ${theme.spacing(1)};
+        margin-left: ${theme.spacing(1)};
         height: 10px;
         background-color: ${theme.colors.error.main};
 
         .MuiLinearProgress-barColorPrimary {
           background-color: ${theme.colors.alpha.white[100]};
-          border-top-right-radius: ${theme.general.borderRadius};
-          border-bottom-right-radius: ${theme.general.borderRadius};
+          border-top-left-radius: ${theme.general.borderRadius};
+          border-bottom-left-radius: ${theme.general.borderRadius};
         }
 `
 );
@@ -91,7 +91,7 @@ function Performance() {
         >
           <AvatarSuccess
             sx={{
-              mr: 2
+              ml: 2
             }}
             variant="rounded"
           >
@@ -114,7 +114,7 @@ function Performance() {
         >
           <AvatarError
             sx={{
-              mr: 2
+              ml: 2
             }}
             variant="rounded"
           >

@@ -17,17 +17,17 @@ import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
 import HeaderButtons from './Buttons';
 import HeaderUserbox from './Userbox';
 import HeaderMenu from './Menu';
-import React from 'react';
-import { ColorModeContext } from 'src/theme/DarkLight';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
+// import React from 'react';
+// import { ColorModeContext } from 'src/theme/DarkLight';
+// import Brightness4Icon from '@mui/icons-material/Brightness4';
+// import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
         height: ${theme.header.height};
         color: ${theme.header.textColor};
         padding: ${theme.spacing(0, 2)};
-        right: 0;
+        left: 0;
         z-index: 6;
         background-color: ${alpha(theme.header.background, 0.95)};
         backdrop-filter: blur(3px);
@@ -35,7 +35,7 @@ const HeaderWrapper = styled(Box)(
         justify-content: space-between;
         width: 100%;
         @media (min-width: ${theme.breakpoints.values.lg}px) {
-            left: ${theme.sidebar.width};
+            right: ${theme.sidebar.width};
             width: auto;
         }
 `
@@ -43,9 +43,8 @@ const HeaderWrapper = styled(Box)(
 
 function Header() {
   const { sidebarToggle, toggleSidebar } = useContext(SidebarContext);
-  const theme = useTheme();
-
-  const colorMode = React.useContext(ColorModeContext);
+  // const theme = useTheme();
+  // const colorMode = React.useContext(ColorModeContext);
 
   return (
     <HeaderWrapper
@@ -53,7 +52,8 @@ function Header() {
       alignItems="center"
       sx={{
         bgcolor: 'background.default',
-        color: 'text.primary'
+        color: 'text.primary',
+        direction: 'rtl'
       }}
     >
       <Stack

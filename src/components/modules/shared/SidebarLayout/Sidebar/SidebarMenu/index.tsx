@@ -14,24 +14,7 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import MmsTwoToneIcon from '@mui/icons-material/MmsTwoTone';
 import TableChartTwoToneIcon from '@mui/icons-material/TableChartTwoTone';
 import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
-// import DesignServicesTwoToneIcon from '@mui/icons-material/DesignServicesTwoTone';
-// import BrightnessLowTwoToneIcon from '@mui/icons-material/BrightnessLowTwoTone';
-// import BallotTwoToneIcon from '@mui/icons-material/BallotTwoTone';
-// import BeachAccessTwoToneIcon from '@mui/icons-material/BeachAccessTwoTone';
-// import EmojiEventsTwoToneIcon from '@mui/icons-material/EmojiEventsTwoTone';
-// import FilterVintageTwoToneIcon from '@mui/icons-material/FilterVintageTwoTone';
-// import HowToVoteTwoToneIcon from '@mui/icons-material/HowToVoteTwoTone';
-// import LocalPharmacyTwoToneIcon from '@mui/icons-material/LocalPharmacyTwoTone';
-// import RedeemTwoToneIcon from '@mui/icons-material/RedeemTwoTone';
-// import SettingsTwoToneIcon from '@mui/icons-material/SettingsTwoTone';
-// import TrafficTwoToneIcon from '@mui/icons-material/TrafficTwoTone';
-// import CheckBoxTwoToneIcon from '@mui/icons-material/CheckBoxTwoTone';
-// import ChromeReaderModeTwoToneIcon from '@mui/icons-material/ChromeReaderModeTwoTone';
-// import WorkspacePremiumTwoToneIcon from '@mui/icons-material/WorkspacePremiumTwoTone';
-// import CameraFrontTwoToneIcon from '@mui/icons-material/CameraFrontTwoTone';
-// import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
-
 import LogoutIcon from '@mui/icons-material/Logout';
 import ArticleIcon from '@mui/icons-material/Article';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
@@ -39,7 +22,7 @@ import BeenhereIcon from '@mui/icons-material/Beenhere';
 import MapIcon from '@mui/icons-material/Map';
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
-import ContactlessIcon from '@mui/icons-material/Contactless';
+// import ContactlessIcon from '@mui/icons-material/Contactless';
 
 import DisplaySettingsTwoToneIcon from '@mui/icons-material/DisplaySettingsTwoTone';
 import CircularStatic from 'src/components/modules/pages/admin/progress/ProgressShow';
@@ -67,6 +50,7 @@ const MenuWrapper = styled(Box)(
 
 const SubMenuWrapper = styled(Box)(
   ({ theme }) => `
+  
     .MuiList-root {
 
       .MuiListItem-root {
@@ -74,7 +58,7 @@ const SubMenuWrapper = styled(Box)(
 
         .MuiBadge-root {
           position: absolute;
-          right: ${theme.spacing(3.2)};
+          left: ${theme.spacing(3.2)};
 
           .MuiBadge-standard {
             background: ${theme.colors.primary.main};
@@ -91,9 +75,10 @@ const SubMenuWrapper = styled(Box)(
           background-color: transparent;
           width: 100%;
           justify-content: flex-start;
+          direction: rtl;
           padding: ${theme.spacing(1.2, 3)};
 
-          .MuiButton-startIcon,
+          .MuiButton-endIcon,
           .MuiButton-endIcon {
             transition: ${theme.transitions.create(['color'])};
 
@@ -103,15 +88,15 @@ const SubMenuWrapper = styled(Box)(
             }
           }
 
-          .MuiButton-startIcon {
+          .MuiButton-endIcon {
             // color: ${theme.colors.alpha.trueWhite[30]};
             font-size: ${theme.typography.pxToRem(20)};
-            margin-right: ${theme.spacing(1)};
+            margin-left: ${theme.spacing(1)};
           }
           
           .MuiButton-endIcon {
             // color: ${theme.colors.alpha.trueWhite[50]};
-            margin-left: auto;
+            margin-right: auto;
             opacity: .8;
             font-size: ${theme.typography.pxToRem(20)};
           }
@@ -121,7 +106,7 @@ const SubMenuWrapper = styled(Box)(
             background-color: ${alpha(theme.colors.alpha.trueWhite[100], 0.06)};
             color: ${theme.colors.alpha.trueWhite[100]};
 
-            .MuiButton-startIcon,
+            .MuiButton-endIcon,
             .MuiButton-endIcon {
               color: ${theme.colors.alpha.trueWhite[100]};
             }
@@ -133,7 +118,7 @@ const SubMenuWrapper = styled(Box)(
 
           .MuiBadge-root {
             position: absolute;
-            right: ${theme.spacing(7)};
+            left: ${theme.spacing(7)};
           }
         }
 
@@ -145,13 +130,14 @@ const SubMenuWrapper = styled(Box)(
           }
 
           .MuiListItem-root {
+            
             padding: 1px 0;
 
             .MuiButton-root {
               padding: ${theme.spacing(0.8, 3)};
 
               .MuiBadge-root {
-                right: ${theme.spacing(3.2)};
+                left: ${theme.spacing(3.2)};
               }
 
               &:before {
@@ -167,7 +153,7 @@ const SubMenuWrapper = styled(Box)(
                 transform: scale(0);
                 transform-origin: center;
                 border-radius: 20px;
-                margin-right: ${theme.spacing(1.8)};
+                margin-left: ${theme.spacing(1.8)};
               }
 
               &.active,
@@ -201,10 +187,10 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/overview"
-                  startIcon={<LogoutIcon />}
+                  endIcon={<LogoutIcon />}
                   color="error"
                 >
-                  Logout
+                  خروج
                 </Button>
               </ListItem>
             </List>
@@ -214,7 +200,7 @@ function SidebarMenu() {
           component="div"
           subheader={
             <ListSubheader component="div" disableSticky>
-              Dashboards
+              داشبورد
             </ListSubheader>
           }
         >
@@ -226,9 +212,9 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/dashboards/tasks"
-                  startIcon={<CircularStatic />}
+                  endIcon={<CircularStatic />}
                 >
-                  Progress
+                  نوار پیشرفت
                 </Button>
               </ListItem>
               {/* <ListItem component="div">
@@ -237,7 +223,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/dashboards/messenger"
-                  startIcon={<ContactlessIcon />}
+                  endIcon={<ContactlessIcon />}
                 >
                   Contact Us
                 </Button>
@@ -250,7 +236,7 @@ function SidebarMenu() {
           component="div"
           subheader={
             <ListSubheader component="div" disableSticky>
-              Menu
+              منو
             </ListSubheader>
           }
         >
@@ -262,9 +248,9 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/dashboards/createRestaurant"
-                  startIcon={<RestaurantIcon />}
+                  endIcon={<RestaurantIcon />}
                 >
-                  Create Restaurant
+                  ساخت رستوران
                 </Button>
               </ListItem>
               <ListItem component="div">
@@ -273,9 +259,9 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/dashboards/themes"
-                  startIcon={<AutoFixHighIcon />}
+                  endIcon={<AutoFixHighIcon />}
                 >
-                  Theme Selection
+                  انتخاب مضمون
                 </Button>
               </ListItem>
 
@@ -285,9 +271,9 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/dashboards/createMenu"
-                  startIcon={<ArticleIcon />}
+                  endIcon={<ArticleIcon />}
                 >
-                  Add Menu Items
+                  ساخت منو
                 </Button>
               </ListItem>
               <ListItem component="div">
@@ -296,9 +282,9 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/dashboards/orders"
-                  startIcon={<BeenhereIcon />}
+                  endIcon={<BeenhereIcon />}
                 >
-                  Select Order
+                  نوع تحویل
                 </Button>
               </ListItem>
               <ListItem component="div">
@@ -307,9 +293,9 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/dashboards/tables"
-                  startIcon={<TableRestaurantIcon />}
+                  endIcon={<TableRestaurantIcon />}
                 >
-                  Table management
+                  ساخت میز
                 </Button>
               </ListItem>
               <ListItem component="div">
@@ -318,9 +304,9 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/dashboards/delivery"
-                  startIcon={<MapIcon />}
+                  endIcon={<MapIcon />}
                 >
-                  Add Delivery Zone
+                  منطقه ارسال غذا
                 </Button>
               </ListItem>
 
@@ -330,9 +316,9 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/dashboards/testOrder"
-                  startIcon={<MmsTwoToneIcon />}
+                  endIcon={<MmsTwoToneIcon />}
                 >
-                  Test Orders
+                  تست سامانه
                 </Button>
               </ListItem>
               <ListItem component="div">
@@ -341,9 +327,9 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/dashboards/mobileApp"
-                  startIcon={<PhoneIphoneIcon />}
+                  endIcon={<PhoneIphoneIcon />}
                 >
-                  Config Mobile App
+                  تنظیمات تلفن همراه
                 </Button>
               </ListItem>
               <ListItem component="div">
@@ -353,9 +339,9 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/dashboards/finish"
-                  startIcon={<DownloadDoneIcon />}
+                  endIcon={<DownloadDoneIcon />}
                 >
-                  Finish Installation
+                  اتمام نصب
                 </Button>
               </ListItem>
             </List>
@@ -378,7 +364,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/management/transactions"
-                  startIcon={<TableChartTwoToneIcon />}
+                  endIcon={<TableChartTwoToneIcon />}
                 >
                   Transactions List
                 </Button>
@@ -402,7 +388,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/management/profile/details"
-                  startIcon={<AccountCircleTwoToneIcon />}
+                  endIcon={<AccountCircleTwoToneIcon />}
                 >
                   Profile
                 </Button>
@@ -413,7 +399,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/management/profile/settings"
-                  startIcon={<DisplaySettingsTwoToneIcon />}
+                  endIcon={<DisplaySettingsTwoToneIcon />}
                 >
                   Setting
                 </Button>
@@ -437,7 +423,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/components/buttons"
-                  startIcon={<BallotTwoToneIcon />}
+                  endIcon={<BallotTwoToneIcon />}
                 >
                   Buttons
                 </Button>
@@ -448,7 +434,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/components/modals"
-                  startIcon={<BeachAccessTwoToneIcon />}
+                  endIcon={<BeachAccessTwoToneIcon />}
                 >
                   Modals
                 </Button>
@@ -459,7 +445,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/components/accordions"
-                  startIcon={<EmojiEventsTwoToneIcon />}
+                  endIcon={<EmojiEventsTwoToneIcon />}
                 >
                   Accordions
                 </Button>
@@ -470,7 +456,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/components/tabs"
-                  startIcon={<FilterVintageTwoToneIcon />}
+                  endIcon={<FilterVintageTwoToneIcon />}
                 >
                   Tabs
                 </Button>
@@ -481,7 +467,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/components/badges"
-                  startIcon={<HowToVoteTwoToneIcon />}
+                  endIcon={<HowToVoteTwoToneIcon />}
                 >
                   Badges
                 </Button>
@@ -492,7 +478,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/components/tooltips"
-                  startIcon={<LocalPharmacyTwoToneIcon />}
+                  endIcon={<LocalPharmacyTwoToneIcon />}
                 >
                   Tooltips
                 </Button>
@@ -503,7 +489,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/components/avatars"
-                  startIcon={<RedeemTwoToneIcon />}
+                  endIcon={<RedeemTwoToneIcon />}
                 >
                   Avatars
                 </Button>
@@ -514,7 +500,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/components/cards"
-                  startIcon={<SettingsTwoToneIcon />}
+                  endIcon={<SettingsTwoToneIcon />}
                 >
                   Cards
                 </Button>
@@ -525,7 +511,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/components/forms"
-                  startIcon={<TrafficTwoToneIcon />}
+                  endIcon={<TrafficTwoToneIcon />}
                 >
                   Forms
                 </Button>
@@ -549,7 +535,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/status/404"
-                  startIcon={<CheckBoxTwoToneIcon />}
+                  endIcon={<CheckBoxTwoToneIcon />}
                 >
                   Error 404
                 </Button>
@@ -560,7 +546,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/status/500"
-                  startIcon={<CameraFrontTwoToneIcon />}
+                  endIcon={<CameraFrontTwoToneIcon />}
                 >
                   Error 500
                 </Button>
@@ -571,7 +557,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/status/coming-soon"
-                  startIcon={<ChromeReaderModeTwoToneIcon />}
+                  endIcon={<ChromeReaderModeTwoToneIcon />}
                 >
                   Coming Soon
                 </Button>
@@ -582,7 +568,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/status/maintenance"
-                  startIcon={<WorkspacePremiumTwoToneIcon />}
+                  endIcon={<WorkspacePremiumTwoToneIcon />}
                 >
                   Maintenance
                 </Button>

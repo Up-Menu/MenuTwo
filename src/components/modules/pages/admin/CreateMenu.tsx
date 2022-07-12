@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from 'react';
 
-import BottomNav from '../../shared/BottomNav';
 
 import {
   Alert,
@@ -43,17 +42,21 @@ import PopUp from '../../UI/PopUp';
 import TitleText from '../../UI/TitleText';
 import RtlVersion from '../../UI/RtlVersion';
 import IosSwitch from '../../UI/IosSwitch';
+import BottomNav from '../../shared/BottomNav';
+import { useTypedDispatch } from 'src/store'
+
 
 // import icons
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import AddTaskIcon from '@mui/icons-material/AddTask';
+import { userCreateMenu } from '../../../../store/actions';
 
 const CreateMenu: React.FunctionComponent = () => {
   const [foodList, setFoodList] = useState([]);
   const [open, setOpen] = useState(false);
   const [ID, setID] = useState(0);
   const progressContext = useContext(ProgressContext);
-  // const dispatch = useTypedDispatch();
+  const dispatch = useTypedDispatch();
   const [form] = Form.useForm();
 
   const MyAlert = styled(Alert)`
@@ -79,8 +82,8 @@ const CreateMenu: React.FunctionComponent = () => {
 
   const sendMenu = () => {
     progressContext.onMenu(true);
-    // dispatch(userCreateMenu(foodList, (notification) => notification));
-    console.log(foodList);
+    dispatch(userCreateMenu(foodList, (notification) => notification));
+    // console.log(foodList);
   };
 
   const onFinishFailed = (errorInfo: any) => {

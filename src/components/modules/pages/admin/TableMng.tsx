@@ -30,6 +30,10 @@ import Tables from '../../UI/Table';
 import PopUp from '../../UI/PopUp';
 import TitleText from '../../UI/TitleText';
 import RtlVersion from '../../UI/RtlVersion';
+import { userCreateTable } from '../../../../store/actions';
+import { useTypedDispatch } from 'src/store';
+import { log } from 'util';
+
 
 const CreateTable = () => {
   const progressContext = useContext(ProgressContext);
@@ -37,6 +41,7 @@ const CreateTable = () => {
   const [qrText, setQRText] = useState('');
   const [open, setOpen] = useState(false);
   const [ID, setID] = useState(0);
+  const dispatch = useTypedDispatch();
   const [form] = Form.useForm();
 
   //! call on form submit
@@ -51,8 +56,9 @@ const CreateTable = () => {
   };
 
   const sendTable = () => {
-    console.log(tableList);
     progressContext.onTable(true);
+    dispatch(userCreateTable(tableList, (notification) => notification))
+    // console.log(tableList);
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -79,8 +85,8 @@ const CreateTable = () => {
         };
 
         return (
-          <Box display="flex" flexDirection="row">
-            <Tooltip title="Delete Order" arrow>
+          <Box display='flex' flexDirection='row'>
+            <Tooltip title='Delete Order' arrow>
               <IconButton
                 sx={{
                   '&:hover': {
@@ -89,10 +95,10 @@ const CreateTable = () => {
                   color: '#FF1943'
                 }}
                 onClick={deleteHandler}
-                color="error"
-                size="small"
+                color='error'
+                size='small'
               >
-                <DeleteSweepIcon fontSize="small" />
+                <DeleteSweepIcon fontSize='small' />
               </IconButton>
             </Tooltip>
           </Box>
@@ -127,7 +133,7 @@ const CreateTable = () => {
   };
   return (
     <>
-      <TitleText header="مدیریت میز" />
+      <TitleText header='مدیریت میز' />
       <Toaster />
       <PopUp
         setOpen={setOpen}
@@ -139,41 +145,41 @@ const CreateTable = () => {
       />
 
       <Container>
-        <Card variant="outlined">
+        <Card variant='outlined'>
           <Box p={2} sx={{ direction: 'rtl' }}>
             <Grid container spacing={2}>
               <RtlVersion>
                 <Grid item xs={12} md={5}>
                   <Grid
                     container
-                    direction="column"
-                    justifyContent="left"
-                    alignItems="stretch"
+                    direction='column'
+                    justifyContent='left'
+                    alignItems='stretch'
                     spacing={0}
                   >
                     <Box pt={2} pb={2} pl={2}>
-                      <Typography variant="h4">ساخت میز</Typography>
+                      <Typography variant='h4'>ساخت میز</Typography>
                     </Box>
                     <Divider />
                     <Box pt={3} pb={2} pl={2} pr={2}>
                       <Form
                         form={form}
-                        name="control-hooks"
+                        name='control-hooks'
                         wrapperCol={{ span: 12 }}
                         initialValues={{ remember: true }}
                         onFinish={onFinish}
                         onFinishFailed={onFinishFailed}
-                        autoComplete="on"
+                        autoComplete='on'
                       >
                         <Box
-                          display="flex"
-                          flexDirection="column"
-                          textAlign="justify"
+                          display='flex'
+                          flexDirection='column'
+                          textAlign='justify'
                           pt={1}
                           pb={1}
                         >
                           <Form.Item
-                            name="tableName"
+                            name='tableName'
                             rules={[
                               { message: 'Please input your table name!' }
                             ]}
@@ -182,19 +188,19 @@ const CreateTable = () => {
                             <TextField
                               onChange={qrSend}
                               value={''}
-                              label="نام میز"
-                              type="text"
+                              label='نام میز'
+                              type='text'
                               fullWidth
                             />
                           </Form.Item>
                         </Box>
 
                         <Box
-                          display="flex"
-                          flexDirection="row"
-                          justifyContent="center"
-                          alignItems="center"
-                          textAlign="center"
+                          display='flex'
+                          flexDirection='row'
+                          justifyContent='center'
+                          alignItems='center'
+                          textAlign='center'
                         >
                           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                             <Box
@@ -202,26 +208,26 @@ const CreateTable = () => {
                               pb={2}
                               pl={2}
                               pr={2}
-                              display="flex"
-                              flexDirection="row"
-                              flexWrap="wrap"
-                              justifyContent="space-between"
+                              display='flex'
+                              flexDirection='row'
+                              flexWrap='wrap'
+                              justifyContent='space-between'
                             >
                               <Button
                                 sx={{ margin: 1 }}
-                                size="medium"
-                                color="success"
-                                variant="outlined"
+                                size='medium'
+                                color='success'
+                                variant='outlined'
                                 endIcon={<DoneOutlineIcon />}
                                 onClick={sendTable}
                               >
                                 ثبت
                               </Button>
                               <Button
-                                size="medium"
+                                size='medium'
                                 sx={{ margin: 1 }}
-                                type="submit"
-                                color="warning"
+                                type='submit'
+                                color='warning'
                                 endIcon={<AddTaskIcon />}
                               >
                                 اضافه کردن مجدد
@@ -231,9 +237,9 @@ const CreateTable = () => {
                         </Box>
 
                         <Box
-                          display="flex"
-                          flexDirection="row"
-                          justifyContent="center"
+                          display='flex'
+                          flexDirection='row'
+                          justifyContent='center'
                         >
                           <Card>
                             <Box p={1}>
@@ -263,13 +269,13 @@ const CreateTable = () => {
           </Box>
         </Card>
         <BottomNav
-          className="pt-5"
+          className='pt-5'
           nextStep={true}
           preStep={true}
-          forLink="orders"
-          backLink="delivery"
-          forText="Chose orders"
-          backText="Delivery zone"
+          forLink='orders'
+          backLink='delivery'
+          forText='Chose orders'
+          backText='Delivery zone'
         />
       </Container>
       <Footer />

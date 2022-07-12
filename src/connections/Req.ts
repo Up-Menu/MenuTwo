@@ -19,6 +19,16 @@ export const LoginReq = (value: any, fn: (arg0: any) => void) => {
         .catch(err => console.log(err))
 }
 
+
+export const CreateTableReq = (value: any, fn: (arg0: any) => void) => {
+  Api
+    .post('TableManagment/CreateTable', value, '')
+    .then(response => {
+      fn([response.data.status, response.data.data])
+    })
+    .catch(err => console.log(err))
+}
+
 export const CreateMenuReq = (value: any, fn: (arg0: any) => void) => {
     Api
         .post('Menu/CreateMenu', value, '')

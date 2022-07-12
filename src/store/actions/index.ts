@@ -1,4 +1,11 @@
-import { SignInReq, LoginReq, GoogleReq, CreateMenuReq, CreateRestaurantReq } from './../../connections/Req'
+import {
+    SignInReq,
+    LoginReq,
+    GoogleReq,
+    CreateMenuReq,
+    CreateRestaurantReq,
+    CreateTableReq
+} from '../../connections/Req';
 import { nanoid } from '@reduxjs/toolkit'
 import timeoutPromise from '../helper/TimeOut'
 import toast from 'react-hot-toast'
@@ -107,6 +114,22 @@ export const userCreateMenu = (payload: any, fn: (arg0: any) => void) => async (
 }
 
 
+// CreateTable Actions
+export const userCreateTable = (payload: any, fn: (arg0: any) => void) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
+    CreateTableReq(payload, (server_response) => {
+        if (server_response[0] == "Success") {
+            fn(toast.success(server_response[1]))
+            dispatch({
+                type: "USER_CREATE_TABLE",
+                payload: {
+                    userId: nanoid(),
+                    ...payload
+                }
+            })
+        }
+    })
+}
+
 
 // CreateRestaurant Actions
 export const userCreateRestaurant = (payload: any, fn: (arg0: any) => void) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
@@ -168,7 +191,4 @@ export const userGoogleLogIn = (
             nav("/dashboards/tasks")
         }
     })
-
-
-
 }

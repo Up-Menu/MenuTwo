@@ -64,8 +64,7 @@
     url('../../fonts/iransans/iransansWeb(FaNum).ttf') format('truetype');
 }
 
-html,
-body {
+* {
   font-family: iransans, sans-serif !important;
 }
 

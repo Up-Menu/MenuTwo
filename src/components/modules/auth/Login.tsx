@@ -201,20 +201,33 @@ const Login = () => {
                       <Grid
                         item
                         xs={12}
-                        sx={{ display: 'flex', justifyContent: 'center' }}
+                        sx={{
+                          display: 'flex',
+                          justifyContent: 'center',
+                          flexDirection: 'row',
+                          flexWrap: 'wrap',
+                          alignItems: 'center'
+                        }}
                       >
-                        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                          <Button
-                            type="submit"
-                            size="large"
-                            variant="outlined"
-                            sx={{ padding: 1 }}
-                            endIcon={<LockOpenIcon />}
-                            color="success"
-                          >
-                            ورود به سامانه
-                          </Button>
-                        </Form.Item>
+                        <Box pr={2}>
+                          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                            <Button
+                              type="submit"
+                              size="large"
+                              variant="outlined"
+                              sx={{ padding: 1 }}
+                              endIcon={<LockOpenIcon />}
+                              color="success"
+                            >
+                              ورود به سامانه
+                            </Button>
+                          </Form.Item>
+                        </Box>
+                        <Divider orientation="vertical" flexItem></Divider>
+
+                        <Box pt={0.5} pl={2}>
+                          <SSO />
+                        </Box>
                       </Grid>
                     </Grid>
                   </Form>

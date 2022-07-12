@@ -19,6 +19,7 @@ const DarkLight = ({ children }) => {
     () =>
       createTheme({
         // direction: i18n.dir(),
+        direction: 'rtl',
         colors: {
           gradients: {
             blue1: colors.gradients.blue1,

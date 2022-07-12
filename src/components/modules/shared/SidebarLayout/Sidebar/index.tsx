@@ -86,9 +86,10 @@ function Sidebar() {
             rel="noopener noreferrer"
             variant="outlined"
             size="small"
+            color="warning"
             fullWidth
           >
-            Upgrade to PRO
+            ارتقا به نسخه پرو
           </Button>
         </Box>
       </SidebarWrapper>

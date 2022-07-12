@@ -1,18 +1,14 @@
 import { useEffect } from 'react';
 import jwt_decode from 'jwt-decode';
-import { useTypedDispatch } from 'src/store';
-import { userGoogleLogIn } from 'src/store/actions';
-import { Button, IconButton, styled } from '@mui/material';
-import { useNavigate } from 'react-router';
-import GoogleIcon from '@mui/icons-material/Google';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import FacebookIcon from '@mui/icons-material/Facebook';
+// import { useTypedDispatch } from 'src/store';
+// import { userGoogleLogIn } from 'src/store/actions';
+// import { useNavigate } from 'react-router';
 
 declare let google: any;
 
 export const SSO = () => {
-  const dispatch = useTypedDispatch();
-  const nav = useNavigate();
+  // const dispatch = useTypedDispatch();
+  // const nav = useNavigate();
   function handleCallbackResponse(response: any) {
     let userObj: any = jwt_decode(response.credential);
     const userData: object = {
@@ -25,15 +21,9 @@ export const SSO = () => {
       cellPhone: 'googleSSO',
       profile: userObj.picture
     };
-    dispatch(userGoogleLogIn(userData, (notification) => notification, nav));
-    // console.log( userData )
+    // dispatch(userGoogleLogIn(userData, (notification) => notification, nav));
+    console.log(userData);
   }
-
-  const googleSSO = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    console.log(google);
-    return;
-  };
 
   useEffect(() => {
     google.accounts.id.initialize({
@@ -42,27 +32,23 @@ export const SSO = () => {
       callback: handleCallbackResponse
     });
 
-    google.accounts.id.renderButton(document.getElementById('singInDiv'), {
-      theme: 'outline',
-      size: 'large',
-      type: 'icon',
-      shape: 'circle'
-    });
+    createButton();
   }, []);
 
   return (
     <>
-      {/* <IconButton id="singInDiv" /> */}
-      <IconButton sx={{ ml: 1, mb: 0.5 }} onClick={googleSSO} color="primary">
-        <GoogleIcon />
-      </IconButton>
-
-      {/* <IconButton sx={{ ml: 1, mb: 0.5 }} onClick={googleSSO} color="primary">
-        <GitHubIcon />
-      </IconButton>
-      <IconButton sx={{ ml: 1, mb: 0.5 }} onClick={googleSSO} color="primary">
-        <FacebookIcon />
-      </IconButton> */}
+      <button id="singInDiv" />
     </>
   );
 };
+function createButton() {
+  google.accounts.id.renderButton(document.getElementById('singInDiv'), {
+    size: 'large',
+    scope: 'https://www.googleapis.com/auth/plus.login',
+    width: 200,
+    height: 50,
+    longtitle: false,
+    theme: 'dark',
+    shape: 'circle'
+  });
+}

@@ -109,9 +109,7 @@ const StatusMaintenance = Loader(
 );
 
 function routes(props: string[]): RouteObject[] {
-  const isLogged = props[0] || props[1] ? true : false;
-
-  // const isLogged = true;
+  const isLogged = !!(props[0] || props[1]);
 
   return [
     {

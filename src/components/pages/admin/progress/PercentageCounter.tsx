@@ -4,7 +4,7 @@ import CircularProgress, {
 } from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import ProgressContext from 'src/contexts/ProgressContext';
+import ProgressContext from 'src/context/ProgressContext';
 
 function CircularProgressWithLabel(
   props: CircularProgressProps & { value: number }

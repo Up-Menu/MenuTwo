@@ -18,7 +18,7 @@ import { Form } from 'antd';
 import { GridApi, GridColDef } from '@mui/x-data-grid';
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import { QRCodeSVG } from 'qrcode.react';
-import ProgressContext from 'src/contexts/ProgressContext';
+import ProgressContext from 'src/context/ProgressContext';
 import { Toaster } from 'react-hot-toast';
 
 // import icons
@@ -29,7 +29,7 @@ import AddTaskIcon from '@mui/icons-material/AddTask';
 import Tables from '../../../UI/Table';
 import PopUp from '../../../UI/PopUp';
 import TitleText from '../../../UI/TitleText';
-import RtlVersion from '../../../UI/RtlVersion';
+import RtlVersion from '../../../theme/RtlVersion';
 import { userCreateTable } from '../../../store/actions';
 import { useTypedDispatch } from 'src/store';
 import { log } from 'util';

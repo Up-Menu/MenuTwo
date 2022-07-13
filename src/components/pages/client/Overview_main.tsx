@@ -1,13 +1,13 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardHeader from '@mui/material/CardHeader';
+// import Card from '@mui/material/Card';
+// import CardActions from '@mui/material/CardActions';
+// import CardContent from '@mui/material/CardContent';
+// import CardHeader from '@mui/material/CardHeader';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
-import StarIcon from '@mui/icons-material/StarBorder';
+// import StarIcon from '@mui/icons-material/StarBorder';
 import Typography from '@mui/material/Typography';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
@@ -21,7 +21,7 @@ import { Link } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Footer from '../../../shared/Footer';
 import images from 'src/widgets/importer';
-import { useTheme } from '@mui/material';
+import { Divider, useTheme } from '@mui/material';
 
 const MyButton = styled(Button)`
   svg {
@@ -133,7 +133,7 @@ function PricingContent() {
 
       <Box sx={{ pt: 15, pb: 6, direction: 'rtl' }}>
         <Container maxWidth="lg" component="main">
-          <Grid container spacing={7} alignItems="center">
+          <Grid container spacing={9} alignItems="center">
             <Grid item xs={12} md={4}>
               <Typography variant="h2">
                 سیستم سفارش آنلاین منو رستوران
@@ -286,7 +286,7 @@ function PricingContent() {
             </Grid>
           </Box>
 
-          <Grid pb={5} container spacing={7} alignItems="center">
+          <Grid pb={5} pt={5} container spacing={7} alignItems="center">
             <Grid item xs={12} md={4}>
               <Typography variant="h2">
                 سفارش آنلاین غذا برای رستوران ها
@@ -313,7 +313,7 @@ function PricingContent() {
             </Grid>
           </Grid>
 
-          <Grid pt={5} container spacing={7} alignItems="center">
+          <Grid pt={5} pb={5} container spacing={7} alignItems="center">
             <Grid item xs={12} md={6} order={{ xs: 1, md: -1 }}>
               <img src={images['new-home-2.png']} alt="" />
             </Grid>
@@ -367,7 +367,7 @@ function PricingContent() {
             </Grid>
           </Grid>
 
-          <Grid pt={5} container spacing={7} alignItems="center">
+          <Grid pt={5} pb={5} container spacing={7} alignItems="center">
             <Grid item xs={12} md={6} order={{ xs: 2, md: -1 }}>
               <img src={images['new-home-4.png']} alt="" />
             </Grid>
@@ -427,123 +427,124 @@ function PricingContent() {
         component="main"
         sx={{ pt: 3, pb: 6 }}
       >
-        <Typography
-          component="h1"
-          variant="h2"
-          align="center"
-          color="text.primary"
-          gutterBottom
-        >
-          Pricing
-        </Typography>
-        <Typography
-          variant="h5"
-          align="center"
-          color="text.secondary"
-          component="p"
-        >
-          Quickly build an effective pricing table for your potential customers
-          with this layout. It&apos;s built with default MUI components with
-          little customization.
-        </Typography>
-      </Container>
-      {/* End hero unit */}
-      <Container maxWidth="md" component="main">
-        <Grid container spacing={5} alignItems="flex-end">
-          {tiers.map((tier) => (
-            // Enterprise card is full width at sm breakpoint
-            <Grid
-              item
-              key={tier.title}
-              xs={12}
-              sm={tier.title === 'Enterprise' ? 12 : 6}
-              md={4}
-            >
-              <Card>
-                <CardHeader
-                  title={tier.title}
-                  subheader={tier.subheader}
-                  titleTypographyProps={{ align: 'center' }}
-                  action={tier.title === 'Pro' ? <StarIcon /> : null}
-                  subheaderTypographyProps={{
-                    align: 'center'
-                  }}
-                />
-                <CardContent>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'baseline',
-                      mb: 2
-                    }}
-                  >
-                    <Typography
-                      component="h2"
-                      variant="h3"
-                      color="text.primary"
-                    >
-                      ${tier.price}
-                    </Typography>
-                    <Typography variant="h6" color="text.secondary">
-                      /mo
-                    </Typography>
-                  </Box>
-                  <ul>
-                    {tier.description.map((line) => (
-                      <Typography
-                        component="li"
-                        variant="subtitle1"
-                        align="center"
-                        key={line}
-                      >
-                        {line}
-                      </Typography>
-                    ))}
-                  </ul>
-                </CardContent>
-                <CardActions>
-                  <Button
-                    fullWidth
-                    variant={tier.buttonVariant as 'outlined' | 'contained'}
-                  >
-                    {tier.buttonText}
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
+        <Divider/>
+      {/*  <Typography*/}
+      {/*    component="h1"*/}
+      {/*    variant="h2"*/}
+      {/*    align="center"*/}
+      {/*    color="text.primary"*/}
+      {/*    gutterBottom*/}
+      {/*  >*/}
+      {/*    Pricing*/}
+      {/*  </Typography>*/}
+      {/*  <Typography*/}
+      {/*    variant="h5"*/}
+      {/*    align="center"*/}
+      {/*    color="text.secondary"*/}
+      {/*    component="p"*/}
+      {/*  >*/}
+      {/*    Quickly build an effective pricing table for your potential customers*/}
+      {/*    with this layout. It&apos;s built with default MUI components with*/}
+      {/*    little customization.*/}
+      {/*  </Typography>*/}
+      {/*</Container>*/}
+      {/*/!* End hero unit *!/*/}
+      {/*<Container maxWidth="md" component="main">*/}
+      {/*  <Grid container spacing={5} alignItems="flex-end">*/}
+      {/*    {tiers.map((tier) => (*/}
+      {/*      // Enterprise card is full width at sm breakpoint*/}
+      {/*      <Grid*/}
+      {/*        item*/}
+      {/*        key={tier.title}*/}
+      {/*        xs={12}*/}
+      {/*        sm={tier.title === 'Enterprise' ? 12 : 6}*/}
+      {/*        md={4}*/}
+      {/*      >*/}
+      {/*        <Card>*/}
+      {/*          <CardHeader*/}
+      {/*            title={tier.title}*/}
+      {/*            subheader={tier.subheader}*/}
+      {/*            titleTypographyProps={{ align: 'center' }}*/}
+      {/*            action={tier.title === 'Pro' ? <StarIcon /> : null}*/}
+      {/*            subheaderTypographyProps={{*/}
+      {/*              align: 'center'*/}
+      {/*            }}*/}
+      {/*          />*/}
+      {/*          <CardContent>*/}
+      {/*            <Box*/}
+      {/*              sx={{*/}
+      {/*                display: 'flex',*/}
+      {/*                justifyContent: 'center',*/}
+      {/*                alignItems: 'baseline',*/}
+      {/*                mb: 2*/}
+      {/*              }}*/}
+      {/*            >*/}
+      {/*              <Typography*/}
+      {/*                component="h2"*/}
+      {/*                variant="h3"*/}
+      {/*                color="text.primary"*/}
+      {/*              >*/}
+      {/*                ${tier.price}*/}
+      {/*              </Typography>*/}
+      {/*              <Typography variant="h6" color="text.secondary">*/}
+      {/*                /mo*/}
+      {/*              </Typography>*/}
+      {/*            </Box>*/}
+      {/*            <ul>*/}
+      {/*              {tier.description.map((line) => (*/}
+      {/*                <Typography*/}
+      {/*                  component="li"*/}
+      {/*                  variant="subtitle1"*/}
+      {/*                  align="center"*/}
+      {/*                  key={line}*/}
+      {/*                >*/}
+      {/*                  {line}*/}
+      {/*                </Typography>*/}
+      {/*              ))}*/}
+      {/*            </ul>*/}
+      {/*          </CardContent>*/}
+      {/*          <CardActions>*/}
+      {/*            <Button*/}
+      {/*              fullWidth*/}
+      {/*              variant={tier.buttonVariant as 'outlined' | 'contained'}*/}
+      {/*            >*/}
+      {/*              {tier.buttonText}*/}
+      {/*            </Button>*/}
+      {/*          </CardActions>*/}
+      {/*        </Card>*/}
+      {/*      </Grid>*/}
+      {/*    ))}*/}
+      {/*  </Grid>*/}
         {/* Footer */}
-        <Container
-          maxWidth="md"
-          component="footer"
-          sx={{
-            borderTop: (theme) => `1px solid ${theme.palette.divider}`,
-            mt: 8,
-            py: [3, 6]
-          }}
-        >
-          <Grid container spacing={4} justifyContent="space-evenly">
-            {footers.map((footer) => (
-              <Grid item xs={6} sm={3} key={footer.title}>
-                <Typography variant="h6" color="text.primary" gutterBottom>
-                  {footer.title}
-                </Typography>
-                <ul>
-                  {footer.description.map((item) => (
-                    <li key={item}>
-                      <MyLink to="/someLink" color="text.secondary">
-                        {item}
-                      </MyLink>
-                    </li>
-                  ))}
-                </ul>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-        {/* End footer */}
+        {/*<Container*/}
+        {/*  maxWidth="md"*/}
+        {/*  component="footer"*/}
+        {/*  sx={{*/}
+        {/*    borderTop: (theme) => `1px solid ${theme.palette.divider}`,*/}
+        {/*    mt: 8,*/}
+        {/*    py: [3, 6]*/}
+        {/*  }}*/}
+        {/*>*/}
+        {/*  <Grid container spacing={4} justifyContent="space-evenly">*/}
+        {/*    {footers.map((footer) => (*/}
+        {/*      <Grid item xs={6} sm={3} key={footer.title}>*/}
+        {/*        <Typography variant="h6" color="text.primary" gutterBottom>*/}
+        {/*          {footer.title}*/}
+        {/*        </Typography>*/}
+        {/*        <ul>*/}
+        {/*          {footer.description.map((item) => (*/}
+        {/*            <li key={item}>*/}
+        {/*              <MyLink to="/someLink" color="text.secondary">*/}
+        {/*                {item}*/}
+        {/*              </MyLink>*/}
+        {/*            </li>*/}
+        {/*          ))}*/}
+        {/*        </ul>*/}
+        {/*      </Grid>*/}
+        {/*    ))}*/}
+        {/*  </Grid>*/}
+        {/*</Container>*/}
+        {/*/!* End footer *!/*/}
         <Footer />
       </Container>
     </React.Fragment>

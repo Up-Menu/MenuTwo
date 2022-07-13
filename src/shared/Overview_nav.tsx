@@ -195,7 +195,7 @@ const Overview_nav = () => {
             <Divider sx={{ mb: 0 }} />
 
             <Divider />
-            <Box sx={{ m: 1 ,direction:'rtl'}}>
+            <Box sx={{ m: 1, direction: 'rtl' }}>
               <RtlVersion>
                 {logData.user || logData.googleData ? (
                   <>
@@ -232,14 +232,15 @@ const Overview_nav = () => {
                   </>
                 ) : (
                   <List sx={{ p: 1 }} component='nav'>
-                    <ListItem button to='/dashboards/tasks' component={NavLink}>
-                      <AccountBoxTwoToneIcon fontSize='small' />
-                      <ListItemText primary='SignIn' />
-                    </ListItem>
-                    <ListItem button to='/dashboards/tasks' component={NavLink}>
+                    <ListItem button to='/dashboards/tasks' sx={{display:"flex",flexDirection:"row",justifyContent:"space-between"}} component={NavLink}>
+                      <ListItemText primary='ورود' />
                       <LoginIcon fontSize='small' />
-                      <ListItemText primary='LogIn' />
                     </ListItem>
+                    <ListItem button to='/dashboards/tasks' sx={{display:"flex",flexDirection:"row",justifyContent:"space-between"}} component={NavLink}>
+                      <ListItemText primary='ساخت حساب' />
+                      <AccountBoxTwoToneIcon fontSize='small' />
+                    </ListItem>
+
                   </List>
                 )}
               </RtlVersion>

@@ -50,7 +50,7 @@ const AutoLogout = ( { children } ) => {
     const logoutAction = () => {
         dispatch( userLogout() )
             .then( () => {
-                // Notification logout
+                // notification logout
             } )
     }
 

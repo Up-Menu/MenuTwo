@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import images from 'src/importer';
+import images from 'src/widgets/importer';
 import { useTypedSelector } from 'src/store';
 
 function PageHeader() {

@@ -8,10 +8,10 @@ import ThemeProvider from './theme/ThemeProvider';
 import './assets/styles/css/costume.css';
 
 import { useTypedSelector } from './store';
-import NetworkChecker from './components/modules/widgets/NetworkChecker';
+import NetworkChecker from './widgets/NetworkChecker';
 import toast from 'react-hot-toast';
 import { Toaster } from 'react-hot-toast';
-import AutoLogout from './components/modules/widgets/AutoLogout';
+import AutoLogout from './widgets/AutoLogout';
 import CookieConsent from 'react-cookie-consent';
 
 // function getFaviconEl() {

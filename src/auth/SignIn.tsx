@@ -30,7 +30,7 @@ import TitleText from '../UI/TitleText';
 // import icons
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 
-import RtlVersion from '../UI/RtlVersion';
+import RtlVersion from '../theme/RtlVersion';
 
 import { Link } from 'react-router-dom';
 

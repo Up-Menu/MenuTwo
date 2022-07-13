@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import { useCart } from 'src/components/modules/hooks/useCart'
-import { formatNumber } from 'src/components/modules/helpers/utils'
+import { useCart } from 'src/hooks/useCart'
+import { formatNumber } from 'src/helpers/utils'
 import { Button } from '@mui/material'
 
 const ProductItem = ( { product } ) => {

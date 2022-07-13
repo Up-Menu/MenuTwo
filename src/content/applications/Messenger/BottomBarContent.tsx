@@ -11,7 +11,7 @@ import {
 import AttachFileTwoToneIcon from '@mui/icons-material/AttachFileTwoTone';
 import SendTwoToneIcon from '@mui/icons-material/SendTwoTone';
 import { useTypedSelector } from 'src/store';
-import images from 'src/importer';
+import images from 'src/widgets/importer';
 
 const MessageInputWrapper = styled(InputBase)(
   ({ theme }) => `

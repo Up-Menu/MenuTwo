@@ -17,9 +17,9 @@ import { Link } from 'react-router-dom';
 import Footer from '../../../shared/Footer';
 import BottomNav from '../../../shared/BottomNav';
 import { ThemesList } from '../../../theme/Themes';
-import ProgressContext from 'src/contexts/ProgressContext';
+import ProgressContext from 'src/context/ProgressContext';
 import TitleText from '../../../UI/TitleText';
-import RtlVersion from '../../../UI/RtlVersion';
+import RtlVersion from '../../../theme/RtlVersion';
 import InstallDesktopIcon from '@mui/icons-material/InstallDesktop';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 

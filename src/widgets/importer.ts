@@ -6,5 +6,5 @@ function Importer ( r: __WebpackModuleApi.RequireContext ) {
     return images
 }
 
-const images = Importer( require.context( './assets/images/', true, /\.(png|jpe?g|svg|jpg)$/ ) )
+const images = Importer( require.context( '../assets/images/', true, /\.(png|jpe?g|svg|jpg)$/ ) )
 export default images

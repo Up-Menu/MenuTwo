@@ -9,7 +9,7 @@ import {
 } from 'date-fns';
 import ScheduleTwoToneIcon from '@mui/icons-material/ScheduleTwoTone';
 import { useTypedSelector } from 'src/store';
-import images from 'src/importer';
+import images from 'src/widgets/importer';
 
 const DividerWrapper = styled(Divider)(
   ({ theme }) => `

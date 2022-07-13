@@ -4,7 +4,7 @@ import { Box, Divider, Avatar, styled, Button } from '@mui/material';
 
 import { CheckBox, CheckBoxOutlineBlankTwoTone } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
-import ProgressContext from 'src/contexts/ProgressContext';
+import ProgressContext from 'src/context/ProgressContext';
 
 // import requirement icons
 import RestaurantIcon from '@mui/icons-material/Restaurant';
@@ -18,7 +18,7 @@ import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
 
 // import rtl module
-import RtlVersion from 'src/UI/RtlVersion';
+import RtlVersion from 'src/theme/RtlVersion';
 
 const checkedPart = <CheckBox />;
 const noneCheckPart = <CheckBoxOutlineBlankTwoTone />;

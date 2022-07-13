@@ -1,4 +1,4 @@
-import images from "src/importer"
+import images from "src/widgets/importer"
 
 export const ThemesList: object[] = [
     {

@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import Footer from 'src/components/modules/shared/Footer';
+import Footer from 'src/shared/Footer';
 
 import { Grid, Container } from '@mui/material';
 
@@ -10,7 +10,7 @@ import PopularTags from './PopularTags';
 import MyCards from './MyCards';
 import Addresses from './Addresses';
 import { useTypedSelector } from 'src/store';
-import images from 'src/importer';
+import images from 'src/widgets/importer';
 
 function ManagementUserProfile() {
   const logData: any = useTypedSelector((state) => state);

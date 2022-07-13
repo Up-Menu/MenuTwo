@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import { Helmet } from 'react-helmet-async';
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
-import images from 'src/importer';
+import images from 'src/widgets/importer';
 
 const MainContent = styled(Box)(
   ({ theme }) => `

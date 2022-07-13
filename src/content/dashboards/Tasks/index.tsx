@@ -1,9 +1,9 @@
 import { ChangeEvent, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import PageHeader from './PageHeader';
-import Footer from 'src/components/modules/shared/Footer';
+// import PageHeader from './PageHeader';
+import Footer from 'src/shared/Footer';
 import { Grid, Tab, Tabs, Container, Card, Box, styled } from '@mui/material';
-import PageTitleWrapper from 'src/components/PageTitleWrapper';
+// import PageTitleWrapper from 'src/components/PageTitleWrapper';
 
 // import TeamOverview from './TeamOverview';
 // import TasksAnalytics from './TasksAnalytics';
@@ -12,7 +12,7 @@ import PageTitleWrapper from 'src/components/PageTitleWrapper';
 // import Checklist from './Checklist';
 // import Profile from './Profile';
 import TaskSearch from './TaskSearch';
-import ProgressBar from 'src/components/modules/pages/admin/progress/ProgressBar';
+import ProgressBar from 'src/components/pages/admin/progress/ProgressBar';
 
 const TabsContainerWrapper = styled(Box)(
   ({ theme }) => `
@@ -101,7 +101,7 @@ function DashboardTasks() {
 
   const [currentTab, setCurrentTab] = useState<string>('analytics');
 
-  const tabs = [{ value: 'analytics', label: 'Analytics Overview' }];
+  const tabs = [{ value: 'analytics', label: 'میزان پیشرفت شما' }];
 
   const handleTabsChange = (_event: ChangeEvent<{}>, value: string): void => {
     setCurrentTab(value);

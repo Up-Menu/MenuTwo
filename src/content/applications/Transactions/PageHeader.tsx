@@ -2,7 +2,7 @@ import { Typography, Button, Grid } from '@mui/material';
 
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import { useTypedSelector } from 'src/store';
-import images from 'src/importer';
+import images from 'src/widgets/importer';
 
 function PageHeader() {
   const logData: any = useTypedSelector((state) => state);

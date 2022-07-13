@@ -31,8 +31,10 @@ import {
 import { useTypedSelector, useTypedDispatch } from 'src/store';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
-import images from 'src/importer';
+import images from 'src/widgets/importer';
 import { ColorModeContext } from 'src/theme/DarkLight';
+import RtlVersion from '../theme/RtlVersion';
+
 
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
@@ -60,6 +62,8 @@ const MenuUserBox = styled(Box)(
   ({ theme }) => `
           background: ${theme.colors.alpha.black[5]};
           padding: ${theme.spacing(2)};
+          padding-left:${theme.spacing(2)};
+          justify-content: space-between
   `
 );
 
@@ -95,11 +99,11 @@ const Overview_nav = () => {
   const user = {
     name: logData.googleData.payload
       ? `${logData.googleData.payload.firstName} ${logData.googleData.payload.lastName}`
-      : 'Not Registered',
+      : 'کاربر سپند',
     avatar: logData.googleData.payload
       ? logData.googleData.payload.profile
       : images['avatars/profile_default.png'],
-    jobtitle: 'Sepand user'
+    jobtitle: 'سطح نقره ای'
   };
 
   const handleOpen = (): void => {
@@ -120,8 +124,8 @@ const Overview_nav = () => {
   return (
     <Fragment>
       <HeaderWrapper
-        display="flex"
-        alignItems="center"
+        display='flex'
+        alignItems='center'
         sx={{
           bgcolor: 'background.default',
           color: 'text.primary'
@@ -135,7 +139,7 @@ const Overview_nav = () => {
         >
           <HeaderMenu />
         </Stack> */}
-        <Box display="flex" alignItems="center">
+        <Box display='flex' alignItems='center'>
           <Box sx={{ ml: 1 }}>{/* dark mode button */}</Box>
           <Box sx={{ ml: 1 }}>
             <HeaderSearch />
@@ -144,7 +148,7 @@ const Overview_nav = () => {
           <IconButton
             sx={{ mr: 1 }}
             onClick={colorMode.toggleColorMode}
-            color="inherit"
+            color='inherit'
           >
             {theme.palette.mode === 'dark' ? (
               <Brightness7Icon />
@@ -153,17 +157,19 @@ const Overview_nav = () => {
             )}
           </IconButton>
 
-          <UserBoxButton color="secondary" ref={ref} onClick={handleOpen}>
-            <Avatar variant="rounded" alt={user.name} src={user.avatar} />
-            <Hidden mdDown>
-              <UserBoxText>
-                <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
-              </UserBoxText>
-            </Hidden>
-            <Hidden smDown>
-              <ExpandMoreTwoToneIcon sx={{ ml: 1 }} />
-            </Hidden>
-          </UserBoxButton>
+          <Box sx={{ float: 'right' }}>
+            <UserBoxButton color='secondary' ref={ref} onClick={handleOpen}>
+              <Avatar variant='rounded' alt={user.name} src={user.avatar} />
+              <Hidden mdDown>
+                <UserBoxText>
+                  <UserBoxLabel variant='body1'>{user.name}</UserBoxLabel>
+                </UserBoxText>
+              </Hidden>
+              <Hidden smDown>
+                <ExpandMoreTwoToneIcon sx={{ ml: 1 }} />
+              </Hidden>
+            </UserBoxButton>
+          </Box>
           <Popover
             anchorEl={ref.current}
             onClose={handleClose}
@@ -177,11 +183,11 @@ const Overview_nav = () => {
               horizontal: 'left'
             }}
           >
-            <MenuUserBox sx={{ minWidth: 210 }} display="flex">
-              <Avatar variant="rounded" alt={user.name} src={user.avatar} />
+            <MenuUserBox sx={{ minWidth: 210 }} display='flex'>
+              <Avatar variant='rounded' alt={user.name} src={user.avatar} />
               <UserBoxText sx={{ ml: 1 }}>
-                <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
-                <UserBoxDescription variant="body2">
+                <UserBoxLabel variant='body1'>{user.name}</UserBoxLabel>
+                <UserBoxDescription variant='body2'>
                   {user.jobtitle}
                 </UserBoxDescription>
               </UserBoxText>
@@ -189,19 +195,20 @@ const Overview_nav = () => {
             <Divider sx={{ mb: 0 }} />
 
             <Divider />
-            <Box sx={{ m: 1 }}>
-              {logData.user || logData.googleData ? (
-                <>
-                  <List
-                    sx={{ p: 1, direction: 'rtl', textAlign: 'right' }}
-                    component="nav"
-                  >
-                    <ListItem button to="/dashboards/tasks" component={NavLink}>
-                      <AccountBoxTwoToneIcon fontSize="small" />
-                      <ListItemText primary="داشبورد" />
-                    </ListItem>
+            <Box sx={{ m: 1 ,direction:'rtl'}}>
+              <RtlVersion>
+                {logData.user || logData.googleData ? (
+                  <>
+                    <List
+                      sx={{ p: 1, direction: 'rtl', textAlign: 'right' }}
+                      component='nav'
+                    >
+                      <ListItem button to='/dashboards/tasks' component={NavLink}>
+                        <AccountBoxTwoToneIcon fontSize='small' />
+                        <ListItemText primary='داشبورد' />
+                      </ListItem>
 
-                    {/* <ListItem
+                      {/* <ListItem
                       button
                       to="/dashboards/messenger"
                       component={NavLink}
@@ -209,7 +216,7 @@ const Overview_nav = () => {
                       <InboxTwoToneIcon fontSize="small" />
                       <ListItemText primary="Messenger" />
                     </ListItem> */}
-                    {/* <ListItem
+                      {/* <ListItem
                       button
                       to="/management/profile/settings"
                       component={NavLink}
@@ -217,24 +224,25 @@ const Overview_nav = () => {
                       <AccountTreeTwoToneIcon fontSize="small" />
                       <ListItemText primary="Account Settings" />
                     </ListItem> */}
+                    </List>
+                    <Button color='error' fullWidth onClick={signOutHandler}>
+                      <LockOpenTwoToneIcon sx={{ mr: 1 }} />
+                      خروج از حساب کابری
+                    </Button>
+                  </>
+                ) : (
+                  <List sx={{ p: 1 }} component='nav'>
+                    <ListItem button to='/dashboards/tasks' component={NavLink}>
+                      <AccountBoxTwoToneIcon fontSize='small' />
+                      <ListItemText primary='SignIn' />
+                    </ListItem>
+                    <ListItem button to='/dashboards/tasks' component={NavLink}>
+                      <LoginIcon fontSize='small' />
+                      <ListItemText primary='LogIn' />
+                    </ListItem>
                   </List>
-                  <Button color="error" fullWidth onClick={signOutHandler}>
-                    <LockOpenTwoToneIcon sx={{ ml: 1 }} />
-                    Sign out
-                  </Button>
-                </>
-              ) : (
-                <List sx={{ p: 1 }} component="nav">
-                  <ListItem button to="/dashboards/tasks" component={NavLink}>
-                    <AccountBoxTwoToneIcon fontSize="small" />
-                    <ListItemText primary="SignIn" />
-                  </ListItem>
-                  <ListItem button to="/dashboards/tasks" component={NavLink}>
-                    <LoginIcon fontSize="small" />
-                    <ListItemText primary="LogIn" />
-                  </ListItem>
-                </List>
-              )}
+                )}
+              </RtlVersion>
             </Box>
           </Popover>
         </Box>

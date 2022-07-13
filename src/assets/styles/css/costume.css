@@ -95,3 +95,29 @@ img {
   height: 100%;
   width: 100%;
 }
+
+.container_plus{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.container_plus .card {
+  width: 100%;
+  max-width: 100px;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.container_plus .card p {
+  margin: 12px 0;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.container_plus .card .box {
+  width: 40%;
+  height: 40px;
+  border-radius: 10px;
+  cursor: pointer;
+}

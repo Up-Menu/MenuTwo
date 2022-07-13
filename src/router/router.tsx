@@ -2,12 +2,12 @@ import { Suspense, lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 import { RouteObject } from 'react-router';
 
-import SidebarLayout from 'src/components/modules/shared/SidebarLayout';
+import SidebarLayout from 'src/shared/SidebarLayout';
 import BaseLayout from 'src/layouts/BaseLayout';
 
 import SuspenseLoader from 'src/components/SuspenseLoader';
-import Login from '../components/modules/auth/Login';
-import OpenIconSpeedDial from 'src/components/modules/widgets/OpenIconSpeedDial';
+import Login from '../auth/Login';
+import OpenIconSpeedDial from 'src/widgets/OpenIconSpeedDial';
 
 const Loader = (Component) => (props: JSX.IntrinsicAttributes) =>
   (
@@ -18,7 +18,7 @@ const Loader = (Component) => (props: JSX.IntrinsicAttributes) =>
 
 // Pages
 
-const Overview = Loader(lazy(() => import('src/content/overview')));
+const Overview = Loader(lazy(() => import('src/components/pages/client/overview')));
 
 // Dashboards
 
@@ -40,13 +40,13 @@ const UserSettings = Loader(
 );
 
 const CreateRestaurant = Loader(
-  lazy(() => import('src/components/modules/pages/admin/CreateRestaurant'))
+  lazy(() => import('src/components/pages/admin/RestaurantAccounting'))
 );
 const CreateMenu = Loader(
-  lazy(() => import('src/components/modules/pages/admin/CreateMenu'))
+  lazy(() => import('src/components/pages/admin/CreateMenu'))
 );
 const ThemeSelection = Loader(
-  lazy(() => import('src/components/modules/pages/admin/ThemeSelection'))
+  lazy(() => import('src/components/pages/admin/ThemeSelection'))
 );
 
 const ThemeStore = Loader(lazy(() => import('src/theme/classic/Store')));
@@ -54,18 +54,18 @@ const ThemeStore = Loader(lazy(() => import('src/theme/classic/Store')));
 const ThemeCart = Loader(lazy(() => import('src/theme/classic')));
 
 const Order = Loader(
-  lazy(() => import('src/components/modules/pages/admin/OrdersMng'))
+  lazy(() => import('src/components/pages/admin/OrdersManagement'))
 );
 
 const Delivery = Loader(
-  lazy(() => import('src/components/modules/pages/admin/Delivery'))
+  lazy(() => import('src/components/pages/admin/Delivery'))
 );
 
 const MobileApp = Loader(
-  lazy(() => import('src/components/modules/pages/admin/MobileApp'))
+  lazy(() => import('src/components/pages/admin/MobileApp'))
 );
 const Tables = Loader(
-  lazy(() => import('src/components/modules/pages/admin/TableMng'))
+  lazy(() => import('src/components/pages/admin/TableManagement'))
 );
 
 // Components
@@ -91,7 +91,7 @@ const Avatars = Loader(
 );
 const Cards = Loader(lazy(() => import('src/content/pages/Components/Cards')));
 const Forms = Loader(lazy(() => import('src/content/pages/Components/Forms')));
-const SignIn = Loader(lazy(() => import('../components/modules/auth/SignIn')));
+const SignIn = Loader(lazy(() => import('../auth/SignIn')));
 
 // Status
 

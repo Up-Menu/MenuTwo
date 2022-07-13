@@ -30,17 +30,17 @@ import { Pagination } from 'swiper';
 import { GridApi, GridColDef } from '@mui/x-data-grid';
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import { useContext } from 'react';
-import ProgressContext from 'src/contexts/ProgressContext';
-import images from 'src/importer';
+import ProgressContext from 'src/context/ProgressContext';
+import images from 'src/widgets/importer';
 
-// import Notification components
+// import notification components
 import toast, { Toaster } from 'react-hot-toast';
 
 // costume components
 import Tables from '../../../UI/Table';
 import PopUp from '../../../UI/PopUp';
 import TitleText from '../../../UI/TitleText';
-import RtlVersion from '../../../UI/RtlVersion';
+import RtlVersion from '../../../theme/RtlVersion';
 import IosSwitch from '../../../UI/IosSwitch';
 import BottomNav from '../../../shared/BottomNav';
 import { useTypedDispatch } from 'src/store'

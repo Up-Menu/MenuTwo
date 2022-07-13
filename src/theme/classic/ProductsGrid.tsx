@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ProductItem from './ProductItem';
 import styles from 'src/assets/styles/scss/ProductsGrid.module.scss';
-import { useProducts } from 'src/components/modules/hooks/useProducts';
+import { useProducts } from 'src/hooks/useProducts';
 import { Key } from 'react';
 import { Container, Grid, Box } from '@mui/material';
 import Search from './Search';

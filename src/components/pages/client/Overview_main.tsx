@@ -20,7 +20,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Footer from '../../../shared/Footer';
-import images from 'src/importer';
+import images from 'src/widgets/importer';
 import { useTheme } from '@mui/material';
 
 const MyButton = styled(Button)`

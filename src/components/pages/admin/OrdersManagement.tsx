@@ -13,11 +13,11 @@ import { Link } from 'react-router-dom';
 import Footer from '../../../shared/Footer';
 import BottomNav from '../../../shared/BottomNav';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
-import ProgressContext from 'src/contexts/ProgressContext';
+import ProgressContext from 'src/context/ProgressContext';
 import IosSwitch from '../../../UI/IosSwitch';
-import RtlVersion from '../../../UI/RtlVersion';
+import RtlVersion from '../../../theme/RtlVersion';
 
-const OrdersMng = () => {
+const OrdersManagement = () => {
   const progressContext = useContext(ProgressContext);
   const MyCard = styled(Card)`
     margin: 23px;
@@ -121,4 +121,4 @@ const OrdersMng = () => {
   );
 };
 
-export default OrdersMng;
+export default OrdersManagement;

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { CartContext } from 'src/contexts/Shop/CartContext';
+import { CartContext } from 'src/context/Shop/CartContext';
 import styles from 'src/assets/styles/scss/header.module.scss';
 import { Box, Button } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';

@@ -9,7 +9,7 @@ import {
   ListItem
 } from '@mui/material';
 import { NavLink as RouterLink } from 'react-router-dom';
-import { SidebarContext } from 'src/contexts/SidebarContext';
+import { SidebarContext } from 'src/context/SidebarContext';
 
 // import requirements icons
 import RestaurantIcon from '@mui/icons-material/Restaurant';
@@ -27,7 +27,7 @@ import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
 // import ContactlessIcon from '@mui/icons-material/Contactless';
 
 import DisplaySettingsTwoToneIcon from '@mui/icons-material/DisplaySettingsTwoTone';
-import CircularStatic from 'src/components/modules/pages/admin/progress/ProgressShow';
+import CircularStatic from 'src/components/pages/admin/progress/PercentageCounter';
 
 const MenuWrapper = styled(Box)(
   ({ theme }) => `
@@ -300,29 +300,29 @@ function SidebarMenu() {
                   ساخت میز
                 </Button>
               </ListItem>
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/dashboards/delivery"
-                  endIcon={<MapIcon />}
-                >
-                  منطقه ارسال غذا
-                </Button>
-              </ListItem>
+              {/*<ListItem component="div">*/}
+              {/*  <Button*/}
+              {/*    disableRipple*/}
+              {/*    component={RouterLink}*/}
+              {/*    onClick={closeSidebar}*/}
+              {/*    to="/dashboards/delivery"*/}
+              {/*    endIcon={<MapIcon />}*/}
+              {/*  >*/}
+              {/*    منطقه ارسال غذا*/}
+              {/*  </Button>*/}
+              {/*</ListItem>*/}
 
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/dashboards/testOrder"
-                  endIcon={<MmsTwoToneIcon />}
-                >
-                  تست سامانه
-                </Button>
-              </ListItem>
+              {/*<ListItem component="div">*/}
+              {/*  <Button*/}
+              {/*    disableRipple*/}
+              {/*    component={RouterLink}*/}
+              {/*    onClick={closeSidebar}*/}
+              {/*    to="/dashboards/testOrder"*/}
+              {/*    endIcon={<MmsTwoToneIcon />}*/}
+              {/*  >*/}
+              {/*    تست سامانه*/}
+              {/*  </Button>*/}
+              {/*</ListItem>*/}
               <ListItem component="div">
                 <Button
                   disableRipple
@@ -350,65 +350,65 @@ function SidebarMenu() {
           </SubMenuWrapper>
         </List>
 
-        <List
-          component="div"
-          subheader={
-            <ListSubheader component="div" disableSticky>
-              Management
-            </ListSubheader>
-          }
-        >
-          <SubMenuWrapper>
-            <List component="div">
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/management/transactions"
-                  endIcon={<TableChartTwoToneIcon />}
-                >
-                  Transactions List
-                </Button>
-              </ListItem>
-            </List>
-          </SubMenuWrapper>
-        </List>
-        <List
-          component="div"
-          subheader={
-            <ListSubheader component="div" disableSticky>
-              Account Management
-            </ListSubheader>
-          }
-        >
-          <SubMenuWrapper>
-            <List component="div">
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/management/profile/details"
-                  endIcon={<AccountCircleTwoToneIcon />}
-                >
-                  Profile
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/management/profile/settings"
-                  endIcon={<DisplaySettingsTwoToneIcon />}
-                >
-                  Setting
-                </Button>
-              </ListItem>
-            </List>
-          </SubMenuWrapper>
-        </List>
+        {/*<List*/}
+        {/*  component="div"*/}
+        {/*  subheader={*/}
+        {/*    <ListSubheader component="div" disableSticky>*/}
+        {/*      Management*/}
+        {/*    </ListSubheader>*/}
+        {/*  }*/}
+        {/*>*/}
+        {/*  <SubMenuWrapper>*/}
+        {/*    <List component="div">*/}
+        {/*      <ListItem component="div">*/}
+        {/*        <Button*/}
+        {/*          disableRipple*/}
+        {/*          component={RouterLink}*/}
+        {/*          onClick={closeSidebar}*/}
+        {/*          to="/management/transactions"*/}
+        {/*          endIcon={<TableChartTwoToneIcon />}*/}
+        {/*        >*/}
+        {/*          Transactions List*/}
+        {/*        </Button>*/}
+        {/*      </ListItem>*/}
+        {/*    </List>*/}
+        {/*  </SubMenuWrapper>*/}
+        {/*</List>*/}
+        {/*<List*/}
+        {/*  component="div"*/}
+        {/*  subheader={*/}
+        {/*    <ListSubheader component="div" disableSticky>*/}
+        {/*      Account Management*/}
+        {/*    </ListSubheader>*/}
+        {/*  }*/}
+        {/*>*/}
+        {/*  <SubMenuWrapper>*/}
+        {/*    <List component="div">*/}
+        {/*      <ListItem component="div">*/}
+        {/*        <Button*/}
+        {/*          disableRipple*/}
+        {/*          component={RouterLink}*/}
+        {/*          onClick={closeSidebar}*/}
+        {/*          to="/management/profile/details"*/}
+        {/*          endIcon={<AccountCircleTwoToneIcon />}*/}
+        {/*        >*/}
+        {/*          Profile*/}
+        {/*        </Button>*/}
+        {/*      </ListItem>*/}
+        {/*      <ListItem component="div">*/}
+        {/*        <Button*/}
+        {/*          disableRipple*/}
+        {/*          component={RouterLink}*/}
+        {/*          onClick={closeSidebar}*/}
+        {/*          to="/management/profile/settings"*/}
+        {/*          endIcon={<DisplaySettingsTwoToneIcon />}*/}
+        {/*        >*/}
+        {/*          Setting*/}
+        {/*        </Button>*/}
+        {/*      </ListItem>*/}
+        {/*    </List>*/}
+        {/*  </SubMenuWrapper>*/}
+        {/*</List>*/}
         {/* <List
           component="div"
           subheader={

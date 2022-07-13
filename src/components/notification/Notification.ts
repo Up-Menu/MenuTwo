@@ -1,12 +1,9 @@
-
-
-import toast from "react-hot-toast"
-import { Renderable, ValueFunction, Toast } from "react-hot-toast/dist/core/types"
+import toast from 'react-hot-toast';
+import { Renderable, Toast, ValueFunction } from 'react-hot-toast/dist/core/types';
 
 
 export const promiseNotify = ( callBackFn: any, message: { loading: any; success: any; error: any } ) => {
-    const myPromise = callBackFn
-    toast.promise( myPromise, {
+    toast.promise( callBackFn, {
         loading: message.loading,
         success: message.success,
         error: message.error,

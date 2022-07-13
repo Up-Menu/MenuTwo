@@ -10,7 +10,7 @@ import {
 import DocumentScannerTwoToneIcon from '@mui/icons-material/DocumentScannerTwoTone';
 import AddAlertTwoToneIcon from '@mui/icons-material/AddAlertTwoTone';
 import { useTypedSelector } from 'src/store';
-import images from 'src/importer';
+import images from 'src/widgets/importer';
 
 const AvatarPageTitle = styled(Avatar)(
   ({ theme }) => `

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import Scrollbar from 'src/UI/Scrollbar';
-import { SidebarContext } from 'src/contexts/SidebarContext';
+import { SidebarContext } from 'src/context/SidebarContext';
 
 import {
   Box,
@@ -74,24 +74,24 @@ function Sidebar() {
           />
           <SidebarMenu />
         </Scrollbar>
-        <Divider
-          sx={{
-            background: theme.colors.alpha.trueWhite[10]
-          }}
-        />
-        <Box p={2}>
-          <Button
-            href="https://nilldevelopers.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            variant="outlined"
-            size="small"
-            color="warning"
-            fullWidth
-          >
-            ارتقا به نسخه پرو
-          </Button>
-        </Box>
+        {/*<Divider*/}
+        {/*  sx={{*/}
+        {/*    background: theme.colors.alpha.trueWhite[10]*/}
+        {/*  }}*/}
+        {/*/>*/}
+        {/*<Box p={2}>*/}
+        {/*  <Button*/}
+        {/*    href="https://nilldevelopers.com/"*/}
+        {/*    target="_blank"*/}
+        {/*    rel="noopener noreferrer"*/}
+        {/*    variant="outlined"*/}
+        {/*    size="small"*/}
+        {/*    color="warning"*/}
+        {/*    fullWidth*/}
+        {/*  >*/}
+        {/*    ارتقا به نسخه پرو*/}
+        {/*  </Button>*/}
+        {/*</Box>*/}
       </SidebarWrapper>
       <Drawer
         sx={{

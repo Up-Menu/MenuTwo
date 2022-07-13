@@ -25,7 +25,7 @@ import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
 import { useTypedDispatch } from 'src/store';
 import { userLogout } from 'src/store/actions';
 import { useTypedSelector } from 'src/store';
-import images from 'src/importer';
+import images from 'src/widgets/importer';
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
@@ -67,11 +67,11 @@ function HeaderUserbox() {
   const user = {
     name: logData.googleData.payload
       ? `${logData.googleData.payload.firstName} ${logData.googleData.payload.lastName}`
-      : 'Sepand User',
+      : 'کاربر سپند',
     avatar: logData.googleData.payload
       ? logData.googleData.payload.profile
       : images['avatars/profile_default.png'],
-    jobtitle: 'Project Manager'
+    jobtitle: 'سطح نقره ای'
   };
   const dispatch = useTypedDispatch();
 
@@ -124,37 +124,39 @@ function HeaderUserbox() {
       >
         <MenuUserBox sx={{ minWidth: 210 }} display="flex">
           <Avatar variant="rounded" alt={user.name} src={user.avatar} />
-          <UserBoxText>
-            <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
-            <UserBoxDescription variant="body2">
-              {user.jobtitle}
-            </UserBoxDescription>
-          </UserBoxText>
+          <Box pl={3}>
+            <UserBoxText>
+              <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
+              <UserBoxDescription variant="body2">
+                {user.jobtitle}
+              </UserBoxDescription>
+            </UserBoxText>
+          </Box>
         </MenuUserBox>
-        <Divider sx={{ mb: 0 }} />
-        <List sx={{ p: 1 }} component="nav">
-          <ListItem button to="/management/profile/details" component={NavLink}>
-            <AccountBoxTwoToneIcon fontSize="small" />
-            <ListItemText primary="My Profile" />
-          </ListItem>
-          <ListItem button to="/dashboards/messenger" component={NavLink}>
-            <InboxTwoToneIcon fontSize="small" />
-            <ListItemText primary="Messenger" />
-          </ListItem>
-          <ListItem
-            button
-            to="/management/profile/settings"
-            component={NavLink}
-          >
-            <AccountTreeTwoToneIcon fontSize="small" />
-            <ListItemText primary="Account Settings" />
-          </ListItem>
-        </List>
-        <Divider />
+        {/*<Divider sx={{ mb: 0 }} />*/}
+        {/*<List sx={{ p: 1 }} component="nav">*/}
+        {/*  <ListItem button to="/management/profile/details" component={NavLink}>*/}
+        {/*    <AccountBoxTwoToneIcon fontSize="small" />*/}
+        {/*    <ListItemText primary="My Profile" />*/}
+        {/*  </ListItem>*/}
+        {/*  <ListItem button to="/dashboards/messenger" component={NavLink}>*/}
+        {/*    <InboxTwoToneIcon fontSize="small" />*/}
+        {/*    <ListItemText primary="Messenger" />*/}
+        {/*  </ListItem>*/}
+        {/*  <ListItem*/}
+        {/*    button*/}
+        {/*    to="/management/profile/settings"*/}
+        {/*    component={NavLink}*/}
+        {/*  >*/}
+        {/*    <AccountTreeTwoToneIcon fontSize="small" />*/}
+        {/*    <ListItemText primary="Account Settings" />*/}
+        {/*  </ListItem>*/}
+        {/*</List>*/}
+        {/*<Divider />*/}
         <Box sx={{ m: 1 }}>
           <Button color="error" fullWidth onClick={signOutHandler}>
-            <LockOpenTwoToneIcon sx={{ ml: 1 }} />
-            Sign out
+            <LockOpenTwoToneIcon sx={{ mr: 1 }} />
+              خروج از حساب کاربری
           </Button>
         </Box>
       </Popover>

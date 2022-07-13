@@ -15,7 +15,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Footer from 'src/components/modules/shared/Footer';
+import Footer from 'src/shared/Footer';
 
 interface TabPanelProps {
   children?: React.ReactNode;

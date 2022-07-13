@@ -11,13 +11,12 @@ import {
 import BottomNav from '../../../shared/BottomNav';
 import Footer from '../../../shared/Footer';
 import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
-import ProgressContext from 'src/contexts/ProgressContext';
-import './MobileApp.css';
+import ProgressContext from 'src/context/ProgressContext';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { IPhoneX } from 'react-device-frames';
 import CaptureArea from './CaptureArea';
 import TitleText from '../../../UI/TitleText';
-import RtlVersion from '../../../UI/RtlVersion';
+import RtlVersion from '../../../theme/RtlVersion';
 import ThemeStore from 'src/theme/classic/Store';
 
 const colors = [
@@ -52,14 +51,14 @@ const MobileApp = () => {
                 </Typography>
               </Box>
               <Divider />
-              <Box pt={4} pr={4} pb={2}>
+              <Box pt={4} pr={4} pl={4} pb={2}>
                 <Typography variant='h6'>
                   در این بخش لطفاً تم رنگ منوی خود را از پالت های زیر انتخاب کنید:
                 </Typography>
               </Box>
 
               <Box pt={4} pr={4} pb={2}>
-                <div className='container'>
+                <div className='container_plus'>
                   {colors.map((color, index) => (
                     <div key={index} className='card'>
                       <div style={{
@@ -112,7 +111,8 @@ const MobileApp = () => {
                       style={{
                         background: background,
                         zIndex: 0,
-                        position: 'relative'
+                        position: 'relative',
+                        height: '10000px'
                       }}
                     >
                       <ThemeStore />

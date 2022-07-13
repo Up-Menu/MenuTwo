@@ -1,6 +1,6 @@
 import React from 'react';
 import CartItem from './CartItem';
-import { useCart } from 'src/components/modules/hooks/useCart';
+import { useCart } from 'src/hooks/useCart';
 import { Container, Divider, Grid, Box } from '@mui/material';
 
 const CartProducts = () => {

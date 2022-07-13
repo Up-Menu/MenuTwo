@@ -31,7 +31,7 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import TitleText from '../UI/TitleText';
-import RtlVersion from '../UI/RtlVersion';
+import RtlVersion from '../theme/RtlVersion';
 // import ReCAPTCHA from 'react-google-recaptcha';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import LockOpenIcon from '@mui/icons-material/LockOpen';

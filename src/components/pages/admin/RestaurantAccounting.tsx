@@ -31,12 +31,12 @@ import type { UploadChangeParam } from 'antd/es/upload';
 import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
 
 // auto image importer
-import images from 'src/importer';
+import images from 'src/widgets/importer';
 
 // import costume components
 import TitleText from '../../../UI/TitleText';
-import ProgressContext from 'src/contexts/ProgressContext';
-import RtlVersion from '../../../UI/RtlVersion';
+import ProgressContext from 'src/context/ProgressContext';
+import RtlVersion from '../../../theme/RtlVersion';
 
 const MyBox = styled(Box)`
   border: 1px solid #cbccd247;
@@ -94,7 +94,7 @@ const CreateAccount = () => {
       {loading ? (
         <LoadingOutlined />
       ) : (
-        <img width={80} src={images['avatars/profile_default.png']} />
+        <img width={80} src={images['avatars/profile_default.png']} alt='' />
       )}
     </div>
   );
@@ -107,22 +107,31 @@ const CreateAccount = () => {
     console.log('Failed:', errorInfo);
   };
 
+
+  const MyBox = styled(Box)`
+    @media (min-width: 480px) {
+      //padding: 45px;
+      margin: 0 18px;
+    }
+  `;
+
   return (
     <Fragment>
-      <TitleText header="ساخت اکانت رستوران" />
+      <TitleText header='ساخت اکانت رستوران' />
       <Toaster />
 
-      <Container maxWidth="lg">
+      <Container maxWidth='lg'>
+        <Box p={1}>
         <Card>
-          <Box sx={{ direction: 'rtl', p: 5, m: 2 }}>
+          <MyBox sx={{ direction: 'rtl', p: 2 }}>
             <RtlVersion>
               <Form
-                name="basic"
+                name='basic'
                 wrapperCol={{ span: 6 }}
                 initialValues={{ remember: true }}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
-                autoComplete="on"
+                autoComplete='on'
               >
                 <Grid container spacing={2}>
                   <Grid
@@ -130,21 +139,21 @@ const CreateAccount = () => {
                     xs={12}
                     sx={{ display: 'flex', justifyContent: 'center' }}
                   >
-                    <Form.Item name="profile">
+                    <Form.Item name='profile'>
                       <MyBox>
                         <Upload
-                          name="avatar"
-                          listType="picture-card"
-                          className="avatar-uploader"
+                          name='avatar'
+                          listType='picture-card'
+                          className='avatar-uploader'
                           showUploadList={false}
-                          action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                          action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
                           beforeUpload={beforeUpload}
                           onChange={handleChange}
                         >
                           {imageUrl ? (
                             <img
                               src={imageUrl}
-                              alt="avatar"
+                              alt='avatar'
                               style={{ width: '100%' }}
                             />
                           ) : (
@@ -155,41 +164,30 @@ const CreateAccount = () => {
                     </Form.Item>
                   </Grid>
                   <Grid item xs={12}>
-                    <Form.Item name="restaurantName">
+                    <Form.Item name='restaurantName'>
                       <TextField
-                        label="نام رستوران"
-                        type="text"
+                        label='نام رستوران'
+                        type='text'
                         fullWidth
                         value={''}
                       />
                     </Form.Item>
                   </Grid>
                   <Grid item xs={12} md={6}>
-                    <Form.Item name="cellPhone">
+                    <Form.Item name='cellPhone'>
                       <TextField
-                        label="شماره تلفن"
-                        type="text"
+                        label='شماره تلفن'
+                        type='text'
                         fullWidth
                         value={''}
                       />
                     </Form.Item>
                   </Grid>
                   <Grid item xs={12} md={6}>
-                    <Form.Item name="email">
+                    <Form.Item name='email'>
                       <TextField
-                        label="ایمیل"
-                        type="text"
-                        fullWidth
-                        value={''}
-                      />
-                    </Form.Item>
-                  </Grid>
-
-                  <Grid item xs={12} md={6}>
-                    <Form.Item name="website">
-                      <TextField
-                        label="لینک سایت رستوران"
-                        type="text"
+                        label='ایمیل'
+                        type='text'
                         fullWidth
                         value={''}
                       />
@@ -197,10 +195,21 @@ const CreateAccount = () => {
                   </Grid>
 
                   <Grid item xs={12} md={6}>
-                    <Form.Item name="social">
+                    <Form.Item name='website'>
                       <TextField
-                        label="آیدی اینستاگرام"
-                        type="text"
+                        label='لینک سایت رستوران'
+                        type='text'
+                        fullWidth
+                        value={''}
+                      />
+                    </Form.Item>
+                  </Grid>
+
+                  <Grid item xs={12} md={6}>
+                    <Form.Item name='social'>
+                      <TextField
+                        label='آیدی اینستاگرام'
+                        type='text'
                         fullWidth
                         value={''}
                       />
@@ -208,9 +217,9 @@ const CreateAccount = () => {
                   </Grid>
 
                   <Grid item xs={12}>
-                    <Form.Item name="address">
+                    <Form.Item name='address'>
                       <TextField
-                        label="نشانی"
+                        label='نشانی'
                         multiline
                         value={''}
                         fullWidth
@@ -226,12 +235,12 @@ const CreateAccount = () => {
                   >
                     <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                       <Button
-                        type="submit"
-                        size="large"
-                        variant="outlined"
+                        type='submit'
+                        size='large'
+                        variant='outlined'
                         sx={{ padding: 1 }}
                         endIcon={<DownloadDoneIcon />}
-                        color="success"
+                        color='success'
                       >
                         ذخیره
                       </Button>
@@ -240,17 +249,17 @@ const CreateAccount = () => {
                 </Grid>
               </Form>
             </RtlVersion>
-          </Box>
+          </MyBox>
         </Card>
-
+        </Box>
         <BottomNav
-          className="pt-5"
+          className='pt-5'
           nextStep={true}
           preStep={true}
-          forLink="delivery"
-          backLink="finish"
-          forText="Add delivery zone"
-          backText="Finish installation"
+          forLink='delivery'
+          backLink='finish'
+          forText='Add delivery zone'
+          backText='Finish installation'
         />
       </Container>
       <Footer />

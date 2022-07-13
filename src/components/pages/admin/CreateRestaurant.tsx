@@ -9,8 +9,8 @@ import {
   Grid
 } from '@mui/material';
 
-import BottomNav from '../../shared/BottomNav';
-import Footer from '../../shared/Footer';
+import BottomNav from '../../../shared/BottomNav';
+import Footer from '../../../shared/Footer';
 import { Form } from 'antd';
 
 // import Redux requirements
@@ -34,9 +34,9 @@ import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
 import images from 'src/importer';
 
 // import costume components
-import TitleText from '../../UI/TitleText';
+import TitleText from '../../../UI/TitleText';
 import ProgressContext from 'src/contexts/ProgressContext';
-import RtlVersion from '../../UI/RtlVersion';
+import RtlVersion from '../../../UI/RtlVersion';
 
 const MyBox = styled(Box)`
   border: 1px solid #cbccd247;

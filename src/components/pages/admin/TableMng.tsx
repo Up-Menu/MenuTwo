@@ -10,8 +10,8 @@ import {
   Tooltip
 } from '@mui/material';
 import React, { useContext, useState } from 'react';
-import BottomNav from '../../shared/BottomNav';
-import Footer from '../../shared/Footer';
+import BottomNav from '../../../shared/BottomNav';
+import Footer from '../../../shared/Footer';
 import TextField from '@mui/material/TextField';
 import { Form } from 'antd';
 
@@ -26,11 +26,11 @@ import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 
 // costume components
-import Tables from '../../UI/Table';
-import PopUp from '../../UI/PopUp';
-import TitleText from '../../UI/TitleText';
-import RtlVersion from '../../UI/RtlVersion';
-import { userCreateTable } from '../../../../store/actions';
+import Tables from '../../../UI/Table';
+import PopUp from '../../../UI/PopUp';
+import TitleText from '../../../UI/TitleText';
+import RtlVersion from '../../../UI/RtlVersion';
+import { userCreateTable } from '../../../store/actions';
 import { useTypedDispatch } from 'src/store';
 import { log } from 'util';
 

@@ -13,7 +13,7 @@ import {
   CardContent
 } from '@mui/material';
 import { Link, NavLink as RouterLink } from 'react-router-dom';
-import Footer from 'src/components/modules/shared/Footer';
+import Footer from 'src/shared/Footer';
 import TextField from '@mui/material/TextField';
 import { pink } from '@mui/material/colors';
 import { Form } from 'antd';

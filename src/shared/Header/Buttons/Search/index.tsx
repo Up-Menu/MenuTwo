@@ -143,7 +143,7 @@ function HeaderSearch() {
                   {searchValue}
                 </Typography>
               </Typography>
-              <Link href="#" variant="body2" underline="hover">
+              <Link href="src/shared/Header/Buttons/Search/index#" variant="body2" underline="hover">
                 Advanced search
               </Link>
             </Box>
@@ -165,7 +165,7 @@ function HeaderSearch() {
                 <Box flex="1">
                   <Box display="flex" justifyContent="space-between">
                     <Link
-                      href="#"
+                      href="src/shared/Header/Buttons/Search/index#"
                       underline="hover"
                       sx={{ fontWeight: 'bold' }}
                       variant="body2"
@@ -204,7 +204,7 @@ function HeaderSearch() {
                 <Box flex="1">
                   <Box display="flex" justifyContent="space-between">
                     <Link
-                      href="#"
+                      href="src/shared/Header/Buttons/Search/index#"
                       underline="hover"
                       sx={{ fontWeight: 'bold' }}
                       variant="body2"
@@ -242,7 +242,7 @@ function HeaderSearch() {
                 <Box flex="1">
                   <Box display="flex" justifyContent="space-between">
                     <Link
-                      href="#"
+                      href="src/shared/Header/Buttons/Search/index#"
                       underline="hover"
                       sx={{ fontWeight: 'bold' }}
                       variant="body2"

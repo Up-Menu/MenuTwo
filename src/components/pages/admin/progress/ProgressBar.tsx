@@ -18,7 +18,7 @@ import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
 
 // import rtl module
-import RtlVersion from 'src/components/modules/UI/RtlVersion';
+import RtlVersion from 'src/UI/RtlVersion';
 
 const checkedPart = <CheckBox />;
 const noneCheckPart = <CheckBoxOutlineBlankTwoTone />;

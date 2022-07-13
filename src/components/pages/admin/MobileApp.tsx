@@ -8,16 +8,16 @@ import {
   Divider,
   Button
 } from '@mui/material';
-import BottomNav from '../../shared/BottomNav';
-import Footer from '../../shared/Footer';
+import BottomNav from '../../../shared/BottomNav';
+import Footer from '../../../shared/Footer';
 import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
 import ProgressContext from 'src/contexts/ProgressContext';
 import './MobileApp.css';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { IPhoneX } from 'react-device-frames';
 import CaptureArea from './CaptureArea';
-import TitleText from '../../UI/TitleText';
-import RtlVersion from '../../UI/RtlVersion';
+import TitleText from '../../../UI/TitleText';
+import RtlVersion from '../../../UI/RtlVersion';
 import ThemeStore from 'src/theme/classic/Store';
 
 const colors = [

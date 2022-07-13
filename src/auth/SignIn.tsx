@@ -10,7 +10,7 @@ import {
   Button,
   CardContent
 } from '@mui/material';
-import Footer from 'src/components/modules/shared/Footer';
+import Footer from 'src/shared/Footer';
 import TextField from '@mui/material/TextField';
 
 import { Form } from 'antd';

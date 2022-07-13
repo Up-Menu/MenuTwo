@@ -1,6 +1,6 @@
 import React, { Fragment, useRef, useState } from 'react';
-import HeaderMenu from 'src/components/modules/shared/Header/Menu';
-import HeaderSearch from 'src/components/modules/shared/Header/Buttons/Search';
+import HeaderMenu from 'src/shared/Header/Menu';
+import HeaderSearch from 'src/shared/Header/Buttons/Search';
 import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
 import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
 import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';

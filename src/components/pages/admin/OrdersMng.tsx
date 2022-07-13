@@ -10,12 +10,12 @@ import {
 } from '@mui/material';
 
 import { Link } from 'react-router-dom';
-import Footer from '../../shared/Footer';
-import BottomNav from '../../shared/BottomNav';
+import Footer from '../../../shared/Footer';
+import BottomNav from '../../../shared/BottomNav';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import ProgressContext from 'src/contexts/ProgressContext';
-import IosSwitch from '../../UI/IosSwitch';
-import RtlVersion from '../../UI/RtlVersion';
+import IosSwitch from '../../../UI/IosSwitch';
+import RtlVersion from '../../../UI/RtlVersion';
 
 const OrdersMng = () => {
   const progressContext = useContext(ProgressContext);

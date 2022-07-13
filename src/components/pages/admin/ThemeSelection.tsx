@@ -14,12 +14,12 @@ import {
 
 import toast, { Toaster } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
-import Footer from '../../shared/Footer';
-import BottomNav from '../../shared/BottomNav';
-import { ThemesList } from '../../../../theme/Themes';
+import Footer from '../../../shared/Footer';
+import BottomNav from '../../../shared/BottomNav';
+import { ThemesList } from '../../../theme/Themes';
 import ProgressContext from 'src/contexts/ProgressContext';
-import TitleText from '../../UI/TitleText';
-import RtlVersion from '../../UI/RtlVersion';
+import TitleText from '../../../UI/TitleText';
+import RtlVersion from '../../../UI/RtlVersion';
 import InstallDesktopIcon from '@mui/icons-material/InstallDesktop';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 

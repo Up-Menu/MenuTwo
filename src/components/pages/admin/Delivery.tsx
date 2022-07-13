@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { LoadScript, GoogleMap, Polygon } from '@react-google-maps/api';
-import BottomNav from '../../shared/BottomNav';
-import Footer from '../../shared/Footer';
+import BottomNav from '../../../shared/BottomNav';
+import Footer from '../../../shared/Footer';
 import { Container } from '@mui/material';
 
 // This example presents a way to handle editing a Polygon

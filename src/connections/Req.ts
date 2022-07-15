@@ -52,7 +52,7 @@ export const GoogleReq = (value: any, fn: (arg0: any) => void) => {
     Api
         .post('Account/SSO', value, '')
         .then(response => {
-            fn([response.data.status, response.data.data.message])
+            fn([response.data.status, response.data.data])
         })
         .catch(err => console.log(err))
 }

@@ -10,14 +10,6 @@ import { nanoid } from '@reduxjs/toolkit'
 import timeoutPromise from '../helper/TimeOut'
 import toast from 'react-hot-toast'
 import { NavigateFunction } from 'react-router'
-
-
-
-
-
-
-
-
 //  Login Actions
 export const userLogin = (payload: any, fn: (arg0: any) => void) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
     const payloadWithOutRememberKey = {
@@ -92,7 +84,7 @@ export const userSignIn = (payload: any, fn: (arg0: any) => void, nav: NavigateF
                 }
             })
             fn(toast.success(server_response[1]))
-            nav("/dashboards/tasks")
+            nav("/smsPanel")
         } else fn(toast.error(server_response[1]))
     })
 }
@@ -130,6 +122,24 @@ export const userCreateTable = (payload: any, fn: (arg0: any) => void) => async 
     })
 }
 
+
+
+
+// Sms Panel Actions
+export const userSmsVerification = (payload: any, fn: (arg0: any) => void, nav: NavigateFunction) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
+    SignInReq(payload, (server_response) => {
+        if (server_response[0] == 'Success') {
+            dispatch({
+                type: "USER_SMS_VERIFY",
+                payload: {
+                    ...payload
+                }
+            })
+            fn(toast.success(server_response[1]))
+            nav("/dashboards/tasks")
+        } else fn(toast.error(server_response[1]))
+    })
+}
 
 // CreateRestaurant Actions
 export const userCreateRestaurant = (payload: any, fn: (arg0: any) => void) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
@@ -187,7 +197,6 @@ export const userGoogleLogIn = (
                     }
                 }))
             fn(toast.success("!خوش آمدید"))
-            localStorage.setItem("googleSSO", JSON.stringify(data))
             nav("/dashboards/tasks")
         }
     })

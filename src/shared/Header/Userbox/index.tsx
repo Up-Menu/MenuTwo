@@ -1,31 +1,33 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import { NavLink } from 'react-router-dom';
+
 
 import {
   Avatar,
   Box,
   Button,
-  Divider,
   Hidden,
   lighten,
-  List,
-  ListItem,
-  ListItemText,
+  // List,
+  // Divider,
+  // ListItem,
+  // ListItemText,
   Popover,
   Typography
 } from '@mui/material';
 
-import InboxTwoToneIcon from '@mui/icons-material/InboxTwoTone';
 import { styled } from '@mui/material/styles';
 import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
-import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
 import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
-import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
 import { useTypedDispatch } from 'src/store';
 import { userLogout } from 'src/store/actions';
 import { useTypedSelector } from 'src/store';
 import images from 'src/widgets/importer';
+
+// import InboxTwoToneIcon from '@mui/icons-material/InboxTwoTone';
+// import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
+// import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
+// import { NavLink } from 'react-router-dom';
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
@@ -62,17 +64,29 @@ const UserBoxDescription = styled(Typography)(
 `
 );
 
+interface UserType {
+  name: string;
+  avatar: string;
+  jobtitle: string;
+}
+
 function HeaderUserbox() {
+  const [user, setUser] = useState<UserType>({ name: '', avatar: '', jobtitle: '' })
   const logData: any = useTypedSelector((state) => state);
-  const user = {
-    name: logData.googleData.payload
-      ? `${logData.googleData.payload.firstName} ${logData.googleData.payload.lastName}`
-      : 'کاربر سپند',
-    avatar: logData.googleData.payload
-      ? logData.googleData.payload.profile
-      : images['avatars/profile_default.png'],
-    jobtitle: 'سطح نقره ای'
-  };
+
+  useEffect(() => {
+    return setUser({
+      name: logData.googleData.payload
+        ? `${logData.googleData.payload.firstName} ${logData.googleData.payload.lastName}`
+        : 'کاربر سپند',
+      avatar: logData.googleData.payload
+        ? logData.googleData.payload.profile
+        : images['avatars/profile_default.png'],
+      jobtitle: 'سطح نقره ای'
+    });
+
+  }, [logData.googleData.payload]);
+
   const dispatch = useTypedDispatch();
 
   const ref = useRef<any>(null);
@@ -95,12 +109,12 @@ function HeaderUserbox() {
 
   return (
     <>
-      <UserBoxButton color="secondary" ref={ref} onClick={handleOpen}>
-        <Avatar variant="rounded" alt={user.name} src={user.avatar} />
+      <UserBoxButton color='secondary' ref={ref} onClick={handleOpen}>
+        <Avatar variant='rounded' alt={user.name} src={user.avatar} />
         <Hidden mdDown>
           <UserBoxText>
-            <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
-            <UserBoxDescription variant="body2">
+            <UserBoxLabel variant='body1'>{user.name}</UserBoxLabel>
+            <UserBoxDescription variant='body2'>
               {user.jobtitle}
             </UserBoxDescription>
           </UserBoxText>
@@ -122,12 +136,12 @@ function HeaderUserbox() {
           horizontal: 'left'
         }}
       >
-        <MenuUserBox sx={{ minWidth: 210 }} display="flex">
-          <Avatar variant="rounded" alt={user.name} src={user.avatar} />
+        <MenuUserBox sx={{ minWidth: 210 }} display='flex'>
+          <Avatar variant='rounded' alt={user.name} src={user.avatar} />
           <Box pl={3}>
             <UserBoxText>
-              <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
-              <UserBoxDescription variant="body2">
+              <UserBoxLabel variant='body1'>{user.name}</UserBoxLabel>
+              <UserBoxDescription variant='body2'>
                 {user.jobtitle}
               </UserBoxDescription>
             </UserBoxText>
@@ -154,9 +168,9 @@ function HeaderUserbox() {
         {/*</List>*/}
         {/*<Divider />*/}
         <Box sx={{ m: 1 }}>
-          <Button color="error" fullWidth onClick={signOutHandler}>
+          <Button color='error' fullWidth onClick={signOutHandler}>
             <LockOpenTwoToneIcon sx={{ mr: 1 }} />
-              خروج از حساب کاربری
+            خروج از حساب کاربری
           </Button>
         </Box>
       </Popover>

@@ -91,6 +91,7 @@ const Avatars = Loader(
 );
 const Cards = Loader(lazy(() => import('src/content/pages/Components/Cards')));
 const Forms = Loader(lazy(() => import('src/content/pages/Components/Forms')));
+const SmsPanel = Loader(lazy(() => import('src/components/pages/admin/SmsPanel')));
 const SignIn = Loader(lazy(() => import('../auth/SignIn')));
 
 // Status
@@ -127,14 +128,14 @@ function routes(props: string[]): RouteObject[] {
         },
         {
           path: 'overview',
-          element: <Navigate to="/" replace />
+          element: <Navigate to='/' replace />
         },
         {
           path: 'status',
           children: [
             {
               path: '',
-              element: <Navigate to="404" replace />
+              element: <Navigate to='404' replace />
             },
             {
               path: '404',
@@ -169,7 +170,7 @@ function routes(props: string[]): RouteObject[] {
       children: [
         {
           path: '',
-          element: <Navigate to="tasks" replace />
+          element: <Navigate to='tasks' replace />
         },
         {
           path: 'store',
@@ -186,6 +187,10 @@ function routes(props: string[]): RouteObject[] {
       element: <Login />
     },
     {
+      path: 'smsPanel',
+      element: <SmsPanel />
+    },
+    {
       path: 'dashboards',
       element: isLogged ? (
         <>
@@ -198,7 +203,7 @@ function routes(props: string[]): RouteObject[] {
         {
           path: '',
           element: isLogged ? (
-            <Navigate to="tasks" replace />
+            <Navigate to='tasks' replace />
           ) : (
             <Login /> || <SignIn />
           )
@@ -247,7 +252,7 @@ function routes(props: string[]): RouteObject[] {
       children: [
         {
           path: '',
-          element: <Navigate to="transactions" replace />
+          element: <Navigate to='transactions' replace />
         },
         {
           path: 'transactions',
@@ -258,7 +263,7 @@ function routes(props: string[]): RouteObject[] {
           children: [
             {
               path: '',
-              element: <Navigate to="details" replace />
+              element: <Navigate to='details' replace />
             },
             {
               path: 'details',
@@ -278,7 +283,7 @@ function routes(props: string[]): RouteObject[] {
       children: [
         {
           path: '',
-          element: <Navigate to="buttons" replace />
+          element: <Navigate to='buttons' replace />
         },
         {
           path: 'buttons',

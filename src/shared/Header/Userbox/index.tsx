@@ -79,10 +79,16 @@ function HeaderUserbox() {
   const logData: any = useTypedSelector((state) => state);
 
   useEffect(() => {
-    if (logData.googleData) {
+    if (logData.googleData.user) {
       setUser({
         name: `${logData.googleData.user.firstName} ${logData.googleData.user.lastName}`,
         avatar: logData.googleData.user.profile,
+        jobtitle: 'سطح نقره ای'
+      });
+    } else if (logData.googleData.payload) {
+      setUser({
+        name: `${logData.googleData.payload.firstName} ${logData.googleData.payload.lastName}`,
+        avatar: logData.googleData.payload.profile,
         jobtitle: 'سطح نقره ای'
       });
     } else if (logData.user.user) {

@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 
-
-
 import {
   Avatar,
   Box,
@@ -23,6 +21,7 @@ import { useTypedDispatch } from 'src/store';
 import { userLogout } from 'src/store/actions';
 import { useTypedSelector } from 'src/store';
 import images from 'src/widgets/importer';
+import { useNavigate } from 'react-router';
 
 // import InboxTwoToneIcon from '@mui/icons-material/InboxTwoTone';
 // import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
@@ -71,21 +70,35 @@ interface UserType {
 }
 
 function HeaderUserbox() {
-  const [user, setUser] = useState<UserType>({ name: '', avatar: '', jobtitle: '' })
+  const nav = useNavigate();
+  const [user, setUser] = useState<UserType>({
+    name: 'کاربر سپند',
+    avatar: images['avatars/profile_default.png'],
+    jobtitle: 'سطح نقره ای'
+  });
   const logData: any = useTypedSelector((state) => state);
 
   useEffect(() => {
-    return setUser({
-      name: logData.googleData.payload
-        ? `${logData.googleData.payload.firstName} ${logData.googleData.payload.lastName}`
-        : 'کاربر سپند',
-      avatar: logData.googleData.payload
-        ? logData.googleData.payload.profile
-        : images['avatars/profile_default.png'],
-      jobtitle: 'سطح نقره ای'
-    });
-
-  }, [logData.googleData.payload]);
+    if (logData.googleData) {
+      setUser({
+        name: `${logData.googleData.user.firstName} ${logData.googleData.user.lastName}`,
+        avatar: logData.googleData.user.profile,
+        jobtitle: 'سطح نقره ای'
+      });
+    } else if (logData.user.user) {
+      setUser({
+        name: `${logData.user.user.email}`,
+        avatar: 'from reg',
+        jobtitle: 'سطح نقره ای'
+      });
+    } else {
+      setUser({
+        name: `${logData.user.payload.email}`,
+        avatar: 'from reg',
+        jobtitle: 'سطح نقره ای'
+      });
+    }
+  }, []);
 
   const dispatch = useTypedDispatch();
 
@@ -102,19 +115,17 @@ function HeaderUserbox() {
 
   const signOutHandler = (e: any): void => {
     e.preventDefault();
-    dispatch(userLogout()).then(() => {
-      window.location.reload();
-    });
+    dispatch(userLogout(nav));
   };
 
   return (
     <>
-      <UserBoxButton color='secondary' ref={ref} onClick={handleOpen}>
-        <Avatar variant='rounded' alt={user.name} src={user.avatar} />
+      <UserBoxButton color="secondary" ref={ref} onClick={handleOpen}>
+        <Avatar variant="rounded" alt={user.name} src={user.avatar} />
         <Hidden mdDown>
           <UserBoxText>
-            <UserBoxLabel variant='body1'>{user.name}</UserBoxLabel>
-            <UserBoxDescription variant='body2'>
+            <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
+            <UserBoxDescription variant="body2">
               {user.jobtitle}
             </UserBoxDescription>
           </UserBoxText>
@@ -136,12 +147,12 @@ function HeaderUserbox() {
           horizontal: 'left'
         }}
       >
-        <MenuUserBox sx={{ minWidth: 210 }} display='flex'>
-          <Avatar variant='rounded' alt={user.name} src={user.avatar} />
+        <MenuUserBox sx={{ minWidth: 210 }} display="flex">
+          <Avatar variant="rounded" alt={user.name} src={user.avatar} />
           <Box pl={3}>
             <UserBoxText>
-              <UserBoxLabel variant='body1'>{user.name}</UserBoxLabel>
-              <UserBoxDescription variant='body2'>
+              <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
+              <UserBoxDescription variant="body2">
                 {user.jobtitle}
               </UserBoxDescription>
             </UserBoxText>
@@ -168,7 +179,7 @@ function HeaderUserbox() {
         {/*</List>*/}
         {/*<Divider />*/}
         <Box sx={{ m: 1 }}>
-          <Button color='error' fullWidth onClick={signOutHandler}>
+          <Button color="error" fullWidth onClick={signOutHandler}>
             <LockOpenTwoToneIcon sx={{ mr: 1 }} />
             خروج از حساب کاربری
           </Button>

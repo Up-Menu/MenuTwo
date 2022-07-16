@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import CircularProgress, {
   CircularProgressProps
 } from '@mui/material/CircularProgress';
@@ -35,7 +35,7 @@ function CircularProgressWithLabel(
 }
 
 export default function CircularStatic() {
-  const [progress, setProgress] = React.useState(10);
+  const [progress, setProgress] = useState(10);
   const progressContext = useContext(ProgressContext);
 
   const progressArr: boolean[] = [
@@ -52,7 +52,7 @@ export default function CircularStatic() {
 
   const count1 = progressArr.filter((value) => value === true).length;
 
-  React.useEffect(() => {
+  useEffect(() => {
     const timer = setInterval(() => {
       setProgress(() => count1 * 11.1111111111);
     }, 800);

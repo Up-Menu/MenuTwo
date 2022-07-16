@@ -48,7 +48,7 @@ export const userLogin = (payload: any, fn: (arg0: any) => void) => async (dispa
 }
 
 // Logout Action
-export const userLogout = () => (dispatch: (arg0: { type: string }) => any) => {
+export const userLogout = (nav: NavigateFunction) => (dispatch: (arg0: { type: string }) => any) => {
     return timeoutPromise(500)
         .then(() => (
             dispatch({
@@ -57,6 +57,7 @@ export const userLogout = () => (dispatch: (arg0: { type: string }) => any) => {
         )
         .then(() => {
             localStorage.clear()
+            nav("/")
         })
 }
 
@@ -196,6 +197,7 @@ export const userGoogleLogIn = (
                         ...payload
                     }
                 }))
+            localStorage.setItem("googleSSO", JSON.stringify(data))
             fn(toast.success("!خوش آمدید"))
             nav("/dashboards/tasks")
         }

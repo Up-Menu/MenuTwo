@@ -22,7 +22,7 @@ export const SSO = () => {
       profile: userObj.picture
     };
     dispatch(userGoogleLogIn(userData, (notification) => notification, nav));
-    console.log(userData);
+    // console.log(userData);
   }
 
   useEffect(() => {

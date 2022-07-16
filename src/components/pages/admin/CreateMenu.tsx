@@ -43,16 +43,18 @@ import TitleText from '../../../UI/TitleText';
 import RtlVersion from '../../../theme/RtlVersion';
 import IosSwitch from '../../../UI/IosSwitch';
 import BottomNav from '../../../shared/BottomNav';
-import { useTypedDispatch } from 'src/store'
+import { useTypedDispatch } from 'src/store';
 
 
 // import icons
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import { userCreateMenu } from '../../../store/actions';
+import MenuItem from '@mui/material/MenuItem';
 
 const CreateMenu: React.FunctionComponent = () => {
   const [foodList, setFoodList] = useState([]);
+  const [flag, setFlag] = useState(true);
   const [open, setOpen] = useState(false);
   const [ID, setID] = useState(0);
   const progressContext = useContext(ProgressContext);
@@ -110,8 +112,8 @@ const CreateMenu: React.FunctionComponent = () => {
         };
 
         return (
-          <Box display="flex" flexDirection="row">
-            <Tooltip title="Delete Order" arrow>
+          <Box display='flex' flexDirection='row'>
+            <Tooltip title='Delete Order' arrow>
               <IconButton
                 sx={{
                   '&:hover': {
@@ -120,10 +122,10 @@ const CreateMenu: React.FunctionComponent = () => {
                   color: '#FF1943'
                 }}
                 onClick={deleteHandler}
-                color="error"
-                size="small"
+                color='error'
+                size='small'
               >
-                <DeleteSweepIcon fontSize="small" />
+                <DeleteSweepIcon fontSize='small' />
               </IconButton>
             </Tooltip>
           </Box>
@@ -188,10 +190,51 @@ const CreateMenu: React.FunctionComponent = () => {
     },
     [foodList]
   );
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setFlag(() => false);
+    }, 5000);
+    return () => {
+      clearInterval(timer);
+    };
+  }, [flag]);
 
+
+  const label = { inputProps: { 'aria-label': 'Switch demo' } };
+
+  const currencies = [
+    {
+      value: 'USD',
+      label: '$'
+    },
+    {
+      value: 'EUR',
+      label: 'مستیمنب'
+    },
+    {
+      value: 'BTC',
+      label: '฿'
+    },
+    {
+      value: 'JPY',
+      label: '¥'
+    }
+  ];
+
+  const [currency, setCurrency] = useState('EUR');
+
+  const handleChange = (event) => {
+    setCurrency(event.target.value);
+  };
+
+  const [value, setValue] = useState(30);
+
+  const handleChange2 = (event, newValue) => {
+    setValue(newValue);
+  };
   return (
     <>
-      <TitleText header="صفحه ساخت منو" />
+      <TitleText header='صفحه ساخت منو' />
       <Toaster />
       <PopUp
         setOpen={setOpen}
@@ -202,76 +245,85 @@ const CreateMenu: React.FunctionComponent = () => {
         List={foodList}
       />
 
-      <Container maxWidth="lg">
+      <Container maxWidth='lg'>
         <Box sx={{ direction: 'rtl' }}>
-          <Box pt={3} pb={5}>
+          {flag && <Box pt={3} pb={5}>
             <Stack sx={{ width: '100%' }} spacing={2}>
-              <MyAlert severity="success">
+              <MyAlert severity='success'>
                 انتخاب مضمون با موفقیت انجام شد، اکنون منو غذا را بسازید!
               </MyAlert>
             </Stack>
-          </Box>
+          </Box>}
 
           <Grid container spacing={5}>
             <RtlVersion>
               <Grid item xs={12} md={6}>
-                <Card variant="outlined">
+                <Card variant='outlined'>
                   <Grid
                     container
-                    direction="column"
-                    justifyContent="left"
-                    alignItems="stretch"
+                    direction='column'
+                    justifyContent='left'
+                    alignItems='stretch'
                     spacing={0}
                   >
                     <Box pt={2} pb={2} pl={2}>
-                      <Typography variant="h4">فرم افزودن محصول</Typography>
+                      <Typography variant='h4'>فرم افزودن محصول</Typography>
                     </Box>
                     <Divider />
                     <Box pt={3} pb={2} pl={2} pr={2}>
                       <Form
                         form={form}
-                        name="control-hooks"
+                        name='control-hooks'
                         wrapperCol={{ span: 12 }}
                         initialValues={{ remember: true }}
                         onFinish={onFinish}
                         onFinishFailed={onFinishFailed}
-                        autoComplete="on"
+                        autoComplete='on'
                       >
                         <Grid container spacing={2}>
                           <Grid item xs={12}>
-                            <Form.Item name="productName">
+                            <Form.Item name='productName'>
                               <TextField
                                 value={''}
-                                label="نام غذا"
-                                type="text"
+                                label='نام غذا'
+                                type='text'
                                 fullWidth
                               />
                             </Form.Item>
                           </Grid>
                           <Grid item xs={12} md={6}>
-                            <Form.Item name="category">
+                            <Form.Item name='category'>
                               <TextField
-                                label="دسته بندی"
-                                type="text"
+                                id='outlined-select-currency'
+                                select
+                                label='دسته بندی'
+                                value={currency}
+                                onChange={handleChange}
                                 fullWidth
-                                value={''}
-                              />
+                              >
+                                {currencies.map((option) => (
+                                  <MenuItem sx={{ direction: 'rtl', textAlign: 'right',justifyContent:"end"}}
+                                            key={option.value} value={option.value}>
+                                    {option.label}
+                                  </MenuItem>
+                                ))}
+                              </TextField>
                             </Form.Item>
                           </Grid>
                           <Grid item xs={12} md={6}>
-                            <Form.Item name="price">
+                            <Form.Item name='price'>
                               <TextField
-                                label="قیمت"
-                                type="text"
+                                label='قیمت'
+                                type='text'
                                 fullWidth
                                 value={''}
                               />
                             </Form.Item>
                           </Grid>
                           <Grid item xs={12}>
-                            <Form.Item name="description">
+                            <Form.Item name='description'>
                               <TextField
-                                label="توضیحات غذا"
+                                label='توضیحات غذا'
                                 multiline
                                 fullWidth
                                 value={''}
@@ -280,27 +332,27 @@ const CreateMenu: React.FunctionComponent = () => {
                             </Form.Item>
                           </Grid>
                           <Grid item xs={12}>
-                            <Form.Item name="foodImage">
-                              <TextField value={''} type="file" fullWidth />
+                            <Form.Item name='foodImage'>
+                              <TextField value={''} type='file' fullWidth />
                             </Form.Item>
                           </Grid>
                           <Grid item xs={12}>
                             <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                               <Button
                                 sx={{ margin: 1 }}
-                                size="medium"
-                                color="success"
-                                variant="outlined"
+                                size='medium'
+                                color='success'
+                                variant='outlined'
                                 endIcon={<DoneOutlineIcon />}
                                 onClick={sendMenu}
                               >
                                 ثبت
                               </Button>
                               <Button
-                                size="medium"
+                                size='medium'
                                 sx={{ margin: 1 }}
-                                type="submit"
-                                color="warning"
+                                type='submit'
+                                color='warning'
                                 endIcon={<AddTaskIcon />}
                               >
                                 اضافه کردن مجدد
@@ -315,16 +367,16 @@ const CreateMenu: React.FunctionComponent = () => {
               </Grid>
             </RtlVersion>
             <Grid item xs={12} md={6}>
-              <Card variant="outlined">
+              <Card variant='outlined'>
                 <Grid
                   container
-                  direction="column"
-                  justifyContent="left"
-                  alignItems="stretch"
+                  direction='column'
+                  justifyContent='left'
+                  alignItems='stretch'
                   spacing={0}
                 >
                   <Box pt={2} pb={2} pr={2}>
-                    <Typography variant="h4">محصولات</Typography>
+                    <Typography variant='h4'>محصولات</Typography>
                   </Box>
                   <Divider />
                 </Grid>
@@ -334,62 +386,62 @@ const CreateMenu: React.FunctionComponent = () => {
                       dynamicBullets: true
                     }}
                     modules={[Pagination]}
-                    className="mySwiper"
+                    className='mySwiper'
                   >
                     <SwiperSlide>
-                      <img src={images['new-home-1.png']} alt="" />
+                      <img src={images['new-home-1.png']} alt='' />
                     </SwiperSlide>
                     <SwiperSlide>
-                      <img src={images['new-home-2.png']} alt="" />
+                      <img src={images['new-home-2.png']} alt='' />
                     </SwiperSlide>{' '}
                     <SwiperSlide>
-                      <img src={images['new-home-3.png']} alt="" />
+                      <img src={images['new-home-3.png']} alt='' />
                     </SwiperSlide>
                     <SwiperSlide>
-                      <img src={images['new-home-4.png']} alt="" />
+                      <img src={images['new-home-4.png']} alt='' />
                     </SwiperSlide>
                     <SwiperSlide>
-                      <img src={images['new-home-5.png']} alt="" />
+                      <img src={images['new-home-5.png']} alt='' />
                     </SwiperSlide>
                   </Swiper>
 
-                  <Grid
-                    container
-                    direction="column"
-                    justifyContent="left"
-                    alignItems="stretch"
-                    spacing={0}
-                  >
-                    <Box
-                      pt={2}
-                      pb={2}
-                      pl={2}
-                      pr={2}
-                      display="flex"
-                      flexDirection="row"
-                      justifyContent="space-between"
-                      alignItems="center"
-                    >
-                      <Typography variant="h6">وضعیت موجود</Typography>
+                  {/*<Grid*/}
+                  {/*  container*/}
+                  {/*  direction="column"*/}
+                  {/*  justifyContent="left"*/}
+                  {/*  alignItems="stretch"*/}
+                  {/*  spacing={0}*/}
+                  {/*>*/}
+                  {/*  <Box*/}
+                  {/*    pt={2}*/}
+                  {/*    pb={2}*/}
+                  {/*    pl={2}*/}
+                  {/*    pr={2}*/}
+                  {/*    display="flex"*/}
+                  {/*    flexDirection="row"*/}
+                  {/*    justifyContent="space-between"*/}
+                  {/*    alignItems="center"*/}
+                  {/*  >*/}
+                  {/*    <Typography variant="h6">وضعیت موجود</Typography>*/}
 
-                      <IosSwitch />
-                    </Box>
-                    <Divider />
-                    <Box
-                      pt={2}
-                      pb={2}
-                      pl={2}
-                      pr={2}
-                      display="flex"
-                      flexDirection="row"
-                      justifyContent="space-between"
-                      alignItems="center"
-                    >
-                      <Typography variant="h6">تخفیف</Typography>
+                  {/*    <IosSwitch />*/}
+                  {/*  </Box>*/}
+                  {/*  <Divider />*/}
+                  {/*  <Box*/}
+                  {/*    pt={2}*/}
+                  {/*    pb={2}*/}
+                  {/*    pl={2}*/}
+                  {/*    pr={2}*/}
+                  {/*    display="flex"*/}
+                  {/*    flexDirection="row"*/}
+                  {/*    justifyContent="space-between"*/}
+                  {/*    alignItems="center"*/}
+                  {/*  >*/}
+                  {/*    <Typography variant="h6">تخفیف</Typography>*/}
 
-                      <IosSwitch />
-                    </Box>
-                  </Grid>
+                  {/*    <IosSwitch />*/}
+                  {/*  </Box>*/}
+                  {/*</Grid>*/}
                 </Box>
               </Card>
             </Grid>
@@ -409,13 +461,13 @@ const CreateMenu: React.FunctionComponent = () => {
         </Box>
 
         <BottomNav
-          className="pt-5"
+          className='pt-5'
           nextStep={true}
           preStep={true}
-          backLink="orders"
-          forLink="themes"
-          forText="Select theme"
-          backText="Select order"
+          backLink='orders'
+          forLink='themes'
+          forText='Select theme'
+          backText='Select order'
         />
       </Container>
       <Footer />

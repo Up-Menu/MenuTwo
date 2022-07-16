@@ -18,26 +18,13 @@ const Loader = (Component) => (props: JSX.IntrinsicAttributes) =>
 
 // Pages
 
-const Overview = Loader(lazy(() => import('src/components/pages/client/overview')));
+const Overview = Loader(
+  lazy(() => import('src/components/pages/client/overview'))
+);
 
 // Dashboards
 
 const Tasks = Loader(lazy(() => import('src/content/dashboards/Tasks')));
-
-// Applications
-
-const Messenger = Loader(
-  lazy(() => import('src/content/applications/Messenger'))
-);
-const Transactions = Loader(
-  lazy(() => import('src/content/applications/Transactions'))
-);
-const UserProfile = Loader(
-  lazy(() => import('src/content/applications/Users/profile'))
-);
-const UserSettings = Loader(
-  lazy(() => import('src/content/applications/Users/settings'))
-);
 
 const CreateRestaurant = Loader(
   lazy(() => import('src/components/pages/admin/RestaurantAccounting'))
@@ -57,6 +44,10 @@ const Order = Loader(
   lazy(() => import('src/components/pages/admin/OrdersManagement'))
 );
 
+const CreateCategory = Loader(
+  lazy(() => import('src/components/pages/admin/CreateCategory'))
+);
+
 const Delivery = Loader(
   lazy(() => import('src/components/pages/admin/Delivery'))
 );
@@ -68,30 +59,9 @@ const Tables = Loader(
   lazy(() => import('src/components/pages/admin/TableManagement'))
 );
 
-// Components
-
-const Buttons = Loader(
-  lazy(() => import('src/content/pages/Components/Buttons'))
+const SmsPanel = Loader(
+  lazy(() => import('src/components/pages/admin/SmsPanel'))
 );
-const Modals = Loader(
-  lazy(() => import('src/content/pages/Components/Modals'))
-);
-const Accordions = Loader(
-  lazy(() => import('src/content/pages/Components/Accordions'))
-);
-const Tabs = Loader(lazy(() => import('src/content/pages/Components/Tabs')));
-const Badges = Loader(
-  lazy(() => import('src/content/pages/Components/Badges'))
-);
-const Tooltips = Loader(
-  lazy(() => import('src/content/pages/Components/Tooltips'))
-);
-const Avatars = Loader(
-  lazy(() => import('src/content/pages/Components/Avatars'))
-);
-const Cards = Loader(lazy(() => import('src/content/pages/Components/Cards')));
-const Forms = Loader(lazy(() => import('src/content/pages/Components/Forms')));
-const SmsPanel = Loader(lazy(() => import('src/components/pages/admin/SmsPanel')));
 const SignIn = Loader(lazy(() => import('../auth/SignIn')));
 
 // Status
@@ -128,14 +98,14 @@ function routes(props: string[]): RouteObject[] {
         },
         {
           path: 'overview',
-          element: <Navigate to='/' replace />
+          element: <Navigate to="/" replace />
         },
         {
           path: 'status',
           children: [
             {
               path: '',
-              element: <Navigate to='404' replace />
+              element: <Navigate to="404" replace />
             },
             {
               path: '404',
@@ -161,16 +131,13 @@ function routes(props: string[]): RouteObject[] {
         }
       ]
     },
-    {
-      path: 'signin',
-      element: <SignIn />
-    },
+
     {
       path: 'theme',
       children: [
         {
           path: '',
-          element: <Navigate to='tasks' replace />
+          element: <Navigate to="tasks" replace />
         },
         {
           path: 'store',
@@ -181,6 +148,10 @@ function routes(props: string[]): RouteObject[] {
           element: <ThemeCart />
         }
       ]
+    },
+    {
+      path: 'signin',
+      element: <SignIn />
     },
     {
       path: 'login',
@@ -203,7 +174,7 @@ function routes(props: string[]): RouteObject[] {
         {
           path: '',
           element: isLogged ? (
-            <Navigate to='tasks' replace />
+            <Navigate to="tasks" replace />
           ) : (
             <Login /> || <SignIn />
           )
@@ -225,6 +196,10 @@ function routes(props: string[]): RouteObject[] {
           element: isLogged ? <CreateRestaurant /> : <Login /> || <SignIn />
         },
         {
+          path: 'createCategory',
+          element: isLogged ? <CreateCategory /> : <Login /> || <SignIn />
+        },
+        {
           path: 'createMenu',
           element: isLogged ? <CreateMenu /> : <Login /> || <SignIn />
         },
@@ -239,87 +214,6 @@ function routes(props: string[]): RouteObject[] {
         {
           path: 'themes',
           element: isLogged ? <ThemeSelection /> : <Login /> || <SignIn />
-        },
-        {
-          path: 'messenger',
-          element: isLogged ? <Messenger /> : <Login /> || <SignIn />
-        }
-      ]
-    },
-    {
-      path: 'management',
-      element: isLogged ? <SidebarLayout /> : <Login /> || <SignIn />,
-      children: [
-        {
-          path: '',
-          element: <Navigate to='transactions' replace />
-        },
-        {
-          path: 'transactions',
-          element: <Transactions />
-        },
-        {
-          path: 'profile',
-          children: [
-            {
-              path: '',
-              element: <Navigate to='details' replace />
-            },
-            {
-              path: 'details',
-              element: <UserProfile />
-            },
-            {
-              path: 'settings',
-              element: <UserSettings />
-            }
-          ]
-        }
-      ]
-    },
-    {
-      path: '/components',
-      element: <SidebarLayout />,
-      children: [
-        {
-          path: '',
-          element: <Navigate to='buttons' replace />
-        },
-        {
-          path: 'buttons',
-          element: <Buttons />
-        },
-        {
-          path: 'modals',
-          element: <Modals />
-        },
-        {
-          path: 'accordions',
-          element: <Accordions />
-        },
-        {
-          path: 'tabs',
-          element: <Tabs />
-        },
-        {
-          path: 'badges',
-          element: <Badges />
-        },
-        {
-          path: 'tooltips',
-          element: <Tooltips />
-        },
-        {
-          path: 'avatars',
-          element: <Avatars />
-        },
-        {
-          path: 'cards',
-          element: <Cards />
-        },
-        {
-          path: 'forms',
-          element: <Forms />
         }
       ]
     }

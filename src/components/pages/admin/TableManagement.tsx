@@ -303,10 +303,10 @@ const CreateTable = () => {
           className="pt-5"
           nextStep={true}
           preStep={true}
-          forLink="orders"
-          backLink="delivery"
-          forText="Chose orders"
-          backText="Delivery zone"
+          forLink="mobileApp"
+          backLink="createMenu"
+          forText="تنظیمات تلفن همراه"
+          backText="ساخت منو"
         />
       </Container>
       <Footer />

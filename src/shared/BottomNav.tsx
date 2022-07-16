@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import AOS from 'aos';
-import { Link } from 'react-router-dom';
 import { Box, Button } from '@mui/material';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import styled from 'styled-components';
+import { NavLink as RouterLink } from 'react-router-dom';
 
 const LeftArrow = styled(DoubleArrowIcon)`
   -webkit-transform: rotate(180deg);
@@ -48,24 +48,28 @@ const BottomNav = (props: any) => {
       data-aos-duration="400"
       data-aos-easing="ease-in"
     >
-      <Link to={`/dashboards/${props.backLink}`}>
-        <Button
-          color="success"
-          endIcon={<LeftArrow />}
-          variant="outlined"
-          disabled={!props.preStep}
-          size="small"
-        >
-          {props.backText}
-        </Button>
-      </Link>
+      <Button
+        color="error"
+        startIcon={<LeftArrow />}
+        variant="outlined"
+        disabled={!props.preStep}
+        size="small"
+        component={RouterLink}
+        to={`/dashboards/${props.backLink}`}
+      >
+        {props.backText}
+      </Button>
 
       {props.nextStep && (
-        <Link to={`/dashboards/${props.forLink}`}>
-          <Button color="error" endIcon={<DoubleArrowIcon />} size="small">
-            {props.forText}
-          </Button>
-        </Link>
+        <Button
+          color="success"
+          component={RouterLink}
+          to={`/dashboards/${props.forLink}`}
+          endIcon={<DoubleArrowIcon />}
+          size="small"
+        >
+          {props.forText}
+        </Button>
       )}
     </Box>
   );

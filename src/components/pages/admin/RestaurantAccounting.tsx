@@ -94,7 +94,7 @@ const CreateAccount = () => {
       {loading ? (
         <LoadingOutlined />
       ) : (
-        <img width={80} src={images['avatars/profile_default.png']} alt='' />
+        <img width={80} src={images['avatars/profile_default.png']} alt="" />
       )}
     </div>
   );
@@ -107,7 +107,6 @@ const CreateAccount = () => {
     console.log('Failed:', errorInfo);
   };
 
-
   const MyBox = styled(Box)`
     @media (min-width: 480px) {
       //padding: 45px;
@@ -117,149 +116,149 @@ const CreateAccount = () => {
 
   return (
     <Fragment>
-      <TitleText header='ساخت اکانت رستوران' />
+      <TitleText header="ساخت اکانت رستوران" />
       <Toaster />
 
-      <Container maxWidth='lg'>
+      <Container maxWidth="lg">
         <Box p={1}>
-        <Card>
-          <MyBox sx={{ direction: 'rtl', p: 2 }}>
-            <RtlVersion>
-              <Form
-                name='basic'
-                wrapperCol={{ span: 6 }}
-                initialValues={{ remember: true }}
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
-                autoComplete='on'
-              >
-                <Grid container spacing={2}>
-                  <Grid
-                    item
-                    xs={12}
-                    sx={{ display: 'flex', justifyContent: 'center' }}
-                  >
-                    <Form.Item name='profile'>
-                      <MyBox>
-                        <Upload
-                          name='avatar'
-                          listType='picture-card'
-                          className='avatar-uploader'
-                          showUploadList={false}
-                          action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
-                          beforeUpload={beforeUpload}
-                          onChange={handleChange}
+          <Card>
+            <MyBox sx={{ direction: 'rtl', p: 2 }}>
+              <RtlVersion>
+                <Form
+                  name="basic"
+                  wrapperCol={{ span: 6 }}
+                  initialValues={{ remember: true }}
+                  onFinish={onFinish}
+                  onFinishFailed={onFinishFailed}
+                  autoComplete="on"
+                >
+                  <Grid container spacing={2}>
+                    <Grid
+                      item
+                      xs={12}
+                      sx={{ display: 'flex', justifyContent: 'center' }}
+                    >
+                      <Form.Item name="profile">
+                        <MyBox>
+                          <Upload
+                            name="avatar"
+                            listType="picture-card"
+                            className="avatar-uploader"
+                            showUploadList={false}
+                            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                            beforeUpload={beforeUpload}
+                            onChange={handleChange}
+                          >
+                            {imageUrl ? (
+                              <img
+                                src={imageUrl}
+                                alt="avatar"
+                                style={{ width: '100%' }}
+                              />
+                            ) : (
+                              uploadButton
+                            )}
+                          </Upload>
+                        </MyBox>
+                      </Form.Item>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Form.Item name="restaurantName">
+                        <TextField
+                          label="نام رستوران"
+                          type="text"
+                          fullWidth
+                          value={''}
+                        />
+                      </Form.Item>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <Form.Item name="cellPhone">
+                        <TextField
+                          label="شماره تلفن"
+                          type="text"
+                          fullWidth
+                          value={''}
+                        />
+                      </Form.Item>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <Form.Item name="email">
+                        <TextField
+                          label="ایمیل"
+                          type="text"
+                          fullWidth
+                          value={''}
+                        />
+                      </Form.Item>
+                    </Grid>
+
+                    <Grid item xs={12} md={6}>
+                      <Form.Item name="website">
+                        <TextField
+                          label="لینک سایت رستوران"
+                          type="text"
+                          fullWidth
+                          value={''}
+                        />
+                      </Form.Item>
+                    </Grid>
+
+                    <Grid item xs={12} md={6}>
+                      <Form.Item name="social">
+                        <TextField
+                          label="آیدی اینستاگرام"
+                          type="text"
+                          fullWidth
+                          value={''}
+                        />
+                      </Form.Item>
+                    </Grid>
+
+                    <Grid item xs={12}>
+                      <Form.Item name="address">
+                        <TextField
+                          label="نشانی"
+                          multiline
+                          value={''}
+                          fullWidth
+                          rows={7}
+                        />
+                      </Form.Item>
+                    </Grid>
+
+                    <Grid
+                      item
+                      xs={12}
+                      sx={{ display: 'flex', justifyContent: 'center' }}
+                    >
+                      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                        <Button
+                          type="submit"
+                          size="large"
+                          variant="outlined"
+                          sx={{ padding: 1 }}
+                          endIcon={<DownloadDoneIcon />}
+                          color="success"
                         >
-                          {imageUrl ? (
-                            <img
-                              src={imageUrl}
-                              alt='avatar'
-                              style={{ width: '100%' }}
-                            />
-                          ) : (
-                            uploadButton
-                          )}
-                        </Upload>
-                      </MyBox>
-                    </Form.Item>
+                          ذخیره
+                        </Button>
+                      </Form.Item>
+                    </Grid>
                   </Grid>
-                  <Grid item xs={12}>
-                    <Form.Item name='restaurantName'>
-                      <TextField
-                        label='نام رستوران'
-                        type='text'
-                        fullWidth
-                        value={''}
-                      />
-                    </Form.Item>
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <Form.Item name='cellPhone'>
-                      <TextField
-                        label='شماره تلفن'
-                        type='text'
-                        fullWidth
-                        value={''}
-                      />
-                    </Form.Item>
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <Form.Item name='email'>
-                      <TextField
-                        label='ایمیل'
-                        type='text'
-                        fullWidth
-                        value={''}
-                      />
-                    </Form.Item>
-                  </Grid>
-
-                  <Grid item xs={12} md={6}>
-                    <Form.Item name='website'>
-                      <TextField
-                        label='لینک سایت رستوران'
-                        type='text'
-                        fullWidth
-                        value={''}
-                      />
-                    </Form.Item>
-                  </Grid>
-
-                  <Grid item xs={12} md={6}>
-                    <Form.Item name='social'>
-                      <TextField
-                        label='آیدی اینستاگرام'
-                        type='text'
-                        fullWidth
-                        value={''}
-                      />
-                    </Form.Item>
-                  </Grid>
-
-                  <Grid item xs={12}>
-                    <Form.Item name='address'>
-                      <TextField
-                        label='نشانی'
-                        multiline
-                        value={''}
-                        fullWidth
-                        rows={7}
-                      />
-                    </Form.Item>
-                  </Grid>
-
-                  <Grid
-                    item
-                    xs={12}
-                    sx={{ display: 'flex', justifyContent: 'center' }}
-                  >
-                    <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                      <Button
-                        type='submit'
-                        size='large'
-                        variant='outlined'
-                        sx={{ padding: 1 }}
-                        endIcon={<DownloadDoneIcon />}
-                        color='success'
-                      >
-                        ذخیره
-                      </Button>
-                    </Form.Item>
-                  </Grid>
-                </Grid>
-              </Form>
-            </RtlVersion>
-          </MyBox>
-        </Card>
+                </Form>
+              </RtlVersion>
+            </MyBox>
+          </Card>
         </Box>
         <BottomNav
-          className='pt-5'
+          className="pt-5"
           nextStep={true}
-          preStep={true}
-          forLink='delivery'
-          backLink='finish'
-          forText='Add delivery zone'
-          backText='Finish installation'
+          preStep={false}
+          forLink="themes"
+          backLink="finish"
+          forText="انتخاب تم"
+          backText="ورود به سامانه"
         />
       </Container>
       <Footer />

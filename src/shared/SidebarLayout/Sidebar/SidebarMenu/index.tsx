@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import {
   ListSubheader,
   alpha,
@@ -13,33 +13,31 @@ import { SidebarContext } from 'src/context/SidebarContext';
 
 // import requirements icons
 import RestaurantIcon from '@mui/icons-material/Restaurant';
-import MmsTwoToneIcon from '@mui/icons-material/MmsTwoTone';
-import TableChartTwoToneIcon from '@mui/icons-material/TableChartTwoTone';
-import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
+// import MmsTwoToneIcon from '@mui/icons-material/MmsTwoTone';
+// import TableChartTwoToneIcon from '@mui/icons-material/TableChartTwoTone';
+// import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ArticleIcon from '@mui/icons-material/Article';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
-import BeenhereIcon from '@mui/icons-material/Beenhere';
-import MapIcon from '@mui/icons-material/Map';
+// import BeenhereIcon from '@mui/icons-material/Beenhere';
+// import MapIcon from '@mui/icons-material/Map';
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
 // import ContactlessIcon from '@mui/icons-material/Contactless';
 
-import DisplaySettingsTwoToneIcon from '@mui/icons-material/DisplaySettingsTwoTone';
+// import DisplaySettingsTwoToneIcon from '@mui/icons-material/DisplaySettingsTwoTone';
 import CircularStatic from 'src/components/pages/admin/progress/PercentageCounter';
-import { Dropdown } from 'antd';
-import * as React from 'react';
-
+// import { Dropdown } from 'antd';
 
 import Menu, { MenuProps } from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import EditIcon from '@mui/icons-material/Edit';
-import Divider from '@mui/material/Divider';
-import ArchiveIcon from '@mui/icons-material/Archive';
-import FileCopyIcon from '@mui/icons-material/FileCopy';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+// import EditIcon from '@mui/icons-material/Edit';
+// import Divider from '@mui/material/Divider';
+// import ArchiveIcon from '@mui/icons-material/Archive';
+// import FileCopyIcon from '@mui/icons-material/FileCopy';
+// import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+// import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const StyledMenu = styled((props: MenuProps) => (
   <Menu
@@ -62,7 +60,9 @@ const StyledMenu = styled((props: MenuProps) => (
     marginTop: theme.spacing(1),
     minWidth: 180,
     color:
-      theme.palette.mode === 'light' ? 'rgb(55, 65, 81)' : theme.palette.grey[300],
+      theme.palette.mode === 'light'
+        ? 'rgb(55, 65, 81)'
+        : theme.palette.grey[300],
     boxShadow:
       'rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px',
     '& .MuiMenu-list': {
@@ -201,9 +201,9 @@ const SubMenuWrapper = styled(Box)(
                 background: ${theme.colors.alpha.trueWhite[100]};
                 opacity: 0;
                 transition: ${theme.transitions.create([
-    'transform',
-    'opacity'
-  ])};
+                  'transform',
+                  'opacity'
+                ])};
                 width: 6px;
                 height: 6px;
                 transform: scale(0);
@@ -228,10 +228,8 @@ const SubMenuWrapper = styled(Box)(
 `
 );
 
-
 function SidebarMenu() {
   const { closeSidebar } = useContext(SidebarContext);
-
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -244,17 +242,17 @@ function SidebarMenu() {
   return (
     <>
       <MenuWrapper>
-        <List component='div'>
+        <List component="div">
           <SubMenuWrapper>
-            <List component='div'>
-              <ListItem component='div'>
+            <List component="div">
+              <ListItem component="div">
                 <Button
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to='/overview'
+                  to="/overview"
                   endIcon={<LogoutIcon />}
-                  color='error'
+                  color="error"
                 >
                   خروج
                 </Button>
@@ -263,22 +261,22 @@ function SidebarMenu() {
           </SubMenuWrapper>
         </List>
         <List
-          component='div'
+          component="div"
           sx={{ direction: 'rtl' }}
           subheader={
-            <ListSubheader component='div' disableSticky>
+            <ListSubheader component="div" disableSticky>
               داشبورد
             </ListSubheader>
           }
         >
           <SubMenuWrapper>
-            <List component='div'>
-              <ListItem component='div'>
+            <List component="div">
+              <ListItem component="div">
                 <Button
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to='/dashboards/tasks'
+                  to="/dashboards/tasks"
                   endIcon={<CircularStatic />}
                 >
                   نوار پیشرفت
@@ -300,33 +298,33 @@ function SidebarMenu() {
         </List>
 
         <List
-          component='div'
+          component="div"
           sx={{ direction: 'rtl' }}
           subheader={
-            <ListSubheader component='div' disableSticky>
+            <ListSubheader component="div" disableSticky>
               منو
             </ListSubheader>
           }
         >
           <SubMenuWrapper>
-            <List component='div'>
-              <ListItem component='div'>
+            <List component="div">
+              <ListItem component="div">
                 <Button
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to='/dashboards/createRestaurant'
+                  to="/dashboards/createRestaurant"
                   endIcon={<RestaurantIcon />}
                 >
                   رستوران - کافی شاپ
                 </Button>
               </ListItem>
-              <ListItem component='div'>
+              <ListItem component="div">
                 <Button
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to='/dashboards/themes'
+                  to="/dashboards/themes"
                   endIcon={<AutoFixHighIcon />}
                 >
                   انتخاب تم
@@ -344,7 +342,7 @@ function SidebarMenu() {
               {/*    ساخت منو*/}
               {/*  </Button>*/}
               {/*</ListItem>*/}
-              <ListItem component='div'>
+              <ListItem component="div">
                 {/*<Button*/}
                 {/*  disableRipple*/}
                 {/*  component={RouterLink}*/}
@@ -355,19 +353,19 @@ function SidebarMenu() {
                 {/*  نوع تحویل*/}
                 {/*</Button>*/}
                 <Button
-                  id='demo-customized-button'
+                  id="demo-customized-button"
                   aria-controls={open ? 'demo-customized-menu' : undefined}
-                  aria-haspopup='true'
+                  aria-haspopup="true"
                   aria-expanded={open ? 'true' : undefined}
-                  variant='contained'
+                  variant="contained"
                   disableElevation
                   onClick={handleClick}
-                  endIcon={<KeyboardArrowDownIcon />}
+                  endIcon={<ArticleIcon />}
                 >
                   منو
                 </Button>
                 <StyledMenu
-                  id='demo-customized-menu'
+                  id="demo-customized-menu"
                   MenuListProps={{
                     'aria-labelledby': 'demo-customized-button'
                   }}
@@ -377,27 +375,28 @@ function SidebarMenu() {
                 >
                   <MenuItem
                     component={RouterLink}
-                    to='/dashboards/createCategory'
-                    onClick={handleClose} disableRipple>
-                    <EditIcon />
+                    to="/dashboards/createCategory"
+                    onClick={handleClose}
+                    disableRipple
+                  >
                     افزودن دسته بندی
                   </MenuItem>
                   <MenuItem
                     component={RouterLink}
-                    to='/dashboards/createMenu'
-                    onClick={handleClose} disableRipple>
-                    <FileCopyIcon />
+                    to="/dashboards/createMenu"
+                    onClick={handleClose}
+                    disableRipple
+                  >
                     ساخت منو
                   </MenuItem>
-
                 </StyledMenu>
               </ListItem>
-              <ListItem component='div'>
+              <ListItem component="div">
                 <Button
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to='/dashboards/tables'
+                  to="/dashboards/tables"
                   endIcon={<TableRestaurantIcon />}
                 >
                   ساخت میز
@@ -426,24 +425,24 @@ function SidebarMenu() {
               {/*    تست سامانه*/}
               {/*  </Button>*/}
               {/*</ListItem>*/}
-              <ListItem component='div'>
+              <ListItem component="div">
                 <Button
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to='/dashboards/mobileApp'
+                  to="/dashboards/mobileApp"
                   endIcon={<PhoneIphoneIcon />}
                 >
                   تنظیمات تلفن همراه
                 </Button>
               </ListItem>
-              <ListItem component='div'>
+              <ListItem component="div">
                 <Button
-                  color='success'
+                  color="success"
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to='/dashboards/finish'
+                  to="/dashboards/finish"
                   endIcon={<DownloadDoneIcon />}
                 >
                   اتمام نصب

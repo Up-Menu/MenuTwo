@@ -1,5 +1,16 @@
 import React, { useCallback, useContext, useState } from 'react';
-import { Box, Button, Card, Container, Divider, Grid, IconButton, TextField, Tooltip, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Card,
+  Container,
+  Divider,
+  Grid,
+  IconButton,
+  TextField,
+  Tooltip,
+  Typography
+} from '@mui/material';
 import RtlVersion from '../../../theme/RtlVersion';
 import Tables from '../../../UI/Table';
 import { GridApi, GridColDef } from '@mui/x-data-grid';
@@ -13,6 +24,8 @@ import ProgressContext from '../../../context/ProgressContext';
 import { useTypedDispatch } from '../../../store';
 import PopUp from '../../../UI/PopUp';
 import TitleText from '../../../UI/TitleText';
+import Footer from 'src/shared/Footer';
+import BottomNav from 'src/shared/BottomNav';
 
 const CreateCategory = () => {
   const [foodList, setFoodList] = useState([]);
@@ -21,7 +34,6 @@ const CreateCategory = () => {
   const progressContext = useContext(ProgressContext);
   const dispatch = useTypedDispatch();
   const [form] = Form.useForm();
-
 
   //* call on form submit
   const onFinish = (values: any) => {
@@ -64,8 +76,8 @@ const CreateCategory = () => {
         };
 
         return (
-          <Box display='flex' flexDirection='row'>
-            <Tooltip title='Delete Order' arrow>
+          <Box display="flex" flexDirection="row">
+            <Tooltip title="Delete Order" arrow>
               <IconButton
                 sx={{
                   '&:hover': {
@@ -74,10 +86,10 @@ const CreateCategory = () => {
                   color: '#FF1943'
                 }}
                 onClick={deleteHandler}
-                color='error'
-                size='small'
+                color="error"
+                size="small"
               >
-                <DeleteSweepIcon fontSize='small' />
+                <DeleteSweepIcon fontSize="small" />
               </IconButton>
             </Tooltip>
           </Box>
@@ -136,7 +148,7 @@ const CreateCategory = () => {
   );
   return (
     <>
-      <TitleText header='ایجاد دسته بندی' />
+      <TitleText header="ایجاد دسته بندی" />
       <PopUp
         setOpen={setOpen}
         setID={setID}
@@ -146,34 +158,42 @@ const CreateCategory = () => {
         List={foodList}
       />
       <Box sx={{ direction: 'rtl' }}>
-        <Container maxWidth='lg'>
+        <Container maxWidth="lg">
           <RtlVersion>
             <Grid container spacing={2}>
               <Grid item xs={12} md={6}>
                 <Box pb={4}>
-                  <Card variant='outlined'>
-                    <Grid container direction='column' justifyContent='left' alignItems='stretch' spacing={0}>
+                  <Card variant="outlined">
+                    <Grid
+                      container
+                      direction="column"
+                      justifyContent="left"
+                      alignItems="stretch"
+                      spacing={0}
+                    >
                       <Box pt={2} pb={2} pl={2}>
-                        <Typography variant='h4'>فرم افزودن دسته بندی</Typography>
+                        <Typography variant="h4">
+                          فرم افزودن دسته بندی
+                        </Typography>
                       </Box>
                       <Divider />
                       <Box pt={3} pb={2} pl={2} pr={2}>
                         <Form
                           form={form}
-                          name='control-hooks'
+                          name="control-hooks"
                           wrapperCol={{ span: 12 }}
                           initialValues={{ remember: true }}
                           onFinish={onFinish}
                           onFinishFailed={onFinishFailed}
-                          autoComplete='on'
+                          autoComplete="on"
                         >
                           <Grid container spacing={2}>
                             <Grid item xs={12}>
-                              <Form.Item name='categoryName'>
+                              <Form.Item name="categoryName">
                                 <TextField
                                   value={''}
-                                  label='نام دسته بندی'
-                                  type='text'
+                                  label="نام دسته بندی"
+                                  type="text"
                                   fullWidth
                                 />
                               </Form.Item>
@@ -183,19 +203,19 @@ const CreateCategory = () => {
                               <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                                 <Button
                                   sx={{ margin: 1 }}
-                                  size='medium'
-                                  color='success'
-                                  variant='outlined'
+                                  size="medium"
+                                  color="success"
+                                  variant="outlined"
                                   endIcon={<DoneOutlineIcon />}
                                   onClick={sendMenu}
                                 >
                                   ثبت
                                 </Button>
                                 <Button
-                                  size='medium'
+                                  size="medium"
                                   sx={{ margin: 1 }}
-                                  type='submit'
-                                  color='warning'
+                                  type="submit"
+                                  color="warning"
                                   endIcon={<AddTaskIcon />}
                                 >
                                   اضافه کردن مجدد
@@ -210,7 +230,7 @@ const CreateCategory = () => {
                 </Box>
               </Grid>
               <Grid item xs={12} md={6}>
-                <Card variant='outlined'>
+                <Card variant="outlined">
                   <Tables
                     Rows={foodList}
                     Columns={columns}
@@ -222,6 +242,18 @@ const CreateCategory = () => {
           </RtlVersion>
         </Container>
       </Box>
+      <Container maxWidth="lg">
+        <BottomNav
+          className="pt-5"
+          nextStep={true}
+          preStep={true}
+          forLink="createMenu"
+          backLink="themes"
+          forText="منو / ساخت منو"
+          backText="انتخاب تم"
+        />
+      </Container>
+      <Footer />
     </>
   );
 };

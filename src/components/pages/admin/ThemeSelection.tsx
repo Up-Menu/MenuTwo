@@ -96,12 +96,12 @@ const ThemeSelection = () => {
         </Box>
         <BottomNav
           className="pt-5"
-          nextStep={false}
+          nextStep={true}
           preStep={true}
-          forLink="order-type"
-          backLink="createMenu"
-          forText="ساخت حساب"
-          backText="Create Menu"
+          forLink="createCategory"
+          backLink="createRestaurant"
+          forText="منو / افزودن دسته بندی"
+          backText="رستوران - کافی شاپ"
         />
       </Container>
       <Footer />

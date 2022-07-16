@@ -12,7 +12,7 @@ import BottomNav from '../../../shared/BottomNav';
 import Footer from '../../../shared/Footer';
 import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
 import ProgressContext from 'src/context/ProgressContext';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+
 import { IPhoneX } from 'react-device-frames';
 import CaptureArea from './CaptureArea';
 import TitleText from '../../../UI/TitleText';
@@ -66,14 +66,12 @@ const MobileApp = () => {
                           onClick={() => setBackground(color)}
                         />
 
-                        <CopyToClipboard text={`color: ${color}:`}>
-                          <p
-                            style={{
-                              color: color === background ? '#8C7CF0' : color
-                            }}
-                            onClick={() => setCurrent(color)}
-                          />
-                        </CopyToClipboard>
+                        <p
+                          style={{
+                            color: color === background ? '#8C7CF0' : color
+                          }}
+                          onClick={() => setCurrent(color)}
+                        />
                       </div>
                     ))}
                   </div>

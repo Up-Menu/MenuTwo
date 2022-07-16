@@ -1,18 +1,9 @@
 import { ChangeEvent, useState } from 'react';
-import { Helmet } from 'react-helmet-async';
-// import PageHeader from './PageHeader';
 import Footer from 'src/shared/Footer';
 import { Grid, Tab, Tabs, Container, Card, Box, styled } from '@mui/material';
-// import PageTitleWrapper from 'src/components/PageTitleWrapper';
-
-// import TeamOverview from './TeamOverview';
-// import TasksAnalytics from './TasksAnalytics';
-// import Performance from './Performance';
-// import Projects from './Projects';
-// import Checklist from './Checklist';
-// import Profile from './Profile';
 import TaskSearch from './TaskSearch';
 import ProgressBar from 'src/components/pages/admin/progress/ProgressBar';
+import TitleText from 'src/UI/TitleText';
 
 const TabsContainerWrapper = styled(Box)(
   ({ theme }) => `
@@ -97,10 +88,7 @@ const TabsContainerWrapper = styled(Box)(
 );
 
 function DashboardTasks() {
-  // const theme = useTheme();
-
   const [currentTab, setCurrentTab] = useState<string>('analytics');
-
   const tabs = [{ value: 'analytics', label: 'میزان پیشرفت شما' }];
 
   const handleTabsChange = (_event: ChangeEvent<{}>, value: string): void => {
@@ -109,12 +97,7 @@ function DashboardTasks() {
 
   return (
     <Box sx={{ direction: 'rtl' }}>
-      <Helmet>
-        <title>پنل ادمین رستوران | خوش آمدید</title>
-      </Helmet>
-      {/* <PageTitleWrapper>
-        <PageHeader />
-      </PageTitleWrapper> */}
+      <TitleText header="پنل ادمین رستوران | خوش آمدید" />
       <Container maxWidth="lg">
         <TabsContainerWrapper>
           <Tabs
@@ -160,40 +143,6 @@ function DashboardTasks() {
               </Grid>
             </Card>
           </Grid>
-          {/* <Grid item xs={12} md={6}>
-            <Card variant="outlined">
-              <Box sx={{ p: 5 }}>
-                <video
-                  className="img-fluid"
-                  id="video"
-                  controls={true}
-                  preload="none"
-                  width="600"
-                  poster="https://assets.codepen.io/32795/poster.png"
-                >
-                  <source
-                    id="mp4"
-                    src="http://media.w3.org/2010/05/sintel/trailer.mp4"
-                    type="video/mp4"
-                  />
-                  <source
-                    id="webm"
-                    src="http://media.w3.org/2010/05/sintel/trailer.webm"
-                    type="video/webm"
-                  />
-                  <source
-                    id="ogv"
-                    src="http://media.w3.org/2010/05/sintel/trailer.ogv"
-                    type="video/ogg"
-                  />
-
-                  <p>
-                    Your user agent does not support the HTML5 Video element.
-                  </p>
-                </video>
-              </Box>
-            </Card>
-          </Grid> */}
         </Grid>
       </Container>
       <Footer />

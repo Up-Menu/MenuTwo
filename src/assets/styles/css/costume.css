@@ -2,70 +2,55 @@
 
 /*------------------------------------- font-family -----------------------------------------------*/
 @font-face {
-  font-family: iransans;
+  font-family: Kalameh;
   font-style: normal;
   font-weight: 700;
-  src: url('../../fonts/iransans/iransansWeb(FaNum)_Bold.eot');
-  src: url('../../fonts/iransans/iransansWeb(FaNum)_Bold.eot?#iefix')
-      format('embedded-opentype'),
-    url('../../fonts/iransans/iransansWeb(FaNum)_Bold.woff2') format('woff2'),
-    url('../../fonts/iransans/iransansWeb(FaNum)_Bold.woff') format('woff'),
-    url('../../fonts/iransans/iransansWeb(FaNum)_Bold.ttf') format('truetype');
+  src: url('../../fonts/Peyman/KalamehWeb-Bold.eot');
+  src: url('../../fonts/Peyman/KalamehWeb-Bold.eot?#iefix') format('embedded-opentype'),
+    url('../../fonts/Peyman/KalamehWeb-Bold.woff2') format('woff2'),
+    url('../../fonts/Peyman/KalamehWeb-Bold.woff') format('woff'),
+    url('../../fonts/Peyman/Shabnam-Bold.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: iransans;
+  font-family: Kalameh;
   font-style: normal;
   font-weight: 500;
-  src: url('../../fonts/iransans/iransans(FaNum)_Medium.eot');
-  src: url('../../fonts/iransans/iransansWeb(FaNum)_Medium.eot?#iefix')
-      format('embedded-opentype'),
-    url('../../fonts/iransans/iransansWeb(FaNum)_Medium.woff2') format('woff2'),
-    url('../../fonts/iransans/iransansWeb(FaNum)_Medium.woff') format('woff'),
-    url('../../fonts/iransans/iransansWeb(FaNum)_Medium.ttf') format('truetype');
+  src: url('../../fonts/Peyman/KalamehWeb-Regular.eot');
+  src: url('../../fonts/Peyman/KalamehWeb-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../../fonts/Peyman/KalamehWeb-Regular.woff2') format('woff2'),
+    url('../../fonts/Peyman/KalamehWeb-Regular.woff') format('woff'),
+    url('../../fonts/Peyman/Shabnam-Medium.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: iransans;
+  font-family: Kalameh;
   font-style: normal;
   font-weight: 300;
-  src: url('../../fonts/iransans/iransansWeb(FaNum)_Light.eot');
-  src: url('../../fonts/iransans/iransansWeb(FaNum)_Light.eot?#iefix')
-      format('embedded-opentype'),
-    url('../../fonts/iransans/iransansWeb(FaNum)_Light.woff2') format('woff2'),
-    url('../../fonts/iransans/iransansWeb(FaNum)_Light.woff') format('woff'),
-    url('../../fonts/iransans/iransansWeb(FaNum)_Light.ttf') format('truetype');
+  src: url('../../fonts/Peyman/KalamehWeb-Thin.eot');
+  src: url('../../fonts/Peyman/KalamehWeb-Thin.eot?#iefix') format('embedded-opentype'),
+    url('../../fonts/Peyman/KalamehWeb-Thin.woff2') format('woff2'),
+    url('../../fonts/Peyman/KalamehWeb-Thin.woff') format('woff'),
+    url('../../fonts/Peyman/Shabnam-Thin.ttf') format('truetype');
 }
 
-@font-face {
-  font-family: iransans;
-  font-style: normal;
-  font-weight: 200;
-  src: url('../../fonts/iransans/iransansWeb(FaNum)_UltraLight.eot');
-  src: url('../../fonts/iransans/iransansWeb(FaNum)_UltraLight.eot?#iefix')
-      format('embedded-opentype'),
-    url('../../fonts/iransans/iransansWeb(FaNum)_UltraLight.woff2')
-      format('woff2'),
-    url('../../fonts/iransans/iransansWeb(FaNum)_UltraLight.woff')
-      format('woff'),
-    url('../../fonts/iransans/iransansWeb(FaNum)_UltraLight.ttf')
-      format('truetype');
-}
+
 
 @font-face {
-  font-family: iransans;
+  font-family: Kalameh;
   font-style: normal;
   font-weight: 400;
-  src: url('../../fonts/iransans/iransansWeb(FaNum).eot');
-  src: url('../../fonts/iransans/iransansWeb(FaNum).eot?#iefix')
-      format('embedded-opentype'),
-    url('../../fonts/iransans/iransansWeb(FaNum).woff2') format('woff2'),
-    url('../../fonts/iransans/iransansWeb(FaNum).woff') format('woff'),
-    url('../../fonts/iransans/iransansWeb(FaNum).ttf') format('truetype');
+  src: url('../../fonts/Peyman/KalamehWeb-Black.eot');
+  src: url('../../fonts/Peyman/KalamehWeb-Black.eot?#iefix') format('embedded-opentype'),
+    url('../../fonts/Peyman/KalamehWeb-Black.woff2') format('woff2'),
+    url('../../fonts/Peyman/KalamehWeb-Black.woff') format('woff'),
+    url('../../fonts/Peyman/Shabnam.ttf') format('truetype');
 }
 
+
 * {
-  font-family: iransans, sans-serif !important;
+  font-family: Kalameh, sans-serif !important;
+
 }
 
 a:link,
@@ -74,9 +59,11 @@ a:hover,
 a:active {
   text-decoration: none !important;
 }
+
 div.ant-space.ant-space-horizontal.ant-space-align-baseline {
   align-items: center !important;
 }
+
 img {
   max-width: 100%;
   height: auto;
@@ -96,7 +83,7 @@ img {
   width: 100%;
 }
 
-.container_plus{
+.container_plus {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

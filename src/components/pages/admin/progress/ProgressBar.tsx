@@ -12,10 +12,14 @@ import MmsTwoToneIcon from '@mui/icons-material/MmsTwoTone';
 import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
 import ArticleIcon from '@mui/icons-material/Article';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
-import BeenhereIcon from '@mui/icons-material/Beenhere';
-import MapIcon from '@mui/icons-material/Map';
+// import BeenhereIcon from '@mui/icons-material/Beenhere';
+// import MapIcon from '@mui/icons-material/Map';
+// import BuildIcon from '@mui/icons-material/Build';
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
+import ColorLensIcon from '@mui/icons-material/ColorLens';
+import ConstructionIcon from '@mui/icons-material/Construction';
+import CelebrationIcon from '@mui/icons-material/Celebration';
 
 // import rtl module
 import RtlVersion from 'src/theme/RtlVersion';
@@ -57,7 +61,7 @@ const ProgressBar = () => {
                 endIcon={<RestaurantIcon />}
                 color="primary"
               >
-                ساخت رستوران
+                رستوران - کافی شاپ
               </Button>
             </RtlVersion>
           </Box>
@@ -83,10 +87,10 @@ const ProgressBar = () => {
                 disableRipple
                 size="large"
                 sx={{ padding: 1 }}
-                endIcon={<AutoFixHighIcon />}
+                endIcon={<ColorLensIcon />}
                 color="primary"
               >
-                انتخاب مضمون
+                انتخاب تم
               </Button>
             </RtlVersion>
           </Box>
@@ -122,7 +126,7 @@ const ProgressBar = () => {
         </Box>
       </Link>
       <Divider />
-      <Link to="/dashboards/orders">
+      {/* <Link to="/dashboards/orders">
         <Box px={2} py={4} display="flex" alignItems="flex-center">
           <AvatarPrimary>
             {progressContext.selectOrder ? checkedPart : noneCheckPart}
@@ -149,8 +153,8 @@ const ProgressBar = () => {
           </Box>
         </Box>
       </Link>
-      <Divider />
-      <Link to="/dashboards/orders">
+      <Divider /> */}
+      <Link to="/dashboards/tables">
         <Box px={2} py={4} display="flex" alignItems="flex-center">
           <AvatarPrimary>
             {progressContext.tableManager ? checkedPart : noneCheckPart}
@@ -178,7 +182,7 @@ const ProgressBar = () => {
         </Box>
       </Link>
       <Divider />
-      <Link to="/dashboards/delivery">
+      {/* <Link to="/dashboards/delivery">
         <Box px={2} py={4} display="flex" alignItems="flex-center">
           <AvatarPrimary>
             {progressContext.deliveryZone ? checkedPart : noneCheckPart}
@@ -205,35 +209,8 @@ const ProgressBar = () => {
           </Box>
         </Box>
       </Link>
-      <Divider />
-      <Link to="/dashboards/testOrder">
-        <Box px={2} py={4} display="flex" alignItems="flex-center">
-          <AvatarPrimary>
-            {progressContext.testOrders ? checkedPart : noneCheckPart}
-          </AvatarPrimary>
-          <Box
-            pr={2}
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-            alignItems="flex-center"
-            sx={{ direction: 'rtl' }}
-          >
-            <RtlVersion>
-              <Button
-                disableRipple
-                size="large"
-                sx={{ padding: 1 }}
-                endIcon={<MmsTwoToneIcon />}
-                color="primary"
-              >
-                تست سامانه
-              </Button>
-            </RtlVersion>
-          </Box>
-        </Box>
-      </Link>
-      <Divider />
+      <Divider /> */}
+
       <Link to="/dashboards/mobileApp">
         <Box px={2} py={4} display="flex" alignItems="flex-center">
           <AvatarPrimary>
@@ -262,6 +239,35 @@ const ProgressBar = () => {
         </Box>
       </Link>
       <Divider />
+      <Link to="/dashboards/systemTest">
+        <Box px={2} py={4} display="flex" alignItems="flex-center">
+          <AvatarPrimary>
+            {progressContext.testOrders ? checkedPart : noneCheckPart}
+          </AvatarPrimary>
+          <Box
+            pr={2}
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="flex-center"
+            sx={{ direction: 'rtl' }}
+          >
+            <RtlVersion>
+              <Button
+                disableRipple
+                size="large"
+                sx={{ padding: 1 }}
+                endIcon={<ConstructionIcon />}
+                color="warning"
+              >
+                تست سامانه
+              </Button>
+            </RtlVersion>
+          </Box>
+        </Box>
+      </Link>
+
+      <Divider />
       <Link to="/dashboards/finish">
         <Box px={2} py={4} display="flex" alignItems="flex-center">
           <AvatarPrimary color="success">
@@ -280,9 +286,9 @@ const ProgressBar = () => {
                 disableRipple
                 type="submit"
                 size="large"
-                variant="outlined"
+                // variant="outlined"
                 sx={{ padding: 1 }}
-                endIcon={<DownloadDoneIcon />}
+                endIcon={<CelebrationIcon />}
                 color="success"
               >
                 اتمام نصب

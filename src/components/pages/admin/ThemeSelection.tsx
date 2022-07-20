@@ -30,8 +30,8 @@ const ThemeSelection = () => {
   };
   return (
     <>
-      <TitleText header="انتخاب تم منو" />
       <Toaster />
+      <TitleText header="انتخاب تم منو" />
       <Container maxWidth="lg">
         <Box sx={{ direction: 'rtl' }}>
           <RtlVersion>

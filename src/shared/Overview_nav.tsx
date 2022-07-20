@@ -131,8 +131,7 @@ const Overview_nav = () => {
     }
   }, []);
 
-  const signOutHandler = (e: any): void => {
-    e.preventDefault();
+  const signOutHandler = (): void => {
     setUser({
       name: 'کاربر سپند',
       avatar: images['avatars/profile_default.png'],

@@ -23,7 +23,7 @@ import ArticleIcon from '@mui/icons-material/Article';
 // import BeenhereIcon from '@mui/icons-material/Beenhere';
 // import MapIcon from '@mui/icons-material/Map';
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
-import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
+// import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
 // import ContactlessIcon from '@mui/icons-material/Contactless';
 
 // import DisplaySettingsTwoToneIcon from '@mui/icons-material/DisplaySettingsTwoTone';
@@ -33,7 +33,9 @@ import CircularStatic from 'src/components/pages/admin/progress/PercentageCounte
 import Menu, { MenuProps } from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ColorLensIcon from '@mui/icons-material/ColorLens';
-import BuildIcon from '@mui/icons-material/Build';
+// import BuildIcon from '@mui/icons-material/Build';
+import ConstructionIcon from '@mui/icons-material/Construction';
+import CelebrationIcon from '@mui/icons-material/Celebration';
 
 // import EditIcon from '@mui/icons-material/Edit';
 // import Divider from '@mui/material/Divider';
@@ -445,7 +447,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/dashboards/systemTest"
-                  endIcon={<BuildIcon />}
+                  endIcon={<ConstructionIcon />}
                   color="warning"
                 >
                   تست سامانه
@@ -458,7 +460,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/dashboards/finish"
-                  endIcon={<DownloadDoneIcon />}
+                  endIcon={<CelebrationIcon />}
                 >
                   اتمام نصب
                 </Button>

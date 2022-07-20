@@ -121,7 +121,13 @@ function HeaderUserbox() {
 
   const signOutHandler = (e: any): void => {
     e.preventDefault();
+    setUser({
+      name: 'کاربر سپند',
+      avatar: images['avatars/profile_default.png'],
+      jobtitle: 'سطح نقره ای'
+    });
     dispatch(userLogout(nav));
+    setOpen(false);
   };
 
   return (

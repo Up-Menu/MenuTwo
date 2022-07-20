@@ -11,7 +11,7 @@ import timeoutPromise from '../helper/TimeOut'
 import toast from 'react-hot-toast'
 import { NavigateFunction } from 'react-router'
 //  Login Actions
-export const userLogin = (payload: any, fn: (arg0: any) => void) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
+export const userLogin = (nav: NavigateFunction, payload: any, fn: (arg0: any) => void) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
     const payloadWithOutRememberKey = {
         email: payload.email,
         password: payload.password,
@@ -41,6 +41,7 @@ export const userLogin = (payload: any, fn: (arg0: any) => void) => async (dispa
                     }
                 }))
             fn(toast.success("!خوش آمدید"))
+            nav("/dashboards/tasks")
             if (payload.remember) {
                 localStorage.setItem("user", JSON.stringify(data))
             }
@@ -59,7 +60,7 @@ export const userLogout = (nav: NavigateFunction) => (dispatch: (arg0: { type: s
         )
         .then(() => {
             localStorage.clear()
-            nav("/")
+            nav("/login")
         })
 }
 

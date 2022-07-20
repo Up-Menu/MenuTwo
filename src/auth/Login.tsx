@@ -12,7 +12,7 @@ import {
   OutlinedInput,
   CardContent
 } from '@mui/material';
-import { Link, NavLink as RouterLink } from 'react-router-dom';
+import { Link, NavLink as RouterLink, useNavigate } from 'react-router-dom';
 import Footer from 'src/shared/Footer';
 import TextField from '@mui/material/TextField';
 import { pink } from '@mui/material/colors';
@@ -47,6 +47,7 @@ const recaptchaRef: any = React.createRef();
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const Login = () => {
   const dispatch = useTypedDispatch();
+  const nav = useNavigate();
 
   const [values, setValues] = React.useState<State>({
     password: '',
@@ -71,7 +72,7 @@ const Login = () => {
 
   const onFinish = (values: any) => {
     // const captcha = recaptchaRef.current.execute();
-    dispatch(userLogin({ ...values }, (notification) => notification));
+    dispatch(userLogin(nav, { ...values }, (notification) => notification));
   };
 
   const onFinishFailed = (errorInfo: any) => {

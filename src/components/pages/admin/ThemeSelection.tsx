@@ -13,7 +13,6 @@ import {
 } from '@mui/material';
 
 import toast, { Toaster } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
 import Footer from '../../../shared/Footer';
 import BottomNav from '../../../shared/BottomNav';
 import { ThemesList } from '../../../theme/Themes';
@@ -21,13 +20,11 @@ import ProgressContext from 'src/context/ProgressContext';
 import TitleText from '../../../UI/TitleText';
 import RtlVersion from '../../../theme/RtlVersion';
 import InstallDesktopIcon from '@mui/icons-material/InstallDesktop';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 
 const ThemeSelection = () => {
   const progressContext = useContext(ProgressContext);
   const choseHandler = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    console.log('theme chosen!');
     toast.success('!تم با موفقیت انتخاب شد');
     progressContext.onTheme(true);
   };
@@ -77,15 +74,6 @@ const ThemeSelection = () => {
                         onClick={choseHandler}
                       >
                         نصب
-                      </Button>
-                      <Button
-                        component={Link}
-                        to={'/theme/store'}
-                        sx={{ margin: 1 }}
-                        color="warning"
-                        endIcon={<VisibilityIcon />}
-                      >
-                        پیش نمایش
                       </Button>
                     </CardActions>
                   </Card>

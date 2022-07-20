@@ -63,6 +63,9 @@ const SmsPanel = Loader(
   lazy(() => import('src/components/pages/admin/SmsPanel'))
 );
 const SignIn = Loader(lazy(() => import('../auth/SignIn')));
+const SystemTest = Loader(
+  lazy(() => import('src/components/pages/admin/SystemTest'))
+);
 
 // Status
 
@@ -179,9 +182,14 @@ function routes(props: string[]): RouteObject[] {
             <Login /> || <SignIn />
           )
         },
+
         {
           path: 'mobileApp',
           element: isLogged ? <MobileApp /> : <Login /> || <SignIn />
+        },
+        {
+          path: 'systemTest',
+          element: isLogged ? <SystemTest /> : <Login /> || <SignIn />
         },
         {
           path: 'tables',

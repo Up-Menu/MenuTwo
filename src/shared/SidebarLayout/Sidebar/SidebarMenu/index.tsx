@@ -19,7 +19,7 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ArticleIcon from '@mui/icons-material/Article';
-import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
+// import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 // import BeenhereIcon from '@mui/icons-material/Beenhere';
 // import MapIcon from '@mui/icons-material/Map';
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
@@ -32,6 +32,9 @@ import CircularStatic from 'src/components/pages/admin/progress/PercentageCounte
 
 import Menu, { MenuProps } from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import ColorLensIcon from '@mui/icons-material/ColorLens';
+import BuildIcon from '@mui/icons-material/Build';
+
 // import EditIcon from '@mui/icons-material/Edit';
 // import Divider from '@mui/material/Divider';
 // import ArchiveIcon from '@mui/icons-material/Archive';
@@ -325,7 +328,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/dashboards/themes"
-                  endIcon={<AutoFixHighIcon />}
+                  endIcon={<ColorLensIcon />}
                 >
                   انتخاب تم
                 </Button>
@@ -434,6 +437,18 @@ function SidebarMenu() {
                   endIcon={<PhoneIphoneIcon />}
                 >
                   تنظیمات تلفن همراه
+                </Button>
+              </ListItem>
+              <ListItem component="div">
+                <Button
+                  disableRipple
+                  component={RouterLink}
+                  onClick={closeSidebar}
+                  to="/dashboards/systemTest"
+                  endIcon={<BuildIcon />}
+                  color="warning"
+                >
+                  تست سامانه
                 </Button>
               </ListItem>
               <ListItem component="div">

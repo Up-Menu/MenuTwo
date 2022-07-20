@@ -36,12 +36,14 @@ export const userLogin = (payload: any, fn: (arg0: any) => void) => async (dispa
                 dispatch({
                     type: "USER_LOGIN",
                     payload: {
-                        userId: nanoid(),
+                        userId: server_response[2],
                         ...payload
                     }
                 }))
             fn(toast.success("!خوش آمدید"))
-            if (payload.remember) localStorage.setItem("user", JSON.stringify(data))
+            if (payload.remember) {
+                localStorage.setItem("user", JSON.stringify(data))
+            }
             else return
         }
     })

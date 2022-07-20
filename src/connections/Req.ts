@@ -14,19 +14,19 @@ export const LoginReq = (value: any, fn: (arg0: any) => void) => {
     Api
         .post('Account/Login', value, '')
         .then(response => {
-            fn([response.data.status, response.data.data.message])
+            fn([response.data.status, response.data.data.message, response.data.data.userId])
         })
         .catch(err => console.log(err))
 }
 
 
 export const CreateTableReq = (value: any, fn: (arg0: any) => void) => {
-  Api
-    .post('TableManagment/CreateTable', value, '')
-    .then(response => {
-      fn([response.data.status, response.data.data])
-    })
-    .catch(err => console.log(err))
+    Api
+        .post('TableManagment/CreateTable', value, '')
+        .then(response => {
+            fn([response.data.status, response.data.data])
+        })
+        .catch(err => console.log(err))
 }
 
 export const CreateMenuReq = (value: any, fn: (arg0: any) => void) => {
@@ -58,23 +58,15 @@ export const GoogleReq = (value: any, fn: (arg0: any) => void) => {
 }
 
 
+/**
+ * write get methods
+ */
 
-
-
-export const GUIDsReq = (count: any) => {
+export const GetUserResturant = (userId: any, fn: (arg0: any) => void) => {
     Api
-        .get(`Menu/GetGUIDs?count=${count}`, '', '')
+        .get(`Restaurant/GetUserRestaurant?userId=${userId}`, '', '')
         .then(response => {
-            console.log(response)
-        })
-        .catch(err => console.log(err))
-}
-
-export const GetAllUsers = (fn: (arg0: any) => void) => {
-    Api
-        .get('Account/GetAllUsers', '', '')
-        .then(response => {
-            fn(response.data)
+            fn(response)
         })
         .catch(err => console.log(err))
 }

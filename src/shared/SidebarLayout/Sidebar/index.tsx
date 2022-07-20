@@ -9,13 +9,13 @@ import {
   styled,
   Divider,
   useTheme,
-  Button,
   lighten,
   darken
 } from '@mui/material';
 
 import SidebarMenu from './SidebarMenu';
-import Logo from 'src/components/LogoSign';
+// import Logo from 'src/components/LogoSign';
+import images from 'src/widgets/importer';
 
 const SidebarWrapper = styled(Box)(
   ({ theme }) => `
@@ -57,12 +57,16 @@ function Sidebar() {
         <Scrollbar>
           <Box mt={3}>
             <Box
-              mx={2}
               sx={{
-                width: 52
+                width: '60%',
+                marginLeft: '20%'
               }}
             >
-              <Logo />
+              <img
+                style={{ borderRadius: 0 }}
+                src={images['logo/NILL.png']}
+                alt=""
+              />
             </Box>
           </Box>
           <Divider
@@ -116,10 +120,15 @@ function Sidebar() {
               <Box
                 mx={2}
                 sx={{
-                  width: 52
+                  width: '30%',
+                  marginLeft: '20%'
                 }}
               >
-                <Logo />
+                <img
+                  style={{ borderRadius: 0 }}
+                  src={images['logo/NILL.png']}
+                  alt=""
+                />
               </Box>
             </Box>
             <Divider

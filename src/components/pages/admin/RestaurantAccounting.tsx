@@ -1,4 +1,4 @@
-import { useContext, useState, Fragment } from 'react';
+import { useContext, useState, Fragment, useEffect } from 'react';
 import {
   Container,
   Card,
@@ -6,7 +6,10 @@ import {
   Button,
   TextField,
   styled,
-  Grid
+  Grid,
+  InputLabel,
+  MenuItem,
+  FormControl
 } from '@mui/material';
 
 import BottomNav from '../../../shared/BottomNav';
@@ -37,16 +40,32 @@ import images from 'src/widgets/importer';
 import TitleText from '../../../UI/TitleText';
 import ProgressContext from 'src/context/ProgressContext';
 import RtlVersion from '../../../theme/RtlVersion';
+import { GetUserResturant } from 'src/connections/Req';
 
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+
+interface localUserType {
+  type: string;
+  payload: {
+    userId: string;
+    email: string;
+    password: string;
+    remember: boolean;
+  };
+}
+interface existingUserType {
+  address: string;
+  cellPhone: string;
+  email: string;
+  profile: string;
+  restaurantName: string;
+  social: string;
+  website: string;
+}
 const MyBox = styled(Box)`
-  border: 1px solid #cbccd247;
-  border-radius: 15px;
-  width: fit-content;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
+  @media (min-width: 480px) {
+    margin: 0 18px;
+  }
 `;
 
 const getBase64 = (img: RcFile, callback: (url: string) => void) => {
@@ -68,10 +87,38 @@ const beforeUpload = (file: RcFile) => {
 };
 
 const CreateAccount = () => {
+  let globalUser: existingUserType = {
+    address: null,
+    cellPhone: null,
+    email: null,
+    profile: null,
+    restaurantName: null,
+    social: null,
+    website: null
+  };
+
+  const user: localUserType = JSON.parse(localStorage.getItem('user'));
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
+  const [globalUserState, setGlobalUserState] = useState(globalUser);
   const progressContext = useContext(ProgressContext);
+  const [ssl, setSsl] = useState('');
   const dispatch = useTypedDispatch();
+
+  useEffect(() => {
+    GetUserResturant(user.payload.userId, (resturantData) => {
+      setGlobalUserState({
+        ...globalUser,
+        address: resturantData.data.data.restaurant[0].address,
+        cellPhone: resturantData.data.data.restaurant[0].cellPhone,
+        email: resturantData.data.data.restaurant[0].email,
+        profile: resturantData.data.data.restaurant[0].profile,
+        restaurantName: resturantData.data.data.restaurant[0].restaurantName,
+        social: resturantData.data.data.restaurant[0].social,
+        website: resturantData.data.data.restaurant[0].website
+      });
+    });
+  }, []);
 
   const handleChange: UploadProps['onChange'] = (
     info: UploadChangeParam<UploadFile>
@@ -101,18 +148,23 @@ const CreateAccount = () => {
 
   const onFinish = (values: any) => {
     progressContext.onRestaurant(true);
-    dispatch(userCreateRestaurant(values, (notification) => notification));
+    // dispatch(userCreateRestaurant({
+    // address: `${values.address}`,
+    // email: `${values.email}`,
+    // profile: `${values.profile}`,
+    // restaurantName: `${values.restaurantName}`,
+    // social: `${values.social}`,
+    // website: `${ssl}://${values.website}`,
+    // cellPhone: `${values.areaCode}${values.cellPhone}`
+    // }, (notification) => notification));
   };
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
 
-  const MyBox = styled(Box)`
-    @media (min-width: 480px) {
-      //padding: 45px;
-      margin: 0 18px;
-    }
-  `;
+  const _handleChange = (event: SelectChangeEvent) => {
+    setSsl(event.target.value as string);
+  };
 
   return (
     <Fragment>
@@ -168,19 +220,45 @@ const CreateAccount = () => {
                           label="نام رستوران"
                           type="text"
                           fullWidth
+                          id="outlined-required"
+                          placeholder={
+                            globalUserState.restaurantName === 'string'
+                              ? ''
+                              : globalUserState.restaurantName
+                          }
                           value={''}
                         />
                       </Form.Item>
                     </Grid>
                     <Grid item xs={12} md={6}>
-                      <Form.Item name="cellPhone">
-                        <TextField
-                          label="شماره تلفن"
-                          type="text"
-                          fullWidth
-                          value={''}
-                        />
-                      </Form.Item>
+                      <Grid container spacing={2}>
+                        <Grid item xs={12} md={9}>
+                          <Form.Item name="cellPhone">
+                            <TextField
+                              label="شماره تلفن"
+                              type="text"
+                              fullWidth
+                              placeholder={
+                                globalUserState.cellPhone === 'string'
+                                  ? ''
+                                  : globalUserState.cellPhone
+                              }
+                              value={''}
+                            />
+                          </Form.Item>
+                        </Grid>
+                        <Grid item xs={12} md={3}>
+                          <Form.Item name="areaCode">
+                            <TextField
+                              label="کد منطقه"
+                              type="text"
+                              fullWidth
+                              placeholder="021"
+                              value={''}
+                            />
+                          </Form.Item>
+                        </Grid>
+                      </Grid>
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <Form.Item name="email">
@@ -188,20 +266,54 @@ const CreateAccount = () => {
                           label="ایمیل"
                           type="text"
                           fullWidth
+                          placeholder={
+                            globalUserState.email === 'string'
+                              ? ''
+                              : globalUserState.email
+                          }
                           value={''}
                         />
                       </Form.Item>
                     </Grid>
 
                     <Grid item xs={12} md={6}>
-                      <Form.Item name="website">
-                        <TextField
-                          label="لینک سایت رستوران"
-                          type="text"
-                          fullWidth
-                          value={''}
-                        />
-                      </Form.Item>
+                      <Grid container spacing={2}>
+                        <Grid item xs={12} md={9}>
+                          <Form.Item name="website">
+                            <TextField
+                              label="لینک سایت رستوران"
+                              type="text"
+                              fullWidth
+                              placeholder={
+                                globalUserState.website === 'string'
+                                  ? ''
+                                  : globalUserState.website
+                              }
+                              value={''}
+                            />
+                          </Form.Item>
+                        </Grid>
+
+                        <Grid item xs={12} md={3}>
+                          <Form.Item name="ssl">
+                            <FormControl fullWidth>
+                              <InputLabel id="demo-simple-select-label">
+                                SSL
+                              </InputLabel>
+                              <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={''}
+                                label="SSL"
+                                onChange={_handleChange}
+                              >
+                                <MenuItem value="http">http</MenuItem>
+                                <MenuItem value="https">https</MenuItem>
+                              </Select>
+                            </FormControl>
+                          </Form.Item>
+                        </Grid>
+                      </Grid>
                     </Grid>
 
                     <Grid item xs={12} md={6}>
@@ -210,6 +322,11 @@ const CreateAccount = () => {
                           label="آیدی اینستاگرام"
                           type="text"
                           fullWidth
+                          placeholder={
+                            globalUserState.social === 'string'
+                              ? ''
+                              : globalUserState.social
+                          }
                           value={''}
                         />
                       </Form.Item>
@@ -220,6 +337,11 @@ const CreateAccount = () => {
                         <TextField
                           label="نشانی"
                           multiline
+                          placeholder={
+                            globalUserState.address === 'string'
+                              ? ''
+                              : globalUserState.address
+                          }
                           value={''}
                           fullWidth
                           rows={7}

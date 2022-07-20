@@ -24,11 +24,7 @@ import { Divider, useTheme, styled } from '@mui/material';
 
 const MyButton = styled(Button)`
   svg {
-    margin-right: 8px;
-  }
-
-  &:hover svg {
-    margin-right: 17px;
+    margin-right: 0.5em;
   }
 `;
 
@@ -64,7 +60,7 @@ function PricingContent() {
       <Box sx={{ pt: 15, pb: 6, direction: 'rtl' }}>
         <Container maxWidth="lg" component="main">
           <Grid container spacing={9} alignItems="center">
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={5}>
               <Typography variant="h2">
                 سیستم سفارش آنلاین منو رستوران
               </Typography>
@@ -112,30 +108,30 @@ function PricingContent() {
                 بدون هزینه کمیسیون 5 دقیقه دیگر شروع کنید.
               </Typography>
 
-              <Stack direction="row" spacing={2} pt={4}>
+              <Box display="flex" flexDirection="row" pt={4}>
                 <Button
                   variant="outlined"
-                  sx={{ padding: 1 }}
+                  sx={{ padding: 1, marginLeft: 2 }}
                   size="large"
                   color="primary"
                 >
                   آزمایش رایگان را شروع کنید
                 </Button>
-                <Button
+                <MyButton
                   size="large"
                   sx={{ padding: 1 }}
                   endIcon={<SlowMotionVideoIcon />}
                 >
                   دیدن ویدئو آموزشی
-                </Button>
-              </Stack>
+                </MyButton>
+              </Box>
 
               <Typography variant="h6" fontSize={10} pt={1}>
                 بدون نیاز به کارت اعتباری・رایگان به مدت 7 روز・بدون تعهد
               </Typography>
             </Grid>
 
-            <Grid item xs={12} md={8}>
+            <Grid item xs={12} md={7}>
               <img src={images['burger.png']} alt="" />
             </Grid>
           </Grid>

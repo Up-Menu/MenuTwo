@@ -7,12 +7,13 @@ import {
   Tooltip
 } from '@mui/material';
 import { Helmet } from 'react-helmet-async';
-import Logo from 'src/components/LogoSign';
+// import Logo from 'src/components/LogoSign';
 
 import { styled } from '@mui/material/styles';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import images from 'src/widgets/importer';
 
 const MainContent = styled(Box)(
   () => `
@@ -34,7 +35,12 @@ function StatusMaintenance() {
       </Helmet>
       <MainContent>
         <Container maxWidth="md">
-          <Logo />
+          {/* <Logo /> */}
+          <img
+            style={{ borderRadius: 0 }}
+            src={images['logo/NILL.png']}
+            alt=""
+          />
           <Box textAlign="center">
             <Container maxWidth="xs">
               <Typography variant="h2" sx={{ mt: 4, mb: 2 }}>

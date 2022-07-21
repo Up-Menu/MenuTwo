@@ -1,7 +1,6 @@
-
 import Api from "src/api/Api"
 
-export const SignInReq = (value: any, fn: (arg0: any) => void) => {
+export const RegisterReq = (value: any, fn: (arg0: any) => void) => {
     Api
         .post('Account/Register', value, '')
         .then(response => {
@@ -24,7 +23,7 @@ export const CreateTableReq = (value: any, fn: (arg0: any) => void) => {
     Api
         .post('TableManagment/CreateTable', value, '')
         .then(response => {
-            fn([response.data.status, response.data.data])
+            fn([response.data.status, response.data.data.message])
         })
         .catch(err => console.log(err))
 }
@@ -33,16 +32,18 @@ export const CreateMenuReq = (value: any, fn: (arg0: any) => void) => {
     Api
         .post('Menu/CreateMenu', value, '')
         .then(response => {
-            fn([response.data.status, response.data.data])
+            fn([response.data.status, response.data.data.message])
         })
         .catch(err => console.log(err))
 }
 
+
+// send restaurant data to server
 export const CreateRestaurantReq = (value: any, fn: (arg0: any) => void) => {
     Api
         .post('Restaurant/CreateRestaurant', value, '')
         .then(response => {
-            fn([response.data.status, response.data.data])
+            fn([response.data.status, response.data.data.message, response.data.data.restaurantId])
         })
         .catch(err => console.log(err))
 }
@@ -62,7 +63,7 @@ export const GoogleReq = (value: any, fn: (arg0: any) => void) => {
  * write get methods
  */
 
-export const GetUserResturant = (userId: any, fn: (arg0: any) => void) => {
+export const GetUserRestaurant = (userId: any, fn: (arg0: any) => void) => {
     Api
         .get(`Restaurant/GetUserRestaurant?userId=${userId}`, '', '')
         .then(response => {

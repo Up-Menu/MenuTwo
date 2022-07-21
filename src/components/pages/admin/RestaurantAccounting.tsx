@@ -40,7 +40,7 @@ import images from 'src/widgets/importer';
 import TitleText from '../../../UI/TitleText';
 import ProgressContext from 'src/context/ProgressContext';
 import RtlVersion from '../../../theme/RtlVersion';
-import { GetUserResturant } from 'src/connections/Req';
+import { GetUserRestaurant } from 'src/connections/Req';
 
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
@@ -106,16 +106,16 @@ const CreateAccount = () => {
   const dispatch = useTypedDispatch();
 
   useEffect(() => {
-    GetUserResturant(user.payload.userId, (resturantData) => {
+    GetUserRestaurant(user.payload.userId, (restaurantData) => {
       setGlobalUserState({
         ...globalUser,
-        address: resturantData.data.data.restaurant[0].address,
-        cellPhone: resturantData.data.data.restaurant[0].cellPhone,
-        email: resturantData.data.data.restaurant[0].email,
-        profile: resturantData.data.data.restaurant[0].profile,
-        restaurantName: resturantData.data.data.restaurant[0].restaurantName,
-        social: resturantData.data.data.restaurant[0].social,
-        website: resturantData.data.data.restaurant[0].website
+        address: restaurantData.data.data.restaurant[0].address,
+        cellPhone: restaurantData.data.data.restaurant[0].cellPhone,
+        email: restaurantData.data.data.restaurant[0].email,
+        profile: restaurantData.data.data.restaurant[0].profile,
+        restaurantName: restaurantData.data.data.restaurant[0].restaurantName,
+        social: restaurantData.data.data.restaurant[0].social,
+        website: restaurantData.data.data.restaurant[0].website
       });
     });
   }, []);
@@ -148,15 +148,21 @@ const CreateAccount = () => {
 
   const onFinish = (values: any) => {
     progressContext.onRestaurant(true);
-    // dispatch(userCreateRestaurant({
-    // address: `${values.address}`,
-    // email: `${values.email}`,
-    // profile: `${values.profile}`,
-    // restaurantName: `${values.restaurantName}`,
-    // social: `${values.social}`,
-    // website: `${ssl}://${values.website}`,
-    // cellPhone: `${values.areaCode}${values.cellPhone}`
-    // }, (notification) => notification));
+    dispatch(
+      userCreateRestaurant(
+        {
+          address: `${values.address}`,
+          email: `${values.email}`,
+          profile: `${values.profile}`,
+          restaurantName: `${values.restaurantName}`,
+          social: `${values.social}`,
+          website: `${ssl}://${values.website}`,
+          cellPhone: `${values.areaCode}${values.cellPhone}`,
+          userId: `${user.payload.userId}`
+        },
+        (notification) => notification
+      )
+    );
   };
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
@@ -168,9 +174,8 @@ const CreateAccount = () => {
 
   return (
     <Fragment>
-      <TitleText header="ساخت اکانت رستوران" />
       <Toaster />
-
+      <TitleText header="ساخت اکانت رستوران" />
       <Container maxWidth="lg">
         <Box p={1}>
           <Card>

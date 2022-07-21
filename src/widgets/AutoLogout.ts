@@ -48,7 +48,7 @@ const AutoLogout = ({ children }) => {
         })
     }, [])
 
-    // logs out user by clearing out auth token in localStorage and redirecting url to /signin page.
+    // logs out user by clearing out auth token in localStorage and redirecting url to /register page.
     const logoutAction = () => {
         dispatch(userLogout(nav))
             .then(() => {

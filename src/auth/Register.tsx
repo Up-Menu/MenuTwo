@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, MouseEvent, useState } from 'react';
 import {
   Container,
   Grid,
@@ -14,7 +14,7 @@ import Footer from 'src/shared/Footer';
 import TextField from '@mui/material/TextField';
 
 import { Form } from 'antd';
-import { userSignIn } from 'src/store/actions';
+import { userRegister } from 'src/store/actions';
 import { useTypedDispatch } from 'src/store';
 
 import { Toaster } from 'react-hot-toast';
@@ -41,7 +41,7 @@ interface State {
   showConfPassword: boolean;
 }
 
-const SignIn = () => {
+const Register = () => {
   const dispatch = useTypedDispatch();
   const nav = useNavigate();
 
@@ -74,18 +74,18 @@ const SignIn = () => {
   };
 
   const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: MouseEvent<HTMLButtonElement>
   ) => {
     event.preventDefault();
   };
   const handleMouseDownConfPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: MouseEvent<HTMLButtonElement>
   ) => {
     event.preventDefault();
   };
 
   const onFinish = (values: any) => {
-    dispatch(userSignIn({ ...values }, (notification) => notification, nav));
+    dispatch(userRegister({ ...values }, (notification) => notification, nav));
   };
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
@@ -278,4 +278,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Register;

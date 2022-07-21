@@ -1,5 +1,5 @@
 import {
-    SignInReq,
+    RegisterReq,
     LoginReq,
     GoogleReq,
     CreateMenuReq,
@@ -67,8 +67,8 @@ export const userLogout = (nav: NavigateFunction) => (dispatch: (arg0: { type: s
 
 
 
-// SignIn Actions
-export const userSignIn = (payload: any, fn: (arg0: any) => void, nav: NavigateFunction) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
+// Register Actions
+export const userRegister = (payload: any, fn: (arg0: any) => void, nav: NavigateFunction) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
     const payloadWithOutRememberKey = {
         email: payload.email,
         password: payload.password,
@@ -79,7 +79,7 @@ export const userSignIn = (payload: any, fn: (arg0: any) => void, nav: NavigateF
         cellPhone: payload.cellPhone
     }
 
-    SignInReq(payloadWithOutRememberKey, (server_response) => {
+    RegisterReq(payloadWithOutRememberKey, (server_response) => {
         if (server_response[0] == 'Success') {
             dispatch({
                 type: "USER_SIGNIN",
@@ -131,7 +131,7 @@ export const userCreateTable = (payload: any, fn: (arg0: any) => void) => async 
 
 // Sms Panel Actions
 export const userSmsVerification = (payload: any, fn: (arg0: any) => void, nav: NavigateFunction) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
-    SignInReq(payload, (server_response) => {
+    RegisterReq(payload, (server_response) => {
         if (server_response[0] == 'Success') {
             dispatch({
                 type: "USER_SMS_VERIFY",
@@ -149,14 +149,14 @@ export const userSmsVerification = (payload: any, fn: (arg0: any) => void, nav: 
 export const userCreateRestaurant = (payload: any, fn: (arg0: any) => void) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
     CreateRestaurantReq(payload, (server_response) => {
         if (server_response[0] == "Success") {
-            fn(toast.success(server_response[1]))
             dispatch({
                 type: "USER_CREATE_RESTAURANT",
                 payload: {
-                    userId: nanoid(),
+                    restaurantId: nanoid(),
                     ...payload
                 }
             })
+            fn(toast.success(server_response[1]))
         }
     })
 }

@@ -62,7 +62,7 @@ const Tables = Loader(
 const SmsPanel = Loader(
   lazy(() => import('src/components/pages/admin/SmsPanel'))
 );
-const SignIn = Loader(lazy(() => import('../auth/SignIn')));
+const Register = Loader(lazy(() => import('../auth/Register')));
 const SystemTest = Loader(
   lazy(() => import('src/components/pages/admin/SystemTest'))
 );
@@ -153,8 +153,8 @@ function routes(props: string[]): RouteObject[] {
       ]
     },
     {
-      path: 'signin',
-      element: <SignIn />
+      path: 'register',
+      element: <Register />
     },
     {
       path: 'login',
@@ -171,7 +171,7 @@ function routes(props: string[]): RouteObject[] {
           <SidebarLayout />
         </>
       ) : (
-        <Login /> || <SignIn />
+        <Login /> || <Register />
       ),
       children: [
         {
@@ -179,49 +179,49 @@ function routes(props: string[]): RouteObject[] {
           element: isLogged ? (
             <Navigate to="tasks" replace />
           ) : (
-            <Login /> || <SignIn />
+            <Login /> || <Register />
           )
         },
 
         {
           path: 'mobileApp',
-          element: isLogged ? <MobileApp /> : <Login /> || <SignIn />
+          element: isLogged ? <MobileApp /> : <Login /> || <Register />
         },
         {
           path: 'systemTest',
-          element: isLogged ? <SystemTest /> : <Login /> || <SignIn />
+          element: isLogged ? <SystemTest /> : <Login /> || <Register />
         },
         {
           path: 'tables',
-          element: isLogged ? <Tables /> : <Login /> || <SignIn />
+          element: isLogged ? <Tables /> : <Login /> || <Register />
         },
         {
           path: 'tasks',
-          element: isLogged ? <Tasks /> : <Login /> || <SignIn />
+          element: isLogged ? <Tasks /> : <Login /> || <Register />
         },
         {
           path: 'createRestaurant',
-          element: isLogged ? <CreateRestaurant /> : <Login /> || <SignIn />
+          element: isLogged ? <CreateRestaurant /> : <Login /> || <Register />
         },
         {
           path: 'createCategory',
-          element: isLogged ? <CreateCategory /> : <Login /> || <SignIn />
+          element: isLogged ? <CreateCategory /> : <Login /> || <Register />
         },
         {
           path: 'createMenu',
-          element: isLogged ? <CreateMenu /> : <Login /> || <SignIn />
+          element: isLogged ? <CreateMenu /> : <Login /> || <Register />
         },
         {
           path: 'orders',
-          element: isLogged ? <Order /> : <Login /> || <SignIn />
+          element: isLogged ? <Order /> : <Login /> || <Register />
         },
         {
           path: 'delivery',
-          element: isLogged ? <Delivery /> : <Login /> || <SignIn />
+          element: isLogged ? <Delivery /> : <Login /> || <Register />
         },
         {
           path: 'themes',
-          element: isLogged ? <ThemeSelection /> : <Login /> || <SignIn />
+          element: isLogged ? <ThemeSelection /> : <Login /> || <Register />
         }
       ]
     }

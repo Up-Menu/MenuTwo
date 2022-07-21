@@ -194,7 +194,7 @@ const Login = () => {
                         <Typography
                           variant="h6"
                           component={RouterLink}
-                          to="/signin"
+                          to="/register"
                         >
                           چرا همین الآن ثبت نام نمیکنی؟
                         </Typography>
@@ -365,7 +365,7 @@ const Login = () => {
                     <Typography
                       variant="h6"
                       component={RouterLink}
-                      to="/signin"
+                      to="/register"
                     >
                       Oops I do not have an account!
                     </Typography>

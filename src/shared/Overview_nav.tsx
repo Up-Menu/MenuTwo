@@ -37,7 +37,7 @@ const HeaderWrapper = styled(Box)(
           color: ${theme.header.textColor};
           padding: ${theme.spacing(0, 2)};
           right: 0;
-          z-index: 6;
+          z-index: 1111;
           background-color: ${alpha(theme.header.background, 0.95)};
           backdrop-filter: blur(3px);
           position: fixed;
@@ -250,7 +250,7 @@ const Overview_nav = () => {
                     </ListItem>
                     <ListItem
                       button
-                      to="/signin"
+                      to="/register"
                       sx={{
                         display: 'flex',
                         flexDirection: 'row',

@@ -28,6 +28,8 @@ const HeaderWrapper = styled(Box)(
         padding: ${theme.spacing(0, 2)};
         left: 0;
         z-index: 111;
+        background: transparent;
+        background-color: transparent;
         position: fixed;
         justify-content: space-between;
         width: 100%;
@@ -48,7 +50,6 @@ function Header() {
       display="flex"
       alignItems="center"
       sx={{
-        bgcolor: 'background.default',
         color: 'text.primary',
         direction: 'rtl'
       }}

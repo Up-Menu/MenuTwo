@@ -53,6 +53,7 @@ interface localUserType {
     remember: boolean;
   };
 }
+
 interface existingUserType {
   address: string;
   cellPhone: string;
@@ -62,6 +63,7 @@ interface existingUserType {
   social: string;
   website: string;
 }
+
 const MyBox = styled(Box)`
   @media (min-width: 480px) {
     margin: 0 18px;
@@ -107,16 +109,28 @@ const CreateAccount = () => {
 
   useEffect(() => {
     GetUserRestaurant(user.payload.userId, (restaurantData) => {
-      setGlobalUserState({
-        ...globalUser,
-        address: restaurantData.data.data.restaurant[0].address,
-        cellPhone: restaurantData.data.data.restaurant[0].cellPhone,
-        email: restaurantData.data.data.restaurant[0].email,
-        profile: restaurantData.data.data.restaurant[0].profile,
-        restaurantName: restaurantData.data.data.restaurant[0].restaurantName,
-        social: restaurantData.data.data.restaurant[0].social,
-        website: restaurantData.data.data.restaurant[0].website
-      });
+      console.log(restaurantData);
+      if (restaurantData.data.data.restaurant.length == 0) {
+        setGlobalUserState({
+          address: 'string',
+          cellPhone: 'string',
+          email: 'string',
+          profile: 'string',
+          restaurantName: 'string',
+          social: 'string',
+          website: 'string'
+        });
+      } else {
+        setGlobalUserState({
+          address: restaurantData.data.data.restaurant[0].address,
+          cellPhone: restaurantData.data.data.restaurant[0].cellPhone,
+          email: restaurantData.data.data.restaurant[0].email,
+          profile: restaurantData.data.data.restaurant[0].profile,
+          restaurantName: restaurantData.data.data.restaurant[0].restaurantName,
+          social: restaurantData.data.data.restaurant[0].social,
+          website: restaurantData.data.data.restaurant[0].website
+        });
+      }
     });
   }, []);
 
@@ -162,235 +176,411 @@ const CreateAccount = () => {
         },
         (notification) => notification
       )
-    );
+    ).then((r) => console.log(r));
   };
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
-
   const _handleChange = (event: SelectChangeEvent) => {
     setSsl(event.target.value as string);
   };
+  console.log(globalUserState);
 
-  return (
-    <Fragment>
-      <Toaster />
-      <TitleText header="ساخت اکانت رستوران" />
-      <Container maxWidth="lg">
-        <Box p={1}>
-          <Card>
-            <MyBox sx={{ direction: 'rtl', p: 2 }}>
-              <RtlVersion>
-                <Form
-                  name="basic"
-                  wrapperCol={{ span: 6 }}
-                  initialValues={{ remember: true }}
-                  onFinish={onFinish}
-                  onFinishFailed={onFinishFailed}
-                  autoComplete="on"
-                >
-                  <Grid container spacing={2}>
-                    <Grid
-                      item
-                      xs={12}
-                      sx={{ display: 'flex', justifyContent: 'center' }}
-                    >
-                      <Form.Item name="profile">
-                        <MyBox>
-                          <Upload
-                            name="avatar"
-                            listType="picture-card"
-                            className="avatar-uploader"
-                            showUploadList={false}
-                            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                            beforeUpload={beforeUpload}
-                            onChange={handleChange}
-                          >
-                            {imageUrl ? (
-                              <img
-                                src={imageUrl}
-                                alt="avatar"
-                                style={{ width: '100%' }}
-                              />
-                            ) : (
-                              uploadButton
-                            )}
-                          </Upload>
-                        </MyBox>
-                      </Form.Item>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Form.Item name="restaurantName">
-                        <TextField
-                          label="نام رستوران"
-                          type="text"
-                          fullWidth
-                          id="outlined-required"
-                          placeholder={
-                            globalUserState.restaurantName === 'string'
-                              ? ''
-                              : globalUserState.restaurantName
-                          }
-                          value={''}
-                        />
-                      </Form.Item>
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                      <Grid container spacing={2}>
-                        <Grid item xs={12} md={9}>
-                          <Form.Item name="cellPhone">
-                            <TextField
-                              label="شماره تلفن"
-                              type="text"
-                              fullWidth
-                              placeholder={
-                                globalUserState.cellPhone === 'string'
-                                  ? ''
-                                  : globalUserState.cellPhone
-                              }
-                              value={''}
-                            />
-                          </Form.Item>
-                        </Grid>
-                        <Grid item xs={12} md={3}>
-                          <Form.Item name="areaCode">
-                            <TextField
-                              label="کد منطقه"
-                              type="text"
-                              fullWidth
-                              placeholder="021"
-                              value={''}
-                            />
-                          </Form.Item>
-                        </Grid>
+  if (globalUserState.restaurantName === null) {
+    return;
+  } else if (globalUserState.restaurantName === 'string') {
+    return (
+      <Fragment>
+        <Toaster />
+        <TitleText header="ساخت اکانت رستوران" />
+        <Container maxWidth="lg">
+          <Box p={1}>
+            <Card>
+              <MyBox sx={{ direction: 'rtl', p: 2 }}>
+                <RtlVersion>
+                  <Form
+                    name="basic"
+                    wrapperCol={{ span: 6 }}
+                    initialValues={{ remember: true }}
+                    onFinish={onFinish}
+                    onFinishFailed={onFinishFailed}
+                    autoComplete="on"
+                  >
+                    <Grid container spacing={2}>
+                      <Grid
+                        item
+                        xs={12}
+                        sx={{ display: 'flex', justifyContent: 'center' }}
+                      >
+                        <Form.Item name="profile">
+                          <MyBox>
+                            <Upload
+                              name="avatar"
+                              listType="picture-card"
+                              className="avatar-uploader"
+                              showUploadList={false}
+                              action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                              beforeUpload={beforeUpload}
+                              onChange={handleChange}
+                            >
+                              {imageUrl ? (
+                                <img
+                                  src={imageUrl}
+                                  alt="avatar"
+                                  style={{ width: '100%' }}
+                                />
+                              ) : (
+                                uploadButton
+                              )}
+                            </Upload>
+                          </MyBox>
+                        </Form.Item>
                       </Grid>
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                      <Form.Item name="email">
-                        <TextField
-                          label="ایمیل"
-                          type="text"
-                          fullWidth
-                          placeholder={
-                            globalUserState.email === 'string'
-                              ? ''
-                              : globalUserState.email
-                          }
-                          value={''}
-                        />
-                      </Form.Item>
-                    </Grid>
-
-                    <Grid item xs={12} md={6}>
-                      <Grid container spacing={2}>
-                        <Grid item xs={12} md={9}>
-                          <Form.Item name="website">
-                            <TextField
-                              label="لینک سایت رستوران"
-                              type="text"
-                              fullWidth
-                              placeholder={
-                                globalUserState.website === 'string'
-                                  ? ''
-                                  : globalUserState.website
-                              }
-                              value={''}
-                            />
-                          </Form.Item>
-                        </Grid>
-
-                        <Grid item xs={12} md={3}>
-                          <Form.Item name="ssl">
-                            <FormControl fullWidth>
-                              <InputLabel id="demo-simple-select-label">
-                                SSL
-                              </InputLabel>
-                              <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
+                      <Grid item xs={12}>
+                        <Form.Item name="restaurantName">
+                          <TextField
+                            label="نام رستوران"
+                            type="text"
+                            fullWidth
+                            id="outlined-required"
+                            defaultValue={''}
+                            value={''}
+                          />
+                        </Form.Item>
+                      </Grid>
+                      <Grid item xs={12} md={6}>
+                        <Grid container spacing={2}>
+                          <Grid item xs={12} md={9}>
+                            <Form.Item name="cellPhone">
+                              <TextField
+                                label="شماره تلفن"
+                                type="text"
+                                fullWidth
+                                defaultValue={''}
                                 value={''}
-                                label="SSL"
-                                onChange={_handleChange}
-                              >
-                                <MenuItem value="http">http</MenuItem>
-                                <MenuItem value="https">https</MenuItem>
-                              </Select>
-                            </FormControl>
-                          </Form.Item>
+                              />
+                            </Form.Item>
+                          </Grid>
+                          <Grid item xs={12} md={3}>
+                            <Form.Item name="areaCode">
+                              <TextField
+                                label="کد منطقه"
+                                type="text"
+                                fullWidth
+                                placeholder="021"
+                                value={''}
+                              />
+                            </Form.Item>
+                          </Grid>
                         </Grid>
                       </Grid>
-                    </Grid>
+                      <Grid item xs={12} md={6}>
+                        <Form.Item name="email">
+                          <TextField
+                            label="ایمیل"
+                            type="text"
+                            fullWidth
+                            defaultValue={''}
+                            value={''}
+                          />
+                        </Form.Item>
+                      </Grid>
 
-                    <Grid item xs={12} md={6}>
-                      <Form.Item name="social">
-                        <TextField
-                          label="آیدی اینستاگرام"
-                          type="text"
-                          fullWidth
-                          placeholder={
-                            globalUserState.social === 'string'
-                              ? ''
-                              : globalUserState.social
-                          }
-                          value={''}
-                        />
-                      </Form.Item>
-                    </Grid>
+                      <Grid item xs={12} md={6}>
+                        <Grid container spacing={2}>
+                          <Grid item xs={12} md={9}>
+                            <Form.Item name="website">
+                              <TextField
+                                label="لینک سایت رستوران"
+                                type="text"
+                                fullWidth
+                                defaultValue={''}
+                                value={''}
+                              />
+                            </Form.Item>
+                          </Grid>
 
-                    <Grid item xs={12}>
-                      <Form.Item name="address">
-                        <TextField
-                          label="نشانی"
-                          multiline
-                          placeholder={
-                            globalUserState.address === 'string'
-                              ? ''
-                              : globalUserState.address
-                          }
-                          value={''}
-                          fullWidth
-                          rows={7}
-                        />
-                      </Form.Item>
-                    </Grid>
+                          <Grid item xs={12} md={3}>
+                            <Form.Item name="ssl">
+                              <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">
+                                  SSL
+                                </InputLabel>
+                                <Select
+                                  labelId="demo-simple-select-label"
+                                  id="demo-simple-select"
+                                  value={''}
+                                  label="SSL"
+                                  onChange={_handleChange}
+                                >
+                                  <MenuItem value="http">http</MenuItem>
+                                  <MenuItem value="https">https</MenuItem>
+                                </Select>
+                              </FormControl>
+                            </Form.Item>
+                          </Grid>
+                        </Grid>
+                      </Grid>
 
-                    <Grid
-                      item
-                      xs={12}
-                      sx={{ display: 'flex', justifyContent: 'center' }}
-                    >
-                      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                        <Button
-                          type="submit"
-                          size="large"
-                          variant="outlined"
-                          sx={{ padding: 1 }}
-                          endIcon={<DownloadDoneIcon />}
-                          color="success"
-                        >
-                          ذخیره
-                        </Button>
-                      </Form.Item>
+                      <Grid item xs={12} md={6}>
+                        <Form.Item name="social">
+                          <TextField
+                            label="آیدی اینستاگرام"
+                            type="text"
+                            fullWidth
+                            defaultValue={''}
+                            value={''}
+                          />
+                        </Form.Item>
+                      </Grid>
+
+                      <Grid item xs={12}>
+                        <Form.Item name="address">
+                          <TextField
+                            label="نشانی"
+                            multiline
+                            defaultValue={''}
+                            value={''}
+                            fullWidth
+                            rows={7}
+                          />
+                        </Form.Item>
+                      </Grid>
+
+                      <Grid
+                        item
+                        xs={12}
+                        sx={{ display: 'flex', justifyContent: 'center' }}
+                      >
+                        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                          <Button
+                            type="submit"
+                            size="large"
+                            variant="outlined"
+                            sx={{ padding: 1 }}
+                            endIcon={<DownloadDoneIcon />}
+                            color="success"
+                          >
+                            ذخیره
+                          </Button>
+                        </Form.Item>
+                      </Grid>
                     </Grid>
-                  </Grid>
-                </Form>
-              </RtlVersion>
-            </MyBox>
-          </Card>
-        </Box>
-        <BottomNav
-          className="pt-5"
-          nextStep={true}
-          preStep={false}
-          forLink="themes"
-          backLink="finish"
-          forText="انتخاب تم"
-          backText="ورود به سامانه"
-        />
-      </Container>
-      <Footer />
-    </Fragment>
-  );
+                  </Form>
+                </RtlVersion>
+              </MyBox>
+            </Card>
+          </Box>
+          <BottomNav
+            className="pt-5"
+            nextStep={true}
+            preStep={false}
+            forLink="themes"
+            backLink="finish"
+            forText="انتخاب تم"
+            backText="ورود به سامانه"
+          />
+        </Container>
+        <Footer />
+      </Fragment>
+    );
+  } else {
+    return (
+      <Fragment>
+        <Toaster />
+        <TitleText header="ساخت اکانت رستوران" />
+        <Container maxWidth="lg">
+          <Box p={1}>
+            <Card>
+              <MyBox sx={{ direction: 'rtl', p: 2 }}>
+                <RtlVersion>
+                  <Form
+                    name="basic"
+                    wrapperCol={{ span: 6 }}
+                    initialValues={{ remember: true }}
+                    onFinish={onFinish}
+                    onFinishFailed={onFinishFailed}
+                    autoComplete="on"
+                  >
+                    <Grid container spacing={2}>
+                      <Grid
+                        item
+                        xs={12}
+                        sx={{ display: 'flex', justifyContent: 'center' }}
+                      >
+                        <Form.Item name="profile">
+                          <MyBox>
+                            <Upload
+                              name="avatar"
+                              listType="picture-card"
+                              className="avatar-uploader"
+                              showUploadList={false}
+                              action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                              beforeUpload={beforeUpload}
+                              onChange={handleChange}
+                            >
+                              {imageUrl ? (
+                                <img
+                                  src={imageUrl}
+                                  alt="avatar"
+                                  style={{ width: '100%' }}
+                                />
+                              ) : (
+                                uploadButton
+                              )}
+                            </Upload>
+                          </MyBox>
+                        </Form.Item>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Form.Item name="restaurantName">
+                          <TextField
+                            label="نام رستوران"
+                            type="text"
+                            fullWidth
+                            id="outlined-required"
+                            defaultValue={globalUserState.restaurantName}
+                            value={''}
+                          />
+                        </Form.Item>
+                      </Grid>
+                      <Grid item xs={12} md={6}>
+                        <Grid container spacing={2}>
+                          <Grid item xs={12} md={9}>
+                            <Form.Item name="cellPhone">
+                              <TextField
+                                label="شماره تلفن"
+                                type="text"
+                                fullWidth
+                                defaultValue={globalUserState.cellPhone}
+                                value={''}
+                              />
+                            </Form.Item>
+                          </Grid>
+                          <Grid item xs={12} md={3}>
+                            <Form.Item name="areaCode">
+                              <TextField
+                                label="کد منطقه"
+                                type="text"
+                                fullWidth
+                                placeholder="021"
+                                value={''}
+                              />
+                            </Form.Item>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                      <Grid item xs={12} md={6}>
+                        <Form.Item name="email">
+                          <TextField
+                            label="ایمیل"
+                            type="text"
+                            fullWidth
+                            defaultValue={globalUserState.email}
+                            value={''}
+                          />
+                        </Form.Item>
+                      </Grid>
+
+                      <Grid item xs={12} md={6}>
+                        <Grid container spacing={2}>
+                          <Grid item xs={12} md={9}>
+                            <Form.Item name="website">
+                              <TextField
+                                label="لینک سایت رستوران"
+                                type="text"
+                                fullWidth
+                                defaultValue={globalUserState.website}
+                                value={''}
+                              />
+                            </Form.Item>
+                          </Grid>
+
+                          <Grid item xs={12} md={3}>
+                            <Form.Item name="ssl">
+                              <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">
+                                  SSL
+                                </InputLabel>
+                                <Select
+                                  labelId="demo-simple-select-label"
+                                  id="demo-simple-select"
+                                  value={''}
+                                  label="SSL"
+                                  onChange={_handleChange}
+                                >
+                                  <MenuItem value="http">http</MenuItem>
+                                  <MenuItem value="https">https</MenuItem>
+                                </Select>
+                              </FormControl>
+                            </Form.Item>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+
+                      <Grid item xs={12} md={6}>
+                        <Form.Item name="social">
+                          <TextField
+                            label="آیدی اینستاگرام"
+                            type="text"
+                            fullWidth
+                            defaultValue={globalUserState.social}
+                            value={''}
+                          />
+                        </Form.Item>
+                      </Grid>
+
+                      <Grid item xs={12}>
+                        <Form.Item name="address">
+                          <TextField
+                            label="نشانی"
+                            multiline
+                            defaultValue={globalUserState.address}
+                            value={''}
+                            fullWidth
+                            rows={7}
+                          />
+                        </Form.Item>
+                      </Grid>
+
+                      <Grid
+                        item
+                        xs={12}
+                        sx={{ display: 'flex', justifyContent: 'center' }}
+                      >
+                        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                          <Button
+                            type="submit"
+                            size="large"
+                            variant="outlined"
+                            sx={{ padding: 1 }}
+                            endIcon={<DownloadDoneIcon />}
+                            color="success"
+                          >
+                            ذخیره
+                          </Button>
+                        </Form.Item>
+                      </Grid>
+                    </Grid>
+                  </Form>
+                </RtlVersion>
+              </MyBox>
+            </Card>
+          </Box>
+          <BottomNav
+            className="pt-5"
+            nextStep={true}
+            preStep={false}
+            forLink="themes"
+            backLink="finish"
+            forText="انتخاب تم"
+            backText="ورود به سامانه"
+          />
+        </Container>
+        <Footer />
+      </Fragment>
+    );
+  }
 };
 
 export default CreateAccount;

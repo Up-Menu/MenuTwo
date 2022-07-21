@@ -37,7 +37,7 @@ const CreateCategory = () => {
 
   //* call on form submit
   const onFinish = (values: any) => {
-    let valuesWithIdGenerator = {
+    const valuesWithIdGenerator = {
       id: foodList.length,
       ...values
     };
@@ -49,7 +49,6 @@ const CreateCategory = () => {
   const sendMenu = () => {
     progressContext.onMenu(true);
     dispatch(userCreateMenu(foodList, (notification) => notification));
-    // console.log(foodList);
   };
 
   const onFinishFailed = (errorInfo: any) => {

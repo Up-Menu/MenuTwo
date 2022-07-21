@@ -184,7 +184,6 @@ const CreateAccount = () => {
   const _handleChange = (event: SelectChangeEvent) => {
     setSsl(event.target.value as string);
   };
-  console.log(globalUserState);
 
   if (globalUserState.restaurantName === null) {
     return;

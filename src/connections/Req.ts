@@ -41,7 +41,7 @@ export const CreateMenuReq = (value: any, fn: (arg0: any) => void) => {
 // send restaurant data to server
 export const CreateRestaurantReq = (value: any, fn: (arg0: any) => void) => {
     Api
-        .post('Restaurant/CreateRestaurant', value, '')
+        .post('Restaurant/CreateOrUpdateRestaurant', value, '')
         .then(response => {
             fn([response.data.status, response.data.data.message, response.data.data.restaurantId])
         })

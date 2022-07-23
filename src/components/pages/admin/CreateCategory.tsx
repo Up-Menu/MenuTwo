@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {
   Box,
   Button,
@@ -18,14 +18,15 @@ import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import { Form } from 'antd';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import AddTaskIcon from '@mui/icons-material/AddTask';
-import { userCreateMenu } from '../../../store/actions';
-import toast from 'react-hot-toast';
+import { userCreateCategory } from '../../../store/actions';
+import toast, { Toaster } from 'react-hot-toast';
 import ProgressContext from '../../../context/ProgressContext';
 import { useTypedDispatch } from '../../../store';
 import PopUp from '../../../UI/PopUp';
 import TitleText from '../../../UI/TitleText';
 import Footer from 'src/shared/Footer';
 import BottomNav from 'src/shared/BottomNav';
+import { GetRestaurantCategories } from 'src/connections/Req';
 
 const CreateCategory = () => {
   const [foodList, setFoodList] = useState([]);
@@ -35,21 +36,56 @@ const CreateCategory = () => {
   const dispatch = useTypedDispatch();
   const [form] = Form.useForm();
 
+  const restaurantID: String = JSON.parse(
+    localStorage.getItem('userRestaurantCategory')
+  ).payload.restaurantId;
+  const categoryID: String = JSON.parse(
+    localStorage.getItem('userRestaurantCategory')
+  ).payload.categoryId;
+
   //* call on form submit
   const onFinish = (values: any) => {
-    const valuesWithIdGenerator = {
-      id: foodList.length,
-      ...values
-    };
-
-    setFoodList((foodList) => [...foodList, valuesWithIdGenerator]);
+    progressContext.onMenu(true);
+    dispatch(
+      userCreateCategory(
+        {
+          restaurantId: restaurantID,
+          categoryName: values.categoryName
+        },
+        (notification) => notification
+      )
+    );
+    setFoodList((foodList) => [
+      ...foodList,
+      {
+        id: categoryID,
+        categoryName: values.categoryName
+      }
+    ]);
     form.resetFields();
   };
 
-  const sendMenu = () => {
-    progressContext.onMenu(true);
-    dispatch(userCreateMenu(foodList, (notification) => notification));
-  };
+  useEffect(() => {
+    const timer = setInterval(() => {
+      GetRestaurantCategories(restaurantID, (restaurantCategories) =>
+        restaurantCategories.map((category) => {
+          console.log(category.categoryId);
+          setFoodList((foodList) => [
+            ...foodList,
+            {
+              id: category.categoryId,
+              categoryName: category.categoryName
+            }
+          ]);
+        })
+      );
+    }, 10000);
+    return () => {
+      clearInterval(timer);
+    };
+  }, [foodList]);
+
+  console.log(foodList);
 
   const onFinishFailed = (errorInfo: any) => {
     toast.error('Failed:', errorInfo);
@@ -70,13 +106,13 @@ const CreateCategory = () => {
             .getAllColumns()
             .filter((c) => c.field !== '__check__' && !!c)
             .forEach(() => {
-              setID(params.row.id);
+              setID(params.row.categoryId);
             });
         };
 
         return (
           <Box display="flex" flexDirection="row">
-            <Tooltip title="Delete Order" arrow>
+            <Tooltip title="حذف ردیف" arrow>
               <IconButton
                 sx={{
                   '&:hover': {
@@ -114,39 +150,13 @@ const CreateCategory = () => {
           return row;
         });
         setFoodList(updatedRows);
-      } else if (field === 'category') {
-        const category = value.toString();
-        const updatedRows = foodList.map((row) => {
-          if (row.id === id) {
-            return { ...row, category };
-          }
-          return row;
-        });
-        setFoodList(updatedRows);
-      } else if (field === 'price') {
-        const price = value.toString();
-        const updatedRows = foodList.map((row) => {
-          if (row.id === id) {
-            return { ...row, price };
-          }
-          return row;
-        });
-        setFoodList(updatedRows);
-      } else if (field === 'description') {
-        const description = value.toString();
-        const updatedRows = foodList.map((row) => {
-          if (row.id === id) {
-            return { ...row, description };
-          }
-          return row;
-        });
-        setFoodList(updatedRows);
       }
     },
     [foodList]
   );
   return (
     <>
+      <Toaster />
       <TitleText header="ایجاد دسته بندی" />
       <PopUp
         setOpen={setOpen}
@@ -206,18 +216,9 @@ const CreateCategory = () => {
                                   color="success"
                                   variant="outlined"
                                   endIcon={<DoneOutlineIcon />}
-                                  onClick={sendMenu}
+                                  type="submit"
                                 >
                                   ثبت
-                                </Button>
-                                <Button
-                                  size="medium"
-                                  sx={{ margin: 1 }}
-                                  type="submit"
-                                  color="warning"
-                                  endIcon={<AddTaskIcon />}
-                                >
-                                  اضافه کردن مجدد
                                 </Button>
                               </Form.Item>
                             </Grid>

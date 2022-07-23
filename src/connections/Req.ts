@@ -37,13 +37,22 @@ export const CreateMenuReq = (value: any, fn: (arg0: any) => void) => {
         .catch(err => console.log(err))
 }
 
+export const CreateCategoryReq = (value: any, fn: (arg0: any) => void) => {
+    Api
+        .post('Category/CreateCategory', value, '')
+        .then(response => {
+            fn([response.data.status, response.data.data.message, response.data.data.category.categoryId])
+        })
+        .catch(err => console.log(err))
+}
+
 
 // send restaurant data to server
 export const CreateRestaurantReq = (value: any, fn: (arg0: any) => void) => {
     Api
         .post('Restaurant/CreateOrUpdateRestaurant', value, '')
         .then(response => {
-            fn([response.data.status, response.data.data.message, response.data.data.restaurantId])
+            fn([response.data.status, response.data.data.message, response.data.data.restaurant.restaurantId])
         })
         .catch(err => console.log(err))
 }
@@ -68,6 +77,14 @@ export const GetUserRestaurant = (userId: any, fn: (arg0: any) => void) => {
         .get(`Restaurant/GetUserRestaurant?userId=${userId}`, '', '')
         .then(response => {
             fn(response)
+        })
+        .catch(err => console.log(err))
+}
+export const GetRestaurantCategories = (restaurantId: any, fn: (arg0: any) => void) => {
+    Api
+        .get(`Category/GetRestaurantCategories?restaurantId=${restaurantId}`, '', '')
+        .then(response => {
+            fn(response.data.data.restaurantCategories)
         })
         .catch(err => console.log(err))
 }

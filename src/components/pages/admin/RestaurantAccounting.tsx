@@ -44,16 +44,6 @@ import { GetUserRestaurant } from 'src/connections/Req';
 
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
-interface localUserType {
-  type: string;
-  payload: {
-    userId: string;
-    email: string;
-    password: string;
-    remember: boolean;
-  };
-}
-
 interface existingUserType {
   address: string;
   cellPhone: string;
@@ -99,7 +89,8 @@ const CreateAccount = () => {
     website: null
   };
 
-  const user: localUserType = JSON.parse(localStorage.getItem('user'));
+  const userID: String = JSON.parse(localStorage.getItem('user')).payload
+    .userId;
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
   const [globalUserState, setGlobalUserState] = useState(globalUser);
@@ -108,8 +99,7 @@ const CreateAccount = () => {
   const dispatch = useTypedDispatch();
 
   useEffect(() => {
-    GetUserRestaurant(user.payload.userId, (restaurantData) => {
-      console.log(restaurantData);
+    GetUserRestaurant(userID, (restaurantData) => {
       if (restaurantData.data.data.restaurant.length == 0) {
         setGlobalUserState({
           address: 'string',
@@ -172,7 +162,7 @@ const CreateAccount = () => {
           social: `${values.social}`,
           website: `${ssl}://${values.website}`,
           cellPhone: `${values.areaCode}${values.cellPhone}`,
-          userId: `${user.payload.userId}`
+          userId: `${userID}`
         },
         (notification) => notification
       )

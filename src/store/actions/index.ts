@@ -4,7 +4,8 @@ import {
     GoogleReq,
     CreateMenuReq,
     CreateRestaurantReq,
-    CreateTableReq
+    CreateTableReq,
+    CreateCategoryReq
 } from '../../connections/Req';
 import { nanoid } from '@reduxjs/toolkit'
 import timeoutPromise from '../helper/TimeOut'
@@ -149,14 +150,31 @@ export const userSmsVerification = (payload: any, fn: (arg0: any) => void, nav: 
 export const userCreateRestaurant = (payload: any, fn: (arg0: any) => void) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
     CreateRestaurantReq(payload, (server_response) => {
         if (server_response[0] == "Success") {
-            dispatch({
+            const data = dispatch({
                 type: "USER_CREATE_RESTAURANT",
                 payload: {
-                    restaurantId: nanoid(),
+                    restaurantId: server_response[2],
                     ...payload
                 }
             })
             fn(toast.success(server_response[1]))
+            localStorage.setItem("userRestaurant", JSON.stringify(data))
+        }
+    })
+}
+
+export const userCreateCategory = (payload: any, fn: (arg0: any) => void) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
+    CreateCategoryReq(payload, (server_response) => {
+        if (server_response[0] == "Success") {
+            const data = dispatch({
+                type: "RESTAURANT_CREATE_CATEGORY",
+                payload: {
+                    categoryId: server_response[2],
+                    ...payload
+                }
+            })
+            fn(toast.success(server_response[1]))
+            localStorage.setItem("userRestaurantCategory", JSON.stringify(data))
         }
     })
 }

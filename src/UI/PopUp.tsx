@@ -1,9 +1,8 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import {
   Alert,
   Backdrop,
   Box,
-  Card,
   Fade,
   IconButton,
   Modal,
@@ -18,9 +17,7 @@ import {
 import DoneIcon from '@mui/icons-material/Done';
 import CloseIcon from '@mui/icons-material/Close';
 import { useTypedDispatch } from 'src/store';
-import { DeleteCategoryItem } from 'src/connections/Req';
 import { userDeleteCategory } from 'src/store/actions';
-import toast, { Toaster } from 'react-hot-toast';
 
 interface PopUpValuesType {
   setOpen: Function;
@@ -71,14 +68,7 @@ const PopUp = (props: PopUpValuesType) => {
     newList = newList.filter((item: any) => item.id !== props.ID);
     props.setList(newList);
     if (props.method === 'category') {
-      console.log(props.ID);
-      DeleteCategoryItem(props.ID, (server_response) => {
-        if (server_response[0] == 'Success') {
-          toast.error(server_response[1]);
-        }
-      });
-
-      // dispatch(userDeleteCategory(props.ID, (notification) => notification));
+      dispatch(userDeleteCategory(props.ID, (notification) => notification));
     } else if (props.method === 'table') {
       // DeleteTableItem()
     } else {
@@ -88,7 +78,6 @@ const PopUp = (props: PopUpValuesType) => {
   };
   return (
     <Fragment>
-      <Toaster />
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

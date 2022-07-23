@@ -88,10 +88,9 @@ export const GetRestaurantCategories = (restaurantId: any, fn: (arg0: any) => vo
         })
         .catch(err => console.log(err))
 }
-
-export const DeleteCategoryItem = (categoryId: string, fn: (arg0: any) => void) => {
+export const DeleteCategory = (categoryId: string, fn: (arg0: any) => void) => {
     Api
-        .post('Category/DeleteCategory', categoryId, '')
+        .post(`Category/DeleteCategory/?categoryId=${categoryId}`, categoryId, '')
         .then(response => {
             fn([response.data.status, response.data.data.message])
         })

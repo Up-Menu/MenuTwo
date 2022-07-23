@@ -6,7 +6,7 @@ import {
     CreateRestaurantReq,
     CreateTableReq,
     CreateCategoryReq,
-    DeleteCategoryItem
+    DeleteCategory
 } from '../../connections/Req';
 import { nanoid } from '@reduxjs/toolkit'
 import timeoutPromise from '../helper/TimeOut'
@@ -159,7 +159,7 @@ export const userCreateRestaurant = (payload: any, fn: (arg0: any) => void) => a
 
 // // Delete Category Actions
 export const userDeleteCategory = (payload: any, fn: (arg0: any) => void) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
-    DeleteCategoryItem(payload, (server_response) => {
+    DeleteCategory(payload, (server_response) => {
         if (server_response[0] == "Success") {
             fn(toast.error(server_response[1]))
         }

@@ -36,9 +36,6 @@ const CreateCategory = () => {
   const dispatch = useTypedDispatch();
   const [form] = Form.useForm();
 
-  // const categoryID: String = JSON.parse(
-  //   localStorage.getItem('userRestaurantCategory')
-  // ).payload.categoryId;
   const restaurantID: String = JSON.parse(
     localStorage.getItem('restaurant_data')
   ).payload.restaurantId;

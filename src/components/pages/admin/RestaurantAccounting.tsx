@@ -89,7 +89,7 @@ const CreateAccount = () => {
     website: null
   };
 
-  const userID: String = JSON.parse(localStorage.getItem('user')).payload
+  const userID: String = JSON.parse(localStorage.getItem('user_data')).payload
     .userId;
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
@@ -166,7 +166,7 @@ const CreateAccount = () => {
         },
         (notification) => notification
       )
-    ).then((r) => console.log(r));
+    );
   };
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);

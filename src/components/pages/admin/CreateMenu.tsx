@@ -54,7 +54,7 @@ const CreateMenu: React.FunctionComponent = () => {
   const [foodList, setFoodList] = useState([]);
   const [flag, setFlag] = useState(true);
   const [open, setOpen] = useState(false);
-  const [ID, setID] = useState(0);
+  const [ID, setID] = useState('');
   const progressContext = useContext(ProgressContext);
   const dispatch = useTypedDispatch();
   const [form] = Form.useForm();
@@ -240,6 +240,7 @@ const CreateMenu: React.FunctionComponent = () => {
         open={open}
         ID={ID}
         List={foodList}
+        method="menu"
       />
 
       <Container maxWidth="lg">

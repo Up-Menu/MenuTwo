@@ -5,20 +5,20 @@ import {
     CreateMenuReq,
     CreateRestaurantReq,
     CreateTableReq,
-    CreateCategoryReq
+    CreateCategoryReq,
+    DeleteCategoryItem
 } from '../../connections/Req';
 import { nanoid } from '@reduxjs/toolkit'
 import timeoutPromise from '../helper/TimeOut'
 import toast from 'react-hot-toast'
 import { NavigateFunction } from 'react-router'
+
 //  Login Actions
 export const userLogin = (nav: NavigateFunction, payload: any, fn: (arg0: any) => void) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
     const payloadWithOutRememberKey = {
         email: payload.email,
         password: payload.password,
     }
-
-
     LoginReq(payloadWithOutRememberKey, (server_response) => {
         if (server_response[0] == "NotFound") {
             fn(toast.error(server_response[1]))
@@ -44,7 +44,7 @@ export const userLogin = (nav: NavigateFunction, payload: any, fn: (arg0: any) =
             fn(toast.success("!خوش آمدید"))
             nav("/dashboards/tasks")
             if (payload.remember) {
-                localStorage.setItem("user", JSON.stringify(data))
+                localStorage.setItem("user_data", JSON.stringify(data))
             }
             else return
         }
@@ -64,9 +64,6 @@ export const userLogout = (nav: NavigateFunction) => (dispatch: (arg0: { type: s
             nav("/login")
         })
 }
-
-
-
 
 // Register Actions
 export const userRegister = (payload: any, fn: (arg0: any) => void, nav: NavigateFunction) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
@@ -110,7 +107,6 @@ export const userCreateMenu = (payload: any, fn: (arg0: any) => void) => async (
     })
 }
 
-
 // CreateTable Actions
 export const userCreateTable = (payload: any, fn: (arg0: any) => void) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
     CreateTableReq(payload, (server_response) => {
@@ -126,8 +122,6 @@ export const userCreateTable = (payload: any, fn: (arg0: any) => void) => async 
         }
     })
 }
-
-
 
 
 // Sms Panel Actions
@@ -146,7 +140,7 @@ export const userSmsVerification = (payload: any, fn: (arg0: any) => void, nav: 
     })
 }
 
-// CreateRestaurant Actions
+// Create Restaurant Actions
 export const userCreateRestaurant = (payload: any, fn: (arg0: any) => void) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
     CreateRestaurantReq(payload, (server_response) => {
         if (server_response[0] == "Success") {
@@ -158,11 +152,21 @@ export const userCreateRestaurant = (payload: any, fn: (arg0: any) => void) => a
                 }
             })
             fn(toast.success(server_response[1]))
-            localStorage.setItem("userRestaurant", JSON.stringify(data))
+            localStorage.setItem("restaurant_data", JSON.stringify(data))
         }
     })
 }
 
+// // Delete Category Actions
+export const userDeleteCategory = (payload: any, fn: (arg0: any) => void) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
+    DeleteCategoryItem(payload, (server_response) => {
+        if (server_response[0] == "Success") {
+            fn(toast.error(server_response[1]))
+        }
+    })
+}
+
+// Create Category Actions
 export const userCreateCategory = (payload: any, fn: (arg0: any) => void) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
     CreateCategoryReq(payload, (server_response) => {
         if (server_response[0] == "Success") {

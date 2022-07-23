@@ -41,7 +41,7 @@ const CreateTable = () => {
   const [qrText, setQRText] = useState('');
   const [openDelete, setOpenDelete] = useState(false);
   const [openView, setOpenView] = useState(false);
-  const [ID, setID] = useState(0);
+  const [ID, setID] = useState('');
   const [QR, setQR] = useState('');
   const dispatch = useTypedDispatch();
   const [form] = Form.useForm();
@@ -171,6 +171,7 @@ const CreateTable = () => {
         open={openDelete}
         ID={ID}
         List={tableList}
+        method="table"
       />
 
       <PopUpView setOpen={setOpenView} open={openView} QR={QR} />

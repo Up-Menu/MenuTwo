@@ -14,27 +14,27 @@ const initialState = {
 
 
 // Read user from the localStorage
-function readUser () {
+function readUser() {
     try {
-        const serialized = localStorage.getItem( 'user' )
-        if ( serialized === null )
+        const serialized = localStorage.getItem('user_data')
+        if (serialized === null)
             return undefined
-        return JSON.parse( serialized )
+        return JSON.parse(serialized)
     }
-    catch ( err ) {
+    catch (err) {
         return undefined
     }
 }
 
 // Read google user sso from the localStorage
-function googleUser () {
+function googleUser() {
     try {
-        const serialized = localStorage.getItem( 'googleSSO' )
-        if ( serialized === null )
+        const serialized = localStorage.getItem('googleSSO')
+        if (serialized === null)
             return undefined
-        return JSON.parse( serialized )
+        return JSON.parse(serialized)
     }
-    catch ( err ) {
+    catch (err) {
         return undefined
     }
 }
@@ -54,5 +54,5 @@ export type TypedThunk<ReturnType = void> = ThunkAction<
 export const useTypedDispatch = () => useDispatch<TypedDispatch>()
 export const useTypedSelector: TypedUseSelectorHook<ReduxState> = useSelector
 
-export const store = createStore( rootReducer, initialState, applyMiddleware( thunk, logger ) )
+export const store = createStore(rootReducer, initialState, applyMiddleware(thunk, logger))
 

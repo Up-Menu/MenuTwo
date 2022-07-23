@@ -55,7 +55,7 @@ export default function CircularStatic() {
   useEffect(() => {
     const timer = setInterval(() => {
       setProgress(() => count1 * 11.1111111111);
-    }, 800);
+    }, 3000);
     return () => {
       clearInterval(timer);
     };

@@ -17,13 +17,18 @@ import {
 // import icons
 import DoneIcon from '@mui/icons-material/Done';
 import CloseIcon from '@mui/icons-material/Close';
+import { useTypedDispatch } from 'src/store';
+import { DeleteCategoryItem } from 'src/connections/Req';
+import { userDeleteCategory } from 'src/store/actions';
+import toast, { Toaster } from 'react-hot-toast';
 
 interface PopUpValuesType {
   setOpen: Function;
   open: boolean;
   setID: Function;
-  ID: number;
+  ID: string;
   setList: Function;
+  method: string;
   List: object[];
 }
 
@@ -45,6 +50,7 @@ const style = {
 
 const PopUp = (props: PopUpValuesType) => {
   const theme = useTheme();
+  const dispatch = useTypedDispatch();
   const ErrAlert = styled(Alert)`
     border: 1px solid red;
     color: ${theme.palette.mode === 'dark' ? '#FF1943' : 'red'};
@@ -62,12 +68,27 @@ const PopUp = (props: PopUpValuesType) => {
 
   const removeConfirmation = () => {
     let newList = [...props.List];
-    newList = newList.filter((food: any) => food.id !== props.ID);
+    newList = newList.filter((item: any) => item.id !== props.ID);
     props.setList(newList);
+    if (props.method === 'category') {
+      console.log(props.ID);
+      DeleteCategoryItem(props.ID, (server_response) => {
+        if (server_response[0] == 'Success') {
+          toast.error(server_response[1]);
+        }
+      });
+
+      // dispatch(userDeleteCategory(props.ID, (notification) => notification));
+    } else if (props.method === 'table') {
+      // DeleteTableItem()
+    } else {
+      // DeleteMenuItem()
+    }
     props.setOpen(false);
   };
   return (
     <Fragment>
+      <Toaster />
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

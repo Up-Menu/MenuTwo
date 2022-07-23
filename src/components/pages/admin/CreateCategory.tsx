@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import {
   Box,
   Button,
@@ -17,7 +17,6 @@ import { GridApi, GridColDef } from '@mui/x-data-grid';
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import { Form } from 'antd';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
-import AddTaskIcon from '@mui/icons-material/AddTask';
 import { userCreateCategory } from '../../../store/actions';
 import toast, { Toaster } from 'react-hot-toast';
 import ProgressContext from '../../../context/ProgressContext';
@@ -27,14 +26,16 @@ import TitleText from '../../../UI/TitleText';
 import Footer from 'src/shared/Footer';
 import BottomNav from 'src/shared/BottomNav';
 import { GetRestaurantCategories } from 'src/connections/Req';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
 
 const CreateCategory = () => {
   const [foodList, setFoodList] = useState([]);
   const [open, setOpen] = useState(false);
-  const [ID, setID] = useState(0);
+  const [ID, setID] = useState('');
   const progressContext = useContext(ProgressContext);
   const dispatch = useTypedDispatch();
   const [form] = Form.useForm();
+  const [flag, setFlag] = useState<boolean>();
 
   const restaurantID: String = JSON.parse(
     localStorage.getItem('userRestaurantCategory')
@@ -55,37 +56,28 @@ const CreateCategory = () => {
         (notification) => notification
       )
     );
-    setFoodList((foodList) => [
-      ...foodList,
-      {
-        id: categoryID,
-        categoryName: values.categoryName
-      }
-    ]);
+    setFlag(!flag);
     form.resetFields();
   };
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      GetRestaurantCategories(restaurantID, (restaurantCategories) =>
-        restaurantCategories.map((category) => {
-          console.log(category.categoryId);
-          setFoodList((foodList) => [
-            ...foodList,
-            {
+  const reload = () => {
+    GetRestaurantCategories(restaurantID, (restaurantCategories) => {
+      setFoodList(
+        restaurantCategories.map(
+          (category: {
+            categoryId: string;
+            restaurantId: string;
+            categoryName: string;
+          }) => {
+            return {
               id: category.categoryId,
               categoryName: category.categoryName
-            }
-          ]);
-        })
+            };
+          }
+        )
       );
-    }, 10000);
-    return () => {
-      clearInterval(timer);
-    };
-  }, [foodList]);
-
-  console.log(foodList);
+    });
+  };
 
   const onFinishFailed = (errorInfo: any) => {
     toast.error('Failed:', errorInfo);
@@ -106,7 +98,7 @@ const CreateCategory = () => {
             .getAllColumns()
             .filter((c) => c.field !== '__check__' && !!c)
             .forEach(() => {
-              setID(params.row.categoryId);
+              setID(params.row.id);
             });
         };
 
@@ -165,6 +157,7 @@ const CreateCategory = () => {
         open={open}
         ID={ID}
         List={foodList}
+        method="category"
       />
       <Box sx={{ direction: 'rtl' }}>
         <Container maxWidth="lg">
@@ -230,13 +223,25 @@ const CreateCategory = () => {
                 </Box>
               </Grid>
               <Grid item xs={12} md={6}>
-                <Card variant="outlined">
+                <Card>
                   <Tables
                     Rows={foodList}
                     Columns={columns}
                     onCellEditCommitFn={handleCellEditCommit}
                   />
                 </Card>
+                <Box>
+                  <Button
+                    sx={{ margin: 1 }}
+                    size="medium"
+                    color="info"
+                    variant="outlined"
+                    endIcon={<AutorenewIcon />}
+                    onClick={reload}
+                  >
+                    بازیابی لیست
+                  </Button>
+                </Box>
               </Grid>
             </Grid>
           </RtlVersion>

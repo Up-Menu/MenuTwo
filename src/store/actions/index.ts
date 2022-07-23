@@ -157,7 +157,7 @@ export const userCreateRestaurant = (payload: any, fn: (arg0: any) => void) => a
     })
 }
 
-// // Delete Category Actions
+// Delete Category Actions
 export const userDeleteCategory = (payload: any, fn: (arg0: any) => void) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
     DeleteCategory(payload, (server_response) => {
         if (server_response[0] == "Success") {

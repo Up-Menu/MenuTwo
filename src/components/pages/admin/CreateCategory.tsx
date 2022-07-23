@@ -35,14 +35,13 @@ const CreateCategory = () => {
   const progressContext = useContext(ProgressContext);
   const dispatch = useTypedDispatch();
   const [form] = Form.useForm();
-  const [flag, setFlag] = useState<boolean>();
 
+  // const categoryID: String = JSON.parse(
+  //   localStorage.getItem('userRestaurantCategory')
+  // ).payload.categoryId;
   const restaurantID: String = JSON.parse(
-    localStorage.getItem('userRestaurantCategory')
+    localStorage.getItem('restaurant_data')
   ).payload.restaurantId;
-  const categoryID: String = JSON.parse(
-    localStorage.getItem('userRestaurantCategory')
-  ).payload.categoryId;
 
   //* call on form submit
   const onFinish = (values: any) => {
@@ -56,7 +55,6 @@ const CreateCategory = () => {
         (notification) => notification
       )
     );
-    setFlag(!flag);
     form.resetFields();
   };
 

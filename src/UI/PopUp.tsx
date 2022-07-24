@@ -17,7 +17,7 @@ import {
 import DoneIcon from '@mui/icons-material/Done';
 import CloseIcon from '@mui/icons-material/Close';
 import { useTypedDispatch } from 'src/store';
-import { userDeleteCategory } from 'src/store/actions';
+import { userDeleteCategory, userDeleteFood } from 'src/store/actions';
 
 interface PopUpValuesType {
   setOpen: Function;
@@ -52,8 +52,8 @@ const PopUp = (props: PopUpValuesType) => {
     border: 1px solid red;
     color: ${theme.palette.mode === 'dark' ? '#FF1943' : 'red'};
     background-color: ${theme.palette.mode === 'dark'
-      ? 'rgba(122, 2, 2, 0.3)'
-      : '#fbaaaa'};
+            ? 'rgba(122, 2, 2, 0.3)'
+            : '#fbaaaa'};
     justify-content: center;
     flex-direction: row-reverse;
 
@@ -72,15 +72,15 @@ const PopUp = (props: PopUpValuesType) => {
     } else if (props.method === 'table') {
       // DeleteTableItem()
     } else {
-      // DeleteMenuItem()
+      dispatch(userDeleteFood(props.ID, (notification) => notification));
     }
     props.setOpen(false);
   };
   return (
     <Fragment>
       <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
+        aria-labelledby='transition-modal-title'
+        aria-describedby='transition-modal-description'
         open={props.open}
         onClose={() => {
           props.setOpen(false);
@@ -94,33 +94,33 @@ const PopUp = (props: PopUpValuesType) => {
         <Fade in={props.open}>
           <Box sx={style}>
             <Stack>
-              <ErrAlert severity="error">توجه کنید!</ErrAlert>
+              <ErrAlert severity='error'>توجه کنید!</ErrAlert>
             </Stack>
 
             <Fragment>
               <Typography
-                id="transition-modal-description"
+                id='transition-modal-description'
                 sx={{ mt: 2, textAlign: 'center', direction: 'rtl' }}
               >
                 آیا از انتخاب خود مطمئن هستید؟
               </Typography>
-              <Stack direction="row" justifyContent="center" spacing={2} pt={4}>
-                <Tooltip title="بله" arrow>
+              <Stack direction='row' justifyContent='center' spacing={2} pt={4}>
+                <Tooltip title='بله' arrow>
                   <IconButton
                     onClick={removeConfirmation}
                     sx={{ mr: 1 }}
-                    color="success"
+                    color='success'
                   >
                     <DoneIcon />
                   </IconButton>
                 </Tooltip>
-                <Tooltip title="خیر" arrow>
+                <Tooltip title='خیر' arrow>
                   <IconButton
                     onClick={() => {
                       props.setOpen(false);
                     }}
                     sx={{ mr: 1 }}
-                    color="error"
+                    color='error'
                   >
                     <CloseIcon />
                   </IconButton>

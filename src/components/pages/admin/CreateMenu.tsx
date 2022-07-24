@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 import {
   Alert,
@@ -49,15 +49,35 @@ import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import { userCreateMenu } from '../../../store/actions';
 import MenuItem from '@mui/material/MenuItem';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
+import { GetRestaurantCategories, GetRestaurantMenus } from '../../../connections/Req';
+
+
+interface MenuType extends Array<any> {
+  [index: number]: {
+    foodName: string;
+    category: {
+      value: string;
+      label: string;
+    };
+    description: string;
+    price: string;
+  };
+}
 
 const CreateMenu: React.FunctionComponent = () => {
-  const [foodList, setFoodList] = useState([]);
+  const [foodList, setFoodList] = useState<MenuType>([]);
   const [flag, setFlag] = useState(true);
   const [open, setOpen] = useState(false);
   const [ID, setID] = useState('');
   const progressContext = useContext(ProgressContext);
   const dispatch = useTypedDispatch();
   const [form] = Form.useForm();
+  const [categories, setCategories] = useState([]);
+
+  const restaurantID: String = JSON.parse(
+    localStorage.getItem('userRestaurantCategory')
+  ).payload.restaurantId;
 
   const MyAlert = styled(Alert)`
     border: 1px solid green;
@@ -71,20 +91,40 @@ const CreateMenu: React.FunctionComponent = () => {
 
   //* call on form submit
   const onFinish = (values: any) => {
+    progressContext.onMenu(true);
+    console.log({
+      categoryId: values.category.value,
+      description: values.description,
+      foodImage: values.foodImage,
+      foodName: values.foodName,
+      price: values.price
+    });
+    dispatch(
+      userCreateMenu(
+        {
+          categoryId: values.category.value,
+          description: values.description,
+          foodImage: values.foodImage,
+          foodName: values.foodName,
+          price: values.price
+        },
+        (notification) => notification
+      )
+    );
+
     let valuesWithIdGenerator = {
       id: foodList.length,
-      ...values
+      category: values.category.label,
+      description: values.description,
+      foodImage: values.foodImage,
+      foodName: values.foodName,
+      price: values.price
     };
 
     setFoodList((foodList) => [...foodList, valuesWithIdGenerator]);
     form.resetFields();
   };
 
-  const sendMenu = () => {
-    progressContext.onMenu(true);
-    dispatch(userCreateMenu(foodList, (notification) => notification));
-    // console.log(foodList);
-  };
 
   const onFinishFailed = (errorInfo: any) => {
     toast.error('Failed:', errorInfo);
@@ -110,8 +150,8 @@ const CreateMenu: React.FunctionComponent = () => {
         };
 
         return (
-          <Box display="flex" flexDirection="row">
-            <Tooltip title="Delete Order" arrow>
+          <Box display='flex' flexDirection='row'>
+            <Tooltip title='حذف ردیف' arrow>
               <IconButton
                 sx={{
                   '&:hover': {
@@ -120,10 +160,10 @@ const CreateMenu: React.FunctionComponent = () => {
                   color: '#FF1943'
                 }}
                 onClick={deleteHandler}
-                color="error"
-                size="small"
+                color='error'
+                size='small'
               >
-                <DeleteSweepIcon fontSize="small" />
+                <DeleteSweepIcon fontSize='small' />
               </IconButton>
             </Tooltip>
           </Box>
@@ -132,7 +172,7 @@ const CreateMenu: React.FunctionComponent = () => {
     },
 
     {
-      field: 'productName',
+      field: 'foodName',
       editable: true,
       headerName: 'نام غذا',
       width: 180
@@ -148,7 +188,7 @@ const CreateMenu: React.FunctionComponent = () => {
   ];
   const handleCellEditCommit = useCallback(
     ({ id, field, value }) => {
-      if (field === 'productName') {
+      if (field === 'foodName') {
         const productName = value.toString();
         const updatedRows = foodList.map((row) => {
           if (row.id === id) {
@@ -188,7 +228,7 @@ const CreateMenu: React.FunctionComponent = () => {
     },
     [foodList]
   );
-  React.useEffect(() => {
+  useEffect(() => {
     const timer = setInterval(() => {
       setFlag(() => false);
     }, 5000);
@@ -197,41 +237,59 @@ const CreateMenu: React.FunctionComponent = () => {
     };
   }, [flag]);
 
-  const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
-  const currencies = [
-    {
-      value: 'USD',
-      label: '$'
-    },
-    {
-      value: 'EUR',
-      label: 'مستیمنب'
-    },
-    {
-      value: 'BTC',
-      label: '฿'
-    },
-    {
-      value: 'JPY',
-      label: '¥'
-    }
-  ];
+  useEffect(() => {
+    GetRestaurantCategories(restaurantID, (restaurantCategories) => {
+      setCategories(
+        restaurantCategories.map(
+          (category: {
+            categoryId: string;
+            restaurantId: string;
+            categoryName: string;
+          }) => {
+            return {
+              value: category.categoryId,
+              label: category.categoryName
+            };
+          }
+        )
+      );
+    });
+  }, []);
 
-  const [currency, setCurrency] = useState('EUR');
 
-  const handleChange = (event) => {
-    setCurrency(event.target.value);
+
+  const reload = () => {
+    GetRestaurantMenus(restaurantID, (restaurantMenus) => {
+      console.log(restaurantMenus);
+      setFoodList(
+        restaurantMenus.map(
+          (menu: {
+            categoryId: string;
+            description: string;
+            foodImage: string;
+            foodName: string
+            menuId: string;
+            price: number;
+          }) => {
+            return {
+              id: menu.menuId, // replace with foodId
+              category: menu.categoryId,
+              description: menu.description,
+              foodImage: menu.foodImage,
+              foodName: menu.foodName,
+              menuId: menu.menuId,
+              price: menu.price
+            };
+          }
+        )
+      );
+    });
   };
 
-  const [value, setValue] = useState(30);
-
-  const handleChange2 = (event, newValue) => {
-    setValue(newValue);
-  };
   return (
     <>
-      <TitleText header="صفحه ساخت منو" />
+      <TitleText header='صفحه ساخت منو' />
       <Toaster />
       <PopUp
         setOpen={setOpen}
@@ -240,16 +298,16 @@ const CreateMenu: React.FunctionComponent = () => {
         open={open}
         ID={ID}
         List={foodList}
-        method="menu"
+        method='menu'
       />
 
-      <Container maxWidth="lg">
+      <Container maxWidth='lg'>
         <Box sx={{ direction: 'rtl' }}>
           {flag && (
             <Box pt={3} pb={5}>
               <Stack sx={{ width: '100%' }} spacing={2}>
-                <MyAlert severity="success">
-                  انتخاب مضمون با موفقیت انجام شد، اکنون منو غذا را بسازید!
+                <MyAlert severity='success'>
+                  ایجاد دسته بندی با موفقیت انجام شد، اکنون منو غذا را بسازید!
                 </MyAlert>
               </Stack>
             </Box>
@@ -258,50 +316,48 @@ const CreateMenu: React.FunctionComponent = () => {
           <Grid container spacing={5}>
             <RtlVersion>
               <Grid item xs={12} md={6}>
-                <Card variant="outlined">
+                <Card variant='outlined'>
                   <Grid
                     container
-                    direction="column"
-                    justifyContent="left"
-                    alignItems="stretch"
+                    direction='column'
+                    justifyContent='left'
+                    alignItems='stretch'
                     spacing={0}
                   >
                     <Box pt={2} pb={2} pl={2}>
-                      <Typography variant="h4">فرم افزودن محصول</Typography>
+                      <Typography variant='h4'>فرم افزودن محصول</Typography>
                     </Box>
                     <Divider />
                     <Box pt={3} pb={2} pl={2} pr={2}>
                       <Form
                         form={form}
-                        name="control-hooks"
+                        name='control-hooks'
                         wrapperCol={{ span: 12 }}
                         initialValues={{ remember: true }}
                         onFinish={onFinish}
                         onFinishFailed={onFinishFailed}
-                        autoComplete="on"
+                        autoComplete='on'
                       >
                         <Grid container spacing={2}>
                           <Grid item xs={12}>
-                            <Form.Item name="productName">
+                            <Form.Item name='foodName'>
                               <TextField
                                 value={''}
-                                label="نام غذا"
-                                type="text"
+                                label='نام غذا'
+                                type='text'
                                 fullWidth
                               />
                             </Form.Item>
                           </Grid>
                           <Grid item xs={12} md={6}>
-                            <Form.Item name="category">
+                            <Form.Item name='category'>
                               <TextField
-                                id="outlined-select-currency"
+                                id='outlined-select-category'
                                 select
-                                label="دسته بندی"
-                                value={currency}
-                                onChange={handleChange}
+                                label='دسته بندی'
                                 fullWidth
                               >
-                                {currencies.map((option) => (
+                                {categories.map((option) => (
                                   <MenuItem
                                     sx={{
                                       direction: 'rtl',
@@ -309,7 +365,7 @@ const CreateMenu: React.FunctionComponent = () => {
                                       justifyContent: 'end'
                                     }}
                                     key={option.value}
-                                    value={option.value}
+                                    value={option}
                                   >
                                     {option.label}
                                   </MenuItem>
@@ -318,19 +374,19 @@ const CreateMenu: React.FunctionComponent = () => {
                             </Form.Item>
                           </Grid>
                           <Grid item xs={12} md={6}>
-                            <Form.Item name="price">
+                            <Form.Item name='price'>
                               <TextField
-                                label="قیمت"
-                                type="text"
+                                label='قیمت'
+                                type='text'
                                 fullWidth
                                 value={''}
                               />
                             </Form.Item>
                           </Grid>
                           <Grid item xs={12}>
-                            <Form.Item name="description">
+                            <Form.Item name='description'>
                               <TextField
-                                label="توضیحات غذا"
+                                label='توضیحات غذا'
                                 multiline
                                 fullWidth
                                 value={''}
@@ -339,31 +395,23 @@ const CreateMenu: React.FunctionComponent = () => {
                             </Form.Item>
                           </Grid>
                           <Grid item xs={12}>
-                            <Form.Item name="foodImage">
-                              <TextField value={''} type="file" fullWidth />
+                            <Form.Item name='foodImage'>
+                              <TextField value={''} type='file' fullWidth />
                             </Form.Item>
                           </Grid>
                           <Grid item xs={12}>
                             <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                               <Button
                                 sx={{ margin: 1 }}
-                                size="medium"
-                                color="success"
-                                variant="outlined"
+                                size='medium'
+                                color='success'
+                                variant='outlined'
                                 endIcon={<DoneOutlineIcon />}
-                                onClick={sendMenu}
+                                type='submit'
                               >
                                 ثبت
                               </Button>
-                              <Button
-                                size="medium"
-                                sx={{ margin: 1 }}
-                                type="submit"
-                                color="warning"
-                                endIcon={<AddTaskIcon />}
-                              >
-                                اضافه کردن مجدد
-                              </Button>
+
                             </Form.Item>
                           </Grid>
                         </Grid>
@@ -374,16 +422,16 @@ const CreateMenu: React.FunctionComponent = () => {
               </Grid>
             </RtlVersion>
             <Grid item xs={12} md={6}>
-              <Card variant="outlined">
+              <Card variant='outlined'>
                 <Grid
                   container
-                  direction="column"
-                  justifyContent="left"
-                  alignItems="stretch"
+                  direction='column'
+                  justifyContent='left'
+                  alignItems='stretch'
                   spacing={0}
                 >
                   <Box pt={2} pb={2} pr={2}>
-                    <Typography variant="h4">محصولات</Typography>
+                    <Typography variant='h4'>محصولات</Typography>
                   </Box>
                   <Divider />
                 </Grid>
@@ -393,22 +441,22 @@ const CreateMenu: React.FunctionComponent = () => {
                       dynamicBullets: true
                     }}
                     modules={[Pagination]}
-                    className="mySwiper"
+                    className='mySwiper'
                   >
                     <SwiperSlide>
-                      <img src={images['new-home-1.png']} alt="" />
+                      <img src={images['new-home-1.png']} alt='' />
                     </SwiperSlide>
                     <SwiperSlide>
-                      <img src={images['new-home-2.png']} alt="" />
+                      <img src={images['new-home-2.png']} alt='' />
                     </SwiperSlide>{' '}
                     <SwiperSlide>
-                      <img src={images['new-home-3.png']} alt="" />
+                      <img src={images['new-home-3.png']} alt='' />
                     </SwiperSlide>
                     <SwiperSlide>
-                      <img src={images['new-home-4.png']} alt="" />
+                      <img src={images['new-home-4.png']} alt='' />
                     </SwiperSlide>
                     <SwiperSlide>
-                      <img src={images['new-home-5.png']} alt="" />
+                      <img src={images['new-home-5.png']} alt='' />
                     </SwiperSlide>
                   </Swiper>
 
@@ -455,26 +503,40 @@ const CreateMenu: React.FunctionComponent = () => {
           </Grid>
 
           <Box pt={3} pb={3}>
-            <Card>
-              <RtlVersion>
+            <RtlVersion>
+
+              <Card>
                 <Tables
                   Rows={foodList}
                   Columns={columns}
                   onCellEditCommitFn={handleCellEditCommit}
                 />
-              </RtlVersion>
-            </Card>
+
+              </Card>
+              <Box>
+                <Button
+                  sx={{ margin: 1 }}
+                  size='medium'
+                  color='info'
+                  variant='outlined'
+                  endIcon={<AutorenewIcon />}
+                  onClick={reload}
+                >
+                  بازیابی لیست
+                </Button>
+              </Box>
+            </RtlVersion>
           </Box>
         </Box>
 
         <BottomNav
-          className="pt-5"
+          className='pt-5'
           nextStep={true}
           preStep={true}
-          forLink="tables"
-          backLink="createCategory"
-          forText="ساخت میز"
-          backText="منو / افزودن دسته بندی"
+          forLink='tables'
+          backLink='createCategory'
+          forText='ساخت میز'
+          backText='منو / افزودن دسته بندی'
         />
       </Container>
       <Footer />

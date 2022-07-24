@@ -88,6 +88,16 @@ export const GetRestaurantCategories = (restaurantId: any, fn: (arg0: any) => vo
         })
         .catch(err => console.log(err))
 }
+export const GetRestaurantMenus = (restaurantId: any, fn: (arg0: any) => void) => {
+  Api
+    .get(`Menu/GetRestaurantMenus?restaurantId=${restaurantId}`, '', '')
+    .then(response => {
+      fn(response.data.data.restaurantMenus)
+    })
+    .catch(err => console.log(err))
+}
+
+
 export const DeleteCategory = (categoryId: string, fn: (arg0: any) => void) => {
     Api
         .post(`Category/DeleteCategory/?categoryId=${categoryId}`, categoryId, '')
@@ -95,4 +105,13 @@ export const DeleteCategory = (categoryId: string, fn: (arg0: any) => void) => {
             fn([response.data.status, response.data.data.message])
         })
         .catch(err => console.log(err))
+}
+
+export const DeleteFood = (foodId: string, fn: (arg0: any) => void) => {
+  Api
+    .post(`Menu/DeleteMenu/?menuId=${foodId}`, foodId, '')
+    .then(response => {
+      fn([response.data.status, response.data.data.message])
+    })
+    .catch(err => console.log(err))
 }

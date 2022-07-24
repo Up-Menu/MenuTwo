@@ -29,7 +29,7 @@ import { GetRestaurantCategories } from 'src/connections/Req';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 
 const CreateCategory = () => {
-  const [foodList, setFoodList] = useState([]);
+  const [categoryList, setCategoryList] = useState([]);
   const [open, setOpen] = useState(false);
   const [ID, setID] = useState('');
   const progressContext = useContext(ProgressContext);
@@ -57,7 +57,7 @@ const CreateCategory = () => {
 
   const reload = () => {
     GetRestaurantCategories(restaurantID, (restaurantCategories) => {
-      setFoodList(
+      setCategoryList(
         restaurantCategories.map(
           (category: {
             categoryId: string;
@@ -130,16 +130,16 @@ const CreateCategory = () => {
     ({ id, field, value }) => {
       if (field === 'categoryName') {
         const categoryName = value.toString();
-        const updatedRows = foodList.map((row) => {
+        const updatedRows = categoryList.map((row) => {
           if (row.id === id) {
             return { ...row, categoryName };
           }
           return row;
         });
-        setFoodList(updatedRows);
+        setCategoryList(updatedRows);
       }
     },
-    [foodList]
+    [categoryList]
   );
   return (
     <>
@@ -148,10 +148,10 @@ const CreateCategory = () => {
       <PopUp
         setOpen={setOpen}
         setID={setID}
-        setList={setFoodList}
+        setList={setCategoryList}
         open={open}
         ID={ID}
-        List={foodList}
+        List={categoryList}
         method="category"
       />
       <Box sx={{ direction: 'rtl' }}>
@@ -220,7 +220,7 @@ const CreateCategory = () => {
               <Grid item xs={12} md={6}>
                 <Card>
                   <Tables
-                    Rows={foodList}
+                    Rows={categoryList}
                     Columns={columns}
                     onCellEditCommitFn={handleCellEditCommit}
                   />

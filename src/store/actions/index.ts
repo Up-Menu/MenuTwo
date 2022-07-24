@@ -6,7 +6,7 @@ import {
     CreateRestaurantReq,
     CreateTableReq,
     CreateCategoryReq,
-    DeleteCategory
+    DeleteCategory, DeleteFood
 } from '../../connections/Req';
 import { nanoid } from '@reduxjs/toolkit'
 import timeoutPromise from '../helper/TimeOut'
@@ -60,7 +60,7 @@ export const userLogout = (nav: NavigateFunction) => (dispatch: (arg0: { type: s
             }))
         )
         .then(() => {
-            localStorage.clear()
+            localStorage.removeItem("user_data")
             nav("/login")
         })
 }
@@ -160,6 +160,14 @@ export const userCreateRestaurant = (payload: any, fn: (arg0: any) => void) => a
 // Delete Category Actions
 export const userDeleteCategory = (payload: any, fn: (arg0: any) => void) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
     DeleteCategory(payload, (server_response) => {
+        if (server_response[0] == "Success") {
+            fn(toast.error(server_response[1]))
+        }
+    })
+}
+// Delete Food Actions
+export const userDeleteFood = (payload: any, fn: (arg0: any) => void) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
+    DeleteFood(payload, (server_response) => {
         if (server_response[0] == "Success") {
             fn(toast.error(server_response[1]))
         }

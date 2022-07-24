@@ -145,24 +145,21 @@ const CreateAccount = () => {
       {loading ? (
         <LoadingOutlined />
       ) : (
-        <img width={80} src={images['avatars/profile_default.png']} alt="" />
+        <img width={80} src={images['avatars/profile_default.png']} alt='' />
       )}
     </div>
   );
 
   const onFinish = (values: any) => {
     progressContext.onRestaurant(true);
+    console.log(values);
+
+
     dispatch(
       userCreateRestaurant(
         {
-          address: `${values.address}`,
-          email: `${values.email}`,
-          profile: `${values.profile}`,
-          restaurantName: `${values.restaurantName}`,
-          social: `${values.social}`,
-          website: `${ssl}://${values.website}`,
-          cellPhone: `${values.areaCode}${values.cellPhone}`,
-          userId: `${userID}`
+          ...values,
+          userId: userID
         },
         (notification) => notification
       )
@@ -181,19 +178,19 @@ const CreateAccount = () => {
     return (
       <Fragment>
         <Toaster />
-        <TitleText header="ساخت اکانت رستوران" />
-        <Container maxWidth="lg">
+        <TitleText header='ساخت اکانت رستوران' />
+        <Container maxWidth='lg'>
           <Box p={1}>
             <Card>
               <MyBox sx={{ direction: 'rtl', p: 2 }}>
                 <RtlVersion>
                   <Form
-                    name="basic"
+                    name='basic'
                     wrapperCol={{ span: 6 }}
                     initialValues={{ remember: true }}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
-                    autoComplete="on"
+                    autoComplete='on'
                   >
                     <Grid container spacing={2}>
                       <Grid
@@ -201,21 +198,21 @@ const CreateAccount = () => {
                         xs={12}
                         sx={{ display: 'flex', justifyContent: 'center' }}
                       >
-                        <Form.Item name="profile">
+                        <Form.Item name='profile'>
                           <MyBox>
                             <Upload
-                              name="avatar"
-                              listType="picture-card"
-                              className="avatar-uploader"
+                              name='avatar'
+                              listType='picture-card'
+                              className='avatar-uploader'
                               showUploadList={false}
-                              action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                              action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
                               beforeUpload={beforeUpload}
                               onChange={handleChange}
                             >
                               {imageUrl ? (
                                 <img
                                   src={imageUrl}
-                                  alt="avatar"
+                                  alt='avatar'
                                   style={{ width: '100%' }}
                                 />
                               ) : (
@@ -226,12 +223,12 @@ const CreateAccount = () => {
                         </Form.Item>
                       </Grid>
                       <Grid item xs={12}>
-                        <Form.Item name="restaurantName">
+                        <Form.Item name='restaurantName'>
                           <TextField
-                            label="نام رستوران"
-                            type="text"
+                            label='نام رستوران'
+                            type='text'
                             fullWidth
-                            id="outlined-required"
+                            id='outlined-required'
                             defaultValue={''}
                             value={''}
                           />
@@ -240,10 +237,10 @@ const CreateAccount = () => {
                       <Grid item xs={12} md={6}>
                         <Grid container spacing={2}>
                           <Grid item xs={12} md={9}>
-                            <Form.Item name="cellPhone">
+                            <Form.Item name='cellPhone'>
                               <TextField
-                                label="شماره تلفن"
-                                type="text"
+                                label='شماره تلفن'
+                                type='text'
                                 fullWidth
                                 defaultValue={''}
                                 value={''}
@@ -251,12 +248,12 @@ const CreateAccount = () => {
                             </Form.Item>
                           </Grid>
                           <Grid item xs={12} md={3}>
-                            <Form.Item name="areaCode">
+                            <Form.Item name='areaCode'>
                               <TextField
-                                label="کد منطقه"
-                                type="text"
+                                label='کد منطقه'
+                                type='text'
                                 fullWidth
-                                placeholder="021"
+                                placeholder='021'
                                 value={''}
                               />
                             </Form.Item>
@@ -264,10 +261,10 @@ const CreateAccount = () => {
                         </Grid>
                       </Grid>
                       <Grid item xs={12} md={6}>
-                        <Form.Item name="email">
+                        <Form.Item name='email'>
                           <TextField
-                            label="ایمیل"
-                            type="text"
+                            label='ایمیل'
+                            type='text'
                             fullWidth
                             defaultValue={''}
                             value={''}
@@ -278,10 +275,10 @@ const CreateAccount = () => {
                       <Grid item xs={12} md={6}>
                         <Grid container spacing={2}>
                           <Grid item xs={12} md={9}>
-                            <Form.Item name="website">
+                            <Form.Item name='website'>
                               <TextField
-                                label="لینک سایت رستوران"
-                                type="text"
+                                label='لینک سایت رستوران'
+                                type='text'
                                 fullWidth
                                 defaultValue={''}
                                 value={''}
@@ -290,20 +287,20 @@ const CreateAccount = () => {
                           </Grid>
 
                           <Grid item xs={12} md={3}>
-                            <Form.Item name="ssl">
+                            <Form.Item name='ssl'>
                               <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">
+                                <InputLabel id='demo-simple-select-label'>
                                   SSL
                                 </InputLabel>
                                 <Select
-                                  labelId="demo-simple-select-label"
-                                  id="demo-simple-select"
+                                  labelId='demo-simple-select-label'
+                                  id='demo-simple-select'
                                   value={''}
-                                  label="SSL"
+                                  label='SSL'
                                   onChange={_handleChange}
                                 >
-                                  <MenuItem value="http">http</MenuItem>
-                                  <MenuItem value="https">https</MenuItem>
+                                  <MenuItem value='http'>http</MenuItem>
+                                  <MenuItem value='https'>https</MenuItem>
                                 </Select>
                               </FormControl>
                             </Form.Item>
@@ -312,10 +309,10 @@ const CreateAccount = () => {
                       </Grid>
 
                       <Grid item xs={12} md={6}>
-                        <Form.Item name="social">
+                        <Form.Item name='social'>
                           <TextField
-                            label="آیدی اینستاگرام"
-                            type="text"
+                            label='آیدی اینستاگرام'
+                            type='text'
                             fullWidth
                             defaultValue={''}
                             value={''}
@@ -324,9 +321,9 @@ const CreateAccount = () => {
                       </Grid>
 
                       <Grid item xs={12}>
-                        <Form.Item name="address">
+                        <Form.Item name='address'>
                           <TextField
-                            label="نشانی"
+                            label='نشانی'
                             multiline
                             defaultValue={''}
                             value={''}
@@ -343,12 +340,12 @@ const CreateAccount = () => {
                       >
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                           <Button
-                            type="submit"
-                            size="large"
-                            variant="outlined"
+                            type='submit'
+                            size='large'
+                            variant='outlined'
                             sx={{ padding: 1 }}
                             endIcon={<DownloadDoneIcon />}
-                            color="success"
+                            color='success'
                           >
                             ذخیره
                           </Button>
@@ -361,13 +358,13 @@ const CreateAccount = () => {
             </Card>
           </Box>
           <BottomNav
-            className="pt-5"
+            className='pt-5'
             nextStep={true}
             preStep={false}
-            forLink="themes"
-            backLink="finish"
-            forText="انتخاب تم"
-            backText="ورود به سامانه"
+            forLink='themes'
+            backLink='finish'
+            forText='انتخاب تم'
+            backText='ورود به سامانه'
           />
         </Container>
         <Footer />
@@ -377,19 +374,19 @@ const CreateAccount = () => {
     return (
       <Fragment>
         <Toaster />
-        <TitleText header="ساخت اکانت رستوران" />
-        <Container maxWidth="lg">
+        <TitleText header='ساخت اکانت رستوران' />
+        <Container maxWidth='lg'>
           <Box p={1}>
             <Card>
               <MyBox sx={{ direction: 'rtl', p: 2 }}>
                 <RtlVersion>
                   <Form
-                    name="basic"
+                    name='basic'
                     wrapperCol={{ span: 6 }}
                     initialValues={{ remember: true }}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
-                    autoComplete="on"
+                    autoComplete='on'
                   >
                     <Grid container spacing={2}>
                       <Grid
@@ -397,21 +394,21 @@ const CreateAccount = () => {
                         xs={12}
                         sx={{ display: 'flex', justifyContent: 'center' }}
                       >
-                        <Form.Item name="profile">
+                        <Form.Item name='profile'>
                           <MyBox>
                             <Upload
-                              name="avatar"
-                              listType="picture-card"
-                              className="avatar-uploader"
+                              name='avatar'
+                              listType='picture-card'
+                              className='avatar-uploader'
                               showUploadList={false}
-                              action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                              action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
                               beforeUpload={beforeUpload}
                               onChange={handleChange}
                             >
                               {imageUrl ? (
                                 <img
                                   src={imageUrl}
-                                  alt="avatar"
+                                  alt='avatar'
                                   style={{ width: '100%' }}
                                 />
                               ) : (
@@ -422,110 +419,71 @@ const CreateAccount = () => {
                         </Form.Item>
                       </Grid>
                       <Grid item xs={12}>
-                        <Form.Item name="restaurantName">
+                        <Form.Item name='restaurantName' initialValue={globalUserState.restaurantName}>
                           <TextField
-                            label="نام رستوران"
-                            type="text"
+                            label='نام رستوران'
+                            type='text'
                             fullWidth
-                            id="outlined-required"
+                            id='outlined-required'
                             defaultValue={globalUserState.restaurantName}
-                            value={''}
+                            value={globalUserState.restaurantName}
                           />
                         </Form.Item>
                       </Grid>
                       <Grid item xs={12} md={6}>
-                        <Grid container spacing={2}>
-                          <Grid item xs={12} md={9}>
-                            <Form.Item name="cellPhone">
-                              <TextField
-                                label="شماره تلفن"
-                                type="text"
-                                fullWidth
-                                defaultValue={globalUserState.cellPhone}
-                                value={''}
-                              />
-                            </Form.Item>
-                          </Grid>
-                          <Grid item xs={12} md={3}>
-                            <Form.Item name="areaCode">
-                              <TextField
-                                label="کد منطقه"
-                                type="text"
-                                fullWidth
-                                placeholder="021"
-                                value={''}
-                              />
-                            </Form.Item>
-                          </Grid>
-                        </Grid>
+                        <Form.Item name='cellPhone' initialValue={globalUserState.cellPhone}>
+                          <TextField
+                            label='شماره تلفن'
+                            type='text'
+                            fullWidth
+                            defaultValue={globalUserState.cellPhone}
+                            value={globalUserState.cellPhone}
+                          />
+                        </Form.Item>
                       </Grid>
                       <Grid item xs={12} md={6}>
-                        <Form.Item name="email">
+                        <Form.Item name='email' initialValue={globalUserState.email}>
                           <TextField
-                            label="ایمیل"
-                            type="text"
+                            label='ایمیل'
+                            type='text'
                             fullWidth
                             defaultValue={globalUserState.email}
-                            value={''}
+                            value={globalUserState.email}
                           />
                         </Form.Item>
                       </Grid>
 
                       <Grid item xs={12} md={6}>
-                        <Grid container spacing={2}>
-                          <Grid item xs={12} md={9}>
-                            <Form.Item name="website">
-                              <TextField
-                                label="لینک سایت رستوران"
-                                type="text"
-                                fullWidth
-                                defaultValue={globalUserState.website}
-                                value={''}
-                              />
-                            </Form.Item>
-                          </Grid>
-
-                          <Grid item xs={12} md={3}>
-                            <Form.Item name="ssl">
-                              <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">
-                                  SSL
-                                </InputLabel>
-                                <Select
-                                  labelId="demo-simple-select-label"
-                                  id="demo-simple-select"
-                                  value={''}
-                                  label="SSL"
-                                  onChange={_handleChange}
-                                >
-                                  <MenuItem value="http">http</MenuItem>
-                                  <MenuItem value="https">https</MenuItem>
-                                </Select>
-                              </FormControl>
-                            </Form.Item>
-                          </Grid>
-                        </Grid>
+                        <Form.Item name='website' initialValue={globalUserState.website}>
+                          <TextField
+                            label='لینک سایت رستوران'
+                            type='text'
+                            fullWidth
+                            defaultValue={globalUserState.website}
+                            value={globalUserState.website}
+                          />
+                        </Form.Item>
                       </Grid>
 
                       <Grid item xs={12} md={6}>
-                        <Form.Item name="social">
+                        <Form.Item name='social' initialValue={globalUserState.social}>
                           <TextField
-                            label="آیدی اینستاگرام"
-                            type="text"
+                            label='آیدی اینستاگرام'
+                            type='text'
                             fullWidth
                             defaultValue={globalUserState.social}
-                            value={''}
+                            value={globalUserState.social}
                           />
                         </Form.Item>
                       </Grid>
 
                       <Grid item xs={12}>
-                        <Form.Item name="address">
+                        <Form.Item name='address' initialValue={globalUserState.address}>
                           <TextField
-                            label="نشانی"
+                            label='نشانی'
                             multiline
                             defaultValue={globalUserState.address}
-                            value={''}
+                            value={globalUserState.address}
                             fullWidth
                             rows={7}
                           />
@@ -539,12 +497,12 @@ const CreateAccount = () => {
                       >
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                           <Button
-                            type="submit"
-                            size="large"
-                            variant="outlined"
+                            type='submit'
+                            size='large'
+                            variant='outlined'
                             sx={{ padding: 1 }}
                             endIcon={<DownloadDoneIcon />}
-                            color="success"
+                            color='success'
                           >
                             ذخیره
                           </Button>
@@ -557,13 +515,13 @@ const CreateAccount = () => {
             </Card>
           </Box>
           <BottomNav
-            className="pt-5"
+            className='pt-5'
             nextStep={true}
             preStep={false}
-            forLink="themes"
-            backLink="finish"
-            forText="انتخاب تم"
-            backText="ورود به سامانه"
+            forLink='themes'
+            backLink='finish'
+            forText='انتخاب تم'
+            backText='ورود به سامانه'
           />
         </Container>
         <Footer />

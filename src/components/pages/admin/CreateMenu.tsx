@@ -37,7 +37,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 // costume components
 import Tables from '../../../UI/Table';
-import PopUp from '../../../UI/PopUp';
+import DeleteRow from '../../../UI/DeleteRow';
 import TitleText from '../../../UI/TitleText';
 import RtlVersion from '../../../theme/RtlVersion';
 import IosSwitch from '../../../UI/IosSwitch';
@@ -291,7 +291,7 @@ const CreateMenu: React.FunctionComponent = () => {
     <>
       <TitleText header='صفحه ساخت منو' />
       <Toaster />
-      <PopUp
+      <DeleteRow
         setOpen={setOpen}
         setID={setID}
         setList={setFoodList}

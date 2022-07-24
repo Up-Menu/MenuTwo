@@ -21,7 +21,7 @@ import { userCreateCategory } from '../../../store/actions';
 import toast, { Toaster } from 'react-hot-toast';
 import ProgressContext from '../../../context/ProgressContext';
 import { useTypedDispatch } from '../../../store';
-import PopUp from '../../../UI/PopUp';
+import DeleteRow from '../../../UI/DeleteRow';
 import TitleText from '../../../UI/TitleText';
 import Footer from 'src/shared/Footer';
 import BottomNav from 'src/shared/BottomNav';
@@ -145,7 +145,7 @@ const CreateCategory = () => {
     <>
       <Toaster />
       <TitleText header="ایجاد دسته بندی" />
-      <PopUp
+      <DeleteRow
         setOpen={setOpen}
         setID={setID}
         setList={setCategoryList}

@@ -28,7 +28,7 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
 // costume components
 import Tables from '../../../UI/Table';
-import PopUp from '../../../UI/PopUp';
+import DeleteRow from '../../../UI/DeleteRow';
 import TitleText from '../../../UI/TitleText';
 import RtlVersion from '../../../theme/RtlVersion';
 import { userCreateTable } from '../../../store/actions';
@@ -164,7 +164,7 @@ const CreateTable = () => {
     <>
       <TitleText header="مدیریت میز" />
       <Toaster />
-      <PopUp
+      <DeleteRow
         setOpen={setOpenDelete}
         setID={setID}
         setList={setTableList}

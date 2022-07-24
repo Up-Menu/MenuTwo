@@ -45,7 +45,7 @@ const style = {
   textAlign: 'right'
 };
 
-const PopUp = (props: PopUpValuesType) => {
+const DeleteRow = (props: PopUpValuesType) => {
   const theme = useTheme();
   const dispatch = useTypedDispatch();
   const ErrAlert = styled(Alert)`
@@ -134,4 +134,4 @@ const PopUp = (props: PopUpValuesType) => {
   );
 };
 
-export default PopUp;
+export default DeleteRow;

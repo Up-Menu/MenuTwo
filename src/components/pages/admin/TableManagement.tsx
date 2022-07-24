@@ -34,6 +34,8 @@ import RtlVersion from '../../../theme/RtlVersion';
 import { userCreateTable } from '../../../store/actions';
 import { useTypedDispatch } from 'src/store';
 import PopUpView from 'src/UI/PopUpView';
+import { GetRestaurantCategories, GetRestaurantTables } from '../../../connections/Req';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
 
 const CreateTable = () => {
   const progressContext = useContext(ProgressContext);
@@ -45,21 +47,21 @@ const CreateTable = () => {
   const [QR, setQR] = useState('');
   const dispatch = useTypedDispatch();
   const [form] = Form.useForm();
+  const restaurantID: String = JSON.parse(
+    localStorage.getItem('restaurant_data')
+  ).payload.restaurantId;
 
   //! call on form submit
   const onFinish = (values: any) => {
-    let valuesWithIdGenerator = {
-      id: tableList.length,
-      ...values
-    };
-
-    setTableList((tableList) => [...tableList, valuesWithIdGenerator]);
-    form.resetFields();
-  };
-
-  const sendTable = () => {
     progressContext.onTable(true);
-    dispatch(userCreateTable(tableList, (notification) => notification));
+    dispatch(userCreateTable(
+        {
+          restaurantId: restaurantID,
+          tableName: values.tableName
+        }, (notification) => notification
+      )
+    );
+    form.resetFields();
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -97,9 +99,10 @@ const CreateTable = () => {
             });
         };
 
+
         return (
-          <Box display="flex" flexDirection="row">
-            <Tooltip title="حذف ردیف" arrow>
+          <Box display='flex' flexDirection='row'>
+            <Tooltip title='حذف ردیف' arrow>
               <IconButton
                 sx={{
                   '&:hover': {
@@ -108,14 +111,14 @@ const CreateTable = () => {
                   color: '#FF1943'
                 }}
                 onClick={deleteHandler}
-                color="error"
-                size="small"
+                color='error'
+                size='small'
               >
-                <DeleteSweepIcon fontSize="small" />
+                <DeleteSweepIcon fontSize='small' />
               </IconButton>
             </Tooltip>
 
-            <Tooltip title="مشاهده QR Code" arrow>
+            <Tooltip title='مشاهده QR Code' arrow>
               <IconButton
                 sx={{
                   '&:hover': {
@@ -124,10 +127,10 @@ const CreateTable = () => {
                   color: '#57CA22'
                 }}
                 onClick={viewHandler}
-                color="success"
-                size="small"
+                color='success'
+                size='small'
               >
-                <RemoveRedEyeIcon fontSize="small" />
+                <RemoveRedEyeIcon fontSize='small' />
               </IconButton>
             </Tooltip>
           </Box>
@@ -160,9 +163,27 @@ const CreateTable = () => {
   const qrSend = (e: { target: { value: React.SetStateAction<string> } }) => {
     setQRText(e.target.value);
   };
+  const reload = () => {
+    GetRestaurantTables(restaurantID, (restaurantCategories) => {
+      setTableList(
+        restaurantCategories.map(
+          (table: {
+            tableId: string;
+            restaurantId: string;
+            tableName: string;
+          }) => {
+            return {
+              id: table.tableId,
+              tableName: table.tableName
+            };
+          }
+        )
+      );
+    });
+  };
   return (
     <>
-      <TitleText header="مدیریت میز" />
+      <TitleText header='مدیریت میز' />
       <Toaster />
       <DeleteRow
         setOpen={setOpenDelete}
@@ -171,47 +192,47 @@ const CreateTable = () => {
         open={openDelete}
         ID={ID}
         List={tableList}
-        method="table"
+        method='table'
       />
 
       <PopUpView setOpen={setOpenView} open={openView} QR={QR} />
 
       <Container>
-        <Card variant="outlined">
+        <Card variant='outlined'>
           <Box p={2} sx={{ direction: 'rtl' }}>
             <Grid container spacing={2}>
               <RtlVersion>
                 <Grid item xs={12} md={5}>
                   <Grid
                     container
-                    direction="column"
-                    justifyContent="left"
-                    alignItems="stretch"
+                    direction='column'
+                    justifyContent='left'
+                    alignItems='stretch'
                     spacing={0}
                   >
                     <Box pt={2} pb={2} pl={2}>
-                      <Typography variant="h4">ساخت میز</Typography>
+                      <Typography variant='h4'>ساخت میز</Typography>
                     </Box>
                     <Divider />
                     <Box pt={3} pb={2} pl={2} pr={2}>
                       <Form
                         form={form}
-                        name="control-hooks"
+                        name='control-hooks'
                         wrapperCol={{ span: 12 }}
                         initialValues={{ remember: true }}
                         onFinish={onFinish}
                         onFinishFailed={onFinishFailed}
-                        autoComplete="on"
+                        autoComplete='on'
                       >
                         <Box
-                          display="flex"
-                          flexDirection="column"
-                          textAlign="justify"
+                          display='flex'
+                          flexDirection='column'
+                          textAlign='justify'
                           pt={1}
                           pb={1}
                         >
                           <Form.Item
-                            name="tableName"
+                            name='tableName'
                             rules={[
                               { message: 'Please input your table name!' }
                             ]}
@@ -220,19 +241,19 @@ const CreateTable = () => {
                             <TextField
                               onChange={qrSend}
                               value={''}
-                              label="نام میز"
-                              type="text"
+                              label='نام میز'
+                              type='text'
                               fullWidth
                             />
                           </Form.Item>
                         </Box>
 
                         <Box
-                          display="flex"
-                          flexDirection="row"
-                          justifyContent="center"
-                          alignItems="center"
-                          textAlign="center"
+                          display='flex'
+                          flexDirection='row'
+                          justifyContent='center'
+                          alignItems='center'
+                          textAlign='center'
                         >
                           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                             <Box
@@ -240,38 +261,29 @@ const CreateTable = () => {
                               pb={2}
                               pl={2}
                               pr={2}
-                              display="flex"
-                              flexDirection="row"
-                              flexWrap="wrap"
-                              justifyContent="space-between"
+                              display='flex'
+                              flexDirection='row'
+                              flexWrap='wrap'
+                              justifyContent='space-between'
                             >
                               <Button
                                 sx={{ margin: 1 }}
-                                size="medium"
-                                color="success"
-                                variant="outlined"
+                                size='medium'
+                                color='success'
+                                variant='outlined'
                                 endIcon={<DoneOutlineIcon />}
-                                onClick={sendTable}
+                                type='submit'
                               >
                                 ثبت
-                              </Button>
-                              <Button
-                                size="medium"
-                                sx={{ margin: 1 }}
-                                type="submit"
-                                color="warning"
-                                endIcon={<AddTaskIcon />}
-                              >
-                                اضافه کردن مجدد
                               </Button>
                             </Box>
                           </Form.Item>
                         </Box>
 
                         <Box
-                          display="flex"
-                          flexDirection="row"
-                          justifyContent="center"
+                          display='flex'
+                          flexDirection='row'
+                          justifyContent='center'
                         >
                           <Card>
                             <Box p={1}>
@@ -285,34 +297,50 @@ const CreateTable = () => {
                 </Grid>
               </RtlVersion>
               <Grid item xs={12} md={7}>
+
                 <Box pt={3} pb={3}>
-                  <Card>
-                    <RtlVersion>
+                  <RtlVersion>
+
+                    <Card>
                       <Tables
                         Rows={tableList}
                         Columns={columns}
                         onCellEditCommitFn={handleCellEditCommit}
                       />
-                    </RtlVersion>
-                  </Card>
+
+                    </Card>
+                    <Box>
+                      <Button
+                        sx={{ margin: 1 }}
+                        size='medium'
+                        color='info'
+                        variant='outlined'
+                        endIcon={<AutorenewIcon />}
+                        onClick={reload}
+                      >
+                        بازیابی لیست
+                      </Button>
+                    </Box>
+                  </RtlVersion>
                 </Box>
               </Grid>
             </Grid>
           </Box>
         </Card>
         <BottomNav
-          className="pt-5"
+          className='pt-5'
           nextStep={true}
           preStep={true}
-          forLink="mobileApp"
-          backLink="createMenu"
-          forText="تنظیمات تلفن همراه"
-          backText="ساخت منو"
-        />
+          forLink='mobileApp'
+          backLink='createMenu'
+          forText='تنظیمات تلفن همراه'
+          backText='ساخت منو'
+        />;
       </Container>
-      <Footer />
+      <Footer />;
     </>
-  );
+  )
+    ;
 };
 
 export default CreateTable;

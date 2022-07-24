@@ -152,9 +152,6 @@ const CreateAccount = () => {
 
   const onFinish = (values: any) => {
     progressContext.onRestaurant(true);
-    console.log(values);
-
-
     dispatch(
       userCreateRestaurant(
         {

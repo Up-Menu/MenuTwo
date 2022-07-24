@@ -17,7 +17,7 @@ import {
 import DoneIcon from '@mui/icons-material/Done';
 import CloseIcon from '@mui/icons-material/Close';
 import { useTypedDispatch } from 'src/store';
-import { userDeleteCategory, userDeleteFood } from 'src/store/actions';
+import { userDeleteCategory, userDeleteFood, userDeleteTable } from 'src/store/actions';
 
 interface PopUpValuesType {
   setOpen: Function;
@@ -70,7 +70,7 @@ const DeleteRow = (props: PopUpValuesType) => {
     if (props.method === 'category') {
       dispatch(userDeleteCategory(props.ID, (notification) => notification));
     } else if (props.method === 'table') {
-      // DeleteTableItem()
+      dispatch(userDeleteTable(props.ID, (notification) => notification));
     } else {
       dispatch(userDeleteFood(props.ID, (notification) => notification));
     }

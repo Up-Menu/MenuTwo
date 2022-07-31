@@ -44,6 +44,7 @@ export const userLogin = (nav: NavigateFunction, payload: any, fn: (arg0: any) =
             fn(toast.success("!خوش آمدید"))
             nav("/dashboards/tasks")
             if (payload.remember) {
+                localStorage.setItem("user", JSON.stringify(data.payload))
                 localStorage.setItem("user_data", JSON.stringify(data))
             }
             else return
@@ -60,7 +61,7 @@ export const userLogout = (nav: NavigateFunction) => (dispatch: (arg0: { type: s
             }))
         )
         .then(() => {
-            localStorage.removeItem("user_data")
+            localStorage.removeItem("user")
             nav("/login")
         })
 }

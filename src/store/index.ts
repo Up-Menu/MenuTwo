@@ -16,7 +16,7 @@ const initialState = {
 // Read user from the localStorage
 function readUser() {
     try {
-        const serialized = localStorage.getItem('user_data')
+        const serialized = localStorage.getItem('user')
         if (serialized === null)
             return undefined
         return JSON.parse(serialized)

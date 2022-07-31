@@ -335,12 +335,12 @@ const CreateTable = () => {
           backLink='createMenu'
           forText='تنظیمات تلفن همراه'
           backText='ساخت منو'
-        />;
+        />
       </Container>
-      <Footer />;
+      <Footer />
     </>
-  )
-    ;
+  );
+
 };
 
 export default CreateTable;

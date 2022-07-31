@@ -6,10 +6,6 @@ import {
   Button,
   Hidden,
   lighten,
-  // List,
-  // Divider,
-  // ListItem,
-  // ListItemText,
   Popover,
   Typography
 } from '@mui/material';
@@ -22,11 +18,6 @@ import { userLogout } from 'src/store/actions';
 import { useTypedSelector } from 'src/store';
 import images from 'src/widgets/importer';
 import { useNavigate } from 'react-router';
-
-// import InboxTwoToneIcon from '@mui/icons-material/InboxTwoTone';
-// import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
-// import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
-// import { NavLink } from 'react-router-dom';
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
@@ -99,7 +90,7 @@ function HeaderUserbox() {
       });
     } else {
       setUser({
-        name: `${logData.user.payload.email}`,
+        name: `${logData.user.email}`,
         avatar: 'from reg',
         jobtitle: 'سطح نقره ای'
       });

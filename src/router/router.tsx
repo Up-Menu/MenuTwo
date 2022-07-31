@@ -27,7 +27,7 @@ const Overview = Loader(
 const Tasks = Loader(lazy(() => import('src/content/dashboards/Tasks')));
 
 const CreateRestaurant = Loader(
-  lazy(() => import('src/components/pages/admin/RestaurantAccounting'))
+  lazy(() => import('src/components/pages/admin/CreateRestaurant'))
 );
 const CreateMenu = Loader(
   lazy(() => import('src/components/pages/admin/CreateMenu'))

@@ -116,10 +116,13 @@ const SmsPanel = () => {
                     <Grid item xs={12} md={6}>
                       <Form.Item
                         name='cellPhone'
+                        hasFeedback
+                        validateStatus='validating'
                         rules={[
                           {
                             required: true,
-                            message: 'Please input your confirm password!'
+                            message: 'تلفن همراه را بدرستی وارد کنید!',
+                            pattern: /(\+?98|098|0|0098)?(9\d{9})/i
                           }
                         ]}
                       >
@@ -170,13 +173,16 @@ const SmsPanel = () => {
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <Form.Item
-                        name='smsVerificationCode'
+                        hasFeedback
+                        validateStatus='validating'
                         rules={[
                           {
                             required: true,
-                            message: 'Please input your password!'
+                            message: 'کد تایید معتبر نیست!',
+                            pattern: /^\d{4}$/
                           }
                         ]}
+                        name='smsVerificationCode'
                       >
                         <FormControl fullWidth required variant='outlined'>
                           <InputLabel htmlFor='outlined-adornment-password'>

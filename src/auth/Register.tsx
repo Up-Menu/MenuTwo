@@ -141,7 +141,18 @@ const Register = () => {
                         </Form.Item>
                       </Grid>
                       <Grid item xs={12}>
-                        <Form.Item name='email'>
+                        <Form.Item
+                          hasFeedback
+                          validateStatus='validating'
+                          name='email'
+                          rules={[
+                            {
+                              required: true,
+                              message: 'ایمیل مورد قبول نیست!',
+                              pattern: /(^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$)/i
+                            }
+                          ]}
+                        >
                           <TextField
                             label='ایمیل'
                             type='text'

@@ -232,33 +232,40 @@ const CreateAccount = () => {
                         </Form.Item>
                       </Grid>
                       <Grid item xs={12} md={6}>
-                        <Grid container spacing={2}>
-                          <Grid item xs={12} md={9}>
-                            <Form.Item name='cellPhone'>
-                              <TextField
-                                label='شماره تلفن'
-                                type='text'
-                                fullWidth
-                                defaultValue={''}
-                                value={''}
-                              />
-                            </Form.Item>
-                          </Grid>
-                          <Grid item xs={12} md={3}>
-                            <Form.Item name='areaCode'>
-                              <TextField
-                                label='کد منطقه'
-                                type='text'
-                                fullWidth
-                                placeholder='021'
-                                value={''}
-                              />
-                            </Form.Item>
-                          </Grid>
-                        </Grid>
+                        <Form.Item
+                          hasFeedback
+                          validateStatus='validating'
+                          rules={[
+                            {
+                              required: true,
+                              message: 'شماره مورد قبول نیست!',
+                              pattern: /(^(\+98|0)?\d{10}$)/i
+                            }
+                          ]}
+                          name='cellPhone'>
+                          <TextField
+                            label='شماره تلفن'
+                            type='text'
+                            fullWidth
+                            defaultValue={''}
+                            value={''}
+                          />
+                        </Form.Item>
+
                       </Grid>
                       <Grid item xs={12} md={6}>
-                        <Form.Item name='email'>
+                        <Form.Item
+                          hasFeedback
+                          validateStatus='validating'
+                          name='email'
+                          rules={[
+                            {
+                              required: true,
+                              message: 'ایمیل مورد قبول نیست!',
+                              pattern: /(^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$)/i
+                            }
+                          ]}
+                        >
                           <TextField
                             label='ایمیل'
                             type='text'
@@ -270,39 +277,26 @@ const CreateAccount = () => {
                       </Grid>
 
                       <Grid item xs={12} md={6}>
-                        <Grid container spacing={2}>
-                          <Grid item xs={12} md={9}>
-                            <Form.Item name='website'>
-                              <TextField
-                                label='لینک سایت رستوران'
-                                type='text'
-                                fullWidth
-                                defaultValue={''}
-                                value={''}
-                              />
-                            </Form.Item>
-                          </Grid>
-
-                          <Grid item xs={12} md={3}>
-                            <Form.Item name='ssl'>
-                              <FormControl fullWidth>
-                                <InputLabel id='demo-simple-select-label'>
-                                  SSL
-                                </InputLabel>
-                                <Select
-                                  labelId='demo-simple-select-label'
-                                  id='demo-simple-select'
-                                  value={''}
-                                  label='SSL'
-                                  onChange={_handleChange}
-                                >
-                                  <MenuItem value='http'>http</MenuItem>
-                                  <MenuItem value='https'>https</MenuItem>
-                                </Select>
-                              </FormControl>
-                            </Form.Item>
-                          </Grid>
-                        </Grid>
+                        <Form.Item
+                          hasFeedback
+                          validateStatus='validating'
+                          rules={[
+                            {
+                              required: true,
+                              message: 'لینک مورد قبول نیست!',
+                              pattern: /([(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))/i
+                            }
+                          ]}
+                          name='website'
+                        >
+                          <TextField
+                            label='لینک سایت رستوران'
+                            type='text'
+                            fullWidth
+                            defaultValue={''}
+                            value={''}
+                          />
+                        </Form.Item>
                       </Grid>
 
                       <Grid item xs={12} md={6}>
@@ -428,7 +422,18 @@ const CreateAccount = () => {
                         </Form.Item>
                       </Grid>
                       <Grid item xs={12} md={6}>
-                        <Form.Item name='cellPhone' initialValue={globalUserState.cellPhone}>
+                        <Form.Item
+                          hasFeedback
+                          validateStatus='validating'
+                          rules={[
+                            {
+                              required: true,
+                              message: 'شماره مورد قبول نیست!',
+                              pattern: /(^(\+98|0)?\d{10}$)/i
+                            }
+                          ]}
+                          name='cellPhone'
+                          initialValue={globalUserState.cellPhone}>
                           <TextField
                             label='شماره تلفن'
                             type='text'
@@ -439,7 +444,20 @@ const CreateAccount = () => {
                         </Form.Item>
                       </Grid>
                       <Grid item xs={12} md={6}>
-                        <Form.Item name='email' initialValue={globalUserState.email}>
+                        <Form.Item
+
+                          hasFeedback
+                          validateStatus='validating'
+                          name='email'
+                          rules={[
+                            {
+                              required: true,
+                              message: 'ایمیل مورد قبول نیست!',
+                              pattern: /(^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$)/i
+                            }
+                          ]}
+
+                          initialValue={globalUserState.email}>
                           <TextField
                             label='ایمیل'
                             type='text'
@@ -451,7 +469,18 @@ const CreateAccount = () => {
                       </Grid>
 
                       <Grid item xs={12} md={6}>
-                        <Form.Item name='website' initialValue={globalUserState.website}>
+                        <Form.Item
+                          hasFeedback
+                          validateStatus='validating'
+                          rules={[
+                            {
+                              required: true,
+                              message: 'لینک مورد قبول نیست!',
+                              pattern: /([(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))/i
+                            }
+                          ]}
+                          name='website'
+                          initialValue={globalUserState.website}>
                           <TextField
                             label='لینک سایت رستوران'
                             type='text'

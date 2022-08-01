@@ -112,7 +112,7 @@ const Login = () => {
                         <Form.Item
                           hasFeedback
                           validateStatus='validating'
-                          name='username'
+                          name='email'
                           rules={[
                             {
                               required: true,

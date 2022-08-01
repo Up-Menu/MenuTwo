@@ -25,13 +25,13 @@ import { Toaster } from 'react-hot-toast';
 
 // import icons
 import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
-
 import { LoadingOutlined } from '@ant-design/icons';
 
 // upload requirements
 import { message, Upload } from 'antd';
 import type { UploadChangeParam } from 'antd/es/upload';
 import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
+
 
 // auto image importer
 import images from 'src/widgets/importer';
@@ -42,7 +42,6 @@ import ProgressContext from 'src/context/ProgressContext';
 import RtlVersion from '../../../theme/RtlVersion';
 import { GetUserRestaurant } from 'src/connections/Req';
 
-import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 interface existingUserType {
   address: string;
@@ -91,12 +90,27 @@ const CreateAccount = () => {
 
   const userID: String = JSON.parse(localStorage.getItem('user_data')).payload
     .userId;
-  const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState<string>();
   const [globalUserState, setGlobalUserState] = useState(globalUser);
   const progressContext = useContext(ProgressContext);
-  const [ssl, setSsl] = useState('');
   const dispatch = useTypedDispatch();
+
+  // upload profile
+  const [loading, setLoading] = useState(false);
+  const [imageUrl, setImageUrl] = useState<string>();
+
+  const handleChange: UploadProps['onChange'] = (info: UploadChangeParam<UploadFile>) => {
+    if (info.file.status === 'uploading') {
+      setLoading(true);
+      return;
+    }
+    if (info.file.status === 'done') {
+      // Get this url from response in real world.
+      getBase64(info.file.originFileObj as RcFile, url => {
+        setLoading(false);
+        setImageUrl(url);
+      });
+    }
+  };
 
   useEffect(() => {
     GetUserRestaurant(userID, (restaurantData) => {
@@ -124,22 +138,6 @@ const CreateAccount = () => {
     });
   }, []);
 
-  const handleChange: UploadProps['onChange'] = (
-    info: UploadChangeParam<UploadFile>
-  ) => {
-    if (info.file.status === 'uploading') {
-      setLoading(true);
-      return;
-    }
-    if (info.file.status === 'done') {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj as RcFile, (url) => {
-        setLoading(false);
-        setImageUrl(url);
-      });
-    }
-  };
-
   const uploadButton = (
     <div>
       {loading ? (
@@ -152,22 +150,27 @@ const CreateAccount = () => {
 
   const onFinish = (values: any) => {
     progressContext.onRestaurant(true);
+    console.log({
+      ...values,
+      profile:`${values.profile.file.name}`,
+      userId: userID
+    });
     dispatch(
       userCreateRestaurant(
         {
           ...values,
+          profile:`${values.profile.file.name}`,
           userId: userID
         },
         (notification) => notification
       )
-    );
+    ).then(() => {
+    });
   };
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
-  const _handleChange = (event: SelectChangeEvent) => {
-    setSsl(event.target.value as string);
-  };
+
 
   if (globalUserState.restaurantName === null) {
     return;
@@ -196,27 +199,17 @@ const CreateAccount = () => {
                         sx={{ display: 'flex', justifyContent: 'center' }}
                       >
                         <Form.Item name='profile'>
-                          <MyBox>
-                            <Upload
-                              name='avatar'
-                              listType='picture-card'
-                              className='avatar-uploader'
-                              showUploadList={false}
-                              action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
-                              beforeUpload={beforeUpload}
-                              onChange={handleChange}
-                            >
-                              {imageUrl ? (
-                                <img
-                                  src={imageUrl}
-                                  alt='avatar'
-                                  style={{ width: '100%' }}
-                                />
-                              ) : (
-                                uploadButton
-                              )}
-                            </Upload>
-                          </MyBox>
+                          <Upload
+                            name='avatar'
+                            listType='picture-card'
+                            className='avatar-uploader'
+                            showUploadList={false}
+                            action='https://upmenu.sepandpay.ir/swagger/index.html'
+                            beforeUpload={beforeUpload}
+                            onChange={handleChange}
+                          >
+                            {imageUrl ? <img src={imageUrl} alt='avatar' style={{ width: '100%' }} /> : uploadButton}
+                          </Upload>
                         </Form.Item>
                       </Grid>
                       <Grid item xs={12}>
@@ -386,27 +379,17 @@ const CreateAccount = () => {
                         sx={{ display: 'flex', justifyContent: 'center' }}
                       >
                         <Form.Item name='profile'>
-                          <MyBox>
-                            <Upload
-                              name='avatar'
-                              listType='picture-card'
-                              className='avatar-uploader'
-                              showUploadList={false}
-                              action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
-                              beforeUpload={beforeUpload}
-                              onChange={handleChange}
-                            >
-                              {imageUrl ? (
-                                <img
-                                  src={imageUrl}
-                                  alt='avatar'
-                                  style={{ width: '100%' }}
-                                />
-                              ) : (
-                                uploadButton
-                              )}
-                            </Upload>
-                          </MyBox>
+                          <Upload
+                            name='avatar'
+                            listType='picture-card'
+                            className='avatar-uploader'
+                            showUploadList={false}
+                            action='https://upmenu.sepandpay.ir/swagger/index.html'
+                            beforeUpload={beforeUpload}
+                            onChange={handleChange}
+                          >
+                            {imageUrl ? <img src={imageUrl} alt='avatar' style={{ width: '100%' }} /> : uploadButton}
+                          </Upload>
                         </Form.Item>
                       </Grid>
                       <Grid item xs={12}>

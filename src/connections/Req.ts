@@ -86,7 +86,6 @@ export const DeleteTable = (tableId: string, fn: (arg0: any) => void) => {
 };
 
 
-
 export const GetUserRestaurant = (userId: any, fn: (arg0: any) => void) => {
   Api
     .get(`Restaurant/GetUserRestaurant?userId=${userId}`, '', '')
@@ -105,11 +104,12 @@ export const GetRestaurantCategories = (restaurantId: any, fn: (arg0: any) => vo
     })
     .catch(err => console.log(err));
 };
-export const GetRestaurantMenus = (userId: any, fn: (arg0: any) => void) => {
+
+export const GetRestaurantMenus = (restaurantId: any, fn: (arg0: any) => void) => {
   Api
-    .get(`Restaurant/GetUserRestaurant?userId=${userId}`, '', '')
+    .get(`Food/GetRestaurantFoods?restaurantId=${restaurantId}`, '', '')
     .then(response => {
-      fn(response.data.data.restaurant);
+      fn(response.data.data.categoryFoods);
     })
     .catch(err => console.log(err));
 };

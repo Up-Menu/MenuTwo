@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+/*------------------------------------- font-family -----------------------------------------------*/
+@font-face {
+  font-family: Kalameh;
+  font-style: normal;
+  font-weight: 700;
+  src: url('../../fonts/Peyman/KalamehWeb-Bold.eot');
+  src: url('../../fonts/Peyman/KalamehWeb-Bold.eot?#iefix') format('embedded-opentype'),
+    url('../../fonts/Peyman/KalamehWeb-Bold.woff2') format('woff2'),
+    url('../../fonts/Peyman/KalamehWeb-Bold.woff') format('woff'),
+    url('../../fonts/Peyman/Shabnam-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: Kalameh;
+  font-style: normal;
+  font-weight: 500;
+  src: url('../../fonts/Peyman/KalamehWeb-Regular.eot');
+  src: url('../../fonts/Peyman/KalamehWeb-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../../fonts/Peyman/KalamehWeb-Regular.woff2') format('woff2'),
+    url('../../fonts/Peyman/KalamehWeb-Regular.woff') format('woff'),
+    url('../../fonts/Peyman/Shabnam-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: Kalameh;
+  font-style: normal;
+  font-weight: 300;
+  src: url('../../fonts/Peyman/KalamehWeb-Thin.eot');
+  src: url('../../fonts/Peyman/KalamehWeb-Thin.eot?#iefix') format('embedded-opentype'),
+    url('../../fonts/Peyman/KalamehWeb-Thin.woff2') format('woff2'),
+    url('../../fonts/Peyman/KalamehWeb-Thin.woff') format('woff'),
+    url('../../fonts/Peyman/Shabnam-Thin.ttf') format('truetype');
+}
+
+
+
+@font-face {
+  font-family: Kalameh;
+  font-style: normal;
+  font-weight: 400;
+  src: url('../../fonts/Peyman/KalamehWeb-Black.eot');
+  src: url('../../fonts/Peyman/KalamehWeb-Black.eot?#iefix') format('embedded-opentype'),
+    url('../../fonts/Peyman/KalamehWeb-Black.woff2') format('woff2'),
+    url('../../fonts/Peyman/KalamehWeb-Black.woff') format('woff'),
+    url('../../fonts/Peyman/Shabnam.ttf') format('truetype');
+}
+
+
+* {
+  font-family: Kalameh, sans-serif !important;
+
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none !important;
+}
+
+div.ant-space.ant-space-horizontal.ant-space-align-baseline {
+  align-items: center !important;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  border-radius: 10px;
+}
+
+#Map {
+  font-family: sans-serif;
+  text-align: center;
+  height: 100vh;
+}
+
+.App-map {
+  height: 100%;
+  width: 100%;
+}
+
+.container_plus {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.container_plus .card {
+  width: 100%;
+  max-width: 100px;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.container_plus .card p {
+  margin: 12px 0;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.container_plus .card .box {
+  width: 40%;
+  height: 40px;
+  border-radius: 10px;
+  cursor: pointer;
+}

@@ -33,6 +33,7 @@ import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import RtlVersion from '../theme/RtlVersion';
 
 import { Link } from 'react-router-dom';
+import { IRegisterForm } from './Auth';
 
 interface State {
   password: string;
@@ -73,9 +74,7 @@ const Register = () => {
     });
   };
 
-  const handleMouseDownPassword = (
-    event: MouseEvent<HTMLButtonElement>
-  ) => {
+  const handleMouseDownPassword = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
   const handleMouseDownConfPassword = (
@@ -84,29 +83,27 @@ const Register = () => {
     event.preventDefault();
   };
 
-  const onFinish = (values: any) => {
-    
-    
-    dispatch(userRegister({...values}, (notification) => notification, nav));
+  const onFinish = (values: IRegisterForm) => {
+    dispatch(userRegister({ ...values }, (notification) => notification, nav));
   };
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
   return (
     <>
-      <TitleText header='صفحه ثبت نام' />
+      <TitleText header="صفحه ثبت نام" />
       <Toaster />
-      <Container maxWidth='lg'>
+      <Container maxWidth="lg">
         <Box pt={5} sx={{ direction: 'rtl' }}>
           <Card>
             <Box
-              display='flex'
-              flexDirection='row'
-              justifyContent='space-between'
+              display="flex"
+              flexDirection="row"
+              justifyContent="space-between"
             >
-              <CardHeader title='فرم ثبت نام' />
-              <Link to='/dashboards/tasks'>
-                <CardHeader title='قبلا ثبت نام کردم' />
+              <CardHeader title="فرم ثبت نام" />
+              <Link to="/dashboards/tasks">
+                <CardHeader title="قبلا ثبت نام کردم" />
               </Link>
             </Box>
             <Divider />
@@ -114,29 +111,29 @@ const Register = () => {
               <Box sx={{ p: 5, m: 2 }}>
                 <RtlVersion>
                   <Form
-                    name='basic'
+                    name="basic"
                     wrapperCol={{ span: 6 }}
                     initialValues={{ remember: true }}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
-                    autoComplete='on'
+                    autoComplete="on"
                   >
                     <Grid container spacing={2}>
                       <Grid item xs={12} md={6}>
-                        <Form.Item name='firstname'>
+                        <Form.Item name="firstname">
                           <TextField
-                            label='نام'
-                            type='text'
+                            label="نام"
+                            type="text"
                             fullWidth
                             value={''}
                           />
                         </Form.Item>
                       </Grid>
                       <Grid item xs={12} md={6}>
-                        <Form.Item name='lastname'>
+                        <Form.Item name="lastname">
                           <TextField
-                            label='نام خانوادگی'
-                            type='text'
+                            label="نام خانوادگی"
+                            type="text"
                             fullWidth
                             value={''}
                           />
@@ -145,19 +142,20 @@ const Register = () => {
                       <Grid item xs={12}>
                         <Form.Item
                           hasFeedback
-                          validateStatus='validating'
-                          name='email'
+                          validateStatus="validating"
+                          name="email"
                           rules={[
                             {
                               required: true,
                               message: 'ایمیل مورد قبول نیست!',
-                              pattern: /(^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$)/i
+                              pattern:
+                                /(^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$)/i
                             }
                           ]}
                         >
                           <TextField
-                            label='ایمیل'
-                            type='text'
+                            label="ایمیل"
+                            type="text"
                             fullWidth
                             value={''}
                           />
@@ -165,7 +163,7 @@ const Register = () => {
                       </Grid>
                       <Grid item xs={12} md={6}>
                         <Form.Item
-                          name='password'
+                          name="password"
                           rules={[
                             {
                               required: true,
@@ -173,22 +171,22 @@ const Register = () => {
                             }
                           ]}
                         >
-                          <FormControl fullWidth required variant='outlined'>
-                            <InputLabel htmlFor='outlined-adornment-password'>
+                          <FormControl fullWidth required variant="outlined">
+                            <InputLabel htmlFor="outlined-adornment-password">
                               کلمه عبور
                             </InputLabel>
                             <OutlinedInput
-                              id='outlined-adornment-password'
+                              id="outlined-adornment-password"
                               type={values.showPassword ? 'text' : 'password'}
                               value={values.password}
                               onChange={handleChange('password')}
                               endAdornment={
-                                <InputAdornment position='end'>
+                                <InputAdornment position="end">
                                   <IconButton
-                                    aria-label='toggle password visibility'
+                                    aria-label="toggle password visibility"
                                     onClick={handleClickShowPassword}
                                     onMouseDown={handleMouseDownPassword}
-                                    edge='end'
+                                    edge="end"
                                   >
                                     {values.showPassword ? (
                                       <VisibilityOff />
@@ -198,7 +196,7 @@ const Register = () => {
                                   </IconButton>
                                 </InputAdornment>
                               }
-                              label='کلمه عبور'
+                              label="کلمه عبور"
                             />
                           </FormControl>
                         </Form.Item>
@@ -206,7 +204,7 @@ const Register = () => {
 
                       <Grid item xs={12} md={6}>
                         <Form.Item
-                          name='confirmPassword'
+                          name="confirmPassword"
                           rules={[
                             {
                               required: true,
@@ -214,24 +212,24 @@ const Register = () => {
                             }
                           ]}
                         >
-                          <FormControl fullWidth required variant='outlined'>
-                            <InputLabel htmlFor='outlined-adornment-password'>
+                          <FormControl fullWidth required variant="outlined">
+                            <InputLabel htmlFor="outlined-adornment-password">
                               تایید کلمه عبور
                             </InputLabel>
                             <OutlinedInput
-                              id='outlined-adornment-password'
+                              id="outlined-adornment-password"
                               type={
                                 values.showConfPassword ? 'text' : 'password'
                               }
                               value={values.confPassword}
                               onChange={handleConfChange('confPassword')}
                               endAdornment={
-                                <InputAdornment position='end'>
+                                <InputAdornment position="end">
                                   <IconButton
-                                    aria-label='toggle password visibility'
+                                    aria-label="toggle password visibility"
                                     onClick={handleClickShowConfPassword}
                                     onMouseDown={handleMouseDownConfPassword}
-                                    edge='end'
+                                    edge="end"
                                   >
                                     {values.showConfPassword ? (
                                       <VisibilityOff />
@@ -241,17 +239,16 @@ const Register = () => {
                                   </IconButton>
                                 </InputAdornment>
                               }
-                              label='تایید کلمه عبور'
+                              label="تایید کلمه عبور"
                             />
                           </FormControl>
                         </Form.Item>
                       </Grid>
 
-
                       <Grid item xs={12}>
-                        <Form.Item name='address'>
+                        <Form.Item name="address">
                           <TextField
-                            label='نشانی'
+                            label="نشانی"
                             multiline
                             value={''}
                             fullWidth
@@ -267,12 +264,12 @@ const Register = () => {
                       >
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                           <Button
-                            type='submit'
-                            size='large'
-                            variant='outlined'
+                            type="submit"
+                            size="large"
+                            variant="outlined"
                             sx={{ padding: 1 }}
                             endIcon={<VerifiedUserIcon />}
-                            color='success'
+                            color="success"
                           >
                             ثبت نام
                           </Button>

@@ -80,19 +80,19 @@ const Login = () => {
   };
   return (
     <>
-      <TitleText header='صفحه ورود' />
+      <TitleText header="صفحه ورود" />
       <Toaster />
-      <Container maxWidth='lg'>
+      <Container maxWidth="lg">
         <Box pt={5} sx={{ direction: 'rtl' }}>
           <Card>
             <Box
-              display='flex'
-              flexDirection='row'
-              justifyContent='space-between'
+              display="flex"
+              flexDirection="row"
+              justifyContent="space-between"
             >
-              <CardHeader title='فرم لاگین' />
-              <Link to='/'>
-                <CardHeader title='برو به خانه' />
+              <CardHeader title="فرم لاگین" />
+              <Link to="/">
+                <CardHeader title="برو به خانه" />
               </Link>
             </Box>
             <Divider />
@@ -100,30 +100,32 @@ const Login = () => {
               <Box sx={{ p: 5, m: 2 }}>
                 <RtlVersion>
                   <Form
-                    name='basic'
+                    name="basic"
                     wrapperCol={{ span: 6 }}
                     initialValues={{ remember: true }}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
-                    autoComplete='on'
+                    autoComplete="on"
                   >
                     <Grid container spacing={2}>
                       <Grid item xs={12} md={6}>
                         <Form.Item
                           hasFeedback
-                          validateStatus='validating'
-                          name='email'
+                          validateStatus="validating"
+                          name="email"
                           rules={[
                             {
                               required: true,
-                              message: 'فقط ایمیل یا شماره همراه خود را وارد کنید',
-                              pattern: /(^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$)|(\+?98|098|0|0098)?(9\d{9})/i
+                              message:
+                                'فقط ایمیل یا شماره همراه خود را وارد کنید',
+                              pattern:
+                                /(^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$)|(\+?98|098|0|0098)?(9\d{9})/i
                             }
                           ]}
                         >
-                          < TextField
-                            label='نام کاربری'
-                            type='text'
+                          <TextField
+                            label="نام کاربری"
+                            type="text"
                             fullWidth
                             value={''}
                           />
@@ -131,7 +133,7 @@ const Login = () => {
                       </Grid>
                       <Grid item xs={12} md={6}>
                         <Form.Item
-                          name='password'
+                          name="password"
                           rules={[
                             {
                               required: true,
@@ -139,22 +141,22 @@ const Login = () => {
                             }
                           ]}
                         >
-                          <FormControl fullWidth required variant='outlined'>
-                            <InputLabel htmlFor='outlined-adornment-password'>
+                          <FormControl fullWidth required variant="outlined">
+                            <InputLabel htmlFor="outlined-adornment-password">
                               کلمه عبور
                             </InputLabel>
                             <OutlinedInput
-                              id='outlined-adornment-password'
+                              id="outlined-adornment-password"
                               type={values.showPassword ? 'text' : 'password'}
                               value={values.password}
                               onChange={handleChange('password')}
                               endAdornment={
-                                <InputAdornment position='end'>
+                                <InputAdornment position="end">
                                   <IconButton
-                                    aria-label='toggle password visibility'
+                                    aria-label="toggle password visibility"
                                     onClick={handleClickShowPassword}
                                     onMouseDown={handleMouseDownPassword}
-                                    edge='end'
+                                    edge="end"
                                   >
                                     {values.showPassword ? (
                                       <VisibilityOff />
@@ -164,7 +166,7 @@ const Login = () => {
                                   </IconButton>
                                 </InputAdornment>
                               }
-                              label='کلمه عبور'
+                              label="کلمه عبور"
                             />
                           </FormControl>
                         </Form.Item>
@@ -180,8 +182,8 @@ const Login = () => {
                         }}
                       >
                         <Form.Item
-                          name='remember'
-                          valuePropName='checked'
+                          name="remember"
+                          valuePropName="checked"
                           wrapperCol={{ offset: 8, span: 16 }}
                         >
                           <Checkbox
@@ -203,9 +205,9 @@ const Login = () => {
                         sx={{ display: 'flex', justifyContent: 'center' }}
                       >
                         <Typography
-                          variant='h6'
+                          variant="h6"
                           component={RouterLink}
-                          to='/register'
+                          to="/register"
                         >
                           چرا همین الآن ثبت نام نمیکنی؟
                         </Typography>
@@ -224,12 +226,12 @@ const Login = () => {
                         <Box pr={2}>
                           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                             <Button
-                              type='submit'
-                              size='large'
-                              variant='outlined'
+                              type="submit"
+                              size="large"
+                              variant="outlined"
                               sx={{ padding: 1 }}
                               endIcon={<LockOpenIcon />}
-                              color='success'
+                              color="success"
                             >
                               ورود به سامانه
                             </Button>

@@ -6,7 +6,8 @@
   font-style: normal;
   font-weight: 700;
   src: url('../../fonts/Peyman/KalamehWeb-Bold.eot');
-  src: url('../../fonts/Peyman/KalamehWeb-Bold.eot?#iefix') format('embedded-opentype'),
+  src: url('../../fonts/Peyman/KalamehWeb-Bold.eot?#iefix')
+      format('embedded-opentype'),
     url('../../fonts/Peyman/KalamehWeb-Bold.woff2') format('woff2'),
     url('../../fonts/Peyman/KalamehWeb-Bold.woff') format('woff'),
     url('../../fonts/Peyman/Shabnam-Bold.ttf') format('truetype');
@@ -17,7 +18,8 @@
   font-style: normal;
   font-weight: 500;
   src: url('../../fonts/Peyman/KalamehWeb-Regular.eot');
-  src: url('../../fonts/Peyman/KalamehWeb-Regular.eot?#iefix') format('embedded-opentype'),
+  src: url('../../fonts/Peyman/KalamehWeb-Regular.eot?#iefix')
+      format('embedded-opentype'),
     url('../../fonts/Peyman/KalamehWeb-Regular.woff2') format('woff2'),
     url('../../fonts/Peyman/KalamehWeb-Regular.woff') format('woff'),
     url('../../fonts/Peyman/Shabnam-Medium.ttf') format('truetype');
@@ -28,29 +30,27 @@
   font-style: normal;
   font-weight: 300;
   src: url('../../fonts/Peyman/KalamehWeb-Thin.eot');
-  src: url('../../fonts/Peyman/KalamehWeb-Thin.eot?#iefix') format('embedded-opentype'),
+  src: url('../../fonts/Peyman/KalamehWeb-Thin.eot?#iefix')
+      format('embedded-opentype'),
     url('../../fonts/Peyman/KalamehWeb-Thin.woff2') format('woff2'),
     url('../../fonts/Peyman/KalamehWeb-Thin.woff') format('woff'),
     url('../../fonts/Peyman/Shabnam-Thin.ttf') format('truetype');
 }
-
-
 
 @font-face {
   font-family: Kalameh;
   font-style: normal;
   font-weight: 400;
   src: url('../../fonts/Peyman/KalamehWeb-Black.eot');
-  src: url('../../fonts/Peyman/KalamehWeb-Black.eot?#iefix') format('embedded-opentype'),
+  src: url('../../fonts/Peyman/KalamehWeb-Black.eot?#iefix')
+      format('embedded-opentype'),
     url('../../fonts/Peyman/KalamehWeb-Black.woff2') format('woff2'),
     url('../../fonts/Peyman/KalamehWeb-Black.woff') format('woff'),
     url('../../fonts/Peyman/Shabnam.ttf') format('truetype');
 }
 
-
 * {
   font-family: Kalameh, sans-serif !important;
-
 }
 
 a:link,
@@ -107,4 +107,12 @@ img {
   height: 40px;
   border-radius: 10px;
   cursor: pointer;
+}
+
+.muirtl-1a4vs1t-MuiFormControl-root-MuiTextField-root
+  .MuiOutlinedInput-root
+  fieldset {
+  border-color: #8c7cf0 !important;
+  border-radius: 10px !important;
+  border: 2px solid #8c7cf0 !important;
 }

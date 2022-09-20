@@ -6,7 +6,7 @@ import SidebarLayout from 'src/shared/SidebarLayout';
 import BaseLayout from 'src/layouts/BaseLayout';
 
 import SuspenseLoader from 'src/components/SuspenseLoader';
-import Login from '../auth/Login';
+
 import OpenIconSpeedDial from 'src/widgets/OpenIconSpeedDial';
 
 const Loader = (Component) => (props: JSX.IntrinsicAttributes) =>
@@ -62,10 +62,13 @@ const Tables = Loader(
 const SmsPanel = Loader(
   lazy(() => import('src/components/pages/admin/SmsPanel'))
 );
-const Register = Loader(lazy(() => import('../auth/Register')));
+
 const SystemTest = Loader(
   lazy(() => import('src/components/pages/admin/SystemTest'))
 );
+
+const NewLogin = Loader(lazy(() => import('src/auth/NewLogin')));
+const NewRegister = Loader(lazy(() => import('src/auth/NewRegister')));
 
 // Status
 
@@ -154,11 +157,11 @@ function routes(props: string[]): RouteObject[] {
     },
     {
       path: 'register',
-      element: <Register />
+      element: <NewRegister />
     },
     {
       path: 'login',
-      element: <Login />
+      element: <NewLogin />
     },
     {
       path: 'smsPanel',
@@ -171,7 +174,7 @@ function routes(props: string[]): RouteObject[] {
           <SidebarLayout />
         </>
       ) : (
-        <Login /> || <Register />
+        <NewLogin /> || <NewRegister />
       ),
       children: [
         {
@@ -179,49 +182,61 @@ function routes(props: string[]): RouteObject[] {
           element: isLogged ? (
             <Navigate to="tasks" replace />
           ) : (
-            <Login /> || <Register />
+            <NewLogin /> || <NewRegister />
           )
         },
 
         {
           path: 'mobileApp',
-          element: isLogged ? <MobileApp /> : <Login /> || <Register />
+          element: isLogged ? <MobileApp /> : <NewLogin /> || <NewRegister />
         },
         {
           path: 'systemTest',
-          element: isLogged ? <SystemTest /> : <Login /> || <Register />
+          element: isLogged ? <SystemTest /> : <NewLogin /> || <NewRegister />
         },
         {
           path: 'tables',
-          element: isLogged ? <Tables /> : <Login /> || <Register />
+          element: isLogged ? <Tables /> : <NewLogin /> || <NewRegister />
         },
         {
           path: 'tasks',
-          element: isLogged ? <Tasks /> : <Login /> || <Register />
+          element: isLogged ? <Tasks /> : <NewLogin /> || <NewRegister />
         },
         {
           path: 'createRestaurant',
-          element: isLogged ? <CreateRestaurant /> : <Login /> || <Register />
+          element: isLogged ? (
+            <CreateRestaurant />
+          ) : (
+            <NewLogin /> || <NewRegister />
+          )
         },
         {
           path: 'createCategory',
-          element: isLogged ? <CreateCategory /> : <Login /> || <Register />
+          element: isLogged ? (
+            <CreateCategory />
+          ) : (
+            <NewLogin /> || <NewRegister />
+          )
         },
         {
           path: 'createMenu',
-          element: isLogged ? <CreateMenu /> : <Login /> || <Register />
+          element: isLogged ? <CreateMenu /> : <NewLogin /> || <NewRegister />
         },
         {
           path: 'orders',
-          element: isLogged ? <Order /> : <Login /> || <Register />
+          element: isLogged ? <Order /> : <NewLogin /> || <NewRegister />
         },
         {
           path: 'delivery',
-          element: isLogged ? <Delivery /> : <Login /> || <Register />
+          element: isLogged ? <Delivery /> : <NewLogin /> || <NewRegister />
         },
         {
           path: 'themes',
-          element: isLogged ? <ThemeSelection /> : <Login /> || <Register />
+          element: isLogged ? (
+            <ThemeSelection />
+          ) : (
+            <NewLogin /> || <NewRegister />
+          )
         }
       ]
     }

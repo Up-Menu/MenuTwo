@@ -84,7 +84,7 @@ const Register = () => {
   };
 
   const onFinish = (values: IRegisterForm) => {
-    dispatch(userRegister({ ...values }, (notification) => notification, nav));
+    // dispatch(userRegister({ ...values }, (notification) => notification, nav));
   };
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);

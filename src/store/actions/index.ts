@@ -67,35 +67,23 @@ export const userLogout = (nav: NavigateFunction) => (dispatch: (arg0: { type: s
 }
 
 // Register Actions
-export const userRegister = (payload: any, fn: (arg0: any) => void, nav: NavigateFunction) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
-    const payloadWithOutRememberKey = {
-        firstname: payload.firstname,
-        lastname: payload.lastname,
-        email: payload.email,
-        password: payload.password,
-        address: payload.address,
-        mobile: "asfksd"
-    }
+export const userRegister = (payload: any, fn: (arg0: boolean) => void) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
+    //     , (server_response) => {
+    //     if (server_response[0] == 'Success') {
+    //         dispatch({
+    //             type: "USER_SIGNIN",
+    //             payload: {
+    //                 ...payload
+    //             }
+    //         })
+    //         fn(toast.success(server_response[1]))
+    //         nav("/smsPanel")
+    //     } else fn(toast.error(server_response[1]))
+    // }
+    RegisterReq({ ...payload }, (validation) => {
+        fn(validation)
+    })
 
-
-
-
-    RegisterReq(payloadWithOutRememberKey
-
-        //     , (server_response) => {
-        //     if (server_response[0] == 'Success') {
-        //         dispatch({
-        //             type: "USER_SIGNIN",
-        //             payload: {
-        //                 ...payload
-        //             }
-        //         })
-        //         fn(toast.success(server_response[1]))
-        //         nav("/smsPanel")
-        //     } else fn(toast.error(server_response[1]))
-        // }
-
-    )
 }
 
 // CreateMenu Actions

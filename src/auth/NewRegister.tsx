@@ -19,7 +19,8 @@ import TitleText from 'src/UI/TitleText';
 import RtlVersion from 'src/theme/RtlVersion';
 import InputComponent from 'src/components/InputComponent';
 import { IRegisterForm } from './Auth';
-
+import { userRegister } from 'src/store/actions';
+import { useTypedDispatch } from 'src/store';
 export const LinkItem = styled(Link)`
   text-decoration: none;
   color: #3683dc;
@@ -67,6 +68,7 @@ const loginSchema = object({
 type ILogin = TypeOf<typeof loginSchema>;
 
 const NewLogin: FC = () => {
+  const dispatch = useTypedDispatch();
   const [loading, setLoading] = useState<boolean>(false);
 
   const defaultValues: ILogin = {
@@ -93,10 +95,7 @@ const NewLogin: FC = () => {
       password: values.password
     };
 
-    setTimeout(() => {
-      console.log(sendFields);
-      setLoading(false);
-    }, 5000);
+    dispatch(userRegister(sendFields, (validation) => setLoading(validation)));
   };
 
   return (

@@ -9,12 +9,12 @@ export const GoogleReq = (value: any, fn: (arg0: any) => void) => {
     .catch(err => console.log(err));
 };
 
-export const RegisterReq = (value: any) => {
+export const RegisterReq = (value: any, fn: (arg0: boolean) => void) => {
   Api
-    .post('/api/Member', value, '')
+    .post('/api/Member/Register', value, '')
     .then(response => {
       // fn([response.data.status, response.data.data]);
-
+      fn(false)
       console.log(response)
     })
     .catch(err => console.log(err));

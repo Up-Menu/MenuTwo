@@ -2,7 +2,6 @@
 
 export interface IRegisterForm {
     address: string
-
     email: string
     firstname: string
     lastname: string

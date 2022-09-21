@@ -13,7 +13,7 @@ export const RegisterReq = (value: any, fn: (arg0: boolean) => void) => {
   Api
     .post('/api/Member/Register', value, '')
     .then(response => {
-      // fn([response.data.status, response.data.data]);
+
       fn(false)
       console.log(response)
     })
@@ -24,7 +24,7 @@ export const LoginReq = (value: any, fn: (arg0: any) => void) => {
   Api
     .post('/api/Member/Login', value, '')
     .then(response => {
-      // fn([response.data.status, response.data.data.message, response.data.data.userId]);
+
       fn(false)
       console.log(response)
     })

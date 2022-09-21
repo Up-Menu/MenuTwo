@@ -1,3 +1,4 @@
+
 import {
     RegisterReq,
     LoginReq,
@@ -50,13 +51,8 @@ export const userLogin = (payload: any, fn: (arg0: boolean) => void) => async (d
     //         else return
     //     }
     // })
-    console.log(payload);
-    const sendField = {
-        Username: payload.email,
-        Pass: payload.password
-    }
 
-    LoginReq(sendField, (validation) => {
+    LoginReq({ ...payload }, (validation) => {
         fn(validation)
     })
 }
@@ -89,7 +85,11 @@ export const userRegister = (payload: any, fn: (arg0: boolean) => void) => async
     //         nav("/smsPanel")
     //     } else fn(toast.error(server_response[1]))
     // }
-    RegisterReq({ ...payload }, (validation) => {
+    const sendField = {
+        ...payload,
+        mobile: "09223216120"
+    }
+    RegisterReq(sendField, (validation) => {
         fn(validation)
     })
 

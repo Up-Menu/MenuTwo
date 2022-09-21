@@ -60,8 +60,8 @@ export const OauthMuiLink = styled(MuiLink)`
 
 // 👇 Login Schema with Zod
 const loginSchema = object({
-  email: string().min(1, 'فیلد ایمیل ضروریست!').email('فیلد ایمیل ضروریست!'),
-  password: string()
+  Username: string().min(1, 'فیلد ایمیل ضروریست!').email('فیلد ایمیل ضروریست!'),
+  Pass: string()
     .min(1, 'فیلد پسورد نمیتواند خالی باشد!')
     .min(8, 'پسورد باید بیشتر از ۸ حرف باشد!')
     .max(32, 'پسورد باید کمتر از ۳۲ کاراکتر باشد!'),
@@ -76,8 +76,8 @@ const NewLogin: FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   // 👇 Default Values
   const defaultValues: ILogin = {
-    email: '',
-    password: ''
+    Username: '',
+    Pass: ''
   };
 
   // 👇 The object returned from useForm Hook
@@ -148,14 +148,14 @@ const NewLogin: FC = () => {
                             <InputComponent
                               label="نام کاربری"
                               type="email"
-                              name="email"
+                              name="Username"
                               required
                             />
 
                             <InputComponent
                               type="password"
                               label="کلمه عبور"
-                              name="password"
+                              name="Pass"
                               required
                             />
 

@@ -13,7 +13,7 @@ import {
   Button
 } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { literal, object, string, TypeOf } from 'zod';
@@ -26,6 +26,8 @@ import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InputComponent from 'src/components/InputComponent';
+import { useTypedDispatch } from 'src/store';
+import { userLogin } from 'src/store/actions';
 // 👇 Styled React Route Dom Link Component
 export const LinkItem = styled(Link)`
   text-decoration: none;
@@ -70,6 +72,8 @@ const loginSchema = object({
 type ILogin = TypeOf<typeof loginSchema>;
 
 const NewLogin: FC = () => {
+  const dispatch = useTypedDispatch();
+  const [loading, setLoading] = useState<boolean>(false);
   // 👇 Default Values
   const defaultValues: ILogin = {
     email: '',
@@ -84,7 +88,8 @@ const NewLogin: FC = () => {
 
   // 👇 Submit Handler
   const onSubmitHandler: SubmitHandler<ILogin> = (values: ILogin) => {
-    console.log(values);
+    setLoading(true);
+    dispatch(userLogin(values, (validation) => setLoading(validation)));
   };
 
   // 👇 JSX to be rendered
@@ -178,7 +183,7 @@ const NewLogin: FC = () => {
                             />
 
                             <LoadingButton
-                              loading={false}
+                              loading={loading}
                               type="submit"
                               variant="contained"
                               sx={{

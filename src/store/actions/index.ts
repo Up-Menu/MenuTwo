@@ -14,41 +14,50 @@ import toast from 'react-hot-toast'
 import { NavigateFunction } from 'react-router'
 
 //  Login Actions
-export const userLogin = (nav: NavigateFunction, payload: any, fn: (arg0: any) => void) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
-    const payloadWithOutRememberKey = {
-        email: payload.email,
-        password: payload.password,
+export const userLogin = (payload: any, fn: (arg0: boolean) => void) => async (dispatch: (arg0: { type: string; payload: any }) => any) => {
+    // const payloadWithOutRememberKey = {
+    //     email: payload.email,
+    //     password: payload.password,
+    // }
+    // LoginReq(payloadWithOutRememberKey, (server_response) => {
+    //     if (server_response[0] == "NotFound") {
+    //         fn(toast.error(server_response[1]))
+    //         return
+    //     }
+    //     else if (server_response[0] == "Error") {
+    //         fn(toast.error(server_response[1]))
+    //         return
+    //     }
+    //     else if (server_response[0] == "InActive") {
+    //         fn(toast.error(server_response[1]))
+    //         return
+    //     }
+    //     else {
+    //         const data = (
+    //             dispatch({
+    //                 type: "USER_LOGIN",
+    //                 payload: {
+    //                     userId: server_response[2],
+    //                     ...payload
+    //                 }
+    //             }))
+    //         fn(toast.success("!خوش آمدید"))
+    //         nav("/dashboards/tasks")
+    //         if (payload.remember) {
+    //             localStorage.setItem("user", JSON.stringify(data.payload))
+    //             localStorage.setItem("user_data", JSON.stringify(data))
+    //         }
+    //         else return
+    //     }
+    // })
+    console.log(payload);
+    const sendField = {
+        Username: payload.email,
+        Pass: payload.password
     }
-    LoginReq(payloadWithOutRememberKey, (server_response) => {
-        if (server_response[0] == "NotFound") {
-            fn(toast.error(server_response[1]))
-            return
-        }
-        else if (server_response[0] == "Error") {
-            fn(toast.error(server_response[1]))
-            return
-        }
-        else if (server_response[0] == "InActive") {
-            fn(toast.error(server_response[1]))
-            return
-        }
-        else {
-            const data = (
-                dispatch({
-                    type: "USER_LOGIN",
-                    payload: {
-                        userId: server_response[2],
-                        ...payload
-                    }
-                }))
-            fn(toast.success("!خوش آمدید"))
-            nav("/dashboards/tasks")
-            if (payload.remember) {
-                localStorage.setItem("user", JSON.stringify(data.payload))
-                localStorage.setItem("user_data", JSON.stringify(data))
-            }
-            else return
-        }
+
+    LoginReq(sendField, (validation) => {
+        fn(validation)
     })
 }
 

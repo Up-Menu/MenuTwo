@@ -22,9 +22,11 @@ export const RegisterReq = (value: any, fn: (arg0: boolean) => void) => {
 
 export const LoginReq = (value: any, fn: (arg0: any) => void) => {
   Api
-    .post('/Account/Login', value, '')
+    .post('/api/Member/Login', value, '')
     .then(response => {
-      fn([response.data.status, response.data.data.message, response.data.data.userId]);
+      // fn([response.data.status, response.data.data.message, response.data.data.userId]);
+      fn(false)
+      console.log(response)
     })
     .catch(err => console.log(err));
 };

@@ -116,7 +116,6 @@ const NewLogin: FC = () => {
             </Box>
             <Divider />
 
-            {/* blur back */}
             <CardContent>
               <Box sx={{ p: 5, m: 2 }}>
                 <RtlVersion>
